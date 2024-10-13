@@ -1,6 +1,6 @@
 # Wizard
 
-
+This is a VC test.
 
 ## Getting started
 
