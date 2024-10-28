@@ -101,7 +101,6 @@ target_compile_definitions(Lama-server PRIVATE LAMA_SERVER=1 RAPIDJSON_HAS_STDST
 # Comment out if you don't want to print network-related messages into the console
 target_compile_definitions(Lama-server PRIVATE PRINT_NETWORK_MESSAGES=1)
 
-
 # linking to sockpp
 if(WIN32)
     message("Detected Win32")
@@ -111,8 +110,18 @@ if(WIN32)
 
     # Necessary to get sockets working under Windows (with MingW)
     target_link_libraries(Lama-client wsock32 ws2_32)
+
+elseif(APPLE)
+    message("Detected macOS")
+
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+
+    target_link_libraries(Lama-client ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.dylib Threads::Threads)
+    target_link_libraries(Lama-server ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.dylib Threads::Threads)
+
 else()
-    message("Not Win32, so probably a Linux") # We assume it's Linux in this case
+    message("Not Win32 or macOS, so probably Linux")
 
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
