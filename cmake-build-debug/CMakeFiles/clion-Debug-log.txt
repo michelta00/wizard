@@ -1,0 +1,67 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard -B /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug
+-- The C compiler identification is AppleClang 15.0.0.15000040
+-- The CXX compiler identification is AppleClang 15.0.0.15000040
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found wxWidgets: -L/Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wxWidgets-3.2.6/buildOSX/lib;;;-framework IOKit;-framework Carbon;-framework Cocoa;-framework QuartzCore;-framework AudioToolbox;-framework System;-framework OpenGL;-lwx_osx_cocoau_core-3.2;-lwx_baseu-3.2;-lwx_baseu_net-3.2 (found version "3.2.6")
+Not Win32, so probably a Linux
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_6.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_7.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_back.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_5.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_4.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_0.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_1.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_3.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_2.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_logo.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_10.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_5.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_4.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_6.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_7.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_3.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_9.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_hand_8.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_2.png
+-- Installing: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/assets/lama_1.png
+CMake Deprecation Warning at googletest/lib/CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at googletest/lib/googlemock/CMakeLists.txt:45 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at googletest/lib/googletest/CMakeLists.txt:56 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Found Python: /opt/homebrew/Frameworks/Python.framework/Versions/3.13/bin/python3.13 (found version "3.13.0") found components: Interpreter
+-- Configuring done (1.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug
