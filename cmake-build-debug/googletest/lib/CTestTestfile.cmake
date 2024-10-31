@@ -1,7 +1,0 @@
-# CMake generated Testfile for 
-# Source directory: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/googletest/lib
-# Build directory: /Users/mariebecker/Documents/Uni/ETH/3_Semester/SoftwareEngineering/wizard/cmake-build-debug/googletest/lib
-# 
-# This file includes the relevant testing commands required for 
-# testing this directory and lists subdirectories to be tested as well.
-subdirs("googlemock")
