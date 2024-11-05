@@ -74,9 +74,9 @@ void MainGamePanel::buildOtherPlayerHand(game_state* gameState, player* otherPla
         wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
         handPosition -= boundsOfRotatedHand / 2;
 
-        std::string handImage = "assets/lama_hand_" + std::to_string(numberOfCards) + ".png";
+        std::string handImage = "assets/wizard_hand_" + std::to_string(numberOfCards) + ".png";
         if(numberOfCards > 10) {
-            handImage = "assets/lama_hand_10.png";
+            handImage = "assets/wizard_hand_10.png";
         }
         new ImagePanel(this, handImage, wxBITMAP_TYPE_ANY, handPosition, boundsOfRotatedHand, playerAngle);
 
@@ -85,7 +85,7 @@ void MainGamePanel::buildOtherPlayerHand(game_state* gameState, player* otherPla
         wxSize nonRotatedSize = wxSize((int) MainGamePanel::otherPlayerHandSize, (int) MainGamePanel::otherPlayerHandSize);
         handPosition -= nonRotatedSize / 2;
 
-        new ImagePanel(this, "assets/lama_hand_0.png", wxBITMAP_TYPE_ANY, handPosition, nonRotatedSize);
+        new ImagePanel(this, "assets/wizard_hand_0.png", wxBITMAP_TYPE_ANY, handPosition, nonRotatedSize);
     }
 }
 
@@ -171,7 +171,7 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
         // Show discard pile
         const card* topCard = gameState->get_discard_pile()->get_top_card();
         if(topCard != nullptr) {
-            std::string cardImage = "assets/lama_" + std::to_string(topCard->get_value()) + ".png";
+            std::string cardImage = "assets/wizard_" + std::to_string(topCard->get_value()) + ".png";
 
             wxPoint discardPilePosition = MainGamePanel::tableCenter + MainGamePanel::discardPileOffset;
 
@@ -182,7 +182,7 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
         // Show draw pile
         wxPoint drawPilePosition = MainGamePanel::tableCenter + MainGamePanel::drawPileOffset;
 
-        ImagePanel* drawPile = new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
+        ImagePanel* drawPile = new ImagePanel(this, "assets/wizard_back.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
 
         if(gameState->get_current_player() == me && !me->has_folded()) {
             drawPile->SetToolTip("Draw card");
@@ -197,7 +197,7 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
     } else {
         // if the game did not start yet, show a back side of a card in the center (only for the mood)
         wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
-        new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
+        new ImagePanel(this, "assets/wizard_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
     }
 
 }
@@ -323,7 +323,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
 
                 card *handCard = me->get_hand()->get_cards().at(i);
-                std::string cardFile = "assets/lama_" + std::to_string(handCard->get_value()) + ".png";
+                std::string cardFile = "assets/wizard_" + std::to_string(handCard->get_value()) + ".png";
 
                 ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 

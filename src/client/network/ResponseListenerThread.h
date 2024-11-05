@@ -1,5 +1,5 @@
-#ifndef LAMA_CLIENT_NETWORK_THREAD_H
-#define LAMA_CLIENT_NETWORK_THREAD_H
+#ifndef WIZARD_CLIENT_NETWORK_THREAD_H
+#define WIZARD_CLIENT_NETWORK_THREAD_H
 
 #include <functional>
 #include <wx/wx.h>
@@ -24,4 +24,4 @@ private:
 
 };
 
-#endif //LAMA_CLIENT_NETWORK_THREAD_H
+#endif //WIZARD_CLIENT_NETWORK_THREAD_H

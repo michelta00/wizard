@@ -4,7 +4,7 @@
 
 #include "card.h"
 
-#include "../../exceptions/LamaException.h"
+#include "../../exceptions/WizardException.h"
 
 
 card::card(std::string id) : unique_serializable(id) { }
@@ -26,7 +26,7 @@ int card::get_value() const noexcept {
 }
 
 bool card::can_be_played_on(const card *const other) const noexcept {
-    // return true if this card has a one higher or of equal value OR if 'other' is Lama and this is 1
+    // return true if this card has a one higher or of equal value OR if 'other' is Wizard and this is 1
     int value_delta = this->get_value() - other->get_value();
     return value_delta == 0 || value_delta == 1 || (other->get_value() == 7 && this->get_value() == 1);
 }
@@ -36,7 +36,7 @@ card *card::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id") && json.HasMember("value")) {
         return new card(json["id"].GetString(), serializable_value<int>::from_json(json["value"].GetObject()));
     } else {
-        throw LamaException("Could not parse json of card. Was missing 'id' or 'val'.");
+        throw WizardException("Could not parse json of card. Was missing 'id' or 'val'.");
     }
 }
 
