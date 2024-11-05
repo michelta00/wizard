@@ -4,8 +4,8 @@
 // The server_network_manager handles all incoming messages and offers functionality to broadcast messages
 // to all connected players of a game.
 
-#ifndef LAMA_SERVER_NETWORK_MANAGER_H
-#define LAMA_SERVER_NETWORK_MANAGER_H
+#ifndef WIZARD_SERVER_NETWORK_MANAGER_H
+#define WIZARD_SERVER_NETWORK_MANAGER_H
 
 #include <thread>
 #include <functional>
@@ -50,4 +50,4 @@ public:
 
 
 
-#endif //LAMA_SERVER_NETWORK_MANAGER_H
+#endif //WIZARD_SERVER_NETWORK_MANAGER_H

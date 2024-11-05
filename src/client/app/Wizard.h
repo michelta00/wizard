@@ -1,5 +1,5 @@
-#ifndef LAMAUI_LAMA_H
-#define LAMAUI_LAMA_H
+#ifndef WIZARDUI_WIZARD_H
+#define WIZARDUI_WIZARD_H
 
 #include <wx/wx.h>
 #include "../windows/GameWindow.h"
@@ -7,11 +7,11 @@
 
 
 // Main app class
-class Lama : public wxApp
+class Wizard : public wxApp
 {
 public:
     virtual bool OnInit();
 };
 
 
-#endif //LAMAUI_LAMA_H
+#endif //WIZARDUI_WIZARD_H

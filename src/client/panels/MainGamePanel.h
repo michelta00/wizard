@@ -1,5 +1,5 @@
-#ifndef LAMA_CLIENT_MAINGAMEPANEL_H
-#define LAMA_CLIENT_MAINGAMEPANEL_H
+#ifndef WIZARD_CLIENT_MAINGAMEPANEL_H
+#define WIZARD_CLIENT_MAINGAMEPANEL_H
 
 #include <wx/wx.h>
 #include "../../common/game_state/game_state.h"
@@ -46,4 +46,4 @@ private:
 };
 
 
-#endif //LAMA_CLIENT_MAINGAMEPANEL_H
+#endif //WIZARD_CLIENT_MAINGAMEPANEL_H

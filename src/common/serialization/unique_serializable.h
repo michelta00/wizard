@@ -3,8 +3,8 @@
 //
 // Used to serialize game_state objects that need to be identifiable by a unique id.
 
-#ifndef LAMA_UNIQUE_SERIALIZABLE_H
-#define LAMA_UNIQUE_SERIALIZABLE_H
+#ifndef WIZARD_UNIQUE_SERIALIZABLE_H
+#define WIZARD_UNIQUE_SERIALIZABLE_H
 
 
 #include "serializable.h"
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif //LAMA_UNIQUE_SERIALIZABLE_H
+#endif //WIZARD_UNIQUE_SERIALIZABLE_H

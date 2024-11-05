@@ -93,7 +93,7 @@ void GameController::updateGameState(game_state* newGameState) {
 
     if(oldGameState != nullptr) {
 
-        // check if a new round started, and display message accordingly
+        // check if a new round started, and display message accrdingly
         if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
             GameController::showNewRoundMessage(oldGameState, newGameState);
         }
