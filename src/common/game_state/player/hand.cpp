@@ -1,9 +1,4 @@
-//
-// Created by Manuel on 27.01.2021.
-//
-
 #include "hand.h"
-
 #include "../../exceptions/WizardException.h"
 #include "../../serialization/vector_utils.h"
 
@@ -28,27 +23,13 @@ int hand::get_nof_cards() const {
     return _cards.size();
 }
 
-int hand::get_score() const {
-    int res = 0;
-    bool already_counted[7] = { false, false, false, false, false, false, false }; // for the 7 card types
-    for (int i = 0; i < _cards.size(); i++) {
-        int card_value = _cards[i]->get_value();
-        if(!already_counted[card_value - 1]) {
-            already_counted[card_value - 1] = true;
-            if(card_value == 7) {
-                res += 10;
-            } else {
-                res += card_value;
-            }
-        }
-    }
-    return res;
-}
 
 const std::vector<card*> hand::get_cards() const {
     return _cards;
 }
 
+// this function searches for a given card in the hand, and returns whether the card was found or not;
+// if the card was found, the variable hand_card (given as reference) is updated
 bool hand::try_get_card(const std::string &card_id, card *&hand_card) const {
     auto it = std::find_if(_cards.begin(), _cards.end(),
                            [&card_id](const card* x) { return x->get_id() == card_id;});
@@ -84,14 +65,6 @@ std::vector<card*>::iterator hand::get_card_iterator() {
 
 
 #ifdef WIZARD_SERVER
-void hand::setup_round(std::string &err) {
-    // remove all cards (if any) and clear it
-    for (int i = 0; i < _cards.size(); i++) {
-        delete _cards[i];
-    }
-    _cards.clear();
-}
-
 bool hand::add_card(card* new_card, std::string &err) {
     _cards.push_back(new_card);
     return true;

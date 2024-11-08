@@ -1,7 +1,3 @@
-//
-// Created by Manuel on 27.01.2021.
-//
-
 #ifndef WIZARD_HAND_H
 #define WIZARD_HAND_H
 
@@ -31,13 +27,11 @@ public:
 
 // accessors
     int get_nof_cards() const;
-    int get_score() const;
     const std::vector<card*> get_cards() const;
     bool try_get_card(const std::string& card_id, card*& hand_card) const;
 
 #ifdef WIZARD_SERVER
 // state update functions
-    void setup_round(std::string& err);
     bool add_card(card* card, std::string& err);
     bool remove_card(std::string card_id, card*& played_card, std::string& err);
 #endif
