@@ -25,6 +25,8 @@ unsigned int hand::get_nof_cards() const {
 }
 
 std::vector<card*> hand::get_cards() const {
+
+const std::vector<card*> hand::get_cards() const {
     return _cards;
 }
 
@@ -67,6 +69,8 @@ std::vector<card*>::iterator hand::get_card_iterator() {
 #ifdef WIZARD_SERVER
 bool hand::add_card(card* card, std::string &err) {
     _cards.push_back(card);
+bool hand::add_card(card* new_card, std::string &err) {
+    _cards.push_back(new_card);
     return true;
 }
 
