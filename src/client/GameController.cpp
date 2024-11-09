@@ -4,6 +4,7 @@
 #include "../common/network/requests/draw_card_request.h"
 #include "../common/network/requests/fold_request.h"
 #include "../common/network/requests/play_card_request.h"
+#include "../client/messageBoxes/ErrorDialog.h"
 #include "network/ClientNetworkManager.h"
 
 
@@ -143,8 +144,18 @@ wxEvtHandler* GameController::getMainThreadEventHandler() {
 }
 
 
+//void GameController::showError(const std::string& title, const std::string& message) {
+//   wxMessageBox(message, title, wxICON_ERROR);
+//}
+
 void GameController::showError(const std::string& title, const std::string& message) {
-    wxMessageBox(message, title, wxICON_ERROR);
+    // Load a custom image for the error dialog
+    wxString fullpath = "assets/error.png";
+
+    wxBitmap errorImage(fullpath, wxBITMAP_TYPE_ANY);
+    // Create and show the custom error dialog
+    ErrorDialog errorDialog(nullptr, title, message, errorImage);
+    errorDialog.ShowModal();
 }
 
 
