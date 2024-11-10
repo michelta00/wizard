@@ -6,20 +6,20 @@
 // constructors
 card::card(std::string id) : unique_serializable(id) { }
 
-card::card(std::string id, serializable_value<std::tuple<int, int>> *val)
+card::card(std::string id, serializable_value<std::pair<int, int>> *val)
         : unique_serializable(id), _value(val)
 { }
 
-card::card(std::tuple<int, int> val) :
+card::card(std::pair<int, int> val) :
         unique_serializable(),
-        _value(new serializable_value<std::tuple<int, int>>(val))
+        _value(new serializable_value<std::pair<int, int>>(val))
 { }
 
 // destructor
 card::~card() = default;
 
-// getter function, returns tuple of two ints indicating the number of the card and its color
-std::tuple<int, int> card::get_value() const noexcept {
+// getter function, returns pair of two ints indicating the number of the card and its color
+std::pair<int, int> card::get_value() const noexcept {
     return _value->get_value();
 }
 
@@ -31,7 +31,7 @@ bool card::can_be_played(const trick* const current_trick, const hand* const cur
     // on the players hand has the same color as the trick color
 
     // get values of this card
-    std::tuple<int, int> value = this->get_value();
+    std::pair<int, int> value = this->get_value();
 
     // check if card is wizard or jester
     if (std::get<0>(value) > 13) return true;
@@ -45,7 +45,7 @@ bool card::can_be_played(const trick* const current_trick, const hand* const cur
     const std::vector<card*> cards = current_hand->get_cards();
     for (auto it = cards.begin(); it != cards.end(); ++it)
     {
-        std::tuple<int, int> current_value = (*it)->get_value();
+        std::pair<int, int> current_value = (*it)->get_value();
         // if there is a card on the hand with the trick color, the current card cannot be played
         if (std::get<1>(current_value) == trick_color) return false;
     }
@@ -56,7 +56,7 @@ bool card::can_be_played(const trick* const current_trick, const hand* const cur
 
 card *card::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id") && json.HasMember("value")) {
-        return new card(json["id"].GetString(), serializable_value<std::tuple<int, int>>::from_json(json["value"].GetObject()));
+        return new card(json["id"].GetString(), serializable_value<std::pair<int, int>>::from_json(json["value"].GetObject()));
     } else {
         throw WizardException("Could not parse json of card. Was missing 'id' or 'val'.");
     }
