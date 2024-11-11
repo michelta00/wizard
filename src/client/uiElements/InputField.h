@@ -9,11 +9,11 @@ class InputField : public wxPanel {
 public:
     InputField(wxWindow* parent, const wxString& labelText, int labelWidth, const wxString& fieldValue, int fieldWidth);
     wxString getValue();
+    void SetLabelTextColour(const wxColour& colour);
 
 private:
     wxStaticText* _label;
     wxTextCtrl* _field;
-
 };
 
 

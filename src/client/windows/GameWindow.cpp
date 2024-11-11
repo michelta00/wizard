@@ -6,7 +6,7 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     // Set up layout that will contain and center all content
     this->_mainLayout = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
-    outerLayout->Add(this->_mainLayout, 1, wxCENTER);
+    outerLayout->Add(this->_mainLayout, 1, wxEXPAND | wxALL, 20);
     this->SetSizerAndFit(outerLayout);
     this->_currentPanel = nullptr;
 
@@ -36,11 +36,11 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     _settingsButton->Bind(wxEVT_BUTTON, &GameWindow::show_settings, this);
 
     // Set background
-    wxColor darkred = wxColor(102, 0, 51);
-    this->SetBackgroundColour(darkred);
+    wxColor lightBlue = wxColor(102, 0, 51);
+    this->SetBackgroundColour(lightBlue);
 
     // Set the minimum size of the window. The user won't be able to resize the window to a size smaller than this
-    this->SetMinSize(wxSize(50, 50));
+    this->SetMinSize(wxSize(1000, 720));
 
 }
 
@@ -60,7 +60,7 @@ void GameWindow::showPanel(wxPanel* panel) {
     }
 
     // add new panel
-    this->_mainLayout->Add(panel, 1, wxEXPAND | wxALL, 0); // 20 pixel spacing
+    this->_mainLayout->Add(panel, 1, wxEXPAND | wxALL, 20); // Verwenden von wxEXPAND
     panel->Show(true);
     this->_currentPanel = panel;
 

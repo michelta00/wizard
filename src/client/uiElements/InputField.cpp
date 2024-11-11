@@ -26,8 +26,13 @@ InputField::InputField(wxWindow* parent, const wxString& labelText, int labelWid
 
     this->SetSizerAndFit(horizontalLayout);
 }
+void InputField::SetLabelTextColour(const wxColour& colour) {
+    _label->SetForegroundColour(colour);
+    _label->Refresh();
+}
 
 
 wxString InputField::getValue() {
     return this->_field->GetValue();
+
 }

@@ -30,7 +30,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
     double anglePerPlayer = MainGamePanel::twoPi / (double) numberOfPlayers;
 
-    // show all other players
     for(int i = 1; i < numberOfPlayers; i++) {
 
         // get player at i-th position after myself
@@ -197,8 +196,14 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
 
     } else {
         // if the game did not start yet, show a back side of a card in the center (only for the mood)
-        wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
-        new ImagePanel(this, "assets/wizard_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
+        //wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
+
+        // Definieren Sie eine neue Kartengröße, die größer ist
+        wxSize largerCardSize = MainGamePanel::cardSize ; // Verdoppelt die Größe
+
+        //Berechnen Sie die neue Position basierend auf der größeren Kartengröße
+        wxPoint cardPosition = MainGamePanel::tableCenter - (largerCardSize );
+        new ImagePanel(this, "../assets/Wizard_round.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
     }
 
 }
@@ -240,6 +245,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             wxALIGN_CENTER,
             true
     );
+    playerName->SetForegroundColour(wxColour(0, 206, 209));
     innerLayout->Add(playerName, 0, wxALIGN_CENTER);
 
     // if the game has not yet started we say so
@@ -251,10 +257,13 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                 wxSize(200, 18),
                 wxALIGN_CENTER
         );
+        playerPoints->SetForegroundColour(wxColour(0, 206, 209));
         innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // show button that allows our player to start the game
         wxButton* startGameButton = new wxButton(this, wxID_ANY, "Start Game!", wxDefaultPosition, wxSize(160, 64));
+        startGameButton->SetBackgroundColour(wxColour(0, 206, 209));
+        startGameButton->SetForegroundColour(wxColour(102, 0, 51));
         startGameButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
             GameController::startGame();
         });

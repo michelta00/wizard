@@ -1,68 +1,102 @@
 #include "ConnectionPanel.h"
 
-
+#include <wx/image.h>
 #include "../uiElements/ImagePanel.h"
-#include "../../common/network/default.conf"
 #include "../GameController.h"
-
+#include <wx/dcbuffer.h>
 
 ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
 
-    wxColor white = wxColor(255, 255, 255);
-    this->SetBackgroundColour(white);
+    // Load the background image
+    _backgroundImage.LoadFile("./assets/Wizard_big.png", wxBITMAP_TYPE_ANY);
 
+    // Set background paint style and bind paint/resize events
+    this->SetBackgroundStyle(wxBG_STYLE_PAINT);
+    this->Bind(wxEVT_PAINT, &ConnectionPanel::OnPaint, this);
+    this->Bind(wxEVT_SIZE, &ConnectionPanel::OnSize, this);
+
+    // Main vertical layout for input fields and button
     wxBoxSizer* verticalLayout = new wxBoxSizer(wxVERTICAL);
 
-    ImagePanel* logo = new ImagePanel(this, "assets/wizard_logo.png", wxBITMAP_TYPE_ANY, wxDefaultPosition, wxSize(200, 250));
-    verticalLayout->Add(logo, 0, wxALIGN_CENTER | wxTOP | wxLEFT | wxRIGHT, 10);
+    int fieldSpacing = 10; // Space between input fields and button
 
-    this->_serverAddressField = new InputField(
-        this, // parent element
-        "Server address:", // label
-        100, // width of label
-        default_server_host, // default value (variable from "default.conf")
-        240 // width of field
-    );
-    verticalLayout->Add(this->_serverAddressField, 0, wxTOP | wxLEFT | wxRIGHT, 10);
+    // Default values for server host and port
+    wxString default_server_host = "127.0.0.1";
+    int default_port = 50505;
 
-    this->_serverPortField = new InputField(
-        this, // parent element
-        "Server port:", // label
-        100, // width of label
-        wxString::Format("%i", default_port), // default value (variable from "default.conf")
-        240 // width of field
-    );
-    verticalLayout->Add(this->_serverPortField, 0, wxTOP | wxLEFT | wxRIGHT, 10);
+    // Server Address Input Field
+    this->_serverAddressField = new InputField(this, "Server address:", 100, default_server_host, 240);
+    this->_serverAddressField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
+    verticalLayout->Add(this->_serverAddressField, 0, wxALL | wxEXPAND, fieldSpacing);
 
-    this->_playerNameField = new InputField(
-        this, // parent element
-        "Player name:", // label
-        100, // width of label
-        "", // default value
-        240 // width of field
-    );
-    verticalLayout->Add(this->_playerNameField, 0, wxTOP | wxLEFT | wxRIGHT, 10);
+    // Server Port Input Field
+    this->_serverPortField = new InputField(this, "Server port:", 100, wxString::Format("%i", default_port), 240);
+    this->_serverPortField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
+    verticalLayout->Add(this->_serverPortField, 0, wxALL | wxEXPAND, fieldSpacing);
 
-    wxButton* connectButton = new wxButton(this, wxID_ANY, "Connect", wxDefaultPosition, wxSize(100, 40));
+    // Player Name Input Field
+    this->_playerNameField = new InputField(this, "Player name:", 100, "", 240);
+    this->_playerNameField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
+    verticalLayout->Add(this->_playerNameField, 0, wxALL | wxEXPAND, fieldSpacing);
+
+    // Connect Button with custom style
+    wxButton* connectButton = new wxButton(this, wxID_ANY, "Connect", wxDefaultPosition, wxDefaultSize);
+    connectButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
+    connectButton->SetBackgroundColour(wxColour(102, 0, 51));    // Set button background color
+    connectButton->SetWindowStyleFlag(wxBORDER_SIMPLE);          // Set border style
     connectButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
-        GameController::connectToServer();
+        GameController::connectToServer(); // Call the connect method when clicked
     });
-    verticalLayout->Add(connectButton, 0, wxALIGN_RIGHT | wxALL, 10);
+    verticalLayout->Add(connectButton, 0, wxALIGN_CENTER | wxALL, fieldSpacing);
 
-    this->SetSizerAndFit(verticalLayout);
+    // Create a centered layout to ensure everything is vertically and horizontally centered
+    wxBoxSizer* centeredLayout = new wxBoxSizer(wxVERTICAL);
+    centeredLayout->AddStretchSpacer(1); // Add flexible space above the vertical layout
+    centeredLayout->Add(verticalLayout, 0, wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
+    centeredLayout->AddStretchSpacer(1); // Add flexible space below the vertical layout
+
+    // Set the centered layout as the sizer for this panel
+    this->SetSizer(centeredLayout);
 }
 
+void ConnectionPanel::OnPaint(wxPaintEvent& event) {
+    wxAutoBufferedPaintDC dc(this);
+    wxSize panelSize = this->GetClientSize();
 
+    if (_backgroundImage.IsOk()) {
+        // Scale the background image to match the panel size
+        wxImage image = _backgroundImage.ConvertToImage();
+        wxImage scaledImage = image.Scale(panelSize.GetWidth(), panelSize.GetHeight(), wxIMAGE_QUALITY_HIGH);
+        wxBitmap scaledBitmap(scaledImage);
+
+        // Draw the scaled background image
+        dc.DrawBitmap(scaledBitmap, 0, 0, true);
+    } else {
+        // Fallback: Draw a light blue background if the image is not loaded
+        dc.SetBrush(wxBrush(wxColour(200, 200, 255)));
+        dc.DrawRectangle(wxPoint(0, 0), panelSize);
+    }
+}
+
+void ConnectionPanel::OnSize(wxSizeEvent& event) {
+    wxSize panelSize = this->GetClientSize();
+
+    // Update the layout to adjust widget positions and sizes
+    this->Layout();
+    event.Skip();   // Pass the resize event to allow further processing
+}
+
+// Retrieve the server address entered by the user
 wxString ConnectionPanel::getServerAddress() {
     return this->_serverAddressField->getValue();
 }
 
-
+// Retrieve the server port entered by the user
 wxString ConnectionPanel::getServerPort() {
     return this->_serverPortField->getValue();
 }
 
-
+// Retrieve the player name entered by the user
 wxString ConnectionPanel::getPlayerName() {
     return this->_playerNameField->getValue();
 }
