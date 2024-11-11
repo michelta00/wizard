@@ -15,6 +15,10 @@ public:
     wxString getPlayerName();
 
 private:
+    void OnPaint(wxPaintEvent& event);
+    void OnSize(wxSizeEvent& event);
+
+    wxBitmap _backgroundImage;
     InputField* _serverAddressField;
     InputField* _serverPortField;
     InputField* _playerNameField;
