@@ -6,7 +6,7 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     // Set up layout that will contain and center all content
     this->_mainLayout = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
-    outerLayout->Add(this->_mainLayout, 1, wxCENTER);
+    outerLayout->Add(this->_mainLayout, 1, wxEXPAND | wxALL, 20);
     this->SetSizerAndFit(outerLayout);
     this->_currentPanel = nullptr;
 
