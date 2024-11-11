@@ -48,7 +48,9 @@ set(CLIENT_SOURCE_FILES
         src/common/serialization/serializable_value.h
         src/common/serialization/json_utils.h
         src/common/serialization/uuid_generator.h
-        src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h)
+        src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
+        src/client/messageBoxes/ErrorDialog.cpp
+        src/client/messageBoxes/ErrorDialog.h)
 
 # define a variable SERVER_SOURCE_FILES that contains the paths to all source files required to compile the server executable
 set(SERVER_SOURCE_FILES
@@ -101,6 +103,8 @@ target_compile_definitions(Wizard-server PRIVATE WIZARD_SERVER=1 RAPIDJSON_HAS_S
 # Comment out if you don't want to print network-related messages into the console
 target_compile_definitions(Wizard-server PRIVATE PRINT_NETWORK_MESSAGES=1)
 
+# Copy all files from the assets folder to the binary directory
+file(COPY ${CMAKE_SOURCE_DIR}/assets/ DESTINATION ${CMAKE_BINARY_DIR}/assets/)
 
 # linking to sockpp
 if(WIN32)

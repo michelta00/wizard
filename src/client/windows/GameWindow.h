@@ -15,9 +15,13 @@ public:
 private:
     wxBoxSizer* _mainLayout;
     wxStatusBar* _statusBar;
+    wxButton* _rulesButton;
+    wxButton* _settingsButton;
 
     wxPanel* _currentPanel;
 
+    void showRules(wxCommandEvent& event);
+    void show_settings(wxCommandEvent& event);
 };
 
 
