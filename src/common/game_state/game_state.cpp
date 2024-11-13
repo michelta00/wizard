@@ -117,21 +117,34 @@ std::vector<player*>& game_state::get_players() {
 
 // state modification functions without diff
 
+void game_state::increase_round_number() {
+  int number = get_round_number() + 1;
+  _round_number->set_value(number);
+}
+
 void game_state::update_current_player() {
-    _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
+    int nof_players = _players.size();
+    int current_player_idx = _current_player_idx->get_value();
+    ++current_player_idx %= nof_players;
+    this->_current_player_idx->set_value(current_player_idx);
 }
 
 
 void game_state::setup_round(std::string &err) {
 
-    // increase round number
-    _round_number->set_value(_round_number->get_value() + 1);
+    if (_round_state) {
+        delete _round_state;  // Clean up previous round state if it exists
+        _round_state = nullptr;
+    }
 
-    _round_state->setup_round(err, this->get_round_number(), _current_player_idx->get_value());
+    increase_round_number();
 
-    //TODO: how does new round manage to send task to players to estimate tricks / play card / ...
+    _round_state = new round_state(players = this->_players, starting_player_idx = this->_current_player_idx,
+                                   round_number = this->_round_number);
 
     update_current_player();
+
+    //TODO: possibly set up other parts of round (players, deck, trick, ...) --> maybe do in round state
 
     // Provide the callback to be called when the round ends
     _round_state->set_on_round_end([this]() {  // [this] captures the game_state instance
@@ -155,13 +168,6 @@ bool game_state::start_game(std::string &err) {
     if (!_is_started->get_value()) {
         this->_is_started->set_value(true);
         // TODO: think about whether this will cause a problem since setup_round iteratively calls it self and start_game only ends when game has ended
-        if (_round_state) {
-        	delete _round_state;  // Clean up previous round state if it exists
-        	_round_state = nullptr;
-    	}
-
-    	_round_state = new round_state(players = this->_players, starting_player_idx = this->_current_player_idx,
-                                   round_number = this->_round_number);
         this->setup_round(err); //iteratively starts all rounds until game is over
         return true;
     } else {
