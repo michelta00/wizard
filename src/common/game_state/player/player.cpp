@@ -2,26 +2,28 @@
 
 #include "player.h"
 #include "../../exceptions/WizardException.h"
+#include "../../serialization/vector_utils.h"
 
 // constructor for client
 player::player(std::string name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
     this->_nof_predicted = new serializable_value<int>(0);
     this->_nof_tricks = new serializable_value<int>(0);
-    this->_score = new serializable_value<int>(0);
+    this->_scores = std::vector<serializable_value<int>*>(0);
     this->_hand = new hand();
 
 }
 
 // deserialization constructor
 player::player(std::string id, serializable_value<std::string>* name,
-               serializable_value<int>* score, serializable_value<int>* nof_tricks,
-               serializable_value<int>* nof_predicted, hand *hand) :
+               serializable_value<int>* nof_tricks,
+               serializable_value<int>* nof_predicted,
+               std::vector<serializable_value<int>*> scores, hand *hand) :
         unique_serializable(id),
         _player_name(name),
         _nof_tricks(nof_tricks),
         _nof_predicted(nof_predicted),
-        _score(score),
+        _scores(scores),
         _hand(hand)
 { }
 
@@ -29,13 +31,11 @@ player::~player() {
     if (_player_name != nullptr) {
         delete _hand;
         delete _player_name;
-        delete _score;
         delete _nof_predicted;
         delete _nof_predicted;
 
         _hand = nullptr;
         _player_name = nullptr;
-        _score = nullptr;
         _nof_predicted = nullptr;
         _nof_tricks = nullptr;
     }
@@ -47,10 +47,10 @@ player::player(std::string id, std::string name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_score = new serializable_value<int>(0);
+    this->_scores = std::vector< serializable_value<int>*>(0);
     this->_hand = new hand();
     this->_nof_predicted = new serializable_value<int>(0);
-    this->nof_tricks = new serializable_value<int>(0);
+    this->_nof_tricks = new serializable_value<int>(0);
 }
 
 std::string player::get_game_id() {
@@ -63,15 +63,15 @@ void player::set_game_id(std::string game_id) {
 #endif
 
 
-// getter and setter for score
-int player::get_score() const noexcept
+// getter and setter for scores
+std::vector<serializable_value<int>*> player::get_scores() const noexcept
 {
-    return _score->get_value();
+    return _scores;
 }
 
-void player::set_score(int score)
+void player::set_scores(int score)
 {
-    _score->set_value(score);
+    _scores.push_back(new serializable_value<int>(score));
 }
 
 
@@ -124,7 +124,7 @@ void player::setup_round(std::string& err) {
 }
 
 void player::wrap_up_round(std::string &err) {
-    int new_score = _score->get_value();
+    int new_score = _scores.back()->get_value();
     if (_nof_predicted->get_value() == _nof_tricks->get_value())
     {
         new_score += 20 + (10 * _nof_predicted->get_value());
@@ -133,7 +133,7 @@ void player::wrap_up_round(std::string &err) {
     {
         new_score -= std::abs(_nof_predicted->get_value() - _nof_tricks->get_value()) * 10;
     }
-    _score->set_value(new_score);
+    _scores.push_back(new serializable_value<int>(new_score));
 }
 
 bool player::add_card(card *card, std::string &err) {
@@ -170,29 +170,32 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     _nof_predicted->write_into_json(nof_predicted_val, allocator);
     json.AddMember("nof_predicted", nof_predicted_val, allocator);
 
-    rapidjson::Value score_val(rapidjson::kObjectType);
-    _score->write_into_json(score_val, allocator);
-    json.AddMember("score", score_val, allocator);
+    json.AddMember("scores", vector_utils::serialize_vector(_scores, allocator), allocator);
 
     rapidjson::Value hand_val(rapidjson::kObjectType);
     _hand->write_into_json(hand_val, allocator);
     json.AddMember("hand", hand_val, allocator);
 }
 
-
+// TODO: check if this function is correct
 player *player::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
         && json.HasMember("nof_predicted")
         && json.HasMember("nof_tricks")
         && json.HasMember("player_name")
+        && json.HasMember("scores")
         && json.HasMember("hand"))
     {
+        std::vector<serializable_value<int>*> deserialized_scores;
+        for (auto &serialized_score : json["scores"].GetArray()) {
+            deserialized_scores.push_back(serializable_value<int>::from_json(serialized_score.GetObject()));
+        }
         return new player(
                 json["id"].GetString(),
                 serializable_value<std::string>::from_json(json["player_name"].GetObject()),
                 serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
                 serializable_value<int>::from_json(json["nof_tricks"].GetObject()),
-                serializable_value<int>::from_json(json["score"].GetObject()),
+                deserialized_scores,
                 hand::from_json(json["hand"].GetObject()));
     } else {
         throw WizardException("Failed to deserialize player from json. Required json entries were missing.");
