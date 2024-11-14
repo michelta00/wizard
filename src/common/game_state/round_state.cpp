@@ -191,3 +191,40 @@ void round_state::setup_round(std::string& err, const int round_number, const in
 
   //TODO: possibly set up other parts of round (players, deck, trick, ...)
 }
+
+// TODO: add play_card function and adapt can_be_played to the used by that function as in SDS
+bool round_state::can_be_played(const trick* const current_trick, const hand* const current_hand) const noexcept {
+    // return true if this card can be played according to the game rules (checked in that order):
+    // if there is no trick color yet (trick color is 0), then the card can be played
+    // if the card is a jester or wizard, then it can be played
+    // it the card has the same color as the trick color, it can be played
+    // if the card does not have the same color as the trick color, it can only be played if no other card
+    // on the players hand has the same color as the trick color
+
+    // get trick color -> if 0, card can be played
+    int trick_color = current_trick->get_trick_color();
+    if (trick_color == 0) return true;
+
+    // get value of this card
+    std::pair<int, int> value = this->get_value();
+
+    // check if card is wizard or jester -> if yes, card can be played
+    if (value.first == 0 || value.first == 14) return true;
+
+    // if card is not wizard or jester, compare with trick color -> if same, can be played
+    if (value.second == trick_color) return true;
+
+    // if card does not have trick color, check other cards on hand
+    const std::vector<card*> cards = current_hand->get_cards();
+    for (auto it = cards.begin(); it != cards.end(); ++it)
+    {
+        std::pair<int, int> hand_value = (*it)->get_value();
+        // if there is a card on the hand with the trick color, the current card cannot be played
+        if (hand_value.second == trick_color) return false;
+    }
+
+    return true;
+}
+
+
+#endif
