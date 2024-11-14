@@ -13,8 +13,7 @@ private:
     serializable_value<std::string>* _player_name;  // player's name chosen by the player
     serializable_value<int>* _nof_tricks;           // number of tricks won in current round
     serializable_value<int>* _nof_predicted;        // number of predicted tricks in current round
-    // TODO: add scores vector that saves all scores
-    serializable_value<int>* _score;                // score of the player (total game score)
+    std::vector<serializable_value<int>*> _scores;  // scores of the player (total game score, current and past ones)
     hand* _hand;
 
 #ifdef WIZARD_SERVER
@@ -28,7 +27,7 @@ private:
            serializable_value<std::string>* name,
            serializable_value<int>* nof_tricks,
            serializable_value<int>* nof_predicted,
-           serializable_value<int>* score,
+           std::vector<serializable_value<int>*> scores,
            hand* hand);
 
 public:
@@ -44,8 +43,8 @@ public:
 #endif
 
     // accessors
-    int get_score() const noexcept;
-    void set_score(int score);
+    std::vector<serializable_value<int>*> get_scores() const noexcept;
+    void set_scores(int score);
 
     int get_nof_tricks() const noexcept;
     void set_nof_tricks(int nof_tricks);
@@ -69,7 +68,7 @@ public:
 
     // serialization
     static player* from_json(const rapidjson::Value& json);
-    virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+    void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
 
 };
 
