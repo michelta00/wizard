@@ -28,6 +28,7 @@ private:
     trick* _current_trick; //only save current trick, won tricks are saved with the players
 	serializable_value<int>* _trump_color;
     serializable_value<bool>* _is_finished; // maybe not needed
+    serializable_value<bool>* _is_estimation_phase;
     serializable_value<int>* _round_number;
     serializable_value<int>* _trick_estimate_sum;
 
@@ -48,6 +49,7 @@ private:
         	trick* current_trick,
         	serializable_value<int>* trump_color,
             serializable_value<bool>* is_finished,
+        	serializable_value<bool>* is_estimation_phase,
             serializable_value<int>* round_number,
             serializable_value<int>* trick_estimate_sum);
 
@@ -62,28 +64,37 @@ public:
     trick* get_trick() const;
     deck* get_deck() const;
     bool is_finished() const;
+    bool is_estimation_phase() const;
     std::vector<player*>& get_players();
     int get_round_number() const;
     int get_trump_color() const;
     int get_trick_estimate_sum() const;
 
-    set_trump_color(serializable_value<int>* trump_color);
+// setter
+    void set_is_estimation_phase(bool is_estimation_phase);
+    void set_finished(bool is_finished);
+    void set_round_number(int round_number);
+    void set_starting_player_idx(player* starting_player_idx);
+    void set_current_player_idx(player* current_player_idx);
+    void set_trump_color(int trump_color);
 
 
 #ifdef WIZARD_SERVER
 // server-side state update functions
     void set_on_round_end(std::function<void()> callback);
     void finish_round();
+    void determine_trump_color(std::string& err, deck* deck)
+	void setup_round(std::string& err, const int round_number, const int starting_player_idx);
+    void update_current_player();
 
-    void setup_round(std::string& err);   // server side initialization
-    bool draw_card(player* player, std::string& err);
-    bool estimate_tricks(player* player, const int estimate, std::string& err);
-    bool play_card(player* player, const std::string& card_id, std::string& err);
-    bool fold(player* player, std::string& err);
+    //bool draw_card(player* player, std::string& err);
+    //bool estimate_tricks(player* player, const int estimate, std::string& err);
+    //bool play_card(player* player, const std::string& card_id, std::string& err);
+    //bool fold(player* player, std::string& err);
 
     // end of round functions
-    void update_current_player(std::string& err);
-    void wrap_up_round(std::string& err);
+    //void update_current_player(std::string& err);
+    //void wrap_up_round(std::string& err);
 #endif
 
 // serializable interface
