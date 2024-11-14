@@ -18,18 +18,18 @@
 
 class trick : public unique_serializable {
 private:
-    serializable_value<int>* _trick_color = 0;
-    int _trump_color = 0;
-    std::vector<serializable_value<std::pair<card*, player*>>*> _cards;
+    serializable_value<int>* _trick_color;
+    serializable_value<int>* _trump_color;
+    std::vector<std::pair<card*, player*>> _cards;
     trick(std::string id);
-    trick(std::string id, std::vector<serializable_value<std::pair<card*, player*>>*> &cards);
+    trick(std::string id, std::vector<std::pair<card*, player*>> &cards);
 public:
     trick();
     trick(int trump);
     ~trick();
 
 // accessors
-    int get_trick_color();
+    int get_trick_color() const;
 
 // #ifdef WIZARD_SERVER
     // state update functions

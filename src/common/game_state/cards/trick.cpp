@@ -6,30 +6,41 @@
 #include "../../serialization/vector_utils.h"
 #include "../../exceptions/WizardException.h"
 
+trick::trick() : unique_serializable() {
+        this->_trick_color = new serializable_value<int>(0);
+        this->_trump_color = new serializable_value<int>(0);
+}
+trick::trick(std::string id) : unique_serializable(id) {
+        this->_trick_color = new serializable_value<int>(0);
+        this->_trump_color = new serializable_value<int>(0);
+}
 
-trick::trick(std::string id) : unique_serializable(id) { }
-
-trick::trick(std::string id, std::vector<serializable_value<std::pair<card*, player*>>*> &cards):
+trick::trick(std::string id, std::vector<std::pair<card*, player*>> &cards):
         unique_serializable(id),
-        _cards(cards)
-{ }
-
-trick::trick() : unique_serializable() { }
+        _cards(cards) {
+        this->_trick_color = new serializable_value<int>(0);
+        this->_trump_color = new serializable_value<int>(0);
+}
 
 trick::trick(const int trump)
-        : unique_serializable(),
-        _trump_color(trump) { }
+        : unique_serializable() {
+        this->_trick_color = new serializable_value<int>(0);
+        this->_trump_color = new serializable_value<int>(0);
+}
 
 
 trick::~trick() {
         for (int i = 0; i < _cards.size(); i++) {
                 delete _cards[i]->get_value().first;   // delete the `card*`
                 delete _cards[i]->get_value().second;  // delete the `player*`
+
         }
+        delete _trick_color;
+        delete _trump_color;
         _cards.clear();
 }
 
-int trick::get_trick_color() {
+int trick::get_trick_color() const {
         return this->_trick_color->get_value();
 }
 
@@ -49,13 +60,13 @@ player* trick::wrap_up_trick(std::string& err) {
         // Determine and return winner
         // wizard check
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first.first == 14)
+                if (_cards[i]->get_value().first->get_value().first == 14)
                 {
                         return _cards[i]->get_value().second;
                 }
         }
         // all joker check
-        if (_trick_color == 0)
+        if (_trick_color->get_value() == 0)
         {
                 return winner; // would be first joker player
         }
@@ -63,12 +74,12 @@ player* trick::wrap_up_trick(std::string& err) {
         bool trump_present = false;
         int highest_trump = 0;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first.second == _trump_color)
+                if (_cards[i]->get_value().first->get_value().second == _trump_color)
                 {
                         trump_present = true;
-                        if (_cards[i]->get_value().first.first > highest_trump)
+                        if (_cards[i]->get_value().first->get_value().first > highest_trump)
                         {
-                                highest_trump = _cards[i]->get_value().first.first;
+                                highest_trump = _cards[i]->get_value().first->get_value().first;
                                 winner = _cards[i]->get_value().second;
                         }
                 }
@@ -79,8 +90,10 @@ player* trick::wrap_up_trick(std::string& err) {
         // highest card of trick color check
         int winner_idx = -1; // use a non joker idx;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first.second == _trick_color)
-                        if (winner_idx == -1 || _cards[i]->get_value().first.first > _cards[winner_idx]->get_value().first.first) {
+                if (_cards[i]->get_value().first->get_value().second == _trick_color->get_value())
+                        if (winner_idx == -1 ||
+                                _cards[i]->get_value().first->get_value().first
+                                > _cards[winner_idx]->get_value().first->get_value().first) {
                         winner_idx = i;
                 }
         }
@@ -92,14 +105,27 @@ player* trick::wrap_up_trick(std::string& err) {
 }
 
 void trick::set_up_round(std::string& err) {
-        // remove all cards (if any) and
+        // remove all cards (if any)
         for (int i = 0; i < _cards.size(); i++) {
-                delete _cards[i];
+                delete _cards[i]->get_value().first;   // delete the `card*`
+                delete _cards[i]->get_value().second;  // delete the `player*`
         }
         _cards.clear();
 }
 bool trick::add_card(const std::string& card_id, player* player, std::string& err) {
+        card* played_card = nullptr;
+        if (player->get_hand()->try_get_card(card_id, played_card)) {
+                card* local_system_card;
+                if (player->remove_card(played_card->get_id(), local_system_card, err)) {
+                        _cards.push_back(local_system_card);
+                        return true;
+                } else {
+                        err = "Could not play card " + played_card->get_id() + " because player does not have this card.";
+                }
 
+        } else {
+                err = "The player does not possess the card " + card_id + ", which was requested to be played.";
+        }
         return false;
 }
 
@@ -142,9 +168,10 @@ void set_trick_color(int color) {
 
 //#endif
 
+// for creating updated instance of trick
 trick *trick::from_json(const rapidjson::Value &json) {
         if (json.HasMember("id") && json.HasMember("cards")) {
-                std::vector<card*> deserialized_cards = std::vector<card*>();
+                auto deserialized_cards = std::vector<serializable_value<std::pair<card*, player*>>*>();
                 for (auto &serialized_card : json["cards"].GetArray()) {
                         deserialized_cards.push_back(card::from_json(serialized_card.GetObject()));
                 }
