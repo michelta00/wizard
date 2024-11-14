@@ -1,10 +1,5 @@
-//
-// Created by Manuel on 25.01.2021.
-//
-
 #ifndef WIZARD_PLAYER_H
 #define WIZARD_PLAYER_H
-
 
 #include <string>
 #include "hand.h"
@@ -15,13 +10,14 @@
 
 class player : public unique_serializable {
 private:
-    serializable_value<std::string>* _player_name;
-    serializable_value<bool>* _has_folded;
-    serializable_value<int>* _score;
+    serializable_value<std::string>* _player_name;  // player's name chosen by the player
+    serializable_value<int>* _nof_tricks;           // number of tricks won in current round
+    serializable_value<int>* _nof_predicted;        // number of predicted tricks in current round
+    std::vector<serializable_value<int>*> _scores;  // scores of the player (total game score, current and past ones)
     hand* _hand;
 
 #ifdef WIZARD_SERVER
-    std::string _game_id;
+    std::string _game_id;       // ID of the game the player has joint
 #endif
 
     /*
@@ -29,9 +25,10 @@ private:
      */
     player(std::string id,
            serializable_value<std::string>* name,
-           serializable_value<int>* score,
-           hand* hand,
-           serializable_value<bool>* has_folded);
+           serializable_value<int>* nof_tricks,
+           serializable_value<int>* nof_predicted,
+           std::vector<serializable_value<int>*> scores,
+           hand* hand);
 
 public:
 // constructors
@@ -46,15 +43,21 @@ public:
 #endif
 
     // accessors
-    int get_score() const noexcept;
-    bool has_folded() const noexcept;
+    std::vector<serializable_value<int>*> get_scores() const noexcept;
+    void set_scores(int score);
+
+    int get_nof_tricks() const noexcept;
+    void set_nof_tricks(int nof_tricks);
+
+    int get_nof_predicted() const noexcept;
+    void set_nof_predicted(int nof_predicted);
+
     int get_nof_cards() const noexcept;
     const hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
 
 #ifdef WIZARD_SERVER
     // state update functions
-    bool fold(std::string& err);
     bool add_card(card* card, std::string& err);
     bool remove_card(std::string card_id, card*& card, std::string& err);
 
@@ -65,7 +68,7 @@ public:
 
     // serialization
     static player* from_json(const rapidjson::Value& json);
-    virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+    void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
 
 };
 
