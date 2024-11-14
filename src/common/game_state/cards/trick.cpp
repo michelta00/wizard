@@ -112,6 +112,7 @@ void trick::set_up_round(std::string& err) {
         }
         _cards.clear();
 }
+
 bool trick::add_card(const std::string& card_id, player* player, std::string& err) {
         card* played_card = nullptr;
         if (player->get_hand()->try_get_card(card_id, played_card)) {
