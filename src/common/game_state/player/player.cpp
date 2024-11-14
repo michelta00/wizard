@@ -178,7 +178,7 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
 }
 
 // TODO: check if this function is correct
-player *player::from_json(const rapidjson::Value &json) {
+player* player::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
         && json.HasMember("nof_predicted")
         && json.HasMember("nof_tricks")
