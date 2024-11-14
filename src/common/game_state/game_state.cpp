@@ -139,8 +139,11 @@ void game_state::setup_round(std::string &err) {
 
     increase_round_number();
 
+    // TODO: maybe just update round state and don't create a new round state
     _round_state = new round_state(players = this->_players, starting_player_idx = this->_current_player_idx,
                                    round_number = this->_round_number);
+
+    //TODO: how does new round manage to send task to players to estimate tricks / play card / ...
 
     update_current_player();
 
