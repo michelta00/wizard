@@ -13,6 +13,7 @@ private:
     serializable_value<std::string>* _player_name;  // player's name chosen by the player
     serializable_value<int>* _nof_tricks;           // number of tricks won in current round
     serializable_value<int>* _nof_predicted;        // number of predicted tricks in current round
+    // TODO: add scores vector that saves all scores
     serializable_value<int>* _score;                // score of the player (total game score)
     hand* _hand;
 
