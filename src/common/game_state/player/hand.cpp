@@ -90,7 +90,7 @@ void hand::write_into_json(rapidjson::Value &json, rapidjson::Document::Allocato
     json.AddMember("cards", vector_utils::serialize_vector(_cards, allocator), allocator);
 }
 
-hand *hand::from_json(const rapidjson::Value &json) {
+hand* hand::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id") && json.HasMember("cards")) {
         std::vector<card*> deserialized_cards = std::vector<card*>();
         for (auto &serialized_card : json["cards"].GetArray()) {
