@@ -64,7 +64,8 @@ void player::set_game_id(std::string game_id) {
 
 
 // getter and setter for score
-int player::get_score() const noexcept {
+int player::get_score() const noexcept
+{
     return _score->get_value();
 }
 
@@ -79,6 +80,7 @@ int player::get_nof_tricks() const noexcept
 {
     return _nof_tricks->get_value();
 }
+
 void player::set_nof_tricks(int nof_tricks)
 {
     _nof_tricks->set_value(nof_tricks);
@@ -90,6 +92,7 @@ int player::get_nof_predicted() const noexcept
 {
     return _nof_predicted->get_value();
 }
+
 void player::set_nof_predicted(int nof_predicted)
 {
     _nof_predicted->set_value(nof_predicted);
@@ -115,8 +118,9 @@ void player::setup_round(std::string& err) {
 
     _nof_predicted->set_value(0);
     _nof_tricks->set_value(0);
+    delete _hand;
     _hand = new hand();
-    // TODO: implement how the new hand is created
+    // TODO: check if the set up of new hand makes sense
 }
 
 void player::wrap_up_round(std::string &err) {

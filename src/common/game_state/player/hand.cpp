@@ -4,6 +4,7 @@
 
 hand::hand() : unique_serializable() { }
 
+// from_diff constructor
 hand::hand(std::string id) : unique_serializable(id) { }
 
 // deserialization constructor
@@ -22,7 +23,6 @@ hand::~hand() {
 int hand::get_nof_cards() const {
     return _cards.size();
 }
-
 
 const std::vector<card*> hand::get_cards() const {
     return _cards;

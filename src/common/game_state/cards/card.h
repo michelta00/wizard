@@ -11,8 +11,9 @@ class card : public unique_serializable {
 private:
 
     // TODO: make sure that _value can only take numbers from 1 to 15 in first position and from 0 to 4 in second
-    // _value contains the card number as first int (number between 1 and 13, or wizard (14) / jester (15)),
-    // and also the color as second int (encoded as 1: yellow, 2: red, 3: green, 4: blue, 0 if wizard or jester)
+    // _value contains the card number as first int (number between 1 and 13 as the cards value,
+    // or wizard (14) / jester (0)), and also the color as second int
+    // (encoded as 1: yellow, 2: red, 3: green, 4: blue, 0 if wizard or jester)
     serializable_value<std::pair<int, int>>* _value;
 
     // from_diff constructor
@@ -20,6 +21,7 @@ private:
     // deserialization constructor
     card(std::string id, serializable_value<std::pair<int, int>>* val);
 public:
+    // constructor & destructor
     card(std::pair<int, int> val);
     ~card();
 
