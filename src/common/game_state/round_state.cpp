@@ -13,9 +13,10 @@ round_state::round_state(const std::vector<player*>& players, serializable_value
     this->_current_player_idx = starting_player_idx; //current player is starting player when round is created
     this->_players = players;
     this->_deck = new deck();
-    this->trick = new trick(); //attributes need to possibly be added to trick constructor
+    this->_trick = new trick(); //attributes need to possibly be added to trick constructor
     this->_trump_color = new serializable_value<int>(0); //no trump set when round is created
     this->_is_finished = new serializable_value<bool>(false);
+    this->_is_estimation_phase = new serializable_value<bool>(true);
     this->_round_number = round_number;
     this->_trick_estimate_sum = new serializable_value<int>(0);
     this->_on_round_end = nullptr;
@@ -27,9 +28,10 @@ round_state::round_state(std::string id, const std::vector<player*>& players, se
     this->_current_player_idx = starting_player_idx; //current player is starting player when round is created
     this->_players = players;
     this->_deck = new deck();
-    this->trick = new trick(); //attributes need to possibly be added to trick constructor
+    this->_trick = new trick(); //attributes need to possibly be added to trick constructor
     this->_trump_color = new serializable_value<int>(0); //no trump set when round is created
     this->_is_finished = new serializable_value<bool>(false);
+    this->_is_estimation_phase = new serializable_value<bool>(true);
     this->_round_number = round_number;
     this->_trick_estimate_sum = new serializable_value<int>(0);
     this->_on_round_end = nullptr;
@@ -44,6 +46,7 @@ round_state::round_state(
             trick* current_trick,
             serializable_value<int>* trump_color,
             serializable_value<bool>* is_finished,
+            serializable_value<bool>* is_estimation_phase,
             serializable_value<int>* round_number,
             serializable_value<int>* trick_estimate_sum,
             std::function<void()> on_round_end): unique_serializable(id)
@@ -55,6 +58,7 @@ round_state::round_state(
     this->_trick = current_trick; //attributes need to possibly be added to trick constructor
     this->_trump_color = trump_color; //no trump set when round is created
     this->_is_finished = is_finished;
+    this->_is_estimation_phase = is_estimation_phase;
     this->_round_number = round_number;
     this->_trick_estimate_sum = trick_estimate_sum;
     this->_on_round_end = on_round_end;
@@ -66,6 +70,7 @@ round_state::~round_state() {
         delete _deck;
         delete _trick;
         delete _is_finished;
+        delete _is_estimation_phase;
         delete _current_player_idx;
         delete _starting_player_idx;
         delete _trump_color;
@@ -75,6 +80,7 @@ round_state::~round_state() {
         _deck = nullptr;
         _trick = nullptr;
         _is_finished = nullptr;
+        _is_estimation_phase = nullptr;
         _current_player_idx = nullptr;
         _starting_player_idx = nullptr;
         _trump_color = nullptr;
@@ -99,6 +105,10 @@ player* round_state::get_starting_player() const {
 
 bool round_state::is_finished() const {
     return _is_finished->get_value();
+}
+
+bool round_state::is_estimation_phase() const {
+  return _is_estimation_phase->get_value();
 }
 
 int round_state::get_round_number() const {
@@ -127,8 +137,28 @@ int round_state::get_trick_estimate_sum() const {
 
 
 // setter
-round_state::set_trump_color(serializable_value<int>* trump_color) {
-  this->_trump_color = trump_color;
+void round_state::set_trump_color(const int trump_color) {
+  this->_trump_color->set_value(trump_color);
+}
+
+void round_state::set_is_estimation_phase(bool is_estimation_phase){
+  this->_is_estimation_phase->set_value(is_estimation_phase);
+}
+
+void round_state::set_finished(bool is_finished){
+  this->_is_finished->set_value(is_finished);
+}
+
+void set_round_number(int round_number){
+  this->_round_number->set_value(round_number);
+}
+
+void set_starting_player_idx(player* starting_player_idx){
+  this->_starting_player_idx->set_value(starting_player_idx);
+}
+
+void set_current_player_idx(player* current_player_idx){
+  this->_current_player_idx->set_value(current_player_idx);
 }
 
 
@@ -145,3 +175,56 @@ void round_state::finish_round() {
         _on_round_end();  // Invoke the callback
     }
 }
+
+void round_state::determine_trump_color(std::string& err, deck* deck) {
+  //TODO
+}
+
+// set up round
+void round_state::setup_round(std::string& err, const int round_number, const int starting_player_idx){
+  this->_starting_player_idx->set_value(starting_player_idx);
+  this->_current_player_idx->set_value(starting_player_idx);
+  this->_round_number->set_value(round_number);
+
+  determine_trump_color(err, this->_deck);
+
+
+  //TODO: possibly set up other parts of round (players, deck, trick, ...)
+}
+
+// TODO: add play_card function and adapt can_be_played to the used by that function as in SDS
+bool round_state::can_be_played(const trick* const current_trick, const hand* const current_hand) const noexcept {
+    // return true if this card can be played according to the game rules (checked in that order):
+    // if there is no trick color yet (trick color is 0), then the card can be played
+    // if the card is a jester or wizard, then it can be played
+    // it the card has the same color as the trick color, it can be played
+    // if the card does not have the same color as the trick color, it can only be played if no other card
+    // on the players hand has the same color as the trick color
+
+    // get trick color -> if 0, card can be played
+    int trick_color = current_trick->get_trick_color();
+    if (trick_color == 0) return true;
+
+    // get value of this card
+    std::pair<int, int> value = this->get_value();
+
+    // check if card is wizard or jester -> if yes, card can be played
+    if (value.first == 0 || value.first == 14) return true;
+
+    // if card is not wizard or jester, compare with trick color -> if same, can be played
+    if (value.second == trick_color) return true;
+
+    // if card does not have trick color, check other cards on hand
+    const std::vector<card*> cards = current_hand->get_cards();
+    for (auto it = cards.begin(); it != cards.end(); ++it)
+    {
+        std::pair<int, int> hand_value = (*it)->get_value();
+        // if there is a card on the hand with the trick color, the current card cannot be played
+        if (hand_value.second == trick_color) return false;
+    }
+
+    return true;
+}
+
+
+#endif
