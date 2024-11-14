@@ -10,8 +10,8 @@
 #include <functional>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
-#include "cards/draw_pile.h"
-#include "cards/discard_pile.h"
+#include "cards/trick.h"
+#include "cards/deck.h"
 #include "../serialization/serializable.h"
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
@@ -23,7 +23,9 @@ private:
 
     serializable_value<int>* _starting_player_idx;
     serializable_value<int>* _current_player_idx;  //maybe just use integer instead of pointer?
-    std::vector<player*>& _players,
+                                                   // i would leave it like this that's the easiest way for the
+                                                   // json methods and also done like this in the other classes
+    std::vector<player*>& _players;
     deck* _deck;
     trick* _current_trick; //only save current trick, won tricks are saved with the players
 	serializable_value<int>* _trump_color;
@@ -89,7 +91,8 @@ public:
 
     //bool draw_card(player* player, std::string& err);
     //bool estimate_tricks(player* player, const int estimate, std::string& err);
-    //bool play_card(player* player, const std::string& card_id, std::string& err);
+    bool play_card(player* player, const std::string& card_id, std::string& err);
+    bool can_be_played(hand* hand, trick* trick, const std::string& card_id, std::string& err);
     //bool fold(player* player, std::string& err);
 
     // end of round functions

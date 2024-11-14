@@ -228,3 +228,6 @@ bool round_state::can_be_played(const trick* const current_trick, const hand* co
 
 
 #endif
+
+
+// TODO: add from_json and write_into_json functions
