@@ -53,7 +53,7 @@ public:
     void set_nof_predicted(int nof_predicted);
 
     int get_nof_cards() const noexcept;
-    const hand* get_hand() const noexcept;
+    hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
 
 #ifdef WIZARD_SERVER

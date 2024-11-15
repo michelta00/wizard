@@ -104,7 +104,7 @@ std::string player::get_player_name() const noexcept {
     return this->_player_name->get_value();
 }
 
-const hand* player::get_hand() const noexcept {
+hand* player::get_hand() const noexcept {
     return this->_hand;
 }
 

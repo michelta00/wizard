@@ -64,7 +64,7 @@ std::vector<card*>::iterator hand::get_card_iterator() {
 }
 
 
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 bool hand::add_card(card* new_card, std::string &err) {
     _cards.push_back(new_card);
     return true;
@@ -82,7 +82,7 @@ bool hand::remove_card(std::string card_id, card*& played_card, std::string &err
         return false;
     }
 }
-#endif
+//#endif
 
 
 void hand::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
