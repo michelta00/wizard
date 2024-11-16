@@ -15,25 +15,24 @@ trick::trick(std::string id) : unique_serializable(id) {
         this->_trump_color = new serializable_value<int>(0);
 }
 
-trick::trick(std::string id, std::vector<std::pair<card*, player*>> &cards):
-        unique_serializable(id),
-        _cards(cards) {
-        this->_trick_color = new serializable_value<int>(0);
-        this->_trump_color = new serializable_value<int>(0);
+trick::trick(std::string id, std::vector<std::pair<card*, player*>> cards, int &trick_color, int &trump_color)
+    : unique_serializable(id), _cards(cards) {
+        this->_trick_color = new serializable_value<int>(trick_color);
+        this->_trump_color = new serializable_value<int>(trump_color);
 }
 
 trick::trick(const int trump)
         : unique_serializable() {
         this->_trick_color = new serializable_value<int>(0);
         this->_trump_color = new serializable_value<int>(0);
+        *_trump_color = trump;
 }
 
 
 trick::~trick() {
         for (int i = 0; i < _cards.size(); i++) {
-                delete _cards[i]->get_value().first;   // delete the `card*`
-                delete _cards[i]->get_value().second;  // delete the `player*`
-
+                delete _cards[i].first;   // delete the `card*`
+                delete _cards[i].second;  // delete the `player*`
         }
         delete _trick_color;
         delete _trump_color;
@@ -45,24 +44,18 @@ int trick::get_trick_color() const {
 }
 
 
-//#ifdef WIZARD_SERVER
+#ifdef WIZARD_SERVER
 // determines winner using trump color
 player* trick::wrap_up_trick(std::string& err) {
-/*
- * TODO game logic for determining winner
- * Needs all the rules for which player wins
- * Needs to know who the first player was so it can return the winning player -> first in cards vector
- * do we need to pass round state to it?
- * OR include header file for round state?
-*/
-        player* winner = _cards[0]->get_value().second; // base winner is first player, in case of 4 jokers
+// TODO confirm working game logic
+        player* winner = _cards[0].second; // base winner is first player, in case of 4 jokers
 
         // Determine and return winner
         // wizard check
-        for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first->get_value().first == 14)
+        for (auto & _card : _cards) {
+                if (_card.first->get_value().first == 14)
                 {
-                        return _cards[i]->get_value().second;
+                        return _card.second;
                 }
         }
         // all joker check
@@ -74,13 +67,13 @@ player* trick::wrap_up_trick(std::string& err) {
         bool trump_present = false;
         int highest_trump = 0;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first->get_value().second == _trump_color)
+                if (_cards[i].first->get_value().second == _trump_color->get_value())
                 {
                         trump_present = true;
-                        if (_cards[i]->get_value().first->get_value().first > highest_trump)
+                        if (_cards[i].first->get_value().first > highest_trump)
                         {
-                                highest_trump = _cards[i]->get_value().first->get_value().first;
-                                winner = _cards[i]->get_value().second;
+                                highest_trump = _cards[i].first->get_value().first;
+                                winner = _cards[i].second;
                         }
                 }
         }
@@ -90,35 +83,37 @@ player* trick::wrap_up_trick(std::string& err) {
         // highest card of trick color check
         int winner_idx = -1; // use a non joker idx;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i]->get_value().first->get_value().second == _trick_color->get_value())
+                if (_cards[i].first->get_value().second == _trick_color->get_value())
                         if (winner_idx == -1 ||
-                                _cards[i]->get_value().first->get_value().first
-                                > _cards[winner_idx]->get_value().first->get_value().first) {
+                                _cards[i].first->get_value().first
+                                > _cards[winner_idx].first->get_value().first) {
                         winner_idx = i;
                 }
         }
         if (winner_idx != -1) {
-                winner = _cards[winner_idx]->get_value().second;
+                winner = _cards[winner_idx].second;
         }
 
         return winner;
 }
 
-void trick::set_up_round(std::string& err) {
+void trick::set_up_round(std::string& err, int trump) {
         // remove all cards (if any)
         for (int i = 0; i < _cards.size(); i++) {
-                delete _cards[i]->get_value().first;   // delete the `card*`
-                delete _cards[i]->get_value().second;  // delete the `player*`
+                delete _cards[i].first;   // delete the `card*`
+                delete _cards[i].second;  // delete the `player*`
         }
         _cards.clear();
+        *_trump_color = trump;
+        *_trick_color = 0;
 }
 
-bool trick::add_card(const std::string& card_id, player* player, std::string& err) {
+bool trick::add_card(const std::string& card_id, player* current_player, std::string& err) {
         card* played_card = nullptr;
-        if (player->get_hand()->try_get_card(card_id, played_card)) {
+        if (current_player->get_hand()->try_get_card(card_id, played_card)) {
                 card* local_system_card;
-                if (player->remove_card(played_card->get_id(), local_system_card, err)) {
-                        _cards.push_back(local_system_card);
+                if (current_player->remove_card(played_card->get_id(), local_system_card, err)) {
+                        _cards.emplace_back(local_system_card, current_player);
                         return true;
                 } else {
                         err = "Could not play card " + played_card->get_id() + " because player does not have this card.";
@@ -130,48 +125,28 @@ bool trick::add_card(const std::string& card_id, player* player, std::string& er
         return false;
 }
 
-
-bool ::try_play(const std::string& card_id, player* player, std::string& err) {
-        card* played_card = nullptr;
-        if (player->get_hand()->try_get_card(card_id, played_card)) {
-                if (can_play(played_card)) {
-                        card* local_system_card;
-                        if (player->remove_card(played_card->get_id(), local_system_card, err)) {
-                                _cards.push_back(local_system_card);
-                                return true;
-                        } else {
-                                err = "Could not play card " + played_card->get_id() + " because player does not have this card.";
-                        }
-                } else {
-                        err = "The desired card with value " + std::to_string(played_card->get_value())
-                              + " cannot be played on top of a card with value " + std::to_string(get_top_card()->get_value());
-                }
-        } else {
-                err = "The player does not possess the card " + card_id + ", which was requested to be played.";
+bool trick::add_card(card* played_card, player* current_player, std::string& err) {
+        if (played_card) {
+                _cards.emplace_back(played_card, current_player);
+                return true;
         }
+        err = "The desired card cannot be played";
         return false;
 }
 
-void set_trick_color(int color) {
-        this->_trick_color->set_value(color);
+void trick::set_trick_color(int color) {
+        *_trick_color = color;
 }
 
-// bool discard_pile::try_play(card* played_card, std::string& err) {
-//         if (can_play(played_card)) {
-//                 _cards.push_back(played_card);
-//                 return true;
-//         } else {
-//                 err = "The desired card with value " + std::to_string(played_card->get_value())
-//                         + " cannot be played on top of a card with value " + std::to_string(get_top_card()->get_value());
-//         }
-//         return false;
-// }
+#endif
 
-//#endif
+//TODO write from json and to json
 
 // for creating updated instance of trick
 trick *trick::from_json(const rapidjson::Value &json) {
-        if (json.HasMember("id") && json.HasMember("cards")) {
+        if (json.HasMember("id") && json.HasMember("cards") && json.HasMember("trump_color")
+                && json.HasMember("trick_color")) {
+
                 auto deserialized_cards = std::vector<serializable_value<std::pair<card*, player*>>*>();
                 for (auto &serialized_card : json["cards"].GetArray()) {
                         deserialized_cards.push_back(card::from_json(serialized_card.GetObject()));
