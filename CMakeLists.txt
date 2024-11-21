@@ -30,6 +30,8 @@ set(CLIENT_SOURCE_FILES
         src/common/game_state/player/player.cpp src/common/game_state/player/player.h
         src/common/game_state/cards/trick.cpp
         src/common/game_state/cards/trick.h
+        src/common/game_state/cards/deck.cpp
+        src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
         src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
@@ -64,6 +66,8 @@ set(SERVER_SOURCE_FILES
         src/common/game_state/player/player.cpp src/common/game_state/player/player.h
         src/common/game_state/cards/draw_pile.cpp src/common/game_state/cards/draw_pile.h
         src/common/game_state/cards/discard_pile.cpp src/common/game_state/cards/discard_pile.h
+        src/common/game_state/cards/deck.cpp
+        src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
         src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
