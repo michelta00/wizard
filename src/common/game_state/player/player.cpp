@@ -1,11 +1,9 @@
-#include <cmath>
-
 #include "player.h"
 #include "../../exceptions/WizardException.h"
 #include "../../serialization/vector_utils.h"
 
 // constructor for client
-player::player(std::string name) : unique_serializable() {
+player::player(const std::string& name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
     this->_nof_predicted = new serializable_value<int>(0);
     this->_nof_tricks = new serializable_value<int>(0);
@@ -15,10 +13,10 @@ player::player(std::string name) : unique_serializable() {
 }
 
 // deserialization constructor
-player::player(std::string id, serializable_value<std::string>* name,
+player::player(const std::string& id, serializable_value<std::string>* name,
                serializable_value<int>* nof_tricks,
                serializable_value<int>* nof_predicted,
-               std::vector<serializable_value<int>*> scores, hand *hand) :
+               const std::vector<serializable_value<int>*>& scores, hand *hand) :
         unique_serializable(id),
         _player_name(name),
         _nof_tricks(nof_tricks),
@@ -43,7 +41,7 @@ player::~player() {
 
 #ifdef WIZARD_SERVER
 // constructor for server
-player::player(std::string id, std::string name) :
+player::player(const std::string& id, const std::string& name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
@@ -53,11 +51,13 @@ player::player(std::string id, std::string name) :
     this->_nof_tricks = new serializable_value<int>(0);
 }
 
-std::string player::get_game_id() {
+std::string player::get_game_id()
+{
     return _game_id;
 }
 
-void player::set_game_id(std::string game_id) {
+void player::set_game_id(const std::string& game_id)
+{
     _game_id = game_id;
 }
 #endif
@@ -69,7 +69,7 @@ std::vector<serializable_value<int>*> player::get_scores() const noexcept
     return _scores;
 }
 
-void player::set_scores(int score)
+void player::set_scores(const int score)
 {
     _scores.push_back(new serializable_value<int>(score));
 }
@@ -81,7 +81,7 @@ int player::get_nof_tricks() const noexcept
     return _nof_tricks->get_value();
 }
 
-void player::set_nof_tricks(int nof_tricks)
+void player::set_nof_tricks(const int nof_tricks) const
 {
     _nof_tricks->set_value(nof_tricks);
 }
@@ -93,29 +93,32 @@ int player::get_nof_predicted() const noexcept
     return _nof_predicted->get_value();
 }
 
-void player::set_nof_predicted(int nof_predicted)
+void player::set_nof_predicted(const int nof_predicted) const
 {
     _nof_predicted->set_value(nof_predicted);
 }
 
 
 // other getters
-std::string player::get_player_name() const noexcept {
+std::string player::get_player_name() const noexcept
+{
     return this->_player_name->get_value();
 }
 
-const hand* player::get_hand() const noexcept {
+const hand* player::get_hand() const noexcept
+{
     return this->_hand;
 }
 
-int player::get_nof_cards() const noexcept {
+unsigned int player::get_nof_cards() const noexcept
+{
     return _hand->get_nof_cards();
 }
 
 
 #ifdef WIZARD_SERVER
-void player::setup_round(std::string& err) {
-
+void player::setup_round(std::string& err)
+{
     _nof_predicted->set_value(0);
     _nof_tricks->set_value(0);
     delete _hand;
@@ -140,7 +143,7 @@ bool player::add_card(card *card, std::string &err) {
     return _hand->add_card(card, err);
 }
 
-bool player::remove_card(std::string card_id, card*& card, std::string &err) {
+bool player::remove_card(const std::string& card_id, card*& card, std::string &err) {
     card = nullptr;
     if (_hand->get_nof_cards() == 0) {
         err = "Player has already played all its cards and cannot play any more cards";
@@ -177,7 +180,6 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     json.AddMember("hand", hand_val, allocator);
 }
 
-// TODO: check if this function is correct
 player* player::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
         && json.HasMember("nof_predicted")
