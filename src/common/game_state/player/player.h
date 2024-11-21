@@ -23,43 +23,43 @@ private:
     /*
      * Deserialization constructor
      */
-    player(std::string id,
+    player(const std::string& id,
            serializable_value<std::string>* name,
            serializable_value<int>* nof_tricks,
            serializable_value<int>* nof_predicted,
-           std::vector<serializable_value<int>*> scores,
+           const std::vector<serializable_value<int>*>& scores,
            hand* hand);
 
 public:
 // constructors
-    explicit player(std::string name);   // for client
+    explicit player(const std::string& name);   // for client
     ~player();
 
 #ifdef WIZARD_SERVER
-    player(std::string id, std::string name);  // for server
+    player(const std::string& id, const std::string& name);  // for server
 
     std::string get_game_id();
-    void set_game_id(std::string game_id);
+    void set_game_id(const std::string& game_id);
 #endif
 
     // accessors
-    std::vector<serializable_value<int>*> get_scores() const noexcept;
+    [[nodiscard]] std::vector<serializable_value<int>*> get_scores() const noexcept;
     void set_scores(int score);
 
-    int get_nof_tricks() const noexcept;
-    void set_nof_tricks(int nof_tricks);
+    [[nodiscard]] int get_nof_tricks() const noexcept;
+    void set_nof_tricks(int nof_tricks) const;
 
-    int get_nof_predicted() const noexcept;
-    void set_nof_predicted(int nof_predicted);
+    [[nodiscard]] int get_nof_predicted() const noexcept;
+    void set_nof_predicted(int nof_predicted) const;
 
-    int get_nof_cards() const noexcept;
-    hand* get_hand() const noexcept;
-    std::string get_player_name() const noexcept;
+    [[nodiscard]] unsigned int get_nof_cards() const noexcept;
+    [[nodiscard]] const hand* get_hand() const noexcept;
+    [[nodiscard]] std::string get_player_name() const noexcept;
 
 #ifdef WIZARD_SERVER
     // state update functions
     bool add_card(card* card, std::string& err);
-    bool remove_card(std::string card_id, card*& card, std::string& err);
+    bool remove_card(const std::string& card_id, card*& card, std::string& err);
 
     void wrap_up_round(std::string& err);
     void setup_round(std::string& err);
