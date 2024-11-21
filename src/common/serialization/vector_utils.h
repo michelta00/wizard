@@ -32,6 +32,27 @@ namespace vector_utils {
         return arr_val;
     }
 
+    static rapidjson::Value serialize_cards_vector(
+    const std::vector<std::pair<card*, player*>>& cards,
+    rapidjson::Document::AllocatorType& allocator) {
+        rapidjson::Value arr_val(rapidjson::kArrayType);
+        for (const auto& pair : cards) {
+            rapidjson::Value obj(rapidjson::kObjectType);
+
+            // Serialize the pair componentsss
+            rapidjson::Value card_val(rapidjson::kObjectType);
+            pair.first->write_into_json(card_val, allocator);
+            obj.AddMember("card", card_val, allocator);
+
+            rapidjson::Value player_val(rapidjson::kObjectType);
+            pair.second->write_into_json(player_val, allocator);
+            obj.AddMember("player", player_val, allocator);
+
+            arr_val.PushBack(obj, allocator);
+        }
+        return arr_val;
+    }
+
 }
 
 #endif //WIZARD_VECTOR_UTILS_H
