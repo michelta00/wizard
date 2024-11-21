@@ -10,8 +10,8 @@ class hand : public unique_serializable {
 private:
     std::vector<card*> _cards;
 
-    hand(std::string id);
-    hand(std::string id, std::vector<card*> cards);
+    explicit hand(const std::string& id);
+    hand(const std::string& id, const std::vector<card*>& cards);
     card* remove_card(std::vector<card*>::iterator pos);
     card* remove_card(int idx);
     card* remove_card(card* card);
@@ -23,11 +23,11 @@ public:
 
 // serializable interface
     static hand* from_json(const rapidjson::Value& json);
-    virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+    void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
 
 // accessors
-    int get_nof_cards() const;
-    const std::vector<card*> get_cards() const;
+    [[nodiscard]] unsigned int get_nof_cards() const;
+    [[nodiscard]] std::vector<card*> get_cards() const;
     bool try_get_card(const std::string& card_id, card*& hand_card) const;
 
 #ifdef WIZARD_SERVER
