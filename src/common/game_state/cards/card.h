@@ -8,22 +8,27 @@
 class card : public unique_serializable {
 private:
 
-    // _value contains the card number as first int (number between 1 and 13 as the cards value,
-    // or wizard (14) / jester (0)), and also the color as second int
-    // (encoded as 1: yellow, 2: red, 3: green, 4: blue, 0 if wizard or jester)
-    std::pair<serializable_value<int>*, serializable_value<int>*> _value;
+    // _value contains the card value as int (number between 1 and 13 as the cards value,
+    // or wizard (14) / jester (0))
+    // _color contains the card color as an int encoded as 1: yellow, 2: red, 3: green, 4: yellow,
+    // and 0 : no color (for wizard or jester)
+
+
+    serializable_value<int>* _value{};
+    serializable_value<int>* _color{};
 
     // from_diff constructor
-    card(std::string id);
+    explicit card(const std::string& id);
     // deserialization constructor
-    card(std::string id, std::pair<serializable_value<int>*, serializable_value<int>*> val);
+    card(const std::string& id, serializable_value<int>* value, serializable_value<int>* color);
 public:
     // constructor & destructor
-    card(std::pair<int, int> val);
+    card(int value, int color);
     ~card();
 
     // accessors
-    std::pair<int, int> get_value() const noexcept;
+    [[nodiscard]] int get_value() const noexcept;
+    [[nodiscard]] int get_color() const noexcept;
 
     // serializable interface
     void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
