@@ -82,7 +82,7 @@ bool hand::remove_card(std::string card_id, card*& played_card, std::string &err
         return false;
     }
 }
-#endif
+//#endif
 
 
 void hand::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
