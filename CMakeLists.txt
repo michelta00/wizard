@@ -64,8 +64,8 @@ set(SERVER_SOURCE_FILES
         src/common/game_state/game_state.cpp src/common/game_state/game_state.h
         src/common/game_state/player/hand.cpp src/common/game_state/player/hand.h
         src/common/game_state/player/player.cpp src/common/game_state/player/player.h
-        src/common/game_state/cards/draw_pile.cpp src/common/game_state/cards/draw_pile.h
-        src/common/game_state/cards/discard_pile.cpp src/common/game_state/cards/discard_pile.h
+        src/common/game_state/cards/trick.cpp
+        src/common/game_state/cards/trick.h
         src/common/game_state/cards/deck.cpp
         src/common/game_state/cards/deck.h
         # client requests
