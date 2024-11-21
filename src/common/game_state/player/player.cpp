@@ -105,7 +105,7 @@ std::string player::get_player_name() const noexcept
     return this->_player_name->get_value();
 }
 
-const hand* player::get_hand() const noexcept
+hand* player::get_hand() const noexcept
 {
     return this->_hand;
 }
@@ -117,16 +117,16 @@ unsigned int player::get_nof_cards() const noexcept
 
 
 #ifdef WIZARD_SERVER
-void player::setup_round(std::string& err)
+void player::setup_round()
 {
     _nof_predicted->set_value(0);
     _nof_tricks->set_value(0);
-    delete _hand;
-    _hand = new hand();
-    // TODO: check if the set up of new hand makes sense
+    //delete _hand;
+    //_hand = new hand();
+    // TODO: check if the set up of new hand is necessary
 }
 
-void player::wrap_up_round(std::string &err) {
+void player::wrap_up_round() {
     int new_score = _scores.back()->get_value();
     if (_nof_predicted->get_value() == _nof_tricks->get_value())
     {
