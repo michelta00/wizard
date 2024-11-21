@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <functional>
+#include <random>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
 #include "cards/trick.h"
@@ -32,6 +33,7 @@ private:
     serializable_value<bool>* _is_finished; // maybe not needed
     serializable_value<bool>* _is_estimation_phase;
     serializable_value<int>* _round_number;
+    serializable_value<int>* _current_trick_number;
     serializable_value<int>* _trick_estimate_sum;
 
     // for callback from game_state
@@ -53,6 +55,7 @@ private:
             serializable_value<bool>* is_finished,
         	serializable_value<bool>* is_estimation_phase,
             serializable_value<int>* round_number,
+        	serializable_value<int>* current_trick_number,
             serializable_value<int>* trick_estimate_sum);
 
 public:
@@ -79,21 +82,22 @@ public:
     void set_starting_player_idx(player* starting_player_idx);
     void set_current_player_idx(player* current_player_idx);
     void set_trump_color(int trump_color);
+    void set_trick_estimate_sum(int trick_estimate_sum);
 
 
 #ifdef WIZARD_SERVER
 // server-side state update functions
     void set_on_round_end(std::function<void()> callback);
     void finish_round();
-    void determine_trump_color(std::string& err, deck* deck)
+    void determine_trump_color()
 	void setup_round(std::string& err, const int round_number, const int starting_player_idx);
-    void update_current_player();
+    void update_current_player(std::string& err);
 
-    //bool draw_card(player* player, std::string& err);
-    //bool estimate_tricks(player* player, const int estimate, std::string& err);
-    bool play_card(player* player, const std::string& card_id, std::string& err);
+    int get_number_of_turns();
+    bool estimate_tricks(player *player, std::string &err, int trick_estimate);
+
     bool can_be_played(hand* hand, trick* trick, const std::string& card_id, std::string& err);
-    //bool fold(player* player, std::string& err);
+    bool play_card(player* player, const std::string& card_id, std::string& err);
 
     // end of round functions
     //void update_current_player(std::string& err);

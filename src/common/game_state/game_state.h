@@ -63,7 +63,6 @@ public:
 // all in block behind ifdef is only included if wizard server is defined
 #ifdef WIZARD_SERVER
 // server-side state update functions
-    void increase_round_number();
     void update_current_player(); //starting player of round
     void setup_round(std::string& err);   // server side initialization
     bool remove_player(player* player, std::string& err);

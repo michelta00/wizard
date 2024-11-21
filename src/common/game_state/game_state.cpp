@@ -117,22 +117,15 @@ std::vector<player*>& game_state::get_players() {
 
 // state modification functions without diff
 
-void game_state::increase_round_number() {
-  int number = get_round_number() + 1;
-  _round_number->set_value(number);
-}
-
 void game_state::update_current_player() {
-    int nof_players = _players.size();
-    int current_player_idx = _current_player_idx->get_value();
-    ++current_player_idx %= nof_players;
-    this->_current_player_idx->set_value(current_player_idx);
+    _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
 }
 
 
 void game_state::setup_round(std::string &err) {
 
-    increase_round_number();
+    // increase round number
+    _round_number->set_value(_round_number->get_value() + 1);
 
     _round_state->setup_round(err, this->get_round_number(), _current_player_idx->get_value());
 
