@@ -53,7 +53,7 @@ public:
     void set_nof_predicted(int nof_predicted) const;
 
     [[nodiscard]] unsigned int get_nof_cards() const noexcept;
-    [[nodiscard]] const hand* get_hand() const noexcept;
+    [[nodiscard]] hand* get_hand() const noexcept;
     [[nodiscard]] std::string get_player_name() const noexcept;
 
 #ifdef WIZARD_SERVER
@@ -61,8 +61,8 @@ public:
     bool add_card(card* card, std::string& err);
     bool remove_card(const std::string& card_id, card*& card, std::string& err);
 
-    void wrap_up_round(std::string& err);
-    void setup_round(std::string& err);
+    void wrap_up_round();
+    void setup_round();
 #endif
 
 
