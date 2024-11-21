@@ -15,10 +15,10 @@ trick::trick(std::string id) : unique_serializable(id) {
         this->_trump_color = new serializable_value<int>(0);
 }
 
-trick::trick(std::string id, std::vector<std::pair<card*, player*>> cards, int &trick_color, int &trump_color)
+trick::trick(std::string id, std::vector<std::pair<card*, player*>> &cards,  serializable_value<int>* trick_color, serializable_value<int>* trump_color)
     : unique_serializable(id), _cards(cards) {
-        this->_trick_color = new serializable_value<int>(trick_color);
-        this->_trump_color = new serializable_value<int>(trump_color);
+        this->_trick_color = trick_color;
+        this->_trump_color = trump_color;
 }
 
 trick::trick(const int trump)
@@ -144,14 +144,26 @@ void trick::set_trick_color(int color) {
 
 // for creating updated instance of trick
 trick *trick::from_json(const rapidjson::Value &json) {
-        if (json.HasMember("id") && json.HasMember("cards") && json.HasMember("trump_color")
+        if (json.HasMember("id")
+                && json.HasMember("cards")
+                && json.HasMember("trump_color")
                 && json.HasMember("trick_color")) {
 
-                auto deserialized_cards = std::vector<serializable_value<std::pair<card*, player*>>*>();
+                auto deserialized_cards = std::vector<std::pair<card*, player*>>();
                 for (auto &serialized_card : json["cards"].GetArray()) {
-                        deserialized_cards.push_back(card::from_json(serialized_card.GetObject()));
+                        // Deserialize the card
+                        card* deserialized_card = card::from_json(serialized_card["card"]);
+
+                        // Deserialize the player
+                        player* deserialized_player = player::from_json(serialized_card["player"]);
+
+                        // Add the pair to the vector
+                        deserialized_cards.emplace_back(deserialized_card, deserialized_player);
                 }
-                return new trick(json["id"].GetString(), deserialized_cards);
+                auto trump_color = serializable_value<int>::from_json(json["trump_color"].GetObject());
+                auto trick_color = serializable_value<int>::from_json(json["trick_color"].GetObject());
+
+                return new trick(json["id"].GetString(), deserialized_cards, trick_color, trump_color);
         } else {
                 throw WizardException("Could not parse trick from json. 'id' or 'cards' were missing.");
         }
@@ -160,5 +172,16 @@ trick *trick::from_json(const rapidjson::Value &json) {
 void trick::write_into_json(rapidjson::Value &json,
                                    rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) const {
         unique_serializable::write_into_json(json, allocator);
-        json.AddMember("cards", vector_utils::serialize_vector(_cards, allocator), allocator);
+
+        json.AddMember("cards", vector_utils::serialize_cards_vector(_cards, allocator), allocator);
+
+        rapidjson::Value trump_color(rapidjson::kObjectType);
+        _trump_color->write_into_json(trump_color, allocator);
+        json.AddMember("trump_color", trump_color, allocator);
+
+        rapidjson::Value trick_color(rapidjson::kObjectType);
+        _trick_color->write_into_json(trick_color, allocator);
+        json.AddMember("trick_color", trick_color, allocator);
+
+
 }

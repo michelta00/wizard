@@ -21,6 +21,8 @@ private:
     serializable_value<int>* _trick_color;
     serializable_value<int>* _trump_color;
     std::vector<std::pair<card*, player*>> _cards;
+
+
     explicit trick(std::string id);
 
     trick(std::string id,
@@ -33,10 +35,9 @@ public:
     explicit trick(int trump);
     ~trick();
 
-// accessors
-    [[nodiscard]] int get_trick_color() const;
 
-// #ifdef WIZARD_SERVER
+
+#ifdef WIZARD_SERVER
     // state update functions
     player* wrap_up_trick(std::string& err);  // determines winner
     void set_up_round(std::string& err, int trump); // resets attributes
@@ -44,7 +45,9 @@ public:
     bool add_card(card* played_card, player* current_player, std::string& err);
     // setters
     void set_trick_color(int color);
-// #endif
+    // accessors
+    [[nodiscard]] int get_trick_color() const;
+#endif
 
 
 // serializable interface
