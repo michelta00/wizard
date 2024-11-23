@@ -189,48 +189,13 @@ void round_state::set_on_round_end(std::function<void()> callback) {
     _on_round_end = callback;
 }
 
-// Call this when the round ends
-void round_state::finish_round() {
- 	_is_finished->set_value(true);
-
-    //TODO: needs wrap up that calculates scores
-
-    if (_on_round_end) {  // Check if the callback is set
-        _on_round_end();  // Invoke the callback
-    }
-}
 
 
 
 
 
-void round_state::update_current_player(std::string& err){
-  _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
 
-  //if current player is last player of round, switch from estimation to playing or end round and send callback to game_state
-  if (_current_player_idx->get_value() == _starting_player_idx->get_value()){
-    if (_is_estiamtion_phase->get_value() == true) {
-    	_is_estimation_phase->set_value(false);
-    } else {
-    	//determine trick winner
-      	player* winner = _trick->wrap_up_trick(err);
-        winner->set_nof_tricks(get_nof_tricks() + 1);
 
-        if (_current_trick_number->get_value() < _round_number->get_value()){
-          	_current_trick_number->set_value(_current_trick_number->get_value() + 1);
-      		_trick->set_up_round();
-
-        	// winner of trick is starting player of next trick
-        	int player_idx;
-        	get_player_idx(winner, err, player_idx);
-        	_starting_player_idx->set_value(player_idx);
-        	_current_player_idx->set_value(player_idx);
-        } else {
-          	finish_round();
-        }
-    }
-  }
-}
 
 // TODO: add play_card function and adapt can_be_played to the used by that function as in SDS
 bool round_state::can_be_played(const card* card, std::string& err) const noexcept {
@@ -275,38 +240,9 @@ bool play_card(player* player, const std::string& card_id, std::string& err){
   }
 }
 
-int get_number_of_turns(){
-  int nof_players = this->_players.size();
 
-  if (this->_current_player_idx->get_value() >= this->_starting_player_idx->get_value()) {
-    return (this->_current_player_idx->get_value() - this->_starting_player_idx->get_value() + 1); //in first round 0
-  }
-  else{
-    return (this->_current_player_idx->get_value() - this->_starting_player_idx->get_value() + nof_players) % nof_players + 1;
-  }
-}
 
-bool round_state::estimate_tricks(player *player, std::string &err, int trick_estimate){
 
-  if (trick_estimate > get_round_number()) {
-    err = "Trick estimate is too big. You can't win more tricks than cards in your hand.";
-    return false;
-  }
-  if(trick_estimate < 0) {
-    err = "Trick estimate is too small. You can't win less than 0 tricks."
-    return false;
-  }
-
-  if(get_number_of_turns() == this->_players.size() && trick_estimate + _trick_estimate_sum->get_value() == _round_number->get_value()){
-    err = "The tricks can't add up to the exact number of cards in the round. Please either choose a higher or lower number of tricks."
-    return false;
-  }
-
-  player->set_trick_estimate(trick_estimate);
-  _trick_estimate_sum->set_value(trick_estimate + _trick_estimate_sum->get_value());
-  update_current_player(err); //handles logic to switch from estimation to playing round etc.
-  return true;
-}
 
 
 //#endif

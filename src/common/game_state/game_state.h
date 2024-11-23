@@ -97,7 +97,7 @@ public:
     void setup_round(std::string& err);   // server side initialization
     void wrap_up_round(std::string& err);
     bool estimate_tricks(player *player, std::string &err, int trick_estimate);
-    bool can_be_played(const card* card, std::string& err) const noexcept;
+    bool can_be_played(player* player, const card* card, std::string& err) const noexcept;
     bool play_card(player* player, const std::string& card_id, std::string& err);
     void update_current_player(std::string& err);
 

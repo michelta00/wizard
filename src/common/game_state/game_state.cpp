@@ -139,7 +139,7 @@ std::vector<player*>& game_state::get_players() {
 
 
 
-//#ifdef WIZARD_SERVER
+#ifdef WIZARD_SERVER
 
 // state modification functions without diff
 
@@ -243,6 +243,91 @@ bool game_state::start_game(std::string &err) {
     }
 }
 
+int game_state::get_number_of_turns(){
+  int nof_players = this->_players.size();
+
+  if (this->_current_player_idx->get_value() >= this->_starting_player_idx->get_value()) {
+    return (this->_current_player_idx->get_value() - this->_starting_player_idx->get_value() + 1); //in first round 0
+  }
+  else{
+    return (this->_current_player_idx->get_value() - this->_starting_player_idx->get_value() + nof_players) % nof_players + 1;
+  }
+}
+
+bool game_state::estimate_tricks(player *player, std::string &err, int trick_estimate){
+
+  if (trick_estimate > get_round_number()) {
+    err = "Trick estimate is too big. You can't win more tricks than cards in your hand.";
+    return false;
+  }
+  if(trick_estimate < 0) {
+    err = "Trick estimate is too small. You can't win less than 0 tricks.";
+    return false;
+  }
+
+  if(get_number_of_turns() == this->_players.size() && trick_estimate + _trick_estimate_sum->get_value() == _round_number->get_value()){
+    err = "The tricks can't add up to the exact number of cards in the round. Please either choose a higher or lower number of tricks.";
+    return false;
+  }
+
+  player->set_trick_estimate(trick_estimate);
+  _trick_estimate_sum->set_value(trick_estimate + _trick_estimate_sum->get_value());
+  return update_current_player(err); //handles logic to switch from estimation to playing round etc.
+}
+
+// return true if this card can be played according to the game rules (checked in that order):
+// if there is no trick color yet (trick color is 0) or a wizard has set the trick color (-1), then the card can be played
+// if the card is a jester or wizard, then it can be played
+// it the card has the same color as the trick color, it can be played
+// if the card does not have the same color as the trick color, it can only be played if no other card
+// on the players hand has the same color as the trick color
+bool game_state::can_be_played(player* player, const card* card, std::string& err) const noexcept {
+
+    // get trick color -> if 0, card can be played
+    int trick_color = _trick->get_trick_color();
+    int card_value = card->get_value();
+    int card_color = card->get_color();
+
+    // everything can be played if no trick color yet or a wizard has set the trick color
+    if (trick_color == 0 || trick_color == -1) {
+      return true;
+    }
+
+    // check if card is wizard or jester -> if yes, card can be played
+    if (card_value == 0 || card_value == 14) {
+        return true;
+    } else if (card_color == trick_color) { //compare with trick color -> if same, can be played
+        return true;
+    }
+    // if card does not have trick color, check other cards on hand
+    else{
+        std::vector<card*> cards = player->get_hand()->get_cards();
+        for (auto it = cards.begin(); it != cards.end(); it++) {
+          if (*it->get_color() == trick_color && *it->get_value() != card_value) {
+              err = "You can't play this card because you have another card which fits the trick color";
+              return false;
+          }
+        }
+        return true;
+    }
+}
+
+bool game_state::play_card(player* player, const std::string& card_id, std::string& err){
+  card* card = nullptr;
+  if (player->get_hand()->try_get_card(card_id, card) == false){ //also gives us card pointer
+    err = "This card is not in your hand.";
+    return false;
+  }
+  if (!can_be_played(player, card, err)){
+      return false;
+  }
+
+  // play card
+  _trick->add_card(card, player, err); //also sets trick color
+  player->get_hand()->remove_card(card);
+
+}
+
 bool game_state::remove_player(player *player_ptr, std::string &err) {
     int idx = get_player_index(player_ptr);
     if (idx != -1) {
@@ -286,7 +371,7 @@ bool game_state::finish_game(std::string &err) {
   return true;
 }
 
-//#endif
+#endif
 
 
 // Serializable interface
