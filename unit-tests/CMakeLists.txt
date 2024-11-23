@@ -2,7 +2,8 @@ project(Wizard-unit-tests)
 
 set(TEST_SOURCE_FILES
         card.cpp
-        hand.cpp)
+        hand.cpp
+        player.cpp)
 
 add_executable(Wizard-tests ${TEST_SOURCE_FILES})
 
