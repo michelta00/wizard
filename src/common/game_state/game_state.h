@@ -6,8 +6,7 @@
 #include <string>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
-#include "cards/draw_pile.h"
-#include "cards/discard_pile.h"
+#include "round_state.h"
 #include "../serialization/serializable.h"
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
@@ -24,7 +23,6 @@ private:
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
     serializable_value<int>* _current_player_idx;
-    serializable_value<int>* _starting_player_idx; // starting player of the game!, starting player of the round can be calculated
 
     // from_diff constructor, new game is constructed
     game_state(std::string id);
@@ -32,13 +30,12 @@ private:
     // deserialization constructor
     game_state(
             std::string id,
-        	round_state* round_state,
             std::vector<player*>& players,
+        	round_state* round_state,
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
-            serializable_value<int>* current_player_idx,
             serializable_value<int>* round_number,
-            serializable_value<int>* starting_player_idx);
+            serializable_value<int>* current_player_idx);
 
     // returns the index of 'player' in the '_players' vector
     int get_player_index(player* player) const;
@@ -61,7 +58,7 @@ public:
 
 
 // all in block behind ifdef is only included if wizard server is defined
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 // server-side state update functions
     void update_current_player(); //starting player of round
     void setup_round(std::string& err);   // server side initialization
@@ -70,7 +67,7 @@ public:
     bool start_game(std::string& err);
     bool finish_game(std::string& err);
 
-#endif
+//#endif
 
 // serializable interface
     static game_state* from_json(const rapidjson::Value& json);

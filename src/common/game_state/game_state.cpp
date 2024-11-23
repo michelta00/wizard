@@ -1,13 +1,8 @@
-//
-// Created by Manuel on 27.01.2021.
-//
-
 #include "game_state.h"
-
 #include "../exceptions/WizardException.h"
 #include "../serialization/vector_utils.h"
 
-
+// public constructor
 game_state::game_state() : unique_serializable() {
     this->_players = std::vector<player*>();
     this->_round_state = nullptr; //round state only initialized when round is set up
@@ -15,22 +10,22 @@ game_state::game_state() : unique_serializable() {
     this->_is_finished = new serializable_value<bool>(false);
     this->_current_player_idx = new serializable_value<int>(0);
     this->_round_number = new serializable_value<int>(0);
-    this->_starting_player_idx = new serializable_value<int>(0);
 }
 
-game_state::game_state(std::string id, std::vector<player *> &players, round_state* round_state, serializable_value<bool> *is_started,
-                       serializable_value<bool> *is_finished, serializable_value<int> *current_player_idx,
-                       serializable_value<int>* round_number, serializable_value<int> *starting_player_idx)
+// deserialization constructor
+game_state::game_state(std::string id, std::vector<player*>& players, round_state* round_state,
+                       serializable_value<bool>* is_started, serializable_value<bool>* is_finished,
+                       serializable_value<int>* round_number, serializable_value<int>* current_player_idx)
         : unique_serializable(id),
           _players(players),
       	  _round_state(round_state),
           _is_started(is_started),
           _is_finished(is_finished),
-          _current_player_idx(current_player_idx),
           _round_number(round_number),
-          _starting_player_idx(starting_player_idx)
+          _current_player_idx(current_player_idx)
 { }
 
+// from_diff constructor
 game_state::game_state(std::string id) : unique_serializable(id) {
     this->_players = std::vector<player*>();
     this->_round_state = nullptr;
@@ -38,7 +33,6 @@ game_state::game_state(std::string id) : unique_serializable(id) {
     this->_is_finished = new serializable_value<bool>(false);
     this->_current_player_idx = new serializable_value<int>(0);
     this->_round_number = new serializable_value<int>(0);
-    this->_starting_player_idx = new serializable_value<int>(0);
 }
 
 game_state::~game_state() {
@@ -48,27 +42,25 @@ game_state::~game_state() {
         delete _is_started;
         delete _is_finished;
         delete _current_player_idx;
-        delete _starting_player_idx;
         delete _round_number;
 
         _round_state = nullptr;
         _is_started = nullptr;
         _is_finished = nullptr;
         _current_player_idx = nullptr;
-        _starting_player_idx = nullptr;
         _round_number = nullptr;
     }
 }
 
 // accessors
 player* game_state::get_current_player() const {
-    if(_current_player_idx == nullptr || _players.size() == 0) {
+    if(_current_player_idx == nullptr || _players.empty()) {
         return nullptr;
     }
     return _players[_current_player_idx->get_value()];
 }
 
-round_state* round_state::get_round_state() const {
+round_state* game_state::get_round_state() const {
   return _round_state;
 }
 
@@ -93,7 +85,7 @@ int game_state::get_max_round_number() const {
 }
 
 int game_state::get_player_index(player *player) const {
-    auto it = std::find(_players.begin(), _players.end(), player);
+    auto it = std::ranges::find(_players, player);
     if (it == _players.end()) {
         return -1;
     } else {
@@ -102,7 +94,7 @@ int game_state::get_player_index(player *player) const {
 }
 
 bool game_state::is_player_in_game(player *player) const {
-    return std::find(_players.begin(), _players.end(), player) < _players.end();
+    return std::ranges::find(_players, player) < _players.end();
 }
 
 std::vector<player*>& game_state::get_players() {
@@ -113,7 +105,7 @@ std::vector<player*>& game_state::get_players() {
 
 
 
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 
 // state modification functions without diff
 
@@ -123,12 +115,8 @@ void game_state::increase_round_number() {
 }
 
 void game_state::update_current_player() {
-    int nof_players = _players.size();
-    int current_player_idx = _current_player_idx->get_value();
-    ++current_player_idx %= nof_players;
-    this->_current_player_idx->set_value(current_player_idx);
+    _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
 }
-
 
 void game_state::setup_round(std::string &err) {
 
@@ -139,8 +127,7 @@ void game_state::setup_round(std::string &err) {
 
     increase_round_number();
 
-    _round_state = new round_state(players = this->_players, starting_player_idx = this->_current_player_idx,
-                                   round_number = this->_round_number);
+    _round_state = new round_state(_players, _current_player_idx, _round_number);
 
     update_current_player();
 
@@ -219,7 +206,7 @@ bool game_state::finish_game(std::string &err) {
   return true;
 }
 
-#endif
+//#endif
 
 
 // Serializable interface
