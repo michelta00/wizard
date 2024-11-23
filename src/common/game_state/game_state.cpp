@@ -120,15 +120,8 @@ void game_state::update_current_player() {
 
 void game_state::setup_round(std::string &err) {
 
-    if (_round_state) {
-        delete _round_state;  // Clean up previous round state if it exists
-        _round_state = nullptr;
-    }
 
     increase_round_number();
-
-    _round_state = new round_state(_players, _current_player_idx, _round_number);
-
     update_current_player();
 
     //TODO: possibly set up other parts of round (players, deck, trick, ...) --> maybe do in round state
@@ -155,6 +148,11 @@ bool game_state::start_game(std::string &err) {
     if (!_is_started->get_value()) {
         this->_is_started->set_value(true);
         // TODO: think about whether this will cause a problem since setup_round iteratively calls it self and start_game only ends when game has ended
+        if (_round_state) {
+        	delete _round_state;  // Clean up previous round state if it exists
+        	_round_state = nullptr;
+    	}
+    	_round_state = new round_state(_players, _current_player_idx, _round_number);
         this->setup_round(err); //iteratively starts all rounds until game is over
         return true;
     } else {

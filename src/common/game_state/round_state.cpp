@@ -182,7 +182,7 @@ void set_trick_estimate_sum(int trick_estimate_sum){
 }
 
 
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 
 // Method to set the callback
 void round_state::set_on_round_end(std::function<void()> callback) {
@@ -347,7 +347,7 @@ bool round_state::estimate_tricks(player *player, std::string &err, int trick_es
 }
 
 
-#endif
+//#endif
 
 
 // TODO: add from_json and write_into_json functions

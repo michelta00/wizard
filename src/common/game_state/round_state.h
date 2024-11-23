@@ -75,7 +75,7 @@ public:
     set_trump_color(serializable_value<int>* trump_color);
 
 
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 // server-side state update functions
     void set_on_round_end(std::function<void()> callback);
     void finish_round();
@@ -89,7 +89,7 @@ public:
     // end of round functions
     void update_current_player(std::string& err);
     void wrap_up_round(std::string& err);
-#endif
+//#endif
 
 // serializable interface
     static round_state* from_json(const rapidjson::Value& json);

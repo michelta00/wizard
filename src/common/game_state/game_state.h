@@ -6,7 +6,6 @@
 #include <string>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
-#include "round_state.h"
 #include "../serialization/serializable.h"
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
@@ -18,11 +17,18 @@ private:
     static const int _min_nof_players = 3;
 
     std::vector<player*> _players;
-    round_state* _round_state;
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
+    serializable_value<int>* _trick_number;
+    serializable_value<bool>* _is_estimation_phase;
+    serializable_value<int>* _starting_player_idx;
     serializable_value<int>* _current_player_idx;
+
+    deck* _deck;
+    trick* _trick; // only save current trick, won tricks are saved with the players
+    serializable_value<int>* _trump_color;
+    serializable_value<int>* _trick_estimate_sum;
 
     // from_diff constructor, new game is constructed
     game_state(std::string id);
