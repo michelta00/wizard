@@ -1,9 +1,16 @@
 //
-// Created by Manuel Nowack on 11.04.21.
+// Created by Aidan Meara on 23.11.24.
 //
 
 #include "gtest/gtest.h"
-#include "../src/common/game_state/player/hand.h"
+#include "../src/common/game_state/cards/deck.h"
+
+// new deck must hold 60 cards
+TEST(DeckTest, Creation) {
+  deck mydeck;
+  ASSERT_EQ(mydeck._all_cards.size(), 60);
+
+}
 
 
 /* A test fixture allows us to reuse the same configuration of objects for all
@@ -17,6 +24,7 @@
  * next one. googletest does not reuse the same test fixture for multiple
  * tests. Any changes one test makes to the fixture do not affect other tests.
  */
+
 class HandTest : public ::testing::Test {
 
 protected:
