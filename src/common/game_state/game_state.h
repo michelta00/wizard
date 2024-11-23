@@ -32,6 +32,10 @@ private:
     serializable_value<int>* _starting_player_idx;
     serializable_value<int>* _trick_starting_player_idx;
     serializable_value<int>* _current_player_idx;
+    //TODO: possibly add boolean _determine_trump_color that can be used to tell player to decide on a trump color
+
+    deck* _deck;
+    trick* _trick; // only save current trick, won tricks are saved with the players
     serializable_value<int>* _trump_color;
     serializable_value<int>* _trick_estimate_sum;
 
@@ -63,6 +67,7 @@ private:
     // returns the index of 'player' in the '_players' vector
     int get_player_index(player* player) const;
     int get_number_of_turns();
+    void determine_trump_color();
 
 public:
     game_state();
@@ -83,14 +88,12 @@ public:
 // all in block behind ifdef is only included if wizard server is defined
 //#ifdef WIZARD_SERVER
 // server-side state update functions
-    void update_current_player(); //starting player of round
+    bool update_current_player(std::string& err); //starting player of round  // server side initialization
     bool remove_player(player* player, std::string& err);
     bool add_player(player* player, std::string& err);
     bool start_game(std::string& err);
     bool finish_game(std::string& err);
 
-
-    void determine_trump_color();
     void setup_round(std::string& err);   // server side initialization
     void wrap_up_round(std::string& err);
     bool estimate_tricks(player *player, std::string &err, int trick_estimate);

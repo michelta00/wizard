@@ -143,34 +143,88 @@ std::vector<player*>& game_state::get_players() {
 
 // state modification functions without diff
 
-void game_state::increase_round_number() {
-  int number = get_round_number() + 1;
-  _round_number->set_value(number);
+
+void game_state::wrap_up_round(std::string& err){
+  _starting_player_idx->set_value((_starting_player_idx->get_value() + 1) % _players.size());
+
+  for (int i = 0; i < _players.size(); i++) {
+      _players[i]->wrap_up_round();
+  }
 }
 
-void game_state::update_current_player() {
-    _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
+bool game_state::update_current_player(std::string& err){
+  _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
+
+  //if current player is last player of round, switch from estimation to playing or end round and send callback to game_state
+  if (_current_player_idx->get_value() == _trick_starting_player_idx->get_value()){
+    if (_is_estiamtion_phase->get_value() == true) {
+    	_is_estimation_phase->set_value(false);
+    } else {
+    	//determine trick winner
+      	player* winner = _trick->wrap_up_trick(err);
+        winner->set_nof_tricks(get_nof_tricks() + 1);
+
+        // round has not ended yet
+        if (_trick_number->get_value() < _round_number->get_value()){
+          	_trick_number->set_value(_trick_number->get_value() + 1);
+      		_trick->set_up_round();
+
+        	// winner of trick is starting player of next trick
+        	int winner_index = get_player_index(winner);
+            if(winner_index == -1){
+              err = "Player is not part of the game!";
+              return false;
+            } else {
+              _trick_starting_player_idx->set_value(winner_index);
+        	  _current_player_idx->set_value(winner_index);
+            }
+        } else {
+          wrap_up_round(err);
+          _round_number->set_value(_round_number->get_value() + 1);
+          setup_round(err);
+        }
+    }
+  }
+  return true;
+}
+
+void game_state::determine_trump_color() {
+  if(_round_number->get_value() * _players.size() == 60){
+    _trump_color->set_value(0); // there is no trump
+  } else {
+    	card* trump_card = _deck->draw_trump();
+    	if (trump_card->get_color() != 0){
+          _trump_color->set_value(trump_card->get_color());
+    	}
+        else if (trump_card->get_value() == 0) {	//jester
+          _trump_color->set_value(0);
+        }
+        else if (trump_card->get_value() == 14){	//wizard
+		  // for now: just randomly generates number
+          std::random_device rd;
+          std::mt19937 gen(rd());
+          std::uniform_int_distribution<> distrib(1, 4);
+          _trump_color->set_value(distrib(gen));
+          // TODO: include get trump_color_request()
+        }
+  }
 }
 
 void game_state::setup_round(std::string &err) {
 
+    _trick_estimate_sum->set_value(0);
+    _is_estimation_phase->set_value(true);
+    _trick_number->set_value(0); //tricks numbers start by 0
+    _trick_starting_player_idx->set_value(_starting_player_idx->get_value());
+    _current_player_idx->set_value(_starting_player_idx->get_value());
 
-    increase_round_number();
-    update_current_player();
-
-    //TODO: possibly set up other parts of round (players, deck, trick, ...) --> maybe do in round state
-
-    // Provide the callback to be called when the round ends
-    _round_state->set_on_round_end([this]() {  // [this] captures the game_state instance
-        if (get_round_number() < get_max_round_number()) {
-            setup_round(err);  // Start a new round
-        } else {
-            //TODO: possibly more complicated finish game logic
-            this->_is_finished->set_value(true);  // End the game
-            finish_game(err);
-
-        }
-    });
+    _deck->setup_round();
+    for (int i = 0; i < _players.size(); i++) {
+        _players[i]->setup_round();
+        _deck->draw_cards(_players[i], _round_number->get_value(), err);
+    }
+    determine_trump_color();
+    _trick->set_up_round(err, _trump_color->get_value());
 }
 
 bool game_state::start_game(std::string &err) {
@@ -180,15 +234,9 @@ bool game_state::start_game(std::string &err) {
     }
 
     if (!_is_started->get_value()) {
-        this->_is_started->set_value(true);
-        // TODO: think about whether this will cause a problem since setup_round iteratively calls it self and start_game only ends when game has ended
-        if (_round_state) {
-        	delete _round_state;  // Clean up previous round state if it exists
-        	_round_state = nullptr;
-    	}
-    	_round_state = new round_state(_players, _current_player_idx, _round_number);
-        this->setup_round(err); //iteratively starts all rounds until game is over
-        return true;
+        _is_started->set_value(true);
+        // TODO: chek if all round setup done
+        setup_round(err);
     } else {
         err = "Could not start game, as the game was already started";
         return false;

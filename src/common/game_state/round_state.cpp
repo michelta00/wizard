@@ -200,47 +200,9 @@ void round_state::finish_round() {
     }
 }
 
-void round_state::determine_trump_color() {
-  if(_round_number->get_value() * _players.size() == 60){
-    _trump_color->set_value(0); // there is no trump
-  } else {
-    	card* trump_card = _deck->draw_trump();
-    	if (trump_card->get_color() != 0){
-          _trump_color->set_value(trump_card->get_color());
-    	}
-        else if (trump_card->get_value() == 0) {	//jester
-          _trump_color->set_value(0);
-        }
-        else if (trump_card->get_value() == 14){	//wizard
-		  // for now: just randomly generates number
-          std::random_device rd;
-          std::mt19937 gen(rd());
-          std::uniform_int_distribution<> distrib(1, 4);
-          _trump_color->set_value(distrib(gen));
-          // TODO: include get trump_color_request()
-        }
-  }
-}
 
-// set up round
-void round_state::setup_round(std::string& err, const int round_number, const int starting_player_idx){
-  this->_starting_player_idx->set_value(starting_player_idx);
-  this->_current_player_idx->set_value(starting_player_idx);
-  this->_round_number->set_value(round_number);
 
-  _trick_estimate_sum->set_value(0);
-  _is_estimation_phase->set_value(true);
-  _current_trick_number->set_value(1); //tricks have number 1, ..., round_number
 
-  _deck->setup_round();
-  for (int i = 0; i < _players.size(); i++) {
-    _players[i]->setup_round();
-    _deck->draw_cards(_players[i], _round_number->get_value(), err);
-  }
-  determine_trump_color();
-
-  _trick->set_up_round(err, _trump_color->get_value());
-}
 
 void round_state::update_current_player(std::string& err){
   _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
