@@ -10,8 +10,8 @@
 #include <functional>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
-#include "cards/draw_pile.h"
-#include "cards/discard_pile.h"
+#include "cards/trick.h"
+#include "cards/deck.h"
 #include "../serialization/serializable.h"
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
@@ -25,11 +25,13 @@ private:
     serializable_value<int>* _current_player_idx;  //maybe just use integer instead of pointer?
     std::vector<player*>& _players,
     deck* _deck;
-    trick* _current_trick; //only save current trick, won tricks are saved with the players
+    trick* _trick; //only save current trick, won tricks are saved with the players
 	serializable_value<int>* _trump_color;
     serializable_value<bool>* _is_finished; // maybe not needed
     serializable_value<int>* _round_number;
     serializable_value<int>* _trick_estimate_sum;
+    serializable_value<bool>* _is_estimation_phase;
+    serializable_value<int>* _current_trick_number;
 
     // for callback from game_state
     std::function<void()> _on_round_end;
@@ -49,7 +51,9 @@ private:
         	serializable_value<int>* trump_color,
             serializable_value<bool>* is_finished,
             serializable_value<int>* round_number,
-            serializable_value<int>* trick_estimate_sum);
+            serializable_value<int>* trick_estimate_sum,
+        	serializable_value<bool>* is_estimation_phase,
+        	serializable_value<bool>* current_trick_number,);
 
 public:
     round_state(const std::vector<player*>& players, serializable_value<int>* starting_player_idx,
@@ -66,6 +70,7 @@ public:
     int get_round_number() const;
     int get_trump_color() const;
     int get_trick_estimate_sum() const;
+    get_player_idx(player* player, std::string& err, int& player_idx);
 
     set_trump_color(serializable_value<int>* trump_color);
 

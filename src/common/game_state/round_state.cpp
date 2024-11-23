@@ -139,7 +139,17 @@ int round_state::get_trick_estimate_sum() const {
   return _trick_estimate_sum->get_value();
 }
 
-int round_state::get_player_idx()
+bool round_state::get_player_idx(player* player, std::string& err, int& player_idx) const {
+
+  for(int i = 0; i < _players.size(); i++) {
+    if(_players[i]->get_id() == player->get_id()) {
+      player_idx = i;
+      return true;
+    }
+  }
+  err = "Player is not in game!"
+  return false;
+}
 
 
 // setter
@@ -233,30 +243,37 @@ void round_state::setup_round(std::string& err, const int round_number, const in
 }
 
 void round_state::update_current_player(std::string& err){
-  //TODO: new starting player is player who won trick
   _current_player_idx->set_value((_current_player_idx->get_value() + 1) % _players.size());
 
   //if current player is last player of round, switch from estimation to playing or end round and send callback to game_state
   if (_current_player_idx->get_value() == _starting_player_idx->get_value()){
     if (_is_estiamtion_phase->get_value() == true) {
     	_is_estimation_phase->set_value(false);
-    }
-    else if (_current_trick_number->get_value() < _round_number->get_value()){ //not final trick
-      	_current_trick_number->set_value(_current_trick_number->get_value() + 1);
-      	_trick->set_up_round();
-        player* winner = wrap_up_trick(err);
-        // TODO: adapt player trick count etc.
-        _starting_player_idx->set_value()
-    }
-	else {
-      //TODO: don't finish round while not all players have played
-    	finish_round();
+    } else {
+    	//determine trick winner
+      	player* winner = _trick->wrap_up_trick(err);
+        winner->set_nof_tricks(get_nof_tricks() + 1);
+
+        if (_current_trick_number->get_value() < _round_number->get_value()){
+          	_current_trick_number->set_value(_current_trick_number->get_value() + 1);
+      		_trick->set_up_round();
+
+        	// winner of trick is starting player of next trick
+        	int player_idx;
+        	get_player_idx(winner, err, player_idx);
+        	_starting_player_idx->set_value(player_idx);
+        	_current_player_idx->set_value(player_idx);
+        } else {
+          	finish_round();
+        }
     }
   }
 }
 
 // TODO: add play_card function and adapt can_be_played to the used by that function as in SDS
-bool round_state::can_be_played(const trick* const current_trick, const hand* const current_hand, const card* card) const noexcept {
+bool round_state::can_be_played(const card* card, std::string& err) const noexcept {
+
+
     // return true if this card can be played according to the game rules (checked in that order):
     // if there is no trick color yet (trick color is 0), then the card can be played
     // if the card is a jester or wizard, then it can be played
