@@ -7,10 +7,20 @@
 
 // new deck must hold 60 cards
 TEST(DeckTest, Creation) {
-  deck mydeck;
-  ASSERT_EQ(mydeck._all_cards.size(), 60);
+    deck mydeck;
+    ASSERT_EQ(mydeck.get_number_of_remaining_cards(), 60);
+    EXPECT_TRUE(mydeck.is_empty() == false);
 
 }
+
+// can draw trump from new deck
+TEST(DeckTest, TrumpDraw) {
+    deck mydeck;
+    card* trump;
+    trump = mydeck.draw_trump();
+
+}
+
 
 
 /* A test fixture allows us to reuse the same configuration of objects for all
