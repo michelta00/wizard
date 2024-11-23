@@ -45,6 +45,7 @@ private:
 
     // returns the index of 'player' in the '_players' vector
     int get_player_index(player* player) const;
+    int get_number_of_turns();
 
 public:
     game_state();
@@ -72,6 +73,15 @@ public:
     bool add_player(player* player, std::string& err);
     bool start_game(std::string& err);
     bool finish_game(std::string& err);
+
+
+    void determine_trump_color();
+    void setup_round(std::string& err);   // server side initialization
+    void wrap_up_round(std::string& err);
+    bool estimate_tricks(player *player, std::string &err, int trick_estimate);
+    bool can_be_played(const card* card, std::string& err) const noexcept;
+    bool play_card(player* player, const std::string& card_id, std::string& err);
+    void update_current_player(std::string& err);
 
 //#endif
 
