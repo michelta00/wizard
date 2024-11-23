@@ -94,10 +94,6 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
-round_state* game_state::get_round_state() const {
-  return _round_state;
-}
-
 bool game_state::is_full() const {
     return _players.size() == _max_nof_players;
 }
@@ -149,6 +145,9 @@ void game_state::wrap_up_round(std::string& err){
 
   for (int i = 0; i < _players.size(); i++) {
       _players[i]->wrap_up_round();
+  }
+  if (_round_number->get_value() == get_max_round_number() - 1) {
+      finish_game(err);
   }
 }
 
@@ -235,7 +234,6 @@ bool game_state::start_game(std::string &err) {
 
     if (!_is_started->get_value()) {
         _is_started->set_value(true);
-        // TODO: chek if all round setup done
         setup_round(err);
     } else {
         err = "Could not start game, as the game was already started";
@@ -326,17 +324,25 @@ bool game_state::play_card(player* player, const std::string& card_id, std::stri
   _trick->add_card(card, player, err); //also sets trick color
   player->get_hand()->remove_card(card);
 
+  update_current_player(err);
 }
 
 bool game_state::remove_player(player *player_ptr, std::string &err) {
     int idx = get_player_index(player_ptr);
     if (idx != -1) {
-        if (idx < _current_player_idx->get_value()) {
-            // reduce current_player_idx if the player who left had a lower index
-            _current_player_idx->set_value(_current_player_idx->get_value() - 1);
+        if (_is_startet->get_value() == false) {
+            if (idx < _current_player_idx->get_value()) {
+                // reduce current_player_idx if the player who left had a lower index
+                _current_player_idx->set_value(_current_player_idx->get_value() - 1);
+            }
+            _players.erase(_players.begin() + idx);
+            return true;
+        } else {
+            finish_game(err);
         }
-        _players.erase(_players.begin() + idx);
-        return true;
+
+
+
     } else {
         err = "Could not leave game, as the requested player was not found in that game.";
         return false;
@@ -367,7 +373,8 @@ bool game_state::add_player(player* player_ptr, std::string& err) {
 }
 
 bool game_state::finish_game(std::string &err) {
-  // TODO: part to determine winner of the game, show game over message and send players their final score
+  _is_finished->set_value(true);
+  // TODO: part to determine winner of the game, it is done in game controller right now and could stay there.
   return true;
 }
 

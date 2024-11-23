@@ -3,6 +3,8 @@
 #define WIZARD_GAME_STATE_H
 
 #include <vector>
+#include <algorithm>
+#include <ranges>
 #include <string>
 #include "../../rapidjson/include/rapidjson/document.h"
 #include "player/player.h"
