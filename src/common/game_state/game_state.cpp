@@ -172,6 +172,7 @@ std::vector<player*>& game_state::get_players() {
                 // round has not ended yet
                 if (_trick_number->get_value() < _round_number->get_value()){
                     _trick_number->set_value(_trick_number->get_value() + 1);
+                    // TODO: add arguments to function call below
       	            _trick->set_up_round();
 
                     // winner of trick is starting player of next trick
