@@ -28,16 +28,13 @@ private:
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
     serializable_value<bool>* _is_estimation_phase;
+    //TODO: possibly add boolean _determine_trump_color that can be used to tell player to decide on a trump color
 
     serializable_value<int>* _round_number;
     serializable_value<int>* _trick_number;
     serializable_value<int>* _starting_player_idx;
     serializable_value<int>* _trick_starting_player_idx;
     serializable_value<int>* _current_player_idx;
-    //TODO: possibly add boolean _determine_trump_color that can be used to tell player to decide on a trump color
-
-    deck* _deck;
-    trick* _trick; // only save current trick, won tricks are saved with the players
     serializable_value<int>* _trump_color;
     serializable_value<int>* _trick_estimate_sum;
 
@@ -55,7 +52,6 @@ private:
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
             serializable_value<bool>* is_estimation_phase,
-
 
             serializable_value<int>* round_number,
             serializable_value<int>* trick_number,
@@ -82,15 +78,16 @@ public:
     bool is_player_in_game(player* player) const;
     std::vector<player*>& get_players();
     int get_round_number() const;
+    int get_trick_number() const;
     int get_max_round_number() const;
     player* get_current_player() const;
 
 
 
 // all in block behind ifdef is only included if wizard server is defined
-//#ifdef WIZARD_SERVER
+// TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
+#ifdef WIZARD_SERVER
 // server-side state update functions
-    bool update_current_player(std::string& err); //starting player of round  // server side initialization
     bool remove_player(player* player, std::string& err);
     bool add_player(player* player, std::string& err);
     bool start_game(std::string& err);
@@ -101,9 +98,9 @@ public:
     bool estimate_tricks(player *player, std::string &err, int trick_estimate);
     bool can_be_played(player* player, const card* card, std::string& err) const noexcept;
     bool play_card(player* player, const std::string& card_id, std::string& err);
-    void update_current_player(std::string& err);
+    bool update_current_player(std::string& err);
 
-//#endif
+#endif
 
 // serializable interface
     void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
