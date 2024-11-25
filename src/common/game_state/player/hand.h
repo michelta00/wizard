@@ -33,7 +33,8 @@ public:
 #ifdef WIZARD_SERVER
 // state update functions
     bool add_card(card* card, std::string& err);
-    bool remove_card(std::string card_id, card*& played_card, std::string& err);
+    bool remove_card(std::string card_id, std::string& err);
+
 #endif
 
     std::vector<card*>::iterator get_card_iterator();

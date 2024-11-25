@@ -107,7 +107,7 @@ void trick::set_up_round(std::string& err, int trump) {
         *_trump_color = trump;
         *_trick_color = 0;
 }
-
+// probably not needed, its enough to add card with card pointer and not with card_id
 bool trick::add_card(const std::string& card_id, player* current_player, std::string& err) {
         card* played_card = nullptr;
         if (current_player->get_hand()->try_get_card(card_id, played_card)) {
@@ -128,6 +128,13 @@ bool trick::add_card(const std::string& card_id, player* current_player, std::st
 bool trick::add_card(card* played_card, player* current_player, std::string& err) {
         if (played_card) {
                 _cards.emplace_back(played_card, current_player);
+                // set trick color
+                if(_trick_color->get_value() == 0){
+                        _trick_color->set_value(played_card->get_color());
+                        if(played_card->get_value() == 14) { //if wizard sets trick color to -1
+                                _trick_color->set_value(-1);
+                        }
+                }
                 return true;
         }
         err = "The desired card cannot be played";
