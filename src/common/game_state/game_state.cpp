@@ -142,7 +142,7 @@ std::vector<player*>& game_state::get_players() {
 
 
 //TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 
 // state modification functions without diff
 
@@ -172,8 +172,7 @@ std::vector<player*>& game_state::get_players() {
                 // round has not ended yet
                 if (_trick_number->get_value() < _round_number->get_value()){
                     _trick_number->set_value(_trick_number->get_value() + 1);
-                    // TODO: add arguments to function call below
-      	            _trick->set_up_round();
+      	            _trick->set_up_round(err, _trump_color->get_value());
 
                     // winner of trick is starting player of next trick
                     int winner_index = get_player_index(winner);
@@ -332,9 +331,9 @@ std::vector<player*>& game_state::get_players() {
 
         // play card
         _trick->add_card(card, player, err); //also sets trick color
-        // TODO: this remove_card tries to access the private remove_card function of the hand class, so we should either
-        // TODO: make that one public, or (possible better) change the inputs here to access the public remove_card function
-        player->get_hand()->remove_card(card);
+
+        // adapted remove_card function in hand (doesnt need to save removed card anymore)
+        player->get_hand()->remove_card(card_id, err);
 
         update_current_player(err);
         return true;
@@ -388,7 +387,7 @@ std::vector<player*>& game_state::get_players() {
         return true;
     }
 
-#endif
+//#endif
 
 
 // Serializable interface
