@@ -160,7 +160,7 @@ card* deck::draw_trump() const
 
 
 // serialization
-void deck::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override
+void deck::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator)
 {
     unique_serializable::write_into_json(json, allocator);
 

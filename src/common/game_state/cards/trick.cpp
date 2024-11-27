@@ -107,23 +107,6 @@ void trick::set_up_round(std::string& err, int trump) {
         *_trump_color = trump;
         *_trick_color = 0;
 }
-// probably not needed, its enough to add card with card pointer and not with card_id
-bool trick::add_card(const std::string& card_id, player* current_player, std::string& err) {
-        card* played_card = nullptr;
-        if (current_player->get_hand()->try_get_card(card_id, played_card)) {
-                card* local_system_card;
-                if (current_player->remove_card(played_card->get_id(), local_system_card, err)) {
-                        _cards.emplace_back(local_system_card, current_player);
-                        return true;
-                } else {
-                        err = "Could not play card " + played_card->get_id() + " because player does not have this card.";
-                }
-
-        } else {
-                err = "The player does not possess the card " + card_id + ", which was requested to be played.";
-        }
-        return false;
-}
 
 bool trick::add_card(card* played_card, player* current_player, std::string& err) {
         if (played_card) {
