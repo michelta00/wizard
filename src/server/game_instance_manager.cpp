@@ -129,12 +129,46 @@ bool game_instance_manager::try_add_player(player *player, game_instance *&game_
 
 bool game_instance_manager::try_remove_player(player *player, const std::string& game_id, std::string &err) {
     game_instance* game_instance_ptr = nullptr;
+
+    //Case 1: player is in a game --> remove the player from that game
     if (try_get_game_instance(game_id, game_instance_ptr)) {
-        return try_remove_player(player, game_instance_ptr, err);
-    } else {
-        err = "The requested src could not be found. Requested src id was " + game_id;
-        return false;
+        // addition 14.11
+        if (try_remove_player(player, game_instance_ptr, err))
+        {
+            //14.11 martinalavanya: check if any game instance is finished (should be finished if player was removed) and
+            //remove all finished game instances, same as in find_joinable_game_instance() above
+            std::vector<std::string> to_remove;
+            game_instance* res = nullptr;
+            games_lut_lock.lock_shared();
+            for (auto it = games_lut.begin(); it != games_lut.end(); ++it) {
+                // check if there are any finished games that can be removed
+                if (it->second->is_finished()) {
+                    to_remove.push_back(it->first);
+                }
+            }
+            games_lut_lock.unlock_shared();
+            // remove all finished games
+            if (to_remove.size() > 0) {
+                games_lut_lock.lock();
+                for (auto& id : to_remove) {
+                    games_lut.erase(id);
+                }
+                games_lut_lock.unlock();
+            }
+            return true;
+        }
     }
+    // SHOULD be handled by request_handler bcs player is removed from table by player_manager afterwards
+    // Case 2: player is not in game, but already in player manager
+    //else if (player_manager::try_get_player(player->get_id(), player)) {
+        //err = "Player is not currently in a game but exists in the system. No game to leave.";
+        //return false;
+    //}
+
+    // Case 3: player doesn't exist in any game or in the player LUT of player_manager
+    err = "The requested src could not be found or there was a problem removing the player / deleting the finished game instances. Requested src id was " + game_id;
+    return false;
+
 }
 
 bool game_instance_manager::try_remove_player(player *player, game_instance *&game_instance_ptr, std::string &err) {
