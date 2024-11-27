@@ -4,10 +4,11 @@
 
 #include "client_request.h"
 #include "play_card_request.h"
-#include "draw_card_request.h"
-#include "fold_request.h"
+#include "estimate_tricks_request.h"
+#include "decide_trump_color_request.h"
 #include "join_game_request.h"
 #include "start_game_request.h"
+#include "leave_game_request.h"
 
 #include <iostream>
 
@@ -16,16 +17,19 @@ const std::unordered_map<std::string, RequestType> client_request::_string_to_re
         {"join_game", RequestType::join_game },
         {"start_game", RequestType::start_game},
         {"play_card", RequestType::play_card},
-        {"draw_card", RequestType::draw_card},
-        {"fold", RequestType::fold}
+        {"estimate_tricks", RequestType::estimate_tricks},
+        {"decide_trump_color", RequestType::decide_trump_color},
+        {"leave_game", RequestType::leave_game}
 };
 // for serialization
 const std::unordered_map<RequestType, std::string> client_request::_request_type_to_string = {
         { RequestType::join_game, "join_game" },
         { RequestType::start_game, "start_game"},
         { RequestType::play_card, "play_card"},
-        { RequestType::draw_card, "draw_card"},
-        {RequestType::fold, "fold"}
+        {RequestType::estimate_tricks, "estimate_tricks"},
+        {RequestType::decide_trump_color, "decide_trump_color"},
+        {RequestType::leave_game, "leave_game"}
+
 };
 
 // protected constructor. only used by subclasses
@@ -95,18 +99,22 @@ client_request* client_request::from_json(const rapidjson::Value &json) {
         if (request_type == RequestType::play_card) {
             return play_card_request::from_json(json);
         }
-        else if (request_type == RequestType::draw_card) {
-            return draw_card_request::from_json(json);
-        }
-        else if (request_type == RequestType::fold) {
-            return fold_request::from_json(json);
-        }
         else if (request_type == RequestType::join_game) {
             return join_game_request::from_json(json);
         }
         else if (request_type == RequestType::start_game) {
             return start_game_request::from_json(json);
-        } else {
+        }
+        else if (request_type == RequestType::estimate_tricks) {
+            return estimate_tricks_request::from_json(json);
+        }
+        else if (request_type == RequestType::decide_trump_color) {
+            return decide_trump_color_request::from_json(json);
+        }
+        else if (request_type == RequestType::leave_game) {
+            return leave_game_request::from_json(json);
+        }
+        else {
             throw WizardException("Encountered unknown ClientRequest type " + type);
         }
     }

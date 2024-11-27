@@ -51,6 +51,8 @@ set(CLIENT_SOURCE_FILES
         src/common/serialization/json_utils.h
         src/common/serialization/uuid_generator.h
         src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
+        src/common/network/requests/decide_trump_color_request.cpp
+        src/common/network/requests/decide_trump_color_request.h
 )
 
 # define a variable SERVER_SOURCE_FILES that contains the paths to all source files required to compile the server executable
