@@ -15,6 +15,7 @@
 #include "../../serialization/unique_serializable.h"
 #include "../../serialization/serializable_value.h"
 #include "../../../../rapidjson/include/rapidjson/document.h"
+#include "../../../../unit-tests/trick.cpp" //so that trick.cpp can be used as a friend class
 
 class trick : public unique_serializable {
 private:
@@ -34,7 +35,7 @@ public:
     trick();
     explicit trick(int trump);
     ~trick();
-
+    friend class trick_testing; // so that the trick testing class can access private member variables
 
 
 #ifdef WIZARD_SERVER
