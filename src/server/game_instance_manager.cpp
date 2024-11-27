@@ -133,30 +133,8 @@ bool game_instance_manager::try_remove_player(player *player, const std::string&
     //Case 1: player is in a game --> remove the player from that game
     if (try_get_game_instance(game_id, game_instance_ptr)) {
         // addition 14.11
-        if (try_remove_player(player, game_instance_ptr, err))
-        {
-            //14.11 martinalavanya: check if any game instance is finished (should be finished if player was removed) and
-            //remove all finished game instances, same as in find_joinable_game_instance() above
-            std::vector<std::string> to_remove;
-            game_instance* res = nullptr;
-            games_lut_lock.lock_shared();
-            for (auto it = games_lut.begin(); it != games_lut.end(); ++it) {
-                // check if there are any finished games that can be removed
-                if (it->second->is_finished()) {
-                    to_remove.push_back(it->first);
-                }
-            }
-            games_lut_lock.unlock_shared();
-            // remove all finished games
-            if (to_remove.size() > 0) {
-                games_lut_lock.lock();
-                for (auto& id : to_remove) {
-                    games_lut.erase(id);
-                }
-                games_lut_lock.unlock();
-            }
-            return true;
-        }
+        return try_remove_player(player, game_instance_ptr, err);
+
     }
     // SHOULD be handled by request_handler bcs player is removed from table by player_manager afterwards
     // Case 2: player is not in game, but already in player manager

@@ -22,10 +22,6 @@ std::string game_instance::get_id() {
     return _game_state->get_id();
 }
 
-bool game_instance::is_player_allowed_to_play(player *player) {
-    return _game_state->is_allowed_to_play_now(player);
-}
-
 bool game_instance::is_full() {
     return _game_state->is_full();
 }
@@ -51,23 +47,9 @@ bool game_instance::play_card(player *player, const std::string& card_id, std::s
     return false;
 }
 
-bool game_instance::draw_card(player *player, card*& drawn_card, std::string& err) {
+bool game_instance::estimate_tricks(player *player, std::string& err, int nof_tricks){
     modification_lock.lock();
-    if (_game_state->draw_card(player, err)) {
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
-        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
-        modification_lock.unlock();
-        return true;
-    }
-    modification_lock.unlock();
-    return false;
-
-}
-
-bool game_instance::fold(player *player, std::string& err) {
-    modification_lock.lock();
-    if (_game_state->fold(player, err)) {
-        // send state update to all other players
+    if (_game_state->estimate_tricks(player, err, nof_tricks)) {
         full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
@@ -76,6 +58,7 @@ bool game_instance::fold(player *player, std::string& err) {
     modification_lock.unlock();
     return false;
 }
+
 
 bool game_instance::start_game(player* player, std::string &err) {
     modification_lock.lock();

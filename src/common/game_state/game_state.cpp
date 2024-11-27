@@ -351,6 +351,7 @@ std::vector<player*>& game_state::get_players() {
                 return true;
             } else {
                 finish_game(err);
+                return true;
             }
         } else {
             err = "Could not leave game, as the requested player was not found in that game.";

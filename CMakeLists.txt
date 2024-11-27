@@ -35,8 +35,6 @@ set(CLIENT_SOURCE_FILES
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
         src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
-        src/common/network/requests/draw_card_request.cpp src/common/network/requests/draw_card_request.h
-        src/common/network/requests/fold_request.cpp src/common/network/requests/fold_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
         src/common/network/requests/start_game_request.cpp src/common/network/requests/start_game_request.h
         # server responses
@@ -78,8 +76,6 @@ set(SERVER_SOURCE_FILES
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
         src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
-        src/common/network/requests/draw_card_request.cpp src/common/network/requests/draw_card_request.h
-        src/common/network/requests/fold_request.cpp src/common/network/requests/fold_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
         src/common/network/requests/start_game_request.cpp src/common/network/requests/start_game_request.h
         # server responses
