@@ -12,7 +12,8 @@
 #include "game_instance.h"
 
 #include "../common/network/requests/join_game_request.h"
-#include "../common/network/requests/draw_card_request.h"
+#include "../common/network/requests/estimate_tricks_request.h"
+#include "../common/network/requests/decide_trump_color_request.h"
 #include "../common/network/requests/play_card_request.h"
 
 
@@ -23,6 +24,7 @@ request_response* request_handler::handle_request(const client_request* const re
     std::string err;
     game_instance* game_instance_ptr = nullptr;
 
+
     // Get common properties of requests
     RequestType type = req->get_type();
     std::string req_id = req->get_req_id();
@@ -32,8 +34,7 @@ request_response* request_handler::handle_request(const client_request* const re
 
     // Switch behavior according to request type
     switch(type) {
-
-        // ##################### JOIN GAME #####################  //
+        // #################### JOIN GAME #####################  //
         case RequestType::join_game: {
             std::string player_name = ((join_game_request *) req)->get_player_name();
 
@@ -97,36 +98,58 @@ request_response* request_handler::handle_request(const client_request* const re
         }
 
 
-        // ##################### DRAW CARD ##################### //
-        case RequestType:: draw_card: {
+
+        // ##################### ESTIMATE TRICKS #####################  //
+        case RequestType:: estimate_tricks: {
+        //TODO: implement estimate_tricks() in round_state
             if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
-                card *drawn_card;
-                // int nof_cards = ((draw_card_request*)req)->get_nof_cards();
-                if (game_instance_ptr->draw_card(player, drawn_card, err)) {
+                int nof_tricks = ((estimate_tricks_request* )req)->get_trick_estimate(); //create pointer to instance of estimate_tricks_request, then call getter function
+                if (game_instance_ptr->estimate_tricks(player, nof_tricks, err)) { // not implemented yet in game_state.cpp
                     return new request_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
             return new request_response("", req_id, false, nullptr, err);
         }
+    // ##################### DECIDE TRUMP COLOR #####################  //
+        case RequestType:: decide_trump_color: {
+                //TODO: figure out where to get trick estimate from and how to handle request
+                if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
+                    int trump_color = ((decide_trump_color_request* )req)->get_trump_color(); //call getter function in decide trump color request
+                    if (game_instance_ptr->decide_trump_color(player, trump_color, err)) { // randomly selects number between 1 and 4
+                        return new request_response(game_instance_ptr->get_id(), req_id, true,
+                                                    game_instance_ptr->get_game_state()->to_json(), err);
+                    }
+                }
+                return new request_response("", req_id, false, nullptr, err);
 
+        }
 
-        // ##################### FOLD ##################### //
-        case RequestType::fold: {
-            if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
-                if (game_instance_ptr->fold(player, err)) {
+        // ##################### LEAVE GAME #####################  //
+       case RequestType::leave_game: {
+            //get player name
+            std::string player_name = ((join_game_request *) req)->get_player_name();
+            // Case 1: player is in a game
+            //remove player from game via game instance manager -> game instance -> game state
+            if (game_instance_manager::try_remove_player(player, game_id, err))
+            {
+                //remove player from list of active players (delete from LUT table)
+                if (player_manager::remove_player(player_id, player)){
                     return new request_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
-            }
+            // Case 2: player is already in player_LUT of player_manager but not yet in a game
+            player_manager::remove_player(player_id, player);
+
+            //Case 3: player either couldn't be removed from game or player LUT
             return new request_response("", req_id, false, nullptr, err);
-        }
 
 
+            }
         // ##################### UNKNOWN REQUEST ##################### //
         default:
             return new request_response("", req_id, false, nullptr, "Unknown RequestType " + type);
     }
 }
 
-#endif //WIZARD_REQUEST_HANDLER_CPP
+
