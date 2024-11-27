@@ -142,7 +142,7 @@ std::vector<player*>& game_state::get_players() {
 
 
 //TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
-//#ifdef WIZARD_SERVER
+#ifdef WIZARD_SERVER
 
 // state modification functions without diff
 
@@ -387,7 +387,7 @@ std::vector<player*>& game_state::get_players() {
         return true;
     }
 
-//#endif
+#endif
 
 
 // Serializable interface

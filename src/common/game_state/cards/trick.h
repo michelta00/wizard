@@ -35,6 +35,8 @@ public:
     explicit trick(int trump);
     ~trick();
 
+    // accessors
+    [[nodiscard]] int get_trick_color() const;
 
 
 #ifdef WIZARD_SERVER
@@ -45,8 +47,6 @@ public:
     bool add_card(card* played_card, player* current_player, std::string& err);
     // setters
     void set_trick_color(int color);
-    // accessors
-    [[nodiscard]] int get_trick_color() const;
 #endif
 
 
