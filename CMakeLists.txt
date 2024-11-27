@@ -53,6 +53,10 @@ set(CLIENT_SOURCE_FILES
         src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
         src/common/network/requests/decide_trump_color_request.cpp
         src/common/network/requests/decide_trump_color_request.h
+        src/common/network/requests/leave_game_request.cpp
+        src/common/network/requests/leave_game_request.h
+        src/common/network/requests/estimate_tricks_request.cpp
+        src/common/network/requests/estimate_tricks_request.h
 )
 
 # define a variable SERVER_SOURCE_FILES that contains the paths to all source files required to compile the server executable
