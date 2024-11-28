@@ -7,6 +7,7 @@
 #include "network/ResponseListenerThread.h"
 #include "../common/game_state/game_state.h"
 
+// TODO: include decide_trump_request
 
 class GameController {
 
@@ -16,8 +17,8 @@ public:
     static void connectToServer();
     static void updateGameState(game_state* newGameState);
     static void startGame();
-    static void drawCard();
-    static void fold();
+    static void estimateTrick(int nof_cards);
+    static void leaveGame();
     static void playCard(card* cardToPlay);
 
     static wxEvtHandler* getMainThreadEventHandler();
