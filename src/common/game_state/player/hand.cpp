@@ -70,12 +70,11 @@ bool hand::add_card(card* card, std::string &err) {
     return true;
 }
 
-bool hand::remove_card(std::string card_id, card*& played_card, std::string &err) {
-    played_card = nullptr;
+bool hand::remove_card(std::string card_id, std::string &err) {
     const auto it = std::ranges::find_if(_cards,
                                          [&card_id](const card* x) { return x->get_id() == card_id;});
     if (it < _cards.end()) {
-        played_card = remove_card(it);
+        remove_card(it);
         return true;
     } else {
         err = "Could not play card, as the requested card was not on the player's hand.";

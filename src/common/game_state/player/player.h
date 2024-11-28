@@ -59,7 +59,6 @@ public:
 #ifdef WIZARD_SERVER
     // state update functions
     bool add_card(card* card, std::string& err);
-    bool remove_card(const std::string& card_id, card*& card, std::string& err);
 
     void wrap_up_round();
     void setup_round();

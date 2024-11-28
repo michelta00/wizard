@@ -10,6 +10,7 @@
 #include "serializable.h"
 #include "unique_serializable.h"
 #include "../../rapidjson/include/rapidjson/document.h"
+#include "../game_state/player/player.h"
 
 
 namespace vector_utils {

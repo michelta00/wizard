@@ -35,6 +35,9 @@ public:
     trick();
     explicit trick(int trump);
     ~trick();
+
+    // accessors
+    [[nodiscard]] int get_trick_color() const;
     friend class trick_testing; // so that the trick testing class can access private member variables
 
 
@@ -42,12 +45,9 @@ public:
     // state update functions
     player* wrap_up_trick(std::string& err);  // determines winner
     void set_up_round(std::string& err, int trump); // resets attributes
-    bool add_card(const std::string& card_id, player* current_player, std::string& err); // adds card
     bool add_card(card* played_card, player* current_player, std::string& err);
     // setters
     void set_trick_color(int color);
-    // accessors
-    [[nodiscard]] int get_trick_color() const;
 #endif
 
 

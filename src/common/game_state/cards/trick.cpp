@@ -53,7 +53,7 @@ player* trick::wrap_up_trick(std::string& err) {
         // Determine and return winner
         // wizard check
         for (auto & _card : _cards) {
-                if (_card.first.get_value() == 14)
+                if (_card.first->get_value() == 14)
                 {
                         return _card.second;
                 }
@@ -67,12 +67,12 @@ player* trick::wrap_up_trick(std::string& err) {
         bool trump_present = false;
         int highest_trump = 0;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i].first.get_color() == _trump_color->get_value())
+                if (_cards[i].first->get_color() == _trump_color->get_value())
                 {
                         trump_present = true;
-                        if (_cards[i].first.get_value() > highest_trump)
+                        if (_cards[i].first->get_value() > highest_trump)
                         {
-                                highest_trump = _cards[i].first.get_value();
+                                highest_trump = _cards[i].first->get_value();
                                 winner = _cards[i].second;
                         }
                 }
@@ -83,10 +83,10 @@ player* trick::wrap_up_trick(std::string& err) {
         // highest card of trick color check
         int winner_idx = -1; // use a non joker idx;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i].first.get_value() == _trick_color->get_value())
+                if (_cards[i].first->get_value() == _trick_color->get_value())
                         if (winner_idx == -1 ||
-                                _cards[i].first.get_value()
-                                > _cards[winner_idx].first.get_value()) {
+                                _cards[i].first->get_value()
+                                > _cards[winner_idx].first->get_value()) {
                         winner_idx = i;
                 }
         }
@@ -108,26 +108,16 @@ void trick::set_up_round(std::string& err, int trump) {
         *_trick_color = 0;
 }
 
-bool trick::add_card(const std::string& card_id, player* current_player, std::string& err) {
-        card* played_card = nullptr;
-        if (current_player->get_hand()->try_get_card(card_id, played_card)) {
-                card* local_system_card;
-                if (current_player->remove_card(played_card->get_id(), local_system_card, err)) {
-                        _cards.emplace_back(local_system_card, current_player);
-                        return true;
-                } else {
-                        err = "Could not play card " + played_card->get_id() + " because player does not have this card.";
-                }
-
-        } else {
-                err = "The player does not possess the card " + card_id + ", which was requested to be played.";
-        }
-        return false;
-}
-
 bool trick::add_card(card* played_card, player* current_player, std::string& err) {
         if (played_card) {
                 _cards.emplace_back(played_card, current_player);
+                // set trick color
+                if(_trick_color->get_value() == 0){
+                        _trick_color->set_value(played_card->get_color());
+                        if(played_card->get_value() == 14) { //if wizard sets trick color to -1
+                                _trick_color->set_value(-1);
+                        }
+                }
                 return true;
         }
         err = "The desired card cannot be played";

@@ -1,9 +1,9 @@
 #include "GameController.h"
 #include "../common/network/requests/join_game_request.h"
 #include "../common/network/requests/start_game_request.h"
-#include "../common/network/requests/draw_card_request.h"
-#include "../common/network/requests/fold_request.h"
 #include "../common/network/requests/play_card_request.h"
+#include "../common/network/requests/estimate_tricks_request.h"
+#include "../common/network/requests/leave_game_request.h"
 #include "network/ClientNetworkManager.h"
 
 
@@ -19,6 +19,7 @@ game_state* GameController::_currentGameState = nullptr;
 
 void GameController::init(GameWindow* gameWindow) {
 
+    //TODO: panels need to be adapted
     GameController::_gameWindow = gameWindow;
 
     // Set up main panels
@@ -119,21 +120,19 @@ void GameController::startGame() {
     ClientNetworkManager::sendRequest(request);
 }
 
-
-void GameController::drawCard() {
-    draw_card_request request = draw_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id());
+void GameController::estimateTricks(int nof_tricks) {
+    estimate_tricks_request request = estimate_tricks_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), nof_tricks);
     ClientNetworkManager::sendRequest(request);
 }
-
-
-void GameController::fold() {
-    fold_request request = fold_request(GameController::_currentGameState->get_id(), GameController::_me->get_id());
-    ClientNetworkManager::sendRequest(request);
-}
-
 
 void GameController::playCard(card* cardToPlay) {
     play_card_request request = play_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), cardToPlay->get_id());
+    ClientNetworkManager::sendRequest(request);
+}
+
+void GameController::leaveGame()
+{
+    leave_game_request request = leave_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
 }
 
@@ -188,6 +187,7 @@ void GameController::showGameOverMessage() {
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
+    // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {

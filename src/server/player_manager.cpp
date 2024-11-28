@@ -35,7 +35,7 @@ bool player_manager::add_or_get_player(std::string name, const std::string& play
 bool player_manager::remove_player(const std::string& player_id, player *&player) {
     if (try_get_player(player_id, player)) {
         _rw_lock.lock();    // exclusive
-        int nof_removals = player_manager::_players_lut.erase(player_id);
+        player_manager::_players_lut.erase(player_id);
         _rw_lock.unlock();
         return true;
     }

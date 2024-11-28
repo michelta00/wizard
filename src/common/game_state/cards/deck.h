@@ -48,8 +48,8 @@ public:
                                                                                     // on the current round number and
                                                                                     // places them into the player's hand
     [[nodiscard]] card* draw_trump() const;       // randomly draws a card from the remaining
-                                    // cards as a trump, or if all cards have
-                                    // been dealt, uses the _last_card as trump
+                                                  // cards as a trump, or if all cards have
+                                                  // been dealt, uses the _last_card as trump
 #endif
 
     // serialization

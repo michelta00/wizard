@@ -143,14 +143,6 @@ bool player::add_card(card *card, std::string &err) {
     return _hand->add_card(card, err);
 }
 
-bool player::remove_card(const std::string& card_id, card*& card, std::string &err) {
-    card = nullptr;
-    if (_hand->get_nof_cards() == 0) {
-        err = "Player has already played all its cards and cannot play any more cards";
-        return false;
-    }
-    return _hand->remove_card(card_id, card, err);
-}
 
 #endif
 
