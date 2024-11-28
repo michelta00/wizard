@@ -10,7 +10,6 @@ TEST(DeckTest, Creation) {
     deck mydeck;
     ASSERT_EQ(mydeck.get_number_of_remaining_cards(), 60);
     EXPECT_TRUE(mydeck.is_empty() == false);
-
 }
 
 // can draw trump from new deck
@@ -18,9 +17,53 @@ TEST(DeckTest, TrumpDraw) {
     deck mydeck;
     card* trump;
     trump = mydeck.draw_trump();
+    EXPECT_TRUE(trump);
+}
+
+// draw cards to player, make sure proper number of cards
+TEST(DeckTest, CardDraw) {
+    deck mydeck;
+    player* player1 = new player("player1");
+    std::string err;
+    mydeck.draw_cards(player1, 5, err);
+
+    // check card numbers
+    ASSERT_EQ(mydeck.get_number_of_remaining_cards(), 55);
+    EXPECT_TRUE(mydeck.is_empty() == false);
+
+    // check hand
+    ASSERT_EQ(player1->get_hand()->get_nof_cards(), 5);
+}
+
+// Draw last few cards
+TEST(DeckTest, DrawFinalCards) {
+    deck mydeck;
+    player* player1 = new player("player1");
+    std::string err;
+    mydeck.draw_cards(player1, 60, err);
+
+    // check card numbers
+    ASSERT_EQ(mydeck.get_number_of_remaining_cards(), 0);
+    EXPECT_TRUE(mydeck.is_empty() == true);
+
+    // check hand
+    ASSERT_EQ(player1->get_hand()->get_nof_cards(), 60);
+
+    // draw trump
+    ASSERT_EQ(mydeck.draw_trump(), nullptr);
 
 }
 
+// Drawing too many cards must fail
+TEST(DeckTest, OverDraw) {
+    deck mydeck;
+    player* player1 = new player("player1");
+    std::string err;
+
+
+    EXPECT_FALSE(mydeck.draw_cards(player1, 65, err));
+
+}
 
 
 /* A test fixture allows us to reuse the same configuration of objects for all
