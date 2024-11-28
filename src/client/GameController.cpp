@@ -19,6 +19,7 @@ game_state* GameController::_currentGameState = nullptr;
 
 void GameController::init(GameWindow* gameWindow) {
 
+    //TODO: panels need to be adapted
     GameController::_gameWindow = gameWindow;
 
     // Set up main panels
