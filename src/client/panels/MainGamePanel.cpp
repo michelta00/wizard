@@ -4,6 +4,7 @@
 
 
 MainGamePanel::MainGamePanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
+
 }
 
 void MainGamePanel::buildGameState(game_state* gameState, player* me) {
@@ -319,8 +320,8 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             wxSize scaledCardSize = MainGamePanel::cardSize;
 
             // Adjust card size (if the number of cards does not fit on the screen)
-            if (numberOfCards * (MainGamePanel::cardSize.GetWidth() + 8) >
-                MainGamePanel::panelSize.GetWidth()) { // 8 -> 4 pixel padding on both sides
+            if (numberOfCards * (MainGamePanel::cardSize.GetWidth() + 8) > MainGamePanel::panelSize.GetWidth())
+            { // 8 -> 4 pixel padding on both sides
                 int scaledCardWidth = (MainGamePanel::panelSize.GetWidth() / numberOfCards) - 8;
                 double cardAspectRatio =
                         (double) MainGamePanel::cardSize.GetHeight() / (double) MainGamePanel::cardSize.GetWidth();

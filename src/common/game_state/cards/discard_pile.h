@@ -25,6 +25,7 @@ public:
 
 // accessors
     bool can_play(const card* card);
+    const std::vector<card*>* get_cards() const;
     const card* get_top_card() const;
 
 #ifdef WIZARD_SERVER

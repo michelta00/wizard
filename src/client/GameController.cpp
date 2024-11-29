@@ -5,6 +5,7 @@
 #include "../common/network/requests/fold_request.h"
 #include "../common/network/requests/play_card_request.h"
 #include "../client/messageBoxes/ErrorDialog.h"
+#include "../client/messageBoxes/ScoreDialog.h"
 #include "network/ClientNetworkManager.h"
 
 
@@ -12,6 +13,8 @@
 GameWindow* GameController::_gameWindow = nullptr;
 ConnectionPanel* GameController::_connectionPanel = nullptr;
 MainGamePanel* GameController::_mainGamePanel = nullptr;
+MainGamePanelWizard* GameController::_mainGamePanelWizard = nullptr;
+TrickEstimationPanel* GameController::_trickEstimationPanel = nullptr;
 
 player* GameController::_me = nullptr;
 game_state* GameController::_currentGameState = nullptr;
@@ -25,10 +28,14 @@ void GameController::init(GameWindow* gameWindow) {
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
     GameController::_mainGamePanel = new MainGamePanel(gameWindow);
+    GameController::_mainGamePanelWizard = new MainGamePanelWizard(gameWindow);
+    GameController::_trickEstimationPanel = new TrickEstimationPanel(gameWindow);
 
     // Hide all panels
     GameController::_connectionPanel->Show(false);
     GameController::_mainGamePanel->Show(false);
+    GameController::_mainGamePanelWizard->Show(false);
+    GameController::_trickEstimationPanel->Show(false);
 
     // Only show connection panel at the start of the game
     GameController::_gameWindow->showPanel(GameController::_connectionPanel);
@@ -95,10 +102,16 @@ void GameController::updateGameState(game_state* newGameState) {
     if(oldGameState != nullptr) {
 
         // check if a new round started, and display message accrdingly
-        if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
-            GameController::showNewRoundMessage(oldGameState, newGameState);
+        if(oldGameState->get_round_number() >= 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
+            GameController::showStatus("Round " + std::to_string(newGameState->get_round_number()));
+            if(oldGameState->get_round_number() > 0)
+            {
+                GameController::showNewRoundMessage(oldGameState, newGameState);
+            }
+            GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
+            GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
+            GameController::estimateTrick();
         }
-
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }
@@ -107,11 +120,17 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
+    GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
+    GameController::_mainGamePanelWizard->buildGameState(GameController::_currentGameState, GameController::_me);
+
+
+    /*
     // make sure we are showing the main game panel in the window (if we are already showing it, nothing will happen)
     GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
 
     // command the main game panel to rebuild itself, based on the new game state
     GameController::_mainGamePanel->buildGameState(GameController::_currentGameState, GameController::_me);
+    */
 }
 
 
@@ -136,6 +155,18 @@ void GameController::fold() {
 void GameController::playCard(card* cardToPlay) {
     play_card_request request = play_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), cardToPlay->get_id());
     ClientNetworkManager::sendRequest(request);
+}
+
+
+void GameController::estimateTrick()
+{
+    std::string title = "How many tricks?";
+    std::string message = "Enter estimated number of tricks";
+    std::string buttonLabel = "OK";
+
+    wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
+    dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
+    dialogBox.ShowModal();
 }
 
 
@@ -188,9 +219,11 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
         message += "\n" + playerName + ":     " + scoreText;
     }
 
-    wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
-    dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
-    dialogBox.ShowModal();
+    //wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
+    //dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
+    //dialogBox.ShowModal();
+    ScoreDialog* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+    dialog->ShowModal();
 }
 
 
