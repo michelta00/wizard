@@ -60,7 +60,7 @@ void GameWindow::showPanel(wxPanel* panel) {
     }
 
     // add new panel
-    this->_mainLayout->Add(panel, 1, wxEXPAND | wxALL, 20); // 20 pixel spacing
+    this->_mainLayout->Add(panel, 1, wxEXPAND | wxALL, 0); // 20 pixel spacing
     panel->Show(true);
     this->_currentPanel = panel;
 

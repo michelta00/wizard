@@ -36,6 +36,14 @@ const card* discard_pile::get_top_card() const  {
     }
 }
 
+const std::vector<card*>* discard_pile::get_cards() const
+{
+    if (_cards.size() > 0)
+    {
+        return &_cards;
+    }
+};
+
 #ifdef WIZARD_SERVER
 void discard_pile::setup_game(std::string &err) {
     // remove all cards (if any) and clear it
