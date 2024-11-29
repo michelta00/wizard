@@ -37,6 +37,7 @@ public:
 
     // accessors
     [[nodiscard]] int get_trick_color() const;
+    std::vector<std::pair<card*, player*>> get_cards() const;
 
 
 #ifdef WIZARD_SERVER

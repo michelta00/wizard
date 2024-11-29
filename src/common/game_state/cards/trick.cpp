@@ -43,6 +43,11 @@ int trick::get_trick_color() const {
         return this->_trick_color->get_value();
 }
 
+std::vector<std::pair<card*, player*>> trick::get_cards() const
+{
+        return this->_cards;
+}
+
 
 #ifdef WIZARD_SERVER
 // determines winner using trump color
