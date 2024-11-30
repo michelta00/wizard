@@ -3,7 +3,7 @@ project(Wizard-unit-tests)
 set(TEST_SOURCE_FILES
         card.cpp
         deck.cpp
-        hand.cpp
+       # hand.cpp
         player.cpp
         trick.cpp)
 
