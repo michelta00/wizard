@@ -30,7 +30,8 @@ player::~player() {
         delete _hand;
         delete _player_name;
         delete _nof_predicted;
-        delete _nof_predicted;
+        delete _nof_tricks;
+
 
         _hand = nullptr;
         _player_name = nullptr;
@@ -81,7 +82,7 @@ int player::get_nof_tricks() const noexcept
     return _nof_tricks->get_value();
 }
 
-void player::set_nof_tricks(const int nof_tricks) const
+void player::set_nof_tricks(const int nof_tricks)
 {
     _nof_tricks->set_value(nof_tricks);
 }
@@ -93,7 +94,7 @@ int player::get_nof_predicted() const noexcept
     return _nof_predicted->get_value();
 }
 
-void player::set_nof_predicted(const int nof_predicted) const
+void player::set_nof_predicted(const int nof_predicted)
 {
     _nof_predicted->set_value(nof_predicted);
 }
@@ -187,8 +188,8 @@ player* player::from_json(const rapidjson::Value &json) {
         return new player(
                 json["id"].GetString(),
                 serializable_value<std::string>::from_json(json["player_name"].GetObject()),
-                serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
                 serializable_value<int>::from_json(json["nof_tricks"].GetObject()),
+                serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
                 deserialized_scores,
                 hand::from_json(json["hand"].GetObject()));
     } else {
