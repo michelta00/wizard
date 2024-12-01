@@ -42,7 +42,14 @@ trick::~trick() {
 int trick::get_trick_color() const {
         return this->_trick_color->get_value();
 }
-
+int trick::get_trump_color() const
+{
+        return this->_trump_color->get_value();
+}
+std::vector<std::pair<card*, player*>> trick::get_cards_and_players() const
+{
+        return this->_cards;
+}
 
 #ifdef WIZARD_SERVER
 // determines winner using trump color
@@ -133,7 +140,7 @@ void trick::set_trick_color(int color) {
 //TODO write from json and to json
 
 // for creating updated instance of trick
-trick *trick::from_json(const rapidjson::Value &json) {
+trick* trick::from_json(const rapidjson::Value &json) {
         if (json.HasMember("id")
                 && json.HasMember("cards")
                 && json.HasMember("trump_color")

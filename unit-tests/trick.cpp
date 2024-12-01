@@ -1,239 +1,534 @@
-
 //
 // Created by martinalavanya on 23.11.24.
 //
 
 #include "gtest/gtest.h"
 #include "../src/common/exceptions/WizardException.h"
-#include "../src/common/game_state/player/player.h"
-#include "../src/common/game_state/player/hand.h"
+#include "../src/common/game_state/cards/trick.h"
 #include "../src/common/serialization/json_utils.h"
 
-
-TEST(PlayerTest, CreatePlayer)
+class trick_testing : public ::testing::Test
 {
-    std::string name =  "vatkruidvat";
-    player test_player(name);
+protected:
+    serializable_value<int>* trick_color = nullptr;
+    serializable_value<int>* trump_color = nullptr;
+    trick* test_trick = nullptr;
+    std::vector<std::pair<card*, player*>> cards_and_players;
 
-    //check name
-    EXPECT_EQ(test_player.get_player_name(), name);
+    //virtual void SetUp() {
+      //  serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
+        // serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
+      //   std::vector<std::pair<card*, player*>> cards_and_players;
 
-    // check tricks
-    int nof_tricks = 2;
+      //   card* test_card = new card(2, 4);
+      //   player* test_player = new player("vatkruidvat");
+       //  cards_and_players.push_back(std::make_pair(test_card, test_player));
+       //  test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
 
-    test_player.set_nof_tricks(nof_tricks);
-    EXPECT_FALSE(test_player.get_nof_tricks(), 3);//should fail
+   //  }
 
-    //check predicted tricks
-
-    int pred_tricks = 4;
-
-    test_player.set_nof_predicted(pred_tricks);
-    EXPECT_EQ(test_player.get_nof_predicted(), pred_tricks);
-
-    //check score
-    int score = 7;
-    test_player.set_scores(score);
-    EXPECT_EQ(test_player.get_scores(), score);
-
-
-}
-
-TEST(HandTest, RemoveFromEmptyHand)
-{
-    std::string name =  "vatkruidvat";
-
-    player test_player(name);
-    card* test_card = new card(2, 4);
-
-    std::string error = "";
-    std::string card_id = test_card->get_id();
-
-    //remove card without adding it
-    bool result = test_player.remove_card(card_id, test_card, error);
-    //should have returned false
-    EXPECT_FALSE(result);
-    //clear memory
-    delete test_card;
-
-
-}
-// checks add_card, get_nof_cards, remove card
-TEST(HandTest, HandWithOneCard)
-{
-    std::string name =  "vatkruidvat";
-
-    player test_player(name);
-    card* test_card = new card(2, 4);
-
-    std::string error = "";
-    std::string card_id = test_card->get_id();
-    test_player.add_card(test_card, error);
-
-    //add card to card vector
-    std::vector<card*> cards;
-    cards.push_back(test_card);
-
-    //should have one card in the hand
-    EXPECT_EQ(test_player.get_nof_cards(), cards.size());
-
-    // hand in test_player should be the same as cards vector
-    EXPECT_EQ(test_player.get_hand(), cards);
-    //remove card after adding it
-
-    bool result = test_player.remove_card(card_id, test_card, error);
-
-    EXPECT_TRUE(result);
-
-    // clean up memory
-    delete test_card;
-}
-
-TEST(HandTest, HandWithThreeCards)
-{
-    std::string name = "vatkruidvat";
-    player test_player(name);
-
-    // Create the cards
-    card* test_card_1 = new card(2, 4);
-    card* test_card_2 = new card(10, 3);
-    card* test_card_3 = new card(1, 1);
-
-    std::string error = "";
-    std::vector<card*> cards;
-
-    // add the 3 cards
-    test_player.add_card(test_card_1, error);
-    cards.push_back(test_card_1);
-
-    test_player.add_card(test_card_2, error);
-    cards.push_back(test_card_2);
-
-    test_player.add_card(test_card_3, error);
-    cards.push_back(test_card_3);
-
-    // check if nr of cards in the hand matches the size of the vector
-    EXPECT_EQ(test_player.get_nof_cards(), cards.size());
-    std::vector<card*> hand = test_player.get_hand()->get_cards();
-
-    //check if all cards are still the same
-    for (size_t i = 0; i < cards.size(); ++i) {
-        //check color and value because == operator not overloaded for card type
-        EXPECT_EQ(hand[i]->get_id(), cards[i]->get_id());
-
-
-        //alternative
+    // Delete dynamically allocated cards and players
+    virtual void TearDown() {
+        for (int i = 0; i < cards_and_players.size(); i++) {
+            delete cards_and_players[i].first;   // delete the `card*`
+            delete cards_and_players[i].second;  // delete the `player*`
+        }
+        delete trick_color;
+        delete trump_color;
+        cards_and_players.clear();
     }
+};
 
-    // remove card 2 and check
-    std::string card_id_to_remove = test_card_2->get_id();
-    bool result = test_player.remove_card(card_id_to_remove, test_card_2, error);
+//note about cards: 1-13 are number cards (x4), 0 are jester cards (x4), 14 are wizard cards (x4)
 
-    EXPECT_TRUE(result);
+TEST_F(trick_testing, CreateAndChangeTrick) {
+    trick_color = new serializable_value<int>(2); //trick color is 2
+    trump_color = new serializable_value<int>(3);
 
-    // check nr of cards after removal
-    cards.erase(cards.begin() + 1);
-    EXPECT_EQ(test_player.get_nof_cards(), cards.size());
+    card* test_card = new card(2, 4);
+    player* test_player = new player("vatkruidvat");
+    cards_and_players.push_back(std::make_pair(test_card, test_player));
 
-    // check that hand == updated vector
-    EXPECT_EQ(test_player.get_nof_cards(), cards.size());
-    std::vector<card*> updated_hand = test_player.get_hand()->get_cards();
-    for (size_t i = 0; i < cards.size(); ++i) {
-        //since it is the exact same card, we can compare card id
-        EXPECT_EQ(updated_hand[i]->get_id(), cards[i]->get_id());
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    //check cards and players
+    EXPECT_EQ(1, test_trick->get_cards_and_players().size());
+    EXPECT_EQ(cards_and_players, test_trick->get_cards_and_players());
+    // check that trick color was set correctly
 
-        //EXPECT_EQ(updated_hand[i]->get_color(), cards[i]->get_color());
-        //EXPECT_EQ(updated_hand[i]->get_value(), cards[i]->get_value());
-    }
+    EXPECT_EQ(test_trick->get_trick_color(), 2);
+    test_trick->set_trick_color(3);
+    EXPECT_EQ(test_trick->get_trick_color(), 3);
 
-    // clean up memory
-    delete test_card_1;
-    delete test_card_2;
-    delete test_card_3;
+    //check trump color
+    EXPECT_EQ(test_trick->get_trump_color(), 3);
+
+
 
 }
-// check wrap_up_round()
 
-//correct estimate -> + 10 per trick, + 20 in general
-//incorrect estimate -> -10 for each trick offset
-
-// tests if score is computed correctly if predicted tricks == collected tricks
-TEST(HandTest, WrapUpRoundBadPrediction)
+// scoring scenarios
+// have any card be a wizard --> wins
+TEST_F(trick_testing, OneWizard)
 {
-    std::string name =  "vatkruidvat";
+    serializable_value<int>* trick_color = new serializable_value<int>(0); // trick color is 0
+    serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
+    //if a wizard is played, then the other players may play any card they wish (of any suit)
+    card* card1 = new card(14, 0); //winning wizard card
+    card* card2 = new card(2, 2);
+    card* card3 = new card(4, 3); //trump card
+    card* card4 = new card(14, 0); //second wizard card
 
-    player test_player(name);
-    test_player.set_scores(20);
-    test_player.set_nof_tricks(2);
-    test_player.set_nof_predicted(4);
-    int previous_score = test_player.get_scores().back()->get_value();
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
 
-    test_player.wrap_up_round();
-    std::vector<serializable_value<int>*> scores = test_player.get_scores();
-    int new_score = scores.back()->get_value();
-    //since two tricks off (2 made, 4 predicted) --> subtract 2 * 10 from previous score
-    EXPECT_EQ(new_score, 0);
-
-    // lost 20 points from previous point to this round
-    EXPECT_EQ(std::abs(new_score, previous_score), 20);
+    // Initialize cards_and_players using {} notation
+     std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
 
 
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player1->get_player_name(), winner->get_player_name()); // player 1 expected to win
+    EXPECT_EQ(cards_and_players[0].first->get_value(), 14); //first card is a wizard
 }
 
-// tests if score is computed correctly if predicted tricks == collected tricks
-TEST(HandTest, WrapUpRoundGoodGameplay)
+//first wizard card wins
+TEST_F(trick_testing, AllWizards)
 {
-    std::string name =  "vatkruidvat";
+    serializable_value<int>* trick_color = new serializable_value<int>(0); // trick color is 0
+    serializable_value<int>* trump_color = new serializable_value<int>(3); // trump color is 3
 
-    player test_player(name);
-    test_player.set_scores(20);
-    test_player.set_nof_tricks(2);
-    test_player.set_nof_predicted(2);
-    int previous_score = test_player.get_scores().back()->get_value();
+    card* card1 = new card(14, 0); //winning wizard card
+    card* card2 = new card(14, 0);
+    card* card3 = new card(14, 0);
+    card* card4 = new card(14, 0);
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
 
 
-    // compute score
-    test_player.wrap_up_round();
-    std::vector<serializable_value<int>*> scores = test_player.get_scores();
-    int new_score = scores.back()->get_value();
-    //since two tricks off (2 made, 2 predicted) --> add 2 * 10 + 20 to previous score
-    EXPECT_EQ(new_score, 60);
-    int collected_points = scores.back()->get_value();
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player1->get_player_name(), winner->get_player_name()); // player 1 expected to win
+    EXPECT_EQ(cards_and_players[1].first->get_value(), 14); //second card is a wizard
+}
 
-    //made 40 points in this round
-    EXPECT_EQ(std::abs(new_score, previous_score), 40);
 
+//first card is a jester --> wins only if everyone plays a jester, otherwise the jester looses
+TEST_F(trick_testing, OneJesterHighestCard)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
+    serializable_value<int>* trump_color = new serializable_value<int>(4);// trump color is 4
+    //jester has color 0, value 0
+    card* card1 = new card(0, 0); //jester looses
+    card* card2 = new card(2, 2); //first number card --> decides trick color
+    card* card3 = new card(4, 2); //winning card (highest of color 2)
+    card* card4 = new card(3, 1);//player can't match suit and has no trump
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player3->get_player_name(), winner->get_player_name()); // player 3 expected to win
+    EXPECT_EQ(cards_and_players[3].first->get_value(), 3); //last card should be a 3
+}
+
+//first card is a jester, trump card wins
+TEST_F(trick_testing, OneJesterWithTrump)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
+    serializable_value<int>* trump_color = new serializable_value<int>(4);// trump color is 4
+    //jester has color 0, value 0
+    card* card1 = new card(0, 0); //jester looses
+    card* card2 = new card(2, 2); //first number card --> decides trick color
+    card* card3 = new card(4, 2);
+    card* card4 = new card(3, 4);//winning card -> trump
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player4->get_player_name(), winner->get_player_name()); // player 4 expected to win
+    auto third_card = cards_and_players[2].first;
+    EXPECT_EQ(third_card->get_value(), 3); //third card should be a 4
+}
+
+
+//first card is a jester, wizard card wins
+TEST_F(trick_testing, OneJesterWithWizard)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(0); // trick color is 0
+    serializable_value<int>* trump_color = new serializable_value<int>(4);// trump color is 4
+    //jester has color 0, value 0
+    card* card1 = new card(0, 0); //jester looses
+    card* card2 = new card(14, 0); //wizard card wins
+    card* card3 = new card(13, 3); //remaining players may play any suit because wizard was played
+    card* card4 = new card(3, 4);
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player2->get_player_name(), winner->get_player_name()); // player 2 expected to win
+    EXPECT_EQ(cards_and_players[2].first->get_value(), 13); //third card should be a 13
+}
+
+//first card is a jester, wizard card wins
+TEST_F(trick_testing, OneJesterWithWizardAndTrump)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
+    serializable_value<int>* trump_color = new serializable_value<int>(4);// trump color is 4
+    //jester has color 0, value 0
+    card* card1 = new card(0, 0); //jester looses
+    card* card2 = new card(4, 2); //trick color 2
+    card* card3 = new card(13, 4); //trump card
+    card* card4 = new card(14, 0); //wizard wins
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player4->get_player_name(), winner->get_player_name()); // player 4 expected to win
+    EXPECT_EQ(cards_and_players[3].first->get_value(), 14); //last card is a wizard
+}
+
+//all jesters
+TEST_F(trick_testing, AllJesters)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(0); // trick color is 0
+    serializable_value<int>* trump_color = new serializable_value<int>(4);// trump color for this trick is 4
+    //jester has color 0, value 0
+    card* card1 = new card(0, 0); //winning jester card
+    card* card2 = new card(0, 0);
+    card* card3 = new card(0, 0);
+    card* card4 = new card(0, 0);
+
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player1->get_player_name(), winner->get_player_name()); // player 1 expected to win
+    EXPECT_EQ(cards_and_players[3].first->get_value(), 0); //last card should be a jester
+}
+
+
+
+//highest trump card wins
+TEST_F(trick_testing, HighestTrump)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(3); // trick color is 3
+    serializable_value<int>* trump_color = new serializable_value<int>(2);// trump color is 2
+
+
+    card* card1 = new card(2, 3); //decides trick color
+    card* card2 = new card(6, 2); //highest trump card --> wins trick
+    card* card3 = new card(3, 2); //lower trump card
+    card* card4 = new card(8, 3); //highest non-trump of trick color --> still looses
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player2->get_player_name(), winner->get_player_name()); // player 2 expected to win
+    EXPECT_EQ(cards_and_players[1].first->get_value(), 6); //second card should be a 6
+}
+
+
+//only trump played -> highest trump card wins
+TEST_F(trick_testing, OnlyTrump)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(1); // trick color is 1
+    serializable_value<int>* trump_color = new serializable_value<int>(1);// trump color is 1
+
+
+    card* card1 = new card(12, 1);
+    card* card2 = new card(6, 1);
+    card* card3 = new card(13, 1);//highest trump wins
+    card* card4 = new card(8, 1);
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player3->get_player_name(), winner->get_player_name()); // player 3 expected to win
+    EXPECT_EQ(cards_and_players[2].first->get_value(), 13); //third card should be a 13
+}
+// if no trump is played, the highest card wins
+TEST_F(trick_testing, NoTrump)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(1); // trick color is 1
+    serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
+
+
+    card* card1 = new card(1, 1);
+    card* card2 = new card(6, 2);
+    card* card3 = new card(11, 1); //winner
+    card* card4 = new card(8, 1);
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    player* winner = test_trick->wrap_up_trick(error);
+    EXPECT_EQ(player3->get_player_name(), winner->get_player_name()); // player 3 expected to win
+    EXPECT_EQ(cards_and_players[2].first->get_value(), 11); //third card should be a 11
+}
+
+//check setup round
+TEST_F(trick_testing, SetupRound)
+{
+    serializable_value<int>* trick_color = new serializable_value<int>(1); // trick color is 1
+    serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
+
+
+    card* card1 = new card(1, 1);
+    card* card2 = new card(6, 2);
+    card* card3 = new card(11, 1); //winner
+    card* card4 = new card(8, 1);
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+    player* player4 = new player("Player_4");
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {
+        {card1, player1},
+        {card2, player2},
+        {card3, player3},
+        {card4, player4}
+    };
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+    std::string error = "";
+    test_trick->set_up_round(error, 4);
+    EXPECT_EQ(0, test_trick->get_trick_color()); //expect trick color 0 after reset
+    EXPECT_EQ(0, test_trick->get_cards_and_players().size()); //expect empty cards and players vector
 
 }
+
+//check add card
+TEST_F(trick_testing, AddCard)
+{
+    int trump_color = 3;
+    std::string err = "";
+
+    card* card1 = new card(1, 1);
+    card* card2 = new card(6, 2);
+    //create player and add card to player hand
+    player* player1 = new player("Player_1");
+    player1->add_card(card1, err);
+
+    std::vector<std::pair<card*, player*>> cards_and_players = {{card1, player1}};
+
+    test_trick = new trick();
+    test_trick->set_up_round(err, trump_color);
+    EXPECT_TRUE(test_trick->add_card(card1, player1, err));//card1 is in hand
+    EXPECT_FALSE(test_trick->add_card(card2, player1, err));//card 2 is not in hand
+
+    EXPECT_TRUE(test_trick->add_card(card1, player1, err));//card was played, player was added
+    EXPECT_EQ(test_trick->get_cards_and_players(), cards_and_players); //check if player was added to cards_
+
+}
+
+
+//test a full round
+TEST_F(trick_testing, EntireRound)
+{
+    int trump_color = 4;
+    std::string err = "";
+
+    card* card1 = new card(2, 4);
+    card* card2 = new card(4, 3);
+    card* card3 = new card(8, 2);
+    card* card4 = nullptr;// Null card
+
+
+    player* player1 = new player("Player_1");
+    player* player2 = new player("Player_2");
+    player* player3 = new player("Player_3");
+
+    // add cards to players' hands
+    player1->add_card(card1, err);
+    player2->add_card(card2, err);
+    player3->add_card(card3, err);
+
+    //create trick
+    test_trick = new trick();
+    test_trick->set_up_round(err, trump_color);
+
+    // Test adding valid cards from player 1
+    EXPECT_TRUE(test_trick->add_card(card1, player1, err));
+    EXPECT_TRUE(test_trick->add_card(card2, player1, err));
+
+    // Test adding a card not in the player's hand
+    EXPECT_FALSE(test_trick->add_card(nullptr, player1, err));
+    EXPECT_FALSE(test_trick->add_card(card3, player1, err)); // Card 3 belongs to player 3
+
+    // Test adding a null card
+    EXPECT_FALSE(test_trick->add_card(card4, player2, err));
+    EXPECT_EQ(err, "The desired card cannot be played.");
+
+    // Test adding a valid card from player 2
+    EXPECT_TRUE(test_trick->add_card(card3, player2, err));
+
+    // Check the cards and players stored in the trick
+    std::vector<std::pair<card*, player*>> expected_cards_and_players = {
+        {card1, player1},
+        {card2, player1},
+        {card3, player2}
+    };
+    EXPECT_EQ(test_trick->get_cards_and_players(), expected_cards_and_players);
+
+    player* winner = test_trick->wrap_up_trick(err);
+    EXPECT_EQ(player1, winner); //player 1 played trump --> wins
+}
+
+
+//TODO 28.11: check the serialization deserialization --> after that, these tests should be done
 
 // Serialization and subsequent deserialization must yield the same object
-TEST(CardTest, SerializationEquality) {
-    std::string name =  "vatkruidvat";
-    player player_send(name);
-    player_send.set_scores(20);
-    player_send.set_nof_tricks(2);
-    player_send.set_nof_predicted(4);
+TEST_F(trick_testing, SerializationEquality) {
+    trick_color = new serializable_value<int>(2); //trick color is 2
+    trump_color = new serializable_value<int>(3);
 
-    rapidjson::Document* json_send = player_send.to_json();
+    card* test_card = new card(2, 4);
+    player* test_player = new player("vatkruidvat");
+    cards_and_players.push_back(std::make_pair(test_card, test_player));
+
+    test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
+
+    rapidjson::Document* json_send = test_trick->to_json();
     std::string message = json_utils::to_string(json_send);
     delete json_send;
 
     rapidjson::Document json_received = rapidjson::Document(rapidjson::kObjectType);
     json_received.Parse(message.c_str());
-    player* player_received = player::from_json(json_received);
+    trick* trick_received = trick::from_json(json_received);
 
-    EXPECT_EQ(player_send.get_id(), player_received->get_id());
-    EXPECT_EQ(player_send.get_nof_cards(), player_received->get_nof_cards());
-    EXPECT_EQ(player_send.get_nof_predicted(), player_received->get_nof_cards());
-    EXPECT_EQ(player_send.get_player_name(), player_received->get_player_name());
-    EXPECT_EQ(player_send.get_scores(), player_received->get_scores());
-    EXPECT_EQ(player_send.get_hand(), player_received->get_hand());
-    delete player_received;
+    EXPECT_EQ(test_trick->get_id(), trick_received->get_id());
+    EXPECT_EQ(test_trick->get_trump_color(), trick_received->get_trump_color());
+    EXPECT_EQ(test_trick->get_cards_and_players()[0].first->get_color(), trick_received->get_cards_and_players()[0].first->get_color());
+    EXPECT_EQ(test_trick->get_cards_and_players()[0].first->get_value(), trick_received->get_cards_and_players()[0].first->get_value());
+    EXPECT_EQ(test_trick->get_trick_color(), trick_received->get_trick_color());
+
+    delete trick_received;
 }
 
 // Deserializing an invalid string must throw a WizardException
-TEST(CardTest, SerializationException) {
+TEST_F(trick_testing, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
     EXPECT_THROW(player::from_json(json), WizardException);
 }
+
