@@ -6,7 +6,7 @@
 MainGamePanel::MainGamePanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
 
 }
-
+/*
 void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
     // remove any existing UI
@@ -376,3 +376,4 @@ double MainGamePanel::getEdgeLengthOfRotatedSquare(double originalEdgeLength, do
 wxPoint MainGamePanel::getPointOnEllipse(double horizontalRadius, double verticalRadius, double angle) {
     return wxPoint((int) (sin(angle) * horizontalRadius), (int) (cos(angle) * verticalRadius));
 }
+*/

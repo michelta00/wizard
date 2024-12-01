@@ -102,8 +102,9 @@ void GameController::updateGameState(game_state* newGameState) {
 
     if(oldGameState != nullptr) {
 
-        // check if a new round started, and display message accrdingly
+        // check if a new round started, and display message accordingly
         if(oldGameState->get_round_number() >= 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
+            /*
             GameController::showStatus("Round " + std::to_string(newGameState->get_round_number()));
             if(oldGameState->get_round_number() > 0)
             {
@@ -112,7 +113,9 @@ void GameController::updateGameState(game_state* newGameState) {
             GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
             GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
             GameController::estimateTrick();
+            */
         }
+
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }
@@ -121,9 +124,10 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
+    /*
     GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
     GameController::_mainGamePanelWizard->buildGameState(GameController::_currentGameState, GameController::_me);
-
+    */
 
     /*
     // make sure we are showing the main game panel in the window (if we are already showing it, nothing will happen)
@@ -159,6 +163,25 @@ void GameController::leaveGame()
 // TODO: estimate trick request, here message box with entry
 void GameController::estimateTrick()
 {
+    wxString trickEstimate = GameController::_trickEstimationPanel->getTrickEstimate().Trim();
+
+    //check whether value was provided
+    if(trickEstimate.IsEmpty()) {
+        GameController::showError("Input error", "Please provide your trick estimate!");
+        return;
+    }
+
+    // attempt to parse string into a long integer and cast to int if succesful
+    long trickEstimateValue;
+    int trickEstimateInt;
+    if (trickEstimate.ToLong(&trickEstimateValue)) {
+        trickEstimateInt = static_cast<int>(trickEstimateValue);
+    } else {
+        // Handle the error: the string was not a valid integer
+        GameController::showError("Invalid input!"," Please enter a valid number for the trick estimate.");
+    }
+    GameController::estimateTricks(trickEstimateInt);
+    /*
     std::string title = "How many tricks?";
     std::string message = "Enter estimated number of tricks";
     std::string buttonLabel = "OK";
@@ -166,6 +189,7 @@ void GameController::estimateTrick()
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     dialogBox.ShowModal();
+    */
 }
 
 
@@ -194,7 +218,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     std::string title = "Round Completed";
     std::string message = "The players gained the following minus points:\n";
     std::string buttonLabel = "Start next round";
-
+    /*
     // add the point differences of all players to the messages
     for(int i = 0; i < oldGameState->get_players().size(); i++) {
 
@@ -217,6 +241,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     //wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     //dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     //dialogBox.ShowModal();
+    */
     ScoreDialog* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
     dialog->ShowModal();
 }
@@ -226,7 +251,7 @@ void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
-
+    /*
     // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
@@ -256,7 +281,7 @@ void GameController::showGameOverMessage() {
         }
         message += "\n" + playerName + ":     " + scoreText + winnerText;
     }
-
+    */
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     int buttonClicked = dialogBox.ShowModal();

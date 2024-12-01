@@ -7,6 +7,7 @@ MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxI
     this->SetMinSize(wxSize(960, 680));
 }
 
+
 void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
 {
     this->DestroyChildren();
@@ -144,6 +145,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
 
     for (int i = 0; i < otherPlayerPositions.size(); i++)
     {
+        // sizer to out text at center top
         wxGBSizerItem* item = sizer->FindItemAtPosition(otherPlayerPositions[i]);
         wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
@@ -151,6 +153,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
 
         player* otherPlayer = players.at((myPosition + i) % numberOfPlayers);
 
+        // Lobby: display names
         if(!gameState->is_started())
         {
         wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
@@ -162,16 +165,17 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER);
         playerSizer_vert->Add(statusText,0,wxALIGN_CENTER);
         }
+        // game started: display names, predicted and scored tricks
         else
         {
         wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
 
-        wxStaticText* statusText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_score()) + " minus points",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        statusText->SetForegroundColour(*wxWHITE);
+        wxStaticText* trickText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_tricks()) + "/" +  std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        trickText->SetForegroundColour(*wxWHITE);
 
         playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER);
-        playerSizer_vert->Add(statusText,0,wxALIGN_CENTER);
+        playerSizer_vert->Add(trickText,0,wxALIGN_CENTER);
         }
 
     }
@@ -189,8 +193,13 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
         wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         trumpText->SetForegroundColour(*wxWHITE);
 
-        const card* trumpCard = gameState->get_discard_pile()->get_top_card();
+        // TODO which card to display? (trump color)
+        const card* trumpCard = gameState->get_trump_card();
 
+        int trumpValue = trumpCard->get_value();
+        int trumpColor = trumpCard->get_color();
+
+        // TODO: renaming of all card images with respective color and value in the name
         std::string cardImage = "assets/wizard_" + std::to_string(trumpCard->get_value()) + ".png";
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
@@ -214,29 +223,14 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 
     if(gameState->is_started())
     {
-        /*
-        const card* topCard = gameState->get_discard_pile()->get_top_card();
-        const std::vector<card*>* trickCards = gameState->get_discard_pile()->get_cards();
-        if(topCard != nullptr) {
-            std::string cardImage = "assets/wizard_" + std::to_string(topCard->get_value()) + ".png";
-
-
-            ImagePanel* discardPile = new ImagePanel(trickPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
-
-            trickPanelSizer_hor->Add(discardPile, 0, wxALIGN_CENTER | wxALL);
-        }
-        */
-        const std::vector<card*>* trickCards = gameState->get_discard_pile()->get_cards();
-        if (trickCards!= nullptr)
-        {
-            for (const auto& card : *trickCards)
+        const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards();
+            for (const auto& it : trickCards)
             {
+                card* card = it.first();
                 std::string cardImage = "assets/wizard_" + std::to_string(card->get_value()) + ".png";
                 ImagePanel* cardPanel = new ImagePanel(trickPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
                 trickPanelSizer_hor->Add(cardPanel, 0, wxALIGN_CENTER | wxALL, -15);
             }
-        }
-
     }
 }
 
@@ -306,39 +300,14 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     }
     else
     {
-        // show minus points instead of status text
-        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_score()) + " minus points",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        // show estimated and scored tricks instead of status text
+        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_tricks()) + "/" +  std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         playerScore->SetForegroundColour(*wxWHITE);
+
         meSizer->Add(playerScore, 0, wxALIGN_CENTER);
 
-
-        // add status (there are 3 different cases)
-        // we have folded
-        if (me->has_folded())
-        {
-            wxStaticText* playerStatus = new wxStaticText(mePanel, wxID_ANY, "Folded!",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-            playerStatus->SetForegroundColour(*wxWHITE);
-            meSizer->Add(playerStatus, 0, wxALIGN_CENTER);
-        }
-        // if we havent folded yet and it is our turn display fold button
-        else if (gameState->get_current_player() == me)
-        {
-            wxButton *foldButton = new wxButton(mePanel, wxID_ANY, "Fold", wxDefaultPosition, wxSize(80, 32));
-            foldButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
-                GameController::fold();
-            });
-            meSizer->Add(foldButton,0,wxALIGN_CENTER);
-        }
-        // it is not our turn
-        else
-        {
-            wxStaticText* playerStatus = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-            playerStatus->SetForegroundColour(*wxWHITE);
-            meSizer->Add(playerStatus, 0, wxALIGN_CENTER);
-        }
-
-
         // display our hand
+
         int numberOfCards = me->get_nof_cards();
 
         if (numberOfCards > 0)
@@ -366,11 +335,16 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
             for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
 
                 card *handCard = me->get_hand()->get_cards().at(i);
+
+                int cardValue = handCard->get_value();
+                int cardColor = handCard->get_color();
+
+                // TODO rename and add files
                 std::string cardFile = "assets/wizard_" + std::to_string(handCard->get_value()) + ".png";
 
                 ImagePanel *cardButton = new ImagePanel(cardPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
-                if (gameState->get_current_player() == me && !me->has_folded()) {
+                if (gameState->get_current_player() == me) {
                     cardButton->SetToolTip("Play card");
                     cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
                     cardButton->Bind(wxEVT_LEFT_UP, [handCard](wxMouseEvent& event) {

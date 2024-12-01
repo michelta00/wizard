@@ -98,6 +98,12 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
+trick* game_state::get_trick() const
+{
+    return _trick;
+}
+
+
 bool game_state::is_full() const {
     return _players.size() == _max_nof_players;
 }

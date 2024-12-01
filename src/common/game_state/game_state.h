@@ -81,6 +81,7 @@ public:
     int get_trick_number() const;
     int get_max_round_number() const;
     player* get_current_player() const;
+    trick* get_trick() const;
 
 
 

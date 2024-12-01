@@ -6,6 +6,7 @@
 #define TRICKESTIMATIONPANEL_H
 
 #include "../../common/game_state/game_state.h"
+#include "../uiElements/InputField.h"
 #include <wx/wx.h>
 #include <wx/gbsizer.h>
 
@@ -14,7 +15,14 @@ class TrickEstimationPanel : public wxPanel{
 public:
     TrickEstimationPanel(wxWindow* parent);
 
+    wxString getTrickEstimate();
     void buildGameState(game_state* gameState, player* me);
+private:
+    wxSize const panelSize = wxSize(960, 680);
+
+    void buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
+    void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, int myPosition);
+    InputField* _trickEstimateField;
 };
 
 #endif //TRICKESTIMATIONPANEL_H
