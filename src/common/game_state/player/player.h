@@ -47,10 +47,10 @@ public:
     void set_scores(int score);
 
     [[nodiscard]] int get_nof_tricks() const noexcept;
-    void set_nof_tricks(int nof_tricks);
+    void set_nof_tricks(int nof_tricks) const;
 
     [[nodiscard]] int get_nof_predicted() const noexcept;
-    void set_nof_predicted(int nof_predicted);
+    void set_nof_predicted(int nof_predicted) const;
 
     [[nodiscard]] unsigned int get_nof_cards() const noexcept;
     [[nodiscard]] hand* get_hand() const noexcept;

@@ -82,7 +82,7 @@ int player::get_nof_tricks() const noexcept
     return _nof_tricks->get_value();
 }
 
-void player::set_nof_tricks(const int nof_tricks)
+void player::set_nof_tricks(const int nof_tricks) const
 {
     _nof_tricks->set_value(nof_tricks);
 }
@@ -94,7 +94,7 @@ int player::get_nof_predicted() const noexcept
     return _nof_predicted->get_value();
 }
 
-void player::set_nof_predicted(const int nof_predicted)
+void player::set_nof_predicted(const int nof_predicted) const
 {
     _nof_predicted->set_value(nof_predicted);
 }
