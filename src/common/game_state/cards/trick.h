@@ -22,23 +22,20 @@ private:
     serializable_value<int>* _trump_color;
     std::vector<std::pair<card*, player*>> _cards;
 
-
+public:
+    trick();
     explicit trick(std::string id);
-
     trick(std::string id,
         std::vector<std::pair<card*, player*>> &cards,
         serializable_value<int>* trick_color,
         serializable_value<int>* trump_color);
-
-public:
-    trick();
     explicit trick(int trump);
     ~trick();
 
     // accessors
     [[nodiscard]] int get_trick_color() const;
-    std::vector<std::pair<card*, player*>> get_cards() const;
-
+    [[nodiscard]] std::vector<std::pair<card*, player*>> get_cards_and_players() const;
+    [[nodiscard]] int get_trump_color() const;
 
 #ifdef WIZARD_SERVER
     // state update functions
