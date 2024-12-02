@@ -125,6 +125,11 @@ int game_state::get_trick_number() const
     return _trick_number->get_value();
 }
 
+int game_state::get_trick_estimate_sum() const
+{
+    return _trick_estimate_sum->get_value();
+}
+
 int game_state::get_max_round_number() const {
     return 60 / _players.size();
 }
@@ -145,6 +150,11 @@ bool game_state::is_player_in_game(player *player) const {
 std::vector<player*>& game_state::get_players() {
     return _players;
 }
+
+int game_state::get_trump_color() const {
+    return _trump_color->get_value();
+}
+
 
 
 //TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)

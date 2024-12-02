@@ -1,5 +1,4 @@
 #include "TrickEstimationPanel.h"
-#include "../uiElements/InputField.h"
 #include "../GameController.h"
 
 
@@ -90,11 +89,33 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     this->Layout();
 }
 
+void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameState){
+    wxGBSizerItem* centerItem = sizer->FindItemAtPosition(wxGBPosition(1,1));
+    wxPanel* centerPanel = dynamic_cast<wxPanel*>(centerItem->GetWindow());
+
+    // add sizer to center the text
+    auto centerPanelSizer_vert = new wxBoxSizer(wxVERTICAL);
+    centerPanel->SetSizer(centerPanelSizer_vert);
+    auto centerPanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    centerPanelSizer_vert->Add(centerPanelSizer_hor, 1, wxALIGN_CENTER);
+
+    // add round number
+    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()) + "!",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    roundNumber->SetForegroundColour(*wxWHITE);
+
+    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current sum: " + std::to_string(gameState->get_trick_estimate_sum()),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    trickSum->SetForegroundColour(*wxWHITE);
+
+
+    centerPanelSizer_hor->Add(roundNumber, 0, wxALIGN_CENTER);
+    centerPanelSizer_hor->Add(trickSum, 0, wxALIGN_CENTER);
+
+}
+
 void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me)
 {
     wxGBSizerItem* meItem = sizer->FindItemAtPosition(wxGBPosition(2,1));
     wxPanel* mePanel = dynamic_cast<wxPanel*>(meItem->GetWindow());
-    mePanel->SetBackgroundColour(wxColour(0,0,0));
 
     // define the sizers for alignment
     auto mePanelSizer_vert = new wxBoxSizer(wxVERTICAL);

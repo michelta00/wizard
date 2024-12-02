@@ -79,7 +79,9 @@ public:
     std::vector<player*>& get_players();
     int get_round_number() const;
     int get_trick_number() const;
+    int get_trick_estimate_sum() const;
     int get_max_round_number() const;
+    int get_trump_color() const;
     player* get_current_player() const;
     trick* get_trick() const;
 

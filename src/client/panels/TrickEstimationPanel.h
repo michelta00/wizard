@@ -20,6 +20,7 @@ public:
 private:
     wxSize const panelSize = wxSize(960, 680);
 
+    void buildCenter(wxGridBagSizer* sizer, game_state* gameState);
     void buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, int myPosition);
     InputField* _trickEstimateField;

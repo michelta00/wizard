@@ -122,11 +122,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
 
     std::vector<wxGBPosition> otherPlayerPositions;
 
-    if (numberOfPlayers == 2)
-    {
-        otherPlayerPositions = { wxGBPosition(0, 2)};
-    }
-    else if (numberOfPlayers == 3)
+    if (numberOfPlayers == 3)
     {
         otherPlayerPositions = { wxGBPosition(0, 1),  wxGBPosition(0, 3)};
     }
@@ -145,7 +141,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
 
     for (int i = 0; i < otherPlayerPositions.size(); i++)
     {
-        // sizer to out text at center top
+        // sizer to put text at center top
         wxGBSizerItem* item = sizer->FindItemAtPosition(otherPlayerPositions[i]);
         wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
@@ -193,14 +189,10 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
         wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         trumpText->SetForegroundColour(*wxWHITE);
 
-        // TODO which card to display? (trump color)
-        const card* trumpCard = gameState->get_trump_card();
-
-        int trumpValue = trumpCard->get_value();
-        int trumpColor = trumpCard->get_color();
+        int trumpColor = gameState->get_trump_color();
 
         // TODO: renaming of all card images with respective color and value in the name
-        std::string cardImage = "assets/wizard_" + std::to_string(trumpCard->get_value()) + ".png";
+        std::string cardImage = "assets/card_" + std::to_string(trumpColor) + ".png";
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
 
@@ -226,8 +218,8 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
         const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards();
             for (const auto& it : trickCards)
             {
-                card* card = it.first();
-                std::string cardImage = "assets/wizard_" + std::to_string(card->get_value()) + ".png";
+                card* card = it.first;
+                std::string cardImage = "assets/card_" + std::to_string(card->get_value()) + "_" + std::to_string(card->get_color()) + ".png";
                 ImagePanel* cardPanel = new ImagePanel(trickPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
                 trickPanelSizer_hor->Add(cardPanel, 0, wxALIGN_CENTER | wxALL, -15);
             }
@@ -336,11 +328,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
 
                 card *handCard = me->get_hand()->get_cards().at(i);
 
-                int cardValue = handCard->get_value();
-                int cardColor = handCard->get_color();
-
-                // TODO rename and add files
-                std::string cardFile = "assets/wizard_" + std::to_string(handCard->get_value()) + ".png";
+                std::string cardFile = "assets/wizard_" + std::to_string(handCard->get_value()) + "_" + std::to_string(handCard->get_color())  + ".png";
 
                 ImagePanel *cardButton = new ImagePanel(cardPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
