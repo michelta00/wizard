@@ -7,7 +7,7 @@ player::player(const std::string& name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
     this->_nof_predicted = new serializable_value<int>(-1);
     this->_nof_tricks = new serializable_value<int>(0);
-    this->_scores = std::vector<serializable_value<int>*>(0);
+    this->_scores = std::vector<serializable_value<int>*>();
     this->_hand = new hand();
 
 }
@@ -30,12 +30,17 @@ player::~player() {
         delete _hand;
         delete _player_name;
         delete _nof_predicted;
-        delete _nof_predicted;
+        delete _nof_tricks;
 
         _hand = nullptr;
         _player_name = nullptr;
         _nof_predicted = nullptr;
         _nof_tricks = nullptr;
+
+        for (auto score : _scores) {
+            delete score;
+        }
+        _scores.clear();
     }
 }
 
@@ -45,7 +50,7 @@ player::player(const std::string& id, const std::string& name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_scores = std::vector< serializable_value<int>*>(0);
+    this->_scores = std::vector< serializable_value<int>*>();
     this->_hand = new hand();
     this->_nof_predicted = new serializable_value<int>(0);
     this->_nof_tricks = new serializable_value<int>(0);
