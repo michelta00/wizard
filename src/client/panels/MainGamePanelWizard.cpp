@@ -131,15 +131,15 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
     }
     else if (numberOfPlayers == 4)
     {
-        otherPlayerPositions = { wxGBPosition(0, 2),  wxGBPosition(1, 0),  wxGBPosition(1, 2)};
+        otherPlayerPositions = { wxGBPosition(0, 2),  wxGBPosition(1, 0),  wxGBPosition(1, 4)};
     }
     else if (numberOfPlayers == 5)
     {
-        otherPlayerPositions = { wxGBPosition(0, 1), wxGBPosition(0, 3), wxGBPosition(1, 0), wxGBPosition(1, 2)};
+        otherPlayerPositions = { wxGBPosition(0, 1), wxGBPosition(0, 3), wxGBPosition(1, 0), wxGBPosition(1, 4)};
     }
     else if (numberOfPlayers == 6)
     {
-        otherPlayerPositions = { wxGBPosition(0, 1), wxGBPosition(0, 2), wxGBPosition(0, 3), wxGBPosition(1, 0), wxGBPosition(1, 2)};
+        otherPlayerPositions = { wxGBPosition(0, 1), wxGBPosition(0, 2), wxGBPosition(0, 3), wxGBPosition(1, 0), wxGBPosition(1, 4)};
     }
 
     for (int i = 0; i < otherPlayerPositions.size(); i++)
@@ -150,7 +150,8 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
 
-        player* otherPlayer = players.at((myPosition + i) % numberOfPlayers);
+        // get other player
+        player* otherPlayer = players.at((myPosition + i + 1) % numberOfPlayers);
 
         // Lobby: display names
         if(!gameState->is_started())
