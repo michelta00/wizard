@@ -20,7 +20,7 @@ game_state::game_state(std::string id) : unique_serializable(id) {
     _starting_player_idx = new serializable_value<int>(0);
     _trick_starting_player_idx = new serializable_value<int>(0);
     _current_player_idx = new serializable_value<int>(0);
-    _trump_color = nullptr;
+    _trump_color = new serializable_value<int>(0);
     _trick_estimate_sum = new serializable_value<int>(0);
 }
 
@@ -64,7 +64,7 @@ game_state::game_state() : unique_serializable() {
     _starting_player_idx = new serializable_value<int>(0);
     _trick_starting_player_idx = new serializable_value<int>(0);
     _current_player_idx = new serializable_value<int>(0);
-    _trump_color = nullptr;
+    _trump_color = new serializable_value<int>(0);
     _trick_estimate_sum = new serializable_value<int>(0);
 }
 
