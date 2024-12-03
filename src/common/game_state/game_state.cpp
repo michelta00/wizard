@@ -70,10 +70,12 @@ game_state::game_state() : unique_serializable() {
 
 // destructor
 game_state::~game_state() {
+    /*
     for (auto & player : _players) {
         delete player;
         player = nullptr;
     }
+    */
     delete _deck;
     delete _trick;
 
@@ -88,6 +90,21 @@ game_state::~game_state() {
     delete _current_player_idx;
     delete _trump_color;
     delete _trick_estimate_sum;
+
+    _deck = nullptr;
+    _trick = nullptr;
+
+    _is_started = nullptr;
+    _is_finished = nullptr;
+    _is_estimation_phase = nullptr;
+
+    _round_number = nullptr;
+    _trick_number = nullptr;
+    _starting_player_idx = nullptr;
+    _trick_starting_player_idx = nullptr;
+    _current_player_idx = nullptr;
+    _trump_color = nullptr;
+    _trick_estimate_sum = nullptr;
 }
 
 // accessors
