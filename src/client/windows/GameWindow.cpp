@@ -26,8 +26,8 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     // Add stretchable space to fill space in statusbar
     statusSizer->AddStretchSpacer(1);
 
-    statusSizer->Add(_settingsButton, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    statusSizer->Add(_rulesButton, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    statusSizer->Add(_settingsButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    statusSizer->Add(_rulesButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     _statusBar->SetSizer(statusSizer);
     _statusBar->Layout();
 
