@@ -75,6 +75,7 @@ public:
     bool is_full() const;
     bool is_started() const;
     bool is_finished() const;
+    bool is_estimation_phase() const;
     bool is_player_in_game(player* player) const;
     std::vector<player*>& get_players();
     int get_round_number() const;
@@ -83,6 +84,8 @@ public:
     int get_max_round_number() const;
     int get_trump_color() const;
     player* get_current_player() const;
+    player* get_trick_starting_player() const;
+    player* get_starting_player() const;
     trick* get_trick() const;
 
 

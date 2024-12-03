@@ -98,6 +98,22 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
+player* game_state::get_trick_starting_player() const
+{
+    if(_trick_starting_player_idx == nullptr || _players.empty()) {
+        return nullptr;
+    }
+    return _players[_trick_starting_player_idx->get_value()];
+}
+
+player* game_state::get_starting_player() const
+{
+    if(_starting_player_idx == nullptr || _players.empty()) {
+        return nullptr;
+    }
+    return _players[_starting_player_idx->get_value()];
+}
+
 trick* game_state::get_trick() const
 {
     return _trick;
@@ -114,6 +130,11 @@ bool game_state::is_started() const {
 
 bool game_state::is_finished() const {
     return _is_finished->get_value();
+}
+
+bool game_state::is_estimation_phase() const
+{
+    return _is_estimation_phase->get_value();
 }
 
 int game_state::get_round_number() const {

@@ -12,7 +12,6 @@
 // initialize static members
 GameWindow* GameController::_gameWindow = nullptr;
 ConnectionPanel* GameController::_connectionPanel = nullptr;
-MainGamePanel* GameController::_mainGamePanel = nullptr;
 MainGamePanelWizard* GameController::_mainGamePanelWizard = nullptr;
 TrickEstimationPanel* GameController::_trickEstimationPanel = nullptr;
 
@@ -28,13 +27,13 @@ void GameController::init(GameWindow* gameWindow) {
 
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
-    GameController::_mainGamePanel = new MainGamePanel(gameWindow);
+    //GameController::_mainGamePanel = new MainGamePanel(gameWindow);
     GameController::_mainGamePanelWizard = new MainGamePanelWizard(gameWindow);
     GameController::_trickEstimationPanel = new TrickEstimationPanel(gameWindow);
 
     // Hide all panels
     GameController::_connectionPanel->Show(false);
-    GameController::_mainGamePanel->Show(false);
+    //GameController::_mainGamePanel->Show(false);
     GameController::_mainGamePanelWizard->Show(false);
     GameController::_trickEstimationPanel->Show(false);
 
@@ -76,7 +75,7 @@ void GameController::connectToServer() {
         GameController::showError("Connection error", "Invalid port");
         return;
     }
-    uint16_t port = (uint16_t) portAsLong;
+    auto port = static_cast<uint16_t>(portAsLong);
 
     // convert player name from wxString to std::string
     std::string playerName = inputPlayerName.ToStdString();
@@ -102,40 +101,44 @@ void GameController::updateGameState(game_state* newGameState) {
 
     if(oldGameState != nullptr) {
 
-        // check if a new round started, and display message accordingly
-        if(oldGameState->get_round_number() >= 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
-            /*
-            GameController::showStatus("Round " + std::to_string(newGameState->get_round_number()));
-            if(oldGameState->get_round_number() > 0)
+        if(GameController::_currentGameState->is_finished()) {
+            GameController::showGameOverMessage();
+        }
+        else if(GameController::_currentGameState->is_started())
+        {
+            int round_number = _currentGameState->get_round_number();
+
+            if(round_number != oldGameState->get_round_number())
             {
-                GameController::showNewRoundMessage(oldGameState, newGameState);
+                // new round has started
+                showNewRoundMessage(oldGameState, newGameState);
+                showStatus("Round " + std::to_string(newGameState->get_round_number()));
             }
-            GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
-            GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
-            GameController::estimateTrick();
-            */
+
+            // estimation phase
+            if(GameController::_currentGameState->is_estimation_phase()) {
+                GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
+                GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
+                GameController::estimateTrick();
+            }
+
+            // end of trick
+            if(_currentGameState->get_trick_number() != oldGameState->get_trick_number())
+            {
+                showTrickOverMessage();
+            }
         }
 
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }
 
-    if(GameController::_currentGameState->is_finished()) {
-        GameController::showGameOverMessage();
-    }
 
-    /*
+
+    // make sure we are showing the main game panel in the window (if we are already showing it, nothing will happen)
     GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
     GameController::_mainGamePanelWizard->buildGameState(GameController::_currentGameState, GameController::_me);
-    */
 
-    /*
-    // make sure we are showing the main game panel in the window (if we are already showing it, nothing will happen)
-    GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
-
-    // command the main game panel to rebuild itself, based on the new game state
-    GameController::_mainGamePanel->buildGameState(GameController::_currentGameState, GameController::_me);
-    */
 }
 
 
@@ -176,11 +179,12 @@ void GameController::estimateTrick()
     int trickEstimateInt;
     if (trickEstimate.ToLong(&trickEstimateValue)) {
         trickEstimateInt = static_cast<int>(trickEstimateValue);
+        GameController::estimateTricks(trickEstimateInt);
     } else {
         // Handle the error: the string was not a valid integer
         GameController::showError("Invalid input!"," Please enter a valid number for the trick estimate.");
     }
-    GameController::estimateTricks(trickEstimateInt);
+
     /*
     std::string title = "How many tricks?";
     std::string message = "Enter estimated number of tricks";
@@ -218,17 +222,17 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     std::string title = "Round Completed";
     std::string message = "The players gained the following minus points:\n";
     std::string buttonLabel = "Start next round";
-    /*
+
     // add the point differences of all players to the messages
     for(int i = 0; i < oldGameState->get_players().size(); i++) {
 
         player* oldPlayerState = oldGameState->get_players().at(i);
         player* newPlayerState = newGameState->get_players().at(i);
 
-        int scoreDelta = newPlayerState->get_score() - oldPlayerState->get_score();
+        int scoreDelta = newPlayerState->get_scores().back()->get_value() - oldPlayerState->get_scores().back()->get_value();
         std::string scoreText = std::to_string(scoreDelta);
         if(scoreDelta > 0) {
-            scoreText = "+" + scoreText;
+            scoreText.append(scoreText);
         }
 
         std::string playerName = newPlayerState->get_player_name();
@@ -238,11 +242,24 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
         message += "\n" + playerName + ":     " + scoreText;
     }
 
+    //TODO: what to do with these? Is message just going away or do you have to press okay
     //wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     //dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     //dialogBox.ShowModal();
-    */
-    ScoreDialog* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+
+    auto* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+    dialog->ShowModal();
+}
+
+void GameController::showTrickOverMessage()
+{
+    std::string title = "Trick Completed";
+    std::string message = " won the trick\n";
+
+    player* winner =  _currentGameState->get_trick_starting_player();
+    message = winner->get_player_name() + message;
+
+    auto dialog = new ScoreDialog(GameController::_gameWindow, title, message);
     dialog->ShowModal();
 }
 
@@ -251,19 +268,19 @@ void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
-    /*
+
     // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
-        return a->get_score() < b->get_score();
+        return a->get_scores().back()->get_value() < b->get_scores().back()->get_value();
     });
 
     // list all players
     for(int i = 0; i < players.size(); i++) {
 
         player* playerState = players.at(i);
-        std::string scoreText = std::to_string(playerState->get_score());
+        std::string scoreText = std::to_string(playerState->get_scores().back()->get_value());
 
         // first entry is the winner
         std::string winnerText = "";
@@ -281,7 +298,7 @@ void GameController::showGameOverMessage() {
         }
         message += "\n" + playerName + ":     " + scoreText + winnerText;
     }
-    */
+
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     int buttonClicked = dialogBox.ShowModal();

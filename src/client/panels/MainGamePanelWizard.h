@@ -13,7 +13,7 @@ public:
     void buildGameState(game_state* gameState, player* me);
 
 private:
-    void  buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
+    void buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildTurnIndicator(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player *me, int myPosition);
 

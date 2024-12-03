@@ -28,13 +28,13 @@ public:
     static void showError(const std::string& title, const std::string& message);
     static void showStatus(const std::string& message);
     static void showNewRoundMessage(game_state* oldGameState, game_state* newGameState);
+    static void showTrickOverMessage();
     static void showGameOverMessage();
-    static void showTrickEstimationPanel(int roundNumber);
 
 private:
     static GameWindow* _gameWindow;
     static ConnectionPanel* _connectionPanel;
-    static MainGamePanel* _mainGamePanel;
+    //static MainGamePanel* _mainGamePanel;
     static MainGamePanelWizard* _mainGamePanelWizard;
     static TrickEstimationPanel* _trickEstimationPanel;
 
