@@ -27,13 +27,11 @@ void GameController::init(GameWindow* gameWindow) {
 
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
-    //GameController::_mainGamePanel = new MainGamePanel(gameWindow);
     GameController::_mainGamePanelWizard = new MainGamePanelWizard(gameWindow);
     GameController::_trickEstimationPanel = new TrickEstimationPanel(gameWindow);
 
     // Hide all panels
     GameController::_connectionPanel->Show(false);
-    //GameController::_mainGamePanel->Show(false);
     GameController::_mainGamePanelWizard->Show(false);
     GameController::_trickEstimationPanel->Show(false);
 

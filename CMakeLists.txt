@@ -17,7 +17,6 @@ set(CLIENT_SOURCE_FILES
         src/client/windows/GameWindow.cpp src/client/windows/GameWindow.h
         src/client/uiElements/ImagePanel.cpp src/client/uiElements/ImagePanel.h
         src/client/panels/ConnectionPanel.cpp src/client/panels/ConnectionPanel.h
-        src/client/panels/MainGamePanel.cpp src/client/panels/MainGamePanel.h
         src/client/uiElements/InputField.cpp src/client/uiElements/InputField.h
         src/client/uiElements/ImagePanel.cpp src/client/uiElements/ImagePanel.h
         # network

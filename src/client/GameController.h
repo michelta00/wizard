@@ -3,7 +3,6 @@
 
 #include "windows/GameWindow.h"
 #include "panels/ConnectionPanel.h"
-#include "panels/MainGamePanel.h"
 #include "panels/MainGamePanelWizard.h"
 #include "panels/TrickEstimationPanel.h"
 #include "network/ResponseListenerThread.h"
@@ -34,7 +33,6 @@ public:
 private:
     static GameWindow* _gameWindow;
     static ConnectionPanel* _connectionPanel;
-    //static MainGamePanel* _mainGamePanel;
     static MainGamePanelWizard* _mainGamePanelWizard;
     static TrickEstimationPanel* _trickEstimationPanel;
 
