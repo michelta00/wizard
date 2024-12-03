@@ -122,7 +122,10 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
 
     std::vector<wxGBPosition> otherPlayerPositions;
 
-    if (numberOfPlayers == 3)
+    if (numberOfPlayers == 2) {
+        otherPlayerPositions = { wxGBPosition(0, 2)};
+    }
+    else if (numberOfPlayers == 3)
     {
         otherPlayerPositions = { wxGBPosition(0, 1),  wxGBPosition(0, 3)};
     }
