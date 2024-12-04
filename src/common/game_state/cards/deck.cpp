@@ -52,7 +52,12 @@ deck::deck() : unique_serializable()
         _all_cards.push_back(new card(0, 0));
     }
 
-    _remaining_cards = _all_cards;
+    // make a copy of _all_cards
+    _remaining_cards = std::vector<card*>();
+    for (card* & c : _all_cards)
+    {
+        _remaining_cards.push_back(new card(*c));
+    }
 }
 
 deck::~deck() {
