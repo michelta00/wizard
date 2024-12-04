@@ -2,9 +2,10 @@
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer gameplay!
 
 <div style="display: flex; align-items: center;">
-  <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="margin-right: 10px; width: 200px;"/>
-  <img src="./assets/cards.png" alt="Cards" style="width: 100px;"/>
+  <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="height: 150px; margin-right: 20px;">
+  <img src="./assets/cards.png" alt="Cards" style="height: 75px;">
 </div>
+
 
 
 ## 🚀 Features
