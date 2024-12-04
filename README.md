@@ -1,8 +1,11 @@
 # Wizard
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer gameplay!
 
-![Wizard Logo](./assets/wizard_logo.png)
-![Wizard Logo](./assets/cards.png)
+<div style="display: flex; align-items: center;">
+  <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="margin-right: 10px; width: 200px;"/>
+  <img src="./assets/cards.png" alt="Cards" style="width: 100px;"/>
+</div>
+
 
 ## 🚀 Features
 - 🌐 **Multiplayer Gameplay:** Play with up to 6 players.
