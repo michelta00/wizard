@@ -1,7 +1,8 @@
 # Wizard
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer gameplay!
 
----
+![Wizard Logo](./assets/wizard_logo.png)
+![Wizard Logo](./assets/wizard_logo.png)
 
 ## 🚀 Features
 - 🌐 **Multiplayer Gameplay:** Play with up to 6 players.
@@ -13,7 +14,6 @@ Welcome to **Wizard**, a C++ implementation of the classic card game. Compete wi
 You can read the game's rules [here](https://www.amigo.games/content/ap/rule/19420--031-2019-Wizard_Manual_002_LAYOUT[1].pdf). The implementation features a client/server architecture for multiplayer scenarios.
 It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) for object serialization, and [googletest](https://github.com/google/googletest) for the unit tests. 
 
-![Wizard-logo](./assets/wizard_logo.png?raw=true)
 
 ## 1. Compile instructions
 This project works on UNIX systems (Linux / MacOS). We recommend using [Ubuntu](https://ubuntu.com/#download), as it offers the easiest way to setup wxWidgets. Therefore, we explain installation only for Ubuntu systems. The following was tested on a Ubuntu 20.4 system, but should also work for earlier versions of Ubuntu.
