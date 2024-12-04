@@ -89,7 +89,12 @@ unsigned int deck::get_number_of_remaining_cards() const noexcept
 // state update functions
 void deck::setup_round()
 {
-    _remaining_cards = _all_cards;
+    // make a copy of _all_cards
+    _remaining_cards = std::vector<card*>();
+    for (card* & c : _all_cards)
+    {
+        _remaining_cards.push_back(new card(*c));
+    }
 }
 
 bool deck::draw_cards(const player* player, const int round_number, std::string& err)
