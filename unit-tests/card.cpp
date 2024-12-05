@@ -7,9 +7,13 @@
 #include "../src/common/game_state/cards/card.h"
 #include "../src/common/serialization/json_utils.h"
 
+class CardTest : public ::testing::Test {
+
+
+};
 
 // check proper initialization and getters
-TEST(CardTest, MakeCardGetMembers) {
+TEST_F(CardTest, MakeCardGetMembers) {
     card c_1(0,0);
     card c_2(14,0);
     card c_3(1,2);
@@ -37,7 +41,7 @@ TEST(CardTest, MakeCardGetMembers) {
 }
 
 // Serialization and subsequent deserialization must yield the same object
-TEST(CardTest, SerializationEquality) {
+TEST_F(CardTest, SerializationEquality) {
     card card_send(1,1);
     rapidjson::Document* json_send = card_send.to_json();
     std::string message = json_utils::to_string(json_send);
@@ -54,7 +58,7 @@ TEST(CardTest, SerializationEquality) {
 }
 
 // Deserializing an invalid string must throw a WizardException
-TEST(CardTest, SerializationException) {
+TEST_F(CardTest, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
     EXPECT_THROW(card::from_json(json), WizardException);
