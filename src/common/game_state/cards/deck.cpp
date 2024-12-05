@@ -52,12 +52,7 @@ deck::deck() : unique_serializable()
         _all_cards.push_back(new card(0, 0));
     }
 
-    // make a copy of _all_cards
-    _remaining_cards = std::vector<card*>();
-    for (card* & c : _all_cards)
-    {
-        _remaining_cards.push_back(new card(*c));
-    }
+    _remaining_cards = _all_cards;
 }
 
 deck::~deck() {
@@ -67,9 +62,6 @@ deck::~deck() {
     }
     _all_cards.clear();
     // delete _remaining_cards_vector
-    for (card* & _card : _remaining_cards) {
-        delete _card;
-    }
     _remaining_cards.clear();
 }
 
@@ -89,12 +81,7 @@ unsigned int deck::get_number_of_remaining_cards() const noexcept
 // state update functions
 void deck::setup_round()
 {
-    // make a copy of _all_cards
-    _remaining_cards = std::vector<card*>();
-    for (card* & c : _all_cards)
-    {
-        _remaining_cards.push_back(new card(*c));
-    }
+    _remaining_cards = _all_cards;
 }
 
 bool deck::draw_cards(const player* player, const int round_number, std::string& err)
