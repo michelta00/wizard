@@ -65,7 +65,7 @@ bool game_instance::start_game(player* player, std::string &err) {
     if (_game_state->start_game(err)) {
         // send state update to all other players
         full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
-        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
+        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player); // issue here
         modification_lock.unlock();
         return true;
     }
