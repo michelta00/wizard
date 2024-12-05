@@ -240,10 +240,10 @@ TEST_F(GameStateEstimateTrickTest, EstimateTricksRound1Invalid1)
     // make some invalid estimates
     ASSERT_FALSE(test_game_state->estimate_tricks(test_player3, error, 2));
     ASSERT_EQ(error, "Trick estimate is too big. You can't win more tricks than cards in your hand.");
-    ASSERT_EQ(test_player3->get_nof_predicted(), 0);
+    ASSERT_EQ(test_player3->get_nof_predicted(), -1);
     ASSERT_FALSE(test_game_state->estimate_tricks(test_player4, error, -1));
     ASSERT_EQ(error, "Trick estimate is too small. You can't win less than 0 tricks.");
-    ASSERT_EQ(test_player4->get_nof_predicted(), 0);
+    ASSERT_EQ(test_player4->get_nof_predicted(), -1);
 }
 
 // test the estimate_tricks function with estimates that sum up to be the round number
@@ -263,7 +263,7 @@ TEST_F(GameStateEstimateTrickTest, EstimateTricksRound1Invalid2)
 
     // last player
     ASSERT_FALSE(test_game_state->estimate_tricks(test_player5, error, 1));
-    ASSERT_EQ(test_player5->get_nof_predicted(), 0);
+    ASSERT_EQ(test_player5->get_nof_predicted(), -1);
     ASSERT_EQ(error, "The tricks can't add up to the exact number of cards in the round. Please either choose a higher or lower number of tricks.");
     ASSERT_TRUE(test_game_state->estimate_tricks(test_player5, error, 0));
     ASSERT_EQ(test_player5->get_nof_predicted(), 0);
