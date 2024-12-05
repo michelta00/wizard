@@ -219,7 +219,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 
     if(gameState->is_started())
     {
-        const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards();
+        const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards_and_players();
             for (const auto& it : trickCards)
             {
                 card* card = it.first;
