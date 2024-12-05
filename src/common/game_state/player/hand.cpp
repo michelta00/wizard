@@ -1,4 +1,3 @@
-#include <ranges>
 #include "hand.h"
 
 #include <bits/ranges_util.h>
