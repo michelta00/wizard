@@ -1,7 +1,5 @@
 #include "hand.h"
 
-#include <bits/ranges_util.h>
-
 #include "../../exceptions/WizardException.h"
 #include "../../serialization/vector_utils.h"
 
@@ -16,10 +14,6 @@ hand::hand(const std::string& id, const std::vector<card*>& cards) : unique_seri
 }
 
 hand::~hand() {
-    for (auto & card : _cards) {
-        delete card;
-        card = nullptr;
-    }
     _cards.clear();
 }
 
