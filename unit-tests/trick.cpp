@@ -9,7 +9,7 @@
 #include "../src/common/game_state/cards/trick.h"
 #include "../src/common/serialization/json_utils.h"
 
-class trick_testing : public ::testing::Test
+class TrickTest : public ::testing::Test
 {
 protected:
     serializable_value<int>* trick_color = nullptr;
@@ -17,20 +17,10 @@ protected:
     trick* test_trick = nullptr;
     std::vector<std::pair<card*, player*>> cards_and_players;
 
-    //virtual void SetUp() {
-      //  serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
-        // serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
-      //   std::vector<std::pair<card*, player*>> cards_and_players;
-
-      //   card* test_card = new card(2, 4);
-      //   player* test_player = new player("vatkruidvat");
-       //  cards_and_players.push_back(std::make_pair(test_card, test_player));
-       //  test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
-
-   //  }
 
     // Delete dynamically allocated cards and players
-    virtual void TearDown() {
+    //NOT NEEDED, DESTRUCTION HANDLED IN TRICK CLASS!!
+    /*virtual void TearDown() {
         for (int i = 0; i < cards_and_players.size(); i++) {
             delete cards_and_players[i].first;   // delete the `card*`
             delete cards_and_players[i].second;  // delete the `player*`
@@ -38,13 +28,13 @@ protected:
         delete trick_color;
         delete trump_color;
         cards_and_players.clear();
-    }
+    }*/
 };
 
 //note about cards: 1-13 are number cards (x4), 0 are jester cards (x4), 14 are wizard cards (x4)
 //note about trick color setup: if trick color == 0, it means the trick color has not been set yet. if first card is a wizard, it's set to -1
 //
-TEST_F(trick_testing, CreateAndChangeTrick) {
+TEST_F(TrickTest, CreateAndChangeTrick) {
     trick_color = new serializable_value<int>(2); //trick color is 2
     trump_color = new serializable_value<int>(3);
 
@@ -71,7 +61,7 @@ TEST_F(trick_testing, CreateAndChangeTrick) {
 
 // scoring scenarios
 // have any card be a wizard --> wins
-TEST_F(trick_testing, OneWizard)
+TEST_F(TrickTest, OneWizard)
 {
     trick_color = new serializable_value<int>(0); // trick color is 0
     trump_color = new serializable_value<int>(3);// trump color is 3
@@ -86,7 +76,6 @@ TEST_F(trick_testing, OneWizard)
     player* player3 = new player("Player_3");
     player* player4 = new player("Player_4");
 
-    // Initialize cards_and_players using {} notation
      std::vector<std::pair<card*, player*>> cards_and_players = {
         {card1, player1},
         {card2, player2},
@@ -103,7 +92,7 @@ TEST_F(trick_testing, OneWizard)
 }
 
 //first wizard card wins
-TEST_F(trick_testing, AllWizards)
+TEST_F(TrickTest, AllWizards)
 {
     trick_color = new serializable_value<int>(0); // trick color is 0
     trump_color = new serializable_value<int>(3); // trump color is 3
@@ -135,7 +124,7 @@ TEST_F(trick_testing, AllWizards)
 
 
 //first card is a jester --> wins only if everyone plays a jester, otherwise the jester looses
-TEST_F(trick_testing, OneJesterHighestCard)
+TEST_F(TrickTest, OneJesterHighestCard)
 {
     trick_color = new serializable_value<int>(2); // trick color is 2
     trump_color = new serializable_value<int>(4);// trump color is 4
@@ -165,7 +154,7 @@ TEST_F(trick_testing, OneJesterHighestCard)
 }
 
 //first card is a jester, trump card wins
-TEST_F(trick_testing, OneJesterWithTrump)
+TEST_F(TrickTest, OneJesterWithTrump)
 {
     trick_color = new serializable_value<int>(2); // trick color is 2
     trump_color = new serializable_value<int>(4);// trump color is 4
@@ -198,7 +187,7 @@ TEST_F(trick_testing, OneJesterWithTrump)
 
 
 //first card is a jester, wizard card wins
-TEST_F(trick_testing, OneJesterWithWizard)
+TEST_F(TrickTest, OneJesterWithWizard)
 {
     trick_color = new serializable_value<int>(0); // trick color is 0
     trump_color = new serializable_value<int>(4);// trump color is 4
@@ -229,7 +218,7 @@ TEST_F(trick_testing, OneJesterWithWizard)
 }
 
 //first card is a jester, wizard card wins
-TEST_F(trick_testing, OneJesterWithWizardAndTrump)
+TEST_F(TrickTest, OneJesterWithWizardAndTrump)
 {
     trick_color = new serializable_value<int>(2); // trick color is 2
     trump_color = new serializable_value<int>(4);// trump color is 4
@@ -260,7 +249,7 @@ TEST_F(trick_testing, OneJesterWithWizardAndTrump)
 }
 
 //all jesters
-TEST_F(trick_testing, AllJesters)
+TEST_F(TrickTest, AllJesters)
 {
     trick_color = new serializable_value<int>(0); // trick color is 0
     trump_color = new serializable_value<int>(4);// trump color for this trick is 4
@@ -294,7 +283,7 @@ TEST_F(trick_testing, AllJesters)
 
 
 //highest trump card wins
-TEST_F(trick_testing, HighestTrump)
+TEST_F(TrickTest, HighestTrump)
 {
     trick_color = new serializable_value<int>(3); // trick color is 3
     trump_color = new serializable_value<int>(2);// trump color is 2
@@ -327,7 +316,7 @@ TEST_F(trick_testing, HighestTrump)
 
 
 //only trump played -> highest trump card wins
-TEST_F(trick_testing, OnlyTrump)
+TEST_F(TrickTest, OnlyTrump)
 {
     trick_color = new serializable_value<int>(1); // trick color is 1
     trump_color = new serializable_value<int>(1);// trump color is 1
@@ -358,7 +347,7 @@ TEST_F(trick_testing, OnlyTrump)
     EXPECT_EQ(cards_and_players[2].first->get_value(), 13); //third card should be a 13
 }
 // if no trump is played, the highest card wins
-TEST_F(trick_testing, NoTrump)
+TEST_F(TrickTest, NoTrump)
 {
     trick_color = new serializable_value<int>(1); // trick color is 1
     trump_color = new serializable_value<int>(3);// trump color is 3
@@ -388,7 +377,7 @@ TEST_F(trick_testing, NoTrump)
 }
 
 //check setup round
-TEST_F(trick_testing, SetupRound)
+TEST_F(TrickTest, SetupRound)
 {
     trick_color = new serializable_value<int>(1); // trick color is 1
     trump_color = new serializable_value<int>(3);// trump color is 3
@@ -420,7 +409,7 @@ TEST_F(trick_testing, SetupRound)
 }
 
 //check add card
-TEST_F(trick_testing, AddCard)
+TEST_F(TrickTest, AddCard)
 {
     int trump_color = 3;
     std::string err = "";
@@ -439,11 +428,12 @@ TEST_F(trick_testing, AddCard)
     //EXPECT_FALSE(test_trick->add_card(card2, player1, err));//card 2 is not in hand
     EXPECT_EQ(test_trick->get_cards_and_players(), cards_and_players); //check if player was added to cards_
 
+
 }
 
 
 //test a full round
-TEST_F(trick_testing, EntireRound)
+TEST_F(TrickTest, EntireRound)
 {
     int trump_color = 4;
     std::string err = "";
@@ -473,10 +463,8 @@ TEST_F(trick_testing, EntireRound)
 
     // Test adding a card not in the player's hand
     EXPECT_FALSE(test_trick->add_card(nullptr, player1, err));
-    //EXPECT_TRUE(test_trick->add_card(card3, player1, err)); // Card 3 belongs to player 3
-    // -> TODO rewrite this test to check if the right player has the right card
     // Test adding a null card
-    EXPECT_FALSE(test_trick->add_card(card4, player2, err)); //TODO can the player actually play a card she doesn't own? add check
+    EXPECT_FALSE(test_trick->add_card(card4, player2, err));
     EXPECT_EQ(err, "The desired card cannot be played");
 
     // Test adding a valid card from player 2
@@ -496,7 +484,7 @@ TEST_F(trick_testing, EntireRound)
 
 
 // Serialization and subsequent deserialization must yield the same object
-TEST_F(trick_testing, SerializationEquality) {
+TEST_F(TrickTest, SerializationEquality) {
     trick_color = new serializable_value<int>(2); //trick color is 2
     trump_color = new serializable_value<int>(3);
 
@@ -524,9 +512,10 @@ TEST_F(trick_testing, SerializationEquality) {
 }
 
 // Deserializing an invalid string must throw a WizardException
-TEST_F(trick_testing, SerializationException) {
+TEST_F(TrickTest, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
-    EXPECT_THROW(player::from_json(json), WizardException);
+    EXPECT_THROW(trick::from_json(json), WizardException);
 }
 
+//version 5.12 17:10

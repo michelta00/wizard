@@ -8,8 +8,11 @@
 #include "../src/common/game_state/player/player.h"
 #include "../src/common/serialization/json_utils.h"
 
+class PlayerTest : public ::testing::Test {
 
-TEST(PlayerTest, CreatePlayer)
+};
+
+TEST_F(PlayerTest, CreatePlayer)
 {
     std::string name =  "vatkruidvat";
     player test_player(name);
@@ -40,7 +43,7 @@ TEST(PlayerTest, CreatePlayer)
 
 }
 
-TEST(HandTest, RemoveFromEmptyHand)
+TEST_F(PlayerTest, RemoveFromEmptyHand)
 {
     std::string name =  "vatkruidvat";
 
@@ -60,7 +63,7 @@ TEST(HandTest, RemoveFromEmptyHand)
 
 }
 // checks add_card, get_nof_cards, remove card
-TEST(HandTest, HandWithOneCard)
+TEST_F(PlayerTest, HandWithOneCard)
 {
     std::string name =  "vatkruidvat";
 
@@ -90,7 +93,7 @@ TEST(HandTest, HandWithOneCard)
     //delete test_card;
 }
 
-TEST(HandTest, HandWithThreeCards)
+TEST_F(PlayerTest, HandWithThreeCards)
 {
     std::string name = "vatkruidvat";
     player test_player(name);
@@ -152,7 +155,7 @@ TEST(HandTest, HandWithThreeCards)
 //incorrect estimate -> -10 for each trick offset
 
 // tests if score is computed correctly if predicted tricks == collected tricks
-TEST(HandTest, WrapUpRoundBadPrediction)
+TEST_F(PlayerTest, WrapUpRoundBadPrediction)
 {
     std::string name =  "vatkruidvat";
 
@@ -176,7 +179,7 @@ TEST(HandTest, WrapUpRoundBadPrediction)
 }
 
 // tests if score is computed correctly if predicted tricks == collected tricks
-TEST(HandTest, WrapUpRoundGoodGameplay)
+TEST_F(PlayerTest, WrapUpRoundGoodGameplay)
 {
     std::string name =  "vatkruidvat";
 
@@ -202,7 +205,7 @@ TEST(HandTest, WrapUpRoundGoodGameplay)
 }
 
 // Serialization and subsequent deserialization must yield the same object
-TEST(CardTest, SerializationEquality) {
+TEST_F(PlayerTest, SerializationEquality) {
     std::string name =  "vatkruidvat";
     player player_send(name);
     player_send.set_scores(20);
@@ -231,7 +234,7 @@ TEST(CardTest, SerializationEquality) {
 }
 
 // Deserializing an invalid string must throw a WizardException
-TEST(CardTest, SerializationException) {
+TEST_F(PlayerTest, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
     EXPECT_THROW(player::from_json(json), WizardException);
