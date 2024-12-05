@@ -17,20 +17,10 @@ protected:
     trick* test_trick = nullptr;
     std::vector<std::pair<card*, player*>> cards_and_players;
 
-    //virtual void SetUp() {
-      //  serializable_value<int>* trick_color = new serializable_value<int>(2); // trick color is 2
-        // serializable_value<int>* trump_color = new serializable_value<int>(3);// trump color is 3
-      //   std::vector<std::pair<card*, player*>> cards_and_players;
-
-      //   card* test_card = new card(2, 4);
-      //   player* test_player = new player("vatkruidvat");
-       //  cards_and_players.push_back(std::make_pair(test_card, test_player));
-       //  test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
-
-   //  }
 
     // Delete dynamically allocated cards and players
-    virtual void TearDown() {
+    //NOT NEEDED, DESTRUCTION HANDLED IN TRICK CLASS!!
+    /*virtual void TearDown() {
         for (int i = 0; i < cards_and_players.size(); i++) {
             delete cards_and_players[i].first;   // delete the `card*`
             delete cards_and_players[i].second;  // delete the `player*`
@@ -38,7 +28,7 @@ protected:
         delete trick_color;
         delete trump_color;
         cards_and_players.clear();
-    }
+    }*/
 };
 
 //note about cards: 1-13 are number cards (x4), 0 are jester cards (x4), 14 are wizard cards (x4)
@@ -86,7 +76,6 @@ TEST_F(trick_testing, OneWizard)
     player* player3 = new player("Player_3");
     player* player4 = new player("Player_4");
 
-    // Initialize cards_and_players using {} notation
      std::vector<std::pair<card*, player*>> cards_and_players = {
         {card1, player1},
         {card2, player2},
@@ -439,6 +428,7 @@ TEST_F(trick_testing, AddCard)
     //EXPECT_FALSE(test_trick->add_card(card2, player1, err));//card 2 is not in hand
     EXPECT_EQ(test_trick->get_cards_and_players(), cards_and_players); //check if player was added to cards_
 
+
 }
 
 
@@ -473,10 +463,8 @@ TEST_F(trick_testing, EntireRound)
 
     // Test adding a card not in the player's hand
     EXPECT_FALSE(test_trick->add_card(nullptr, player1, err));
-    //EXPECT_TRUE(test_trick->add_card(card3, player1, err)); // Card 3 belongs to player 3
-    // -> TODO rewrite this test to check if the right player has the right card
     // Test adding a null card
-    EXPECT_FALSE(test_trick->add_card(card4, player2, err)); //TODO can the player actually play a card she doesn't own? add check
+    EXPECT_FALSE(test_trick->add_card(card4, player2, err));
     EXPECT_EQ(err, "The desired card cannot be played");
 
     // Test adding a valid card from player 2
@@ -527,6 +515,6 @@ TEST_F(trick_testing, SerializationEquality) {
 TEST_F(trick_testing, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
-    EXPECT_THROW(player::from_json(json), WizardException);
+    EXPECT_THROW(trick::from_json(json), WizardException);
 }
 
