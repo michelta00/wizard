@@ -86,10 +86,6 @@ void deck::setup_round()
 
 bool deck::draw_cards(const player* player, const int round_number, std::string& err)
 {
-
-    // draw randomly n indices from _remaining_cards by shuffling a vector of indices and then choosing the first
-    // n ones
-
     // check if round_number is within the range
     if (round_number > _remaining_cards.size()) {
         // should never be true since cards are only drawn by the server according to round number
@@ -97,43 +93,32 @@ bool deck::draw_cards(const player* player, const int round_number, std::string&
         err = "Cannot draw more cards than remaining.";
         return false;
     }
-
-    // create a vector of indices with size of _remaining_cards
-    std::vector<int> indices(_remaining_cards.size());
-    std::iota(indices.begin(), indices.end(), 0); // fill with 0, 1, ..., vec.size() - 1
-
+    if (round_number < 1) {
+        err = "Invalid number of rounds to draw.";
+        return false;
+    }
     // random device and generator
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::ranges::shuffle(indices, gen); // shuffle the indices
-
-    // take the first n indices
-    const std::vector<int> selected_indices(indices.begin(), indices.begin() + round_number);
-
-
-    // place cards at selected indices into the player's hand
-
-    // get the player's hand to place the cards in
+    // get player hand
     hand* hand = player->get_hand();
-
-    // loop over selected indices and add the corresponding cards to the player's hand
-    bool control = true;    // checks if all cards were successfully placed into the player's hand
-    for (const int & i : selected_indices)
-    {
+    for (int i = 0; i < round_number; ++i) {
+        // randomly select an index from remaining_cards
+        std::uniform_int_distribution<> dist(0, _remaining_cards.size() - 1);
+        int random_index = dist(gen);
+        // try to add card to player's hand
         if (!hand->add_card(_remaining_cards[i], err))
         {
             // card could not be placed into hand
-            control = false;
             err = "Could not place a new card into the player's hand";
+            return false;
         }
-        else
-        {
-            // card could be placed into hand and should be removed from _remaining_cards
-            _remaining_cards.erase(_remaining_cards.begin() + i);
-        }
+        // remove card from remaining_cards
+        _remaining_cards.erase(_remaining_cards.begin() + random_index);
     }
 
-    return control;
+
+    return true;
 }
 
 card* deck::draw_trump() const

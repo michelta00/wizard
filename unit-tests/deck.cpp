@@ -19,6 +19,7 @@ TEST(DeckTest, TrumpDraw) {
     deck mydeck;
     card* trump = mydeck.draw_trump();
     EXPECT_TRUE(trump);
+
 }
 
 // draw cards to player, make sure proper number of cards
@@ -45,7 +46,8 @@ TEST(DeckTest, DrawFinalCards) {
 
     // check card numbers
     ASSERT_EQ(mydeck.get_number_of_remaining_cards(), 0);
-    EXPECT_TRUE(mydeck.is_empty() == true);
+    ASSERT_EQ(err, "");
+    EXPECT_TRUE(mydeck.is_empty());
 
     // check hand
     ASSERT_EQ(player1->get_hand()->get_nof_cards(), 60);
