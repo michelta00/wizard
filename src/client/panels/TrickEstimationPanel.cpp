@@ -4,6 +4,11 @@
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
                                                                       wxSize(960, 680)){}
+TrickEstimationPanel::~TrickEstimationPanel()
+{
+    delete _trickEstimateField;
+    _trickEstimateField = nullptr;
+}
 
 void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 {
