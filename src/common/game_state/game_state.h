@@ -64,6 +64,7 @@ private:
 
     // returns the index of 'player' in the '_players' vector
     int get_player_index(player* player) const;
+    // TODO: these two functions are in the server part in cpp, where do they belong?
     int get_number_of_turns();
     void determine_trump_color();
 
@@ -77,7 +78,6 @@ public:
     bool is_finished() const;
     bool is_estimation_phase() const;
     bool is_player_in_game(player* player) const;
-    std::vector<player*>& get_players();
     int get_round_number() const;
     int get_trick_number() const;
     int get_trick_estimate_sum() const;
@@ -87,12 +87,12 @@ public:
     player* get_trick_starting_player() const;
     player* get_starting_player() const;
     trick* get_trick() const;
-
+    std::vector<player*>& get_players();
 
 
 // all in block behind ifdef is only included if wizard server is defined
 // TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 // server-side state update functions
     bool remove_player(player* player, std::string& err);
     bool add_player(player* player, std::string& err);
@@ -106,7 +106,7 @@ public:
     bool play_card(player* player, const std::string& card_id, std::string& err);
     bool update_current_player(std::string& err);
 
-#endif
+//#endif
 
 // serializable interface
     void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
