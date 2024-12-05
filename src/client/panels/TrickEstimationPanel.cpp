@@ -129,7 +129,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     mePanelSizer_hor->Add(playerName, 0, wxALIGN_CENTER);
 
     // if we have not submitted estimate yet
-    if (me->get_nof_tricks() == -1)
+    if (me->get_nof_predicted() == -1)
     {
         if (gameState->get_current_player() == me)
         {
