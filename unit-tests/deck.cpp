@@ -5,6 +5,7 @@
 #include "gtest/gtest.h"
 #include "../src/common/game_state/cards/deck.h"
 #include "../src/common/serialization/json_utils.h"
+#include "../src/common/exceptions/WizardException.h"
 
 // new deck must hold 60 cards
 TEST(DeckTest, Creation) {
@@ -81,7 +82,7 @@ TEST(DeckTest, Setup) {
 // Serialization and subsequent deserialization must yield the same object
 TEST(CardTest, SerializationEquality) {
     deck deck_send;
-    rapidjson::Document* json_send = deck_send().to_json();
+    rapidjson::Document* json_send = deck_send.to_json();
     std::string message = json_utils::to_string(json_send);
     delete json_send;
 

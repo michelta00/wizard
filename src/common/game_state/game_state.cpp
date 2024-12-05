@@ -70,12 +70,6 @@ game_state::game_state() : unique_serializable() {
 
 // destructor
 game_state::~game_state() {
-    /*
-    for (auto & player : _players) {
-        delete player;
-        player = nullptr;
-    }
-    */
     delete _deck;
     delete _trick;
 
@@ -115,6 +109,16 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
+bool game_state::is_estimation_phase() const
+{
+    return _is_estimation_phase->get_value();
+}
+
+int game_state::get_trump_color() const
+{
+    return _trump_color->get_value();
+}
+
 player* game_state::get_trick_starting_player() const
 {
     if(_trick_starting_player_idx == nullptr || _players.empty()) {
@@ -149,10 +153,6 @@ bool game_state::is_finished() const {
     return _is_finished->get_value();
 }
 
-bool game_state::is_estimation_phase() const
-{
-    return _is_estimation_phase->get_value();
-}
 
 int game_state::get_round_number() const {
     return _round_number->get_value();
@@ -189,14 +189,11 @@ std::vector<player*>& game_state::get_players() {
     return _players;
 }
 
-int game_state::get_trump_color() const {
-    return _trump_color->get_value();
-}
 
 
 
 //TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
-#ifdef WIZARD_SERVER
+//#ifdef WIZARD_SERVER
 
 // state modification functions without diff
 
@@ -280,7 +277,7 @@ int game_state::get_trump_color() const {
         _deck->setup_round();
         for (auto & player : _players) {
             player->setup_round();
-            _deck->draw_cards(player, _round_number->get_value(), err);
+            _deck->draw_cards(player, _round_number->get_value() + 1, err);
         }
         determine_trump_color();
         _trick->set_up_round(err, _trump_color->get_value());
@@ -314,7 +311,7 @@ int game_state::get_trump_color() const {
 
     bool game_state::estimate_tricks(player *player, std::string &err, int trick_estimate){
 
-        if (trick_estimate > get_round_number()) {
+        if (trick_estimate > get_round_number() + 1) {
             err = "Trick estimate is too big. You can't win more tricks than cards in your hand.";
             return false;
         }
@@ -323,12 +320,12 @@ int game_state::get_trump_color() const {
             return false;
         }
         if(get_number_of_turns() == this->_players.size() &&
-           trick_estimate + _trick_estimate_sum->get_value() == _round_number->get_value()) {
+           trick_estimate + _trick_estimate_sum->get_value() == _round_number->get_value() + 1) {
             err = "The tricks can't add up to the exact number of cards in the round. Please either choose a higher or lower number of tricks.";
             return false;
         }
 
-        player->set_nof_tricks(trick_estimate);
+        player->set_nof_predicted(trick_estimate);
         _trick_estimate_sum->set_value(trick_estimate + _trick_estimate_sum->get_value());
         return update_current_player(err); //handles logic to switch from estimation to playing round etc.
     }
@@ -377,10 +374,10 @@ int game_state::get_trump_color() const {
         card* card = nullptr;
         if (player->get_hand()->try_get_card(card_id, card) == false) { //also gives us card pointer
             err = "This card is not in your hand.";
-        return false;
+            return false;
         }
         if (!can_be_played(player, card, err)){
-          return false;
+            return false;
         }
 
         // play card
@@ -442,7 +439,7 @@ int game_state::get_trump_color() const {
         return true;
     }
 
-#endif
+//#endif
 
 
 // Serializable interface
@@ -506,8 +503,6 @@ void game_state::write_into_json(rapidjson::Value &json,
 
 }
 
-
-// TODO: implement that function
 game_state* game_state::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
         && json.HasMember("players")
