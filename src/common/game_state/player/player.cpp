@@ -5,9 +5,9 @@
 // constructor for client
 player::player(const std::string& name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_nof_predicted = new serializable_value<int>(-1);
+    this->_nof_predicted = new serializable_value<int>(0);
     this->_nof_tricks = new serializable_value<int>(0);
-    this->_scores = std::vector<serializable_value<int>*>();
+    this->_scores = std::vector<serializable_value<int>*>(0);
     this->_hand = new hand();
 
 }
@@ -32,15 +32,11 @@ player::~player() {
         delete _nof_predicted;
         delete _nof_tricks;
 
+
         _hand = nullptr;
         _player_name = nullptr;
         _nof_predicted = nullptr;
         _nof_tricks = nullptr;
-
-        for (auto score : _scores) {
-            delete score;
-        }
-        _scores.clear();
     }
 }
 
@@ -50,7 +46,7 @@ player::player(const std::string& id, const std::string& name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_scores = std::vector< serializable_value<int>*>();
+    this->_scores = std::vector< serializable_value<int>*>(0);
     this->_hand = new hand();
     this->_nof_predicted = new serializable_value<int>(0);
     this->_nof_tricks = new serializable_value<int>(0);
@@ -86,7 +82,7 @@ int player::get_nof_tricks() const noexcept
     return _nof_tricks->get_value();
 }
 
-void player::set_nof_tricks(const int nof_tricks) const
+void player::set_nof_tricks(const int nof_tricks)
 {
     _nof_tricks->set_value(nof_tricks);
 }
@@ -98,7 +94,7 @@ int player::get_nof_predicted() const noexcept
     return _nof_predicted->get_value();
 }
 
-void player::set_nof_predicted(const int nof_predicted) const
+void player::set_nof_predicted(const int nof_predicted)
 {
     _nof_predicted->set_value(nof_predicted);
 }
@@ -192,8 +188,8 @@ player* player::from_json(const rapidjson::Value &json) {
         return new player(
                 json["id"].GetString(),
                 serializable_value<std::string>::from_json(json["player_name"].GetObject()),
-                serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
                 serializable_value<int>::from_json(json["nof_tricks"].GetObject()),
+                serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
                 deserialized_scores,
                 hand::from_json(json["hand"].GetObject()));
     } else {

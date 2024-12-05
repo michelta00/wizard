@@ -10,14 +10,14 @@ class hand : public unique_serializable {
 private:
     std::vector<card*> _cards;
 
-    explicit hand(const std::string& id);
-    hand(const std::string& id, const std::vector<card*>& cards);
     card* remove_card(std::vector<card*>::iterator pos);
     card* remove_card(int idx);
     card* remove_card(card* card);
 
 public:
     hand();
+    hand(const std::string& id, const std::vector<card*>& cards);
+    explicit hand(const std::string& id);
     ~hand();
 
 

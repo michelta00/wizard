@@ -60,6 +60,8 @@ deck::~deck() {
     for (card* & _card : _all_cards) {
         delete _card;
     }
+    _all_cards.clear();
+    // delete _remaining_cards_vector
     _remaining_cards.clear();
 }
 

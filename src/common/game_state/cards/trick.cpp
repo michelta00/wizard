@@ -38,12 +38,14 @@ trick::~trick() {
 int trick::get_trick_color() const {
         return this->_trick_color->get_value();
 }
-
-std::vector<std::pair<card*, player*>> trick::get_cards() const
+int trick::get_trump_color() const
+{
+        return this->_trump_color->get_value();
+}
+std::vector<std::pair<card*, player*>> trick::get_cards_and_players() const
 {
         return this->_cards;
 }
-
 
 #ifdef WIZARD_SERVER
 // determines winner using trump color
@@ -84,7 +86,8 @@ player* trick::wrap_up_trick(std::string& err) {
         // highest card of trick color check
         int winner_idx = -1; // use a non joker idx;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i].first->get_value() == _trick_color->get_value())
+                //check if played card color matches trick color
+                if (_cards[i].first->get_color() == _trick_color->get_value())
                         if (winner_idx == -1 ||
                                 _cards[i].first->get_value()
                                 > _cards[winner_idx].first->get_value()) {
@@ -130,7 +133,7 @@ void trick::set_trick_color(int color) {
 //TODO write from json and to json
 
 // for creating updated instance of trick
-trick *trick::from_json(const rapidjson::Value &json) {
+trick* trick::from_json(const rapidjson::Value &json) {
         if (json.HasMember("id")
                 && json.HasMember("cards")
                 && json.HasMember("trump_color")
