@@ -14,7 +14,7 @@ class TrickEstimationPanel : public wxPanel{
 
 public:
     TrickEstimationPanel(wxWindow* parent);
-
+    ~TrickEstimationPanel();
     wxString getTrickEstimate();
     void buildGameState(game_state* gameState, player* me);
 private:
