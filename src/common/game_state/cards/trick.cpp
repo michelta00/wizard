@@ -90,7 +90,8 @@ player* trick::wrap_up_trick(std::string& err) {
         // highest card of trick color check
         int winner_idx = -1; // use a non joker idx;
         for (int i = 0; i < _cards.size(); i++) {
-                if (_cards[i].first->get_value() == _trick_color->get_value())
+                //check if played card color matches trick color
+                if (_cards[i].first->get_color() == _trick_color->get_value())
                         if (winner_idx == -1 ||
                                 _cards[i].first->get_value()
                                 > _cards[winner_idx].first->get_value()) {
