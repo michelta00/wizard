@@ -30,10 +30,6 @@ trick::trick(const int trump)
 
 
 trick::~trick() {
-        for (int i = 0; i < _cards.size(); i++) {
-                delete _cards[i].first;   // delete the `card*`
-                delete _cards[i].second;  // delete the `player*`
-        }
         delete _trick_color;
         delete _trump_color;
         _cards.clear();
@@ -104,10 +100,6 @@ player* trick::wrap_up_trick(std::string& err) {
 
 void trick::set_up_round(std::string& err, int trump) {
         // remove all cards (if any)
-        for (int i = 0; i < _cards.size(); i++) {
-                delete _cards[i].first;   // delete the `card*`
-                delete _cards[i].second;  // delete the `player*`
-        }
         _cards.clear();
         *_trump_color = trump;
         *_trick_color = 0;
