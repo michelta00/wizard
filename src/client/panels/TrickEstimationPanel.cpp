@@ -188,7 +188,7 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
     }
     else if (numberOfPlayers == 5)
     {
-        otherPlayerPositions = { wxGBPosition(0, 1), wxGBPosition(0, 0), wxGBPosition(0, 2), wxGBPosition(1, 2)};
+        otherPlayerPositions = { wxGBPosition(1, 0), wxGBPosition(0, 0), wxGBPosition(0, 2), wxGBPosition(1, 2)};
     }
     else if (numberOfPlayers == 6)
     {
