@@ -1,4 +1,4 @@
-# Wizard
+# Software Engineering Project - Wizard
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer gameplay!
 
 <div style="display: flex; align-items: center;">
@@ -18,11 +18,14 @@ Welcome to **Wizard**, a C++ implementation of the classic card game. Compete wi
 You can read the game's rules [here](https://www.amigo.games/content/ap/rule/19420--031-2019-Wizard_Manual_002_LAYOUT[1].pdf). The implementation features a client/server architecture for multiplayer scenarios.
 It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) for object serialization, and [googletest](https://github.com/google/googletest) for the unit tests. 
 
+##Overview 
 
-###  Overview
+The game and source files is available on GitLab on the main branch. The game was developed based on the provided LAMA example project game. This project consists of a **server** and a **client**, each with their own main.cpp file. Each player can run his client and connect to the server in the same local network.
 
-First off, this project consists of a **server** and a **client**, each with their own main.cpp file. 
-
+## 1 Compile Instructions
+## 2 Run the Game
+## 3 Play the Game
+### Connection Panel 
 The client renders the GUI that is presented to the player, whereas the server is a console application without a user interface. Every action a player performs in the client application (for example playing a card) is sent as a formatted message to the server application, which processes the request.   
 - If the **player's move was valid**, the server will update the game state (e.g. move a card from the player's hand to the discard pile) and broadcast this new game state to all players of the game. Whenever the client application receives a game state update, it will re-render the GUI accordingly and allow new interactions.   
 - If the **move was invalid**, the game state will not be updated and only the requesting player will get a response containing the error message. 
