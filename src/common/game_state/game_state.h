@@ -92,7 +92,7 @@ public:
 
 // all in block behind ifdef is only included if wizard server is defined
 // TODO: remove // before ifdef and endif below (if it is still there otherwise ignore this)
-//#ifdef WIZARD_SERVER
+#ifdef WIZARD_SERVER
 // server-side state update functions
     bool remove_player(player* player, std::string& err);
     bool add_player(player* player, std::string& err);
@@ -106,7 +106,7 @@ public:
     bool play_card(player* player, const std::string& card_id, std::string& err);
     bool update_current_player(std::string& err);
 
-//#endif
+#endif
 
 // serializable interface
     void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;

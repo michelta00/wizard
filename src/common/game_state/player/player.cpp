@@ -128,7 +128,12 @@ void player::setup_round()
 }
 
 void player::wrap_up_round() {
-    int new_score = _scores.back()->get_value();
+    int new_score = 0;
+    if (!_scores.empty())
+    {
+        new_score = _scores.back()->get_value();
+    }
+
     if (_nof_predicted->get_value() == _nof_tricks->get_value())
     {
         new_score += 20 + (10 * _nof_predicted->get_value());
