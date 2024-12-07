@@ -133,10 +133,10 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     //mePanelSizer_vert->Add(mePanelSizer_hor, 1, wxALIGN_CENTER);
 
     // add our name
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
 
-    // increase font size of the player
+    // increase font size of the player name
     wxFont font = playerName->GetFont(); // Get the current font of the wxStaticText
     font.SetPointSize(14);
     playerName->SetFont(font);

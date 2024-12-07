@@ -276,9 +276,15 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     meSizer_hor->Add(meSizer, 1, wxALIGN_BOTTOM);
 
     // add player name to the panel
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
-    meSizer->Add(playerName, 0, wxALIGN_CENTER);
+
+    // increase font size of the player
+    wxFont font = playerName->GetFont(); // Get the current font of the wxStaticText
+    font.SetPointSize(14);
+    playerName->SetFont(font);
+
+    meSizer->Add(playerName, 0, wxALIGN_CENTER|wxALL,10);
 
     if(!gameState->is_started())
     {
