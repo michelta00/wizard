@@ -82,7 +82,7 @@ TEST(DeckTest, Setup) {
 }
 
 // Serialization and subsequent deserialization must yield the same object
-TEST(CardTest, SerializationEquality) {
+TEST(DeckTest, SerializationEquality) {
     deck deck_send;
     rapidjson::Document* json_send = deck_send.to_json();
     std::string message = json_utils::to_string(json_send);
@@ -98,7 +98,7 @@ TEST(CardTest, SerializationEquality) {
 }
 
 // Deserializing an invalid string must throw a WizardException
-TEST(CardTest, SerializationException) {
+TEST(DeckTest, SerializationException) {
     rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
     json.Parse("not json");
     EXPECT_THROW(deck::from_json(json), WizardException);
