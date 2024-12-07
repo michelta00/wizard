@@ -107,7 +107,7 @@ bool deck::draw_cards(const player* player, const int round_number, std::string&
         std::uniform_int_distribution<> dist(0, _remaining_cards.size() - 1);
         int random_index = dist(gen);
         // try to add card to player's hand
-        if (!hand->add_card(_remaining_cards[i], err))
+        if (!hand->add_card(_remaining_cards[random_index], err))
         {
             // card could not be placed into hand
             err = "Could not place a new card into the player's hand";
