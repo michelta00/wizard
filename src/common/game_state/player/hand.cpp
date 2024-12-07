@@ -1,5 +1,5 @@
 #include "hand.h"
-
+#include <ranges>
 #include "../../exceptions/WizardException.h"
 #include "../../serialization/vector_utils.h"
 

@@ -117,6 +117,8 @@ void GameController::updateGameState(game_state* newGameState) {
             if(GameController::_currentGameState->is_estimation_phase()) {
                 GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
                 GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
+                delete oldGameState;
+                return;
             }
 
             // end of trick

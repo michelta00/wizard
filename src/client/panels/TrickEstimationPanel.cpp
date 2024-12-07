@@ -87,6 +87,8 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     //assign sizer to MainGamewindow
     this->SetSizer(mainSizer);
 
+    this->buildCenter(sizer, gameState);
+
     this->buildThisPlayer(sizer, gameState, me);
 
     this->buildOtherPlayers(sizer, gameState, myPosition);
@@ -162,11 +164,11 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     else
     {
         // display the number of tricks
-        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_tricks()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         estimatedTricks->SetForegroundColour(*wxWHITE);
         mePanelSizer_hor->Add(estimatedTricks, 0, wxALIGN_CENTER);
     }
-    mePanel->SetSizer(mePanelSizer_hor);
+    // mePanel->SetSizer(mePanelSizer_hor);
 }
 
 void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, int myPosition)
@@ -201,7 +203,7 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
 
-        player* otherPlayer = players.at((myPosition + i) % numberOfPlayers);
+        player* otherPlayer = players.at((myPosition + i +1) % numberOfPlayers);
 
         // display name
         wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
@@ -217,7 +219,7 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         }
         else
         {
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_tricks()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
             playerNameText->SetForegroundColour(*wxWHITE);
             playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
         }

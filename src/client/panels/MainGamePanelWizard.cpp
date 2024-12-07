@@ -332,7 +332,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
 
                 card *handCard = me->get_hand()->get_cards().at(i);
 
-                std::string cardFile = "assets/wizard_" + std::to_string(handCard->get_value()) + "_" + std::to_string(handCard->get_color())  + ".png";
+                std::string cardFile = "assets/card_" + std::to_string(handCard->get_value()) + "_" + std::to_string(handCard->get_color())  + ".png";
 
                 ImagePanel *cardButton = new ImagePanel(cardPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
