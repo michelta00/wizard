@@ -135,6 +135,12 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     // add our name
     wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
+
+    // increase font size of the player
+    wxFont font = playerName->GetFont(); // Get the current font of the wxStaticText
+    font.SetPointSize(14);
+    playerName->SetFont(font);
+
     mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
 
     // if we have not submitted estimate yet
@@ -143,10 +149,14 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
         if (gameState->get_current_player() == me)
         {
             // add input field for trick estimate
+            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick Estimate:",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            inputLabel->SetForegroundColour(*wxWHITE);
+            mePanelSizer_vert->Add(inputLabel, 0, wxALIGN_CENTER);
 
-            this->_trickEstimateField = new InputField(mePanel, "", 100, "", 80);
+
+            this->_trickEstimateField = new InputField(mePanel, "", 0, "", 80);
             this->_trickEstimateField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
-            mePanelSizer_vert->Add(_trickEstimateField, 0, wxALL | wxEXPAND, 10);
+            mePanelSizer_vert->Add(_trickEstimateField, 0, wxALIGN_CENTER|wxALL, 10);
 
             // show button that allows our player to start the game
             wxButton* submitEstimateButton = new wxButton(mePanel, wxID_ANY, "Submit", wxDefaultPosition, wxSize(80, 32));
