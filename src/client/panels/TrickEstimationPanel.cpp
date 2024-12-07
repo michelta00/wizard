@@ -105,6 +105,8 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     centerPanel->SetSizer(centerPanelSizer_vert);
     auto centerPanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
     centerPanelSizer_vert->Add(centerPanelSizer_hor, 1, wxALIGN_CENTER);
+    auto centerPanelSizer_vert2 = new wxBoxSizer(wxVERTICAL);
+    centerPanelSizer_hor->Add(centerPanelSizer_vert2, 1, wxALIGN_CENTER);
 
     // add round number
     wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()) + "!",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
@@ -114,8 +116,8 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     trickSum->SetForegroundColour(*wxWHITE);
 
 
-    centerPanelSizer_hor->Add(roundNumber, 0, wxALIGN_CENTER);
-    centerPanelSizer_hor->Add(trickSum, 0, wxALIGN_CENTER);
+    centerPanelSizer_vert2->Add(roundNumber, 0, wxALIGN_CENTER);
+    centerPanelSizer_vert2->Add(trickSum, 0, wxALIGN_CENTER);
 
 }
 
@@ -127,13 +129,13 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     // define the sizers for alignment
     auto mePanelSizer_vert = new wxBoxSizer(wxVERTICAL);
     mePanel->SetSizer(mePanelSizer_vert);
-    auto mePanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
-    mePanelSizer_vert->Add(mePanelSizer_hor, 1, wxALIGN_CENTER);
+    //auto mePanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    //mePanelSizer_vert->Add(mePanelSizer_hor, 1, wxALIGN_CENTER);
 
     // add our name
     wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
-    mePanelSizer_hor->Add(playerName, 0, wxALIGN_CENTER);
+    mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
 
     // if we have not submitted estimate yet
     if (me->get_nof_predicted() == -1)
@@ -141,22 +143,23 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
         if (gameState->get_current_player() == me)
         {
             // add input field for trick estimate
-            this->_trickEstimateField = new InputField(mePanel, "Trick estimate:", 100, "", 240);
+
+            this->_trickEstimateField = new InputField(mePanel, "", 100, "", 80);
             this->_trickEstimateField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
-            mePanelSizer_hor->Add(_trickEstimateField, 0, wxALL | wxEXPAND, 10);
+            mePanelSizer_vert->Add(_trickEstimateField, 0, wxALL | wxEXPAND, 10);
 
             // show button that allows our player to start the game
             wxButton* submitEstimateButton = new wxButton(mePanel, wxID_ANY, "Submit", wxDefaultPosition, wxSize(80, 32));
             submitEstimateButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
                 GameController::estimateTrick();
             });
-            mePanelSizer_hor->Add(submitEstimateButton,0,wxALIGN_CENTER);
+            mePanelSizer_vert->Add(submitEstimateButton,0,wxALIGN_CENTER);
         }
         else
         {
             wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
             playerName->SetForegroundColour(*wxWHITE);
-            mePanelSizer_hor->Add(playerName, 0, wxALIGN_CENTER);
+            mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
         }
     }
 
@@ -166,7 +169,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
         // display the number of tricks
         wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         estimatedTricks->SetForegroundColour(*wxWHITE);
-        mePanelSizer_hor->Add(estimatedTricks, 0, wxALIGN_CENTER);
+        mePanelSizer_vert->Add(estimatedTricks, 0, wxALIGN_CENTER);
     }
     // mePanel->SetSizer(mePanelSizer_hor);
 }
