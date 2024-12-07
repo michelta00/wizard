@@ -46,7 +46,7 @@ player::player(const std::string& id, const std::string& name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_scores = std::vector< serializable_value<int>*>(0);
+    this->_scores = std::vector<serializable_value<int>*>(1, new serializable_value<int>(0));
     this->_hand = new hand();
     this->_nof_predicted = new serializable_value<int>(-1);
     this->_nof_tricks = new serializable_value<int>(0);
