@@ -19,7 +19,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     auto mainSizer = new wxBoxSizer(wxVERTICAL);
     // child panel
     wxPanel *panel = new wxPanel(this, wxID_ANY);
-    this->SetBackgroundColour(wxColour(100,100,100));
+    this->SetBackgroundColour(wxColour(102,0,51));
 
     this->SetMinSize(wxSize(960, 680));
 
@@ -66,7 +66,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
         auto p = new wxPanel(panel, wxID_ANY, wxDefaultPosition);
         p->SetMinSize(wxSize(minWidth,minHeight));
         p->SetBackgroundColour(wxColour(102,0,51));
-        sizer->Add(p, item.first, item.second, wxEXPAND,1);
+        sizer->Add(p, item.first, item.second, wxEXPAND|wxALL,5);
     }
 
 
@@ -207,8 +207,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     // define the sizers for alignment
     auto mePanelSizer_vert = new wxBoxSizer(wxVERTICAL);
     mePanel->SetSizer(mePanelSizer_vert);
-    //auto mePanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
-    //mePanelSizer_vert->Add(mePanelSizer_hor, 1, wxALIGN_CENTER);
+    mePanel->SetBackgroundColour(wxColour(120,0,51));
 
     // add our name
     wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
@@ -226,6 +225,8 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     {
         if (gameState->get_current_player() == me)
         {
+            mePanel->SetBackgroundColour(wxColour(50,0,51));
+
             // add input field for trick estimate
             wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick Estimate:",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
             inputLabel->SetForegroundColour(*wxWHITE);
@@ -294,6 +295,8 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
 
+        panel->SetBackgroundColour(wxColour(120,0,51));
+
         player* otherPlayer = players.at((myPosition + i +1) % numberOfPlayers);
 
         // display name
@@ -305,12 +308,22 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         font.SetPointSize(14);
         playerNameText->SetFont(font);
 
-        playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
+        playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER|wxTOP, 5);
 
         // display estimated tricks
         if (otherPlayer->get_nof_predicted() == -1)
         {
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            std::string statusText;
+
+            if (otherPlayer == gameState->get_current_player()){
+                statusText = "estimating...";
+                panel->SetBackgroundColour(wxColour(50,0,51));
+            }
+            else{
+                statusText = "waiting...";
+            }
+
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, statusText,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
             playerNameText->SetForegroundColour(*wxWHITE);
             playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
         }

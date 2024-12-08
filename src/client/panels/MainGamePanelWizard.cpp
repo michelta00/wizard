@@ -16,7 +16,7 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     auto mainSizer = new wxBoxSizer(wxVERTICAL);
     // child panel
     wxPanel *panel = new wxPanel(this, wxID_ANY);
-    this->SetBackgroundColour(wxColour(100,100,100));
+    this->SetBackgroundColour(wxColour(102,0,51));
 
     this->SetMinSize(wxSize(960, 680));
 
@@ -62,8 +62,8 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     }
 
     // specify minimum size of the panels
-    int minWidth = MainGamePanelWizard::panelSize.GetWidth()/5;
-    int minHeight = MainGamePanelWizard::panelSize.GetHeight()/5;
+    int minWidth = MainGamePanelWizard::panelSize.GetWidth()/5 - 10;
+    int minHeight = MainGamePanelWizard::panelSize.GetHeight()/5 - 10;
 
     // fill the gridsizer with panels and set the minimum size accordingly
     for (auto &item : items)
@@ -150,6 +150,8 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
 
+        panel->SetBackgroundColour(wxColour(120,0,51));
+
         // get other player
         player* otherPlayer = players.at((myPosition + i + 1) % numberOfPlayers);
 
@@ -168,7 +170,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         wxStaticText* statusText = new wxStaticText(panel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         statusText->SetForegroundColour(*wxWHITE);
 
-        playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER);
+        playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER|wxTOP, 5);
         playerSizer_vert->Add(statusText,0,wxALIGN_CENTER);
         }
         // game started: display names, predicted and scored tricks
@@ -180,7 +182,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         wxStaticText* trickText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_tricks()) + "/" +  std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         trickText->SetForegroundColour(*wxWHITE);
 
-        playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER);
+        playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER|wxTOP,5);
         playerSizer_vert->Add(trickText,0,wxALIGN_CENTER);
         }
 
@@ -279,7 +281,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
 {
     wxGBSizerItem* meItem = sizer->FindItemAtPosition(wxGBPosition(3,2));
     wxPanel* mePanel = dynamic_cast<wxPanel*>(meItem->GetWindow());
-    mePanel->SetBackgroundColour(wxColour(0,0,0));
+    mePanel->SetBackgroundColour(wxColour(120,0,51));
 
     // create sizer to align elements at bottom center
     wxBoxSizer* meSizer_hor = new wxBoxSizer(wxHORIZONTAL);
@@ -319,7 +321,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
             startGameButton->SetForegroundColour(*wxWHITE);
         }
 
-        meSizer->Add(startGameButton,0,wxALIGN_CENTER);
+        meSizer->Add(startGameButton,0,wxALIGN_CENTER|wxALL, 5);
     }
     else
     {
