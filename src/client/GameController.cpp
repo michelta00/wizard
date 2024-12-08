@@ -218,7 +218,7 @@ void GameController::showStatus(const std::string& message) {
 
 void GameController::showNewRoundMessage(game_state* oldGameState, game_state* newGameState) {
     std::string title = "Round Completed";
-    std::string message = "The players gained the following minus points:\n";
+    std::string message = "The players gained the following points:\n";
     std::string buttonLabel = "Start next round";
 
     // add the point differences of all players to the messages
@@ -230,7 +230,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
         int scoreDelta = newPlayerState->get_scores().back()->get_value() - oldPlayerState->get_scores().back()->get_value();
         std::string scoreText = std::to_string(scoreDelta);
         if(scoreDelta > 0) {
-            scoreText.append(scoreText);
+            scoreText = "+" + scoreText;
         }
 
         std::string playerName = newPlayerState->get_player_name();
