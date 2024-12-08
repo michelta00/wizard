@@ -127,7 +127,6 @@ void GameController::updateGameState(game_state* newGameState) {
                 showTrickOverMessage();
             }
         }
-
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }

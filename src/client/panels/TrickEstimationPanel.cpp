@@ -219,8 +219,14 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         player* otherPlayer = players.at((myPosition + i +1) % numberOfPlayers);
 
         // display name
-        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 25), wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
+
+        // increase font size of the player name
+        wxFont font = playerNameText->GetFont(); // Get the current font of the wxStaticText
+        font.SetPointSize(14);
+        playerNameText->SetFont(font);
+
         playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
 
         // display estimated tricks

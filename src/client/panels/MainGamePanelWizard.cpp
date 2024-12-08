@@ -156,8 +156,14 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         // Lobby: display names
         if(!gameState->is_started())
         {
-        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 25), wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
+
+        // increase font size of the player name
+        wxFont font = playerNameText->GetFont(); // Get the current font of the wxStaticText
+        font.SetPointSize(14);
+        playerNameText->SetFont(font);
+
 
         wxStaticText* statusText = new wxStaticText(panel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         statusText->SetForegroundColour(*wxWHITE);
@@ -209,7 +215,6 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 {
     wxGBSizerItem* trickItem = sizer->FindItemAtPosition(wxGBPosition(1,1));
     wxPanel* trickPanel = dynamic_cast<wxPanel*>(trickItem->GetWindow());
-    trickPanel->SetBackgroundColour(wxColour(100,100,100));
 
     // define the sizers for alignment
     auto trickPanelSizer_vert = new wxBoxSizer(wxVERTICAL);
@@ -219,6 +224,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 
     if(gameState->is_started())
     {
+        trickPanel->SetBackgroundColour(wxColour(100,100,100));
         const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards_and_players();
             for (const auto& it : trickCards)
             {
@@ -227,6 +233,12 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
                 ImagePanel* cardPanel = new ImagePanel(trickPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
                 trickPanelSizer_hor->Add(cardPanel, 0, wxALIGN_CENTER | wxALL, -15);
             }
+    }
+    // if game has not started yet display picture in the lobby
+    else{
+        std::string wizardLogoImage = "assets/Wizard_round.png";
+        ImagePanel* wizardLogo = new ImagePanel(trickPanel, wizardLogoImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, wxSize(130,116.6));
+        trickPanelSizer_hor->Add(wizardLogo, 0, wxALIGN_CENTER );
     }
 }
 
@@ -276,7 +288,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     meSizer_hor->Add(meSizer, 1, wxALIGN_BOTTOM);
 
     // add player name to the panel
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 25), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
 
     // increase font size of the player
@@ -284,20 +296,30 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     font.SetPointSize(14);
     playerName->SetFont(font);
 
-    meSizer->Add(playerName, 0, wxALIGN_CENTER|wxALL,10);
+    meSizer->Add(playerName, 0, wxALIGN_CENTER);
 
     if(!gameState->is_started())
     {
         // add status text (waiting)
         wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, "waiting for the game to start",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         playerScore->SetForegroundColour(*wxWHITE);
-        meSizer->Add(playerScore, 0, wxALIGN_CENTER);
+        meSizer->Add(playerScore, 0, wxALIGN_CENTER|wxALL,5);
 
         // show button that allows our player to start the game
         wxButton* startGameButton = new wxButton(mePanel, wxID_ANY, "Start Game!", wxDefaultPosition, wxSize(80, 32));
         startGameButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
             GameController::startGame();
         });
+
+        // change color of the button as soon as there are 3 players
+        std::vector<player*> players = gameState->get_players();
+        int numberOfPlayers = players.size();
+
+        if (numberOfPlayers >= 3) {
+            startGameButton->SetBackgroundColour(wxColor(34,139,34));
+            startGameButton->SetForegroundColour(*wxWHITE);
+        }
+
         meSizer->Add(startGameButton,0,wxALIGN_CENTER);
     }
     else
