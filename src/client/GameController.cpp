@@ -110,7 +110,7 @@ void GameController::updateGameState(game_state* newGameState) {
             {
                 // new round has started
                 showNewRoundMessage(oldGameState, newGameState);
-                showStatus("Round " + std::to_string(newGameState->get_round_number()));
+                showStatus("Round " + std::to_string(newGameState->get_round_number() + 1));
             }
 
             // estimation phase

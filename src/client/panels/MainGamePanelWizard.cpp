@@ -300,12 +300,12 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     if(!gameState->is_started())
     {
         // add status text (waiting)
-        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, "waiting for the game to start",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, "Waiting for the game to start",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         playerScore->SetForegroundColour(*wxWHITE);
         meSizer->Add(playerScore, 0, wxALIGN_CENTER|wxALL,5);
 
         // show button that allows our player to start the game
-        wxButton* startGameButton = new wxButton(mePanel, wxID_ANY, "Start Game!", wxDefaultPosition, wxSize(80, 32));
+        wxButton* startGameButton = new wxButton(mePanel, wxID_ANY, "Start Game!", wxDefaultPosition, wxSize(100, 32));
         startGameButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
             GameController::startGame();
         });

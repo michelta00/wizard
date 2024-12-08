@@ -187,10 +187,10 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     centerPanelSizer_hor->Add(centerPanelSizer_vert2, 1, wxALIGN_CENTER);
 
     // add round number
-    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()+1) + "!",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     roundNumber->SetForegroundColour(*wxWHITE);
 
-    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current sum: " + std::to_string(gameState->get_trick_estimate_sum()),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum: " + std::to_string(gameState->get_trick_estimate_sum()),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     trickSum->SetForegroundColour(*wxWHITE);
 
 
