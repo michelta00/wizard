@@ -230,7 +230,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
                 card* card = it.first;
                 std::string cardImage = "assets/card_" + std::to_string(card->get_value()) + "_" + std::to_string(card->get_color()) + ".png";
                 ImagePanel* cardPanel = new ImagePanel(trickPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
-                trickPanelSizer_hor->Add(cardPanel, 0, wxALIGN_CENTER | wxALL, -15);
+                trickPanelSizer_hor->Add(cardPanel, 0, wxALIGN_CENTER | wxALL, -10);
             }
     }
     // if game has not started yet display picture in the lobby
