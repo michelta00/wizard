@@ -1,4 +1,5 @@
 #include "TrickEstimationPanel.h"
+#include "../uiElements/ImagePanel.h"
 #include "../GameController.h"
 
 
@@ -23,7 +24,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     this->SetMinSize(wxSize(960, 680));
 
     //create 3x3 Grid
-    auto sizer = new wxGridBagSizer(3,3);
+    auto sizer = new wxGridBagSizer(4,3);
     std::vector<std::pair<wxGBPosition, wxGBSpan>> items  = {
         {{0,0}, {1,1}},
         {{0,1}, {1,1}},
@@ -34,6 +35,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
         {{2,0}, {1,1}},
         {{2,1}, {1,1}},
         {{2,2}, {1,1}},
+        {{3,0}, {1,3}}
     };
 
     // Add other players
@@ -56,7 +58,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     // specify minimum size of the panels
     int minWidth = TrickEstimationPanel::panelSize.GetWidth()/3;
-    int minHeight = TrickEstimationPanel::panelSize.GetHeight()/3;
+    int minHeight = TrickEstimationPanel::panelSize.GetHeight()/4;
 
     // fill the gridsizer with panels and set the minimum size accordingly
     for (auto &item : items)
@@ -93,7 +95,83 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     this->buildOtherPlayers(sizer, gameState, myPosition);
 
+    this->buildHand(sizer, gameState, me);
+
+    this->buildTrumpColor(sizer, gameState);
+
     this->Layout();
+}
+
+void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *gameState) {
+    wxGBSizerItem* trumpItem = sizer->FindItemAtPosition(wxGBPosition(2,0));
+    wxPanel* trumpPanel = dynamic_cast<wxPanel*>(trumpItem->GetWindow());
+    wxBoxSizer* trumpSizer_vert = new wxBoxSizer(wxVERTICAL);
+    trumpPanel->SetSizer(trumpSizer_vert);
+
+    wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
+    trumpText->SetForegroundColour(*wxWHITE);
+
+    // increase font size of trump card text
+    wxFont font = trumpText->GetFont(); // Get the current font of the wxStaticText
+    font.SetPointSize(14);
+    trumpText->SetFont(font);
+
+    int trumpColor = gameState->get_trump_color();
+
+    std::string cardImage = "assets/card_" + std::to_string(trumpColor) + ".png";
+    ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, TrickEstimationPanel::cardSize);
+
+
+    trumpSizer_vert->Add(trumpText,0,wxALIGN_CENTER);
+    trumpSizer_vert->Add(cardPanel, 0, wxALIGN_CENTER|wxALL, 5);
+}
+
+void TrickEstimationPanel::buildHand(wxGridBagSizer *sizer, game_state *gameState, player *me) {
+    wxGBSizerItem* handItem = sizer->FindItemAtPosition(wxGBPosition(3,0));
+    wxPanel* handPanel = dynamic_cast<wxPanel*>(handItem->GetWindow());
+
+    // define two new sizers to be able to center the cards
+    auto handPanelSizer_vert = new wxBoxSizer(wxVERTICAL);
+    handPanel->SetSizer(handPanelSizer_vert);
+    auto handPanelSizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    handPanelSizer_vert->Add(handPanelSizer_hor, 1, wxALIGN_CENTER);
+
+    int numberOfCards = me->get_nof_cards();
+    wxSize scaledCardSize = TrickEstimationPanel::cardSize;
+
+    if (numberOfCards > 0) {
+
+        if (numberOfCards * (TrickEstimationPanel::cardSize.GetWidth() + 8) >
+            TrickEstimationPanel::panelSize.GetWidth()) {
+            int scaledCardWidth = panelSize.GetWidth() / numberOfCards - 8;
+            double cardAspectRatio = (double) cardSize.GetHeight() / (double) cardSize.GetWidth();
+            int scaledCardHeight = (int) ((double) scaledCardWidth * cardAspectRatio);
+            scaledCardSize = wxSize(scaledCardWidth, scaledCardHeight);
+        }
+
+        // Show all cards
+        for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
+
+            card *handCard = me->get_hand()->get_cards().at(i);
+
+            std::string cardFile = "assets/card_" + std::to_string(handCard->get_value()) + "_" +
+                                   std::to_string(handCard->get_color()) + ".png";
+
+            ImagePanel *cardButton = new ImagePanel(handPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition,
+                                                    scaledCardSize);
+
+            if (gameState->get_current_player() == me && gameState->is_estimation_phase() == false) {
+                cardButton->SetToolTip("Play card");
+                cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
+                cardButton->Bind(wxEVT_LEFT_UP, [handCard](wxMouseEvent &event) {
+                    GameController::playCard(handCard);
+                });
+            }
+            handPanelSizer_hor->Add(cardButton, 0, wxALIGN_TOP | wxALL, 4);
+        }
+
+    }
+
 }
 
 void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameState){

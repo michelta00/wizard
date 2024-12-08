@@ -201,7 +201,6 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
 
         int trumpColor = gameState->get_trump_color();
 
-        // TODO: renaming of all card images with respective color and value in the name
         std::string cardImage = "assets/card_" + std::to_string(trumpColor) + ".png";
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
