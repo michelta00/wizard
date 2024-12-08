@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(sockpp/include)
 
-find_package(wxWidgets COMPONENTS core base net REQUIRED)
+#find_package(wxWidgets COMPONENTS core base net REQUIRED)
+find_package(wxWidgets REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 # define a variable CLIENT_SOURCE_FILES that contains the paths to all source files required to compile the client executable
@@ -63,7 +64,9 @@ set(CLIENT_SOURCE_FILES
         src/client/messageBoxes/ScoreDialog.cpp
         src/client/messageBoxes/ScoreDialog.h
         src/client/panels/MainGamePanelWizard.cpp
-        src/client/panels/MainGamePanelWizard.h)
+        src/client/panels/MainGamePanelWizard.h
+        src/client/messageBoxes/ScoreBoardDialog.cpp
+        src/client/messageBoxes/ScoreBoardDialog.h)
 
 # define a variable SERVER_SOURCE_FILES that contains the paths to all source files required to compile the server executable
 set(SERVER_SOURCE_FILES

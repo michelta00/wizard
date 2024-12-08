@@ -2,6 +2,8 @@
 #include "../GameController.h"
 #include "../uiElements/ImagePanel.h"
 #include <wx/gbsizer.h>
+#include <wx/grid.h>
+#include "../messageBoxes/ScoreBoardDialog.h"
 
 MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
     this->SetMinSize(wxSize(960, 680));
@@ -17,6 +19,34 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     // child panel
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     this->SetBackgroundColour(wxColour(102,0,51));
+
+    /*
+    // access the main window to add a button
+    wxFrame* parentFrame = dynamic_cast<wxFrame*>(this->GetParent());
+    if (parentFrame && parentFrame->GetStatusBar()) {
+        wxStatusBar *statusBar = parentFrame->GetStatusBar();
+
+        // Retrieve the existing sizer
+        wxSizer *statusSizer = statusBar->GetSizer();
+        if (statusSizer) {
+            wxButton* scoreBoardButton = new wxButton(statusBar, wxID_ANY, "ScoreBoard");
+            statusSizer->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+            // Refresh the layout
+            statusBar->Layout();
+        }
+    }
+
+    // put all player scores in a vector
+    std::vector<player*> players = gameState->get_players();
+    int numberOfPlayers = players.size();
+    std::vector<std::vector<int>> tableData(numberOfPlayers);
+
+    for (int i = 0; i < numberOfPlayers; i++){
+        tableData.at(i) = players.at(i)->get_scores();
+    }
+    */
+
+
 
     this->SetMinSize(wxSize(960, 680));
 
@@ -111,8 +141,30 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     //show other Players
     this->buildOtherPlayers(sizer, gameState, me, myPosition);
 
+    // show button to display score board
+    this->buildScoreBoardButton(sizer, gameState);
+
     // update Layout
     this->Layout();
+}
+
+void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
+    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
+
+    if (gameState->is_started()) {
+        wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
+        panel->SetSizer(sizer_vert);
+
+        wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
+        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+
+        scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+            ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
+            scoreBoard.ShowModal();
+        });
+    }
+
 }
 
 void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player* me, int myPosition)

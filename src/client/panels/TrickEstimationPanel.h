@@ -26,6 +26,9 @@ private:
     void buildHand(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, int myPosition);
+
+    void buildScoreBoardButton(wxGridBagSizer* sizer, game_state* gameState);
+
     InputField* _trickEstimateField;
 };
 

@@ -1,6 +1,7 @@
 #include "TrickEstimationPanel.h"
 #include "../uiElements/ImagePanel.h"
 #include "../GameController.h"
+#include "../messageBoxes/ScoreBoardDialog.h"
 
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
@@ -99,8 +100,29 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     this->buildTrumpColor(sizer, gameState);
 
+    this->buildScoreBoardButton(sizer, gameState);
+
     this->Layout();
 }
+
+
+void TrickEstimationPanel::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(2,2));
+    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
+
+    wxBoxSizer* sizer_vert = new wxBoxSizer(wxVERTICAL);
+    panel->SetSizer(sizer_vert);
+
+    wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
+    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+
+    scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent& event) {
+        ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
+        scoreBoard.ShowModal();
+    });
+
+}
+
 
 void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *gameState) {
     wxGBSizerItem* trumpItem = sizer->FindItemAtPosition(wxGBPosition(2,0));
