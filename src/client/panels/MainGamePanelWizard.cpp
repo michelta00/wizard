@@ -157,7 +157,7 @@ void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_stat
         panel->SetSizer(sizer_vert);
 
         wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
-        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 
         scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
             ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
