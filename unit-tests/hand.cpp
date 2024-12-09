@@ -14,7 +14,15 @@ protected:
     std::vector<card*> cards;
     hand* test_hand = nullptr;
     std::string err = "";
-//leave all destruction up to hand class or individual tests
+    //destructor for card, since cards are only cleared in hand class
+    // and the actual destructor is in deck
+    virtual void TearDown()
+    {
+        for (card* & _card : cards) {
+            delete _card;
+        }
+
+    }
 };
 
 //check constructor
@@ -59,7 +67,7 @@ TEST_F(HandTest, RemoveExistingCard) {
 }
 
 // remove card that is not in hand
-TEST_F(HandTest, RemoveNonExistingCard) {
+TEST_F(HandTest, RemoveNonExistentCard) {
     card* card1 = new card(14, 0);
     card* card2 = new card(2, 2);
     card* card3 = new card(4, 3);
@@ -77,7 +85,7 @@ TEST_F(HandTest, RemoveNonExistingCard) {
 
 }
 
-// try get existing and nonexisting card
+// try get existing and nonexistent card
 TEST_F(HandTest, TryGetCards) {
     card* card1 = new card(14, 0);
     card* card2 = new card(2, 2);

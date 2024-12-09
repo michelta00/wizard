@@ -17,7 +17,10 @@ card::card(const int value, const int color) : unique_serializable()
 }
 
 // destructor
-card::~card() = default;
+card::~card() {
+    delete _value;
+    delete _color;
+}
 
 // getter functions, return the value of the card or its color
 // (see header file for more details)

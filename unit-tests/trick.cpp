@@ -18,8 +18,7 @@ protected:
     std::vector<std::pair<card*, player*>> cards_and_players;
 
 
-    // Delete dynamically allocated cards and players
-    //NOT NEEDED, DESTRUCTION HANDLED IN TRICK CLASS!!
+    //NOT NEEDED, destruction handled in trick class
     /*virtual void TearDown() {
         for (int i = 0; i < cards_and_players.size(); i++) {
             delete cards_and_players[i].first;   // delete the `card*`

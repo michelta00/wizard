@@ -5,11 +5,10 @@
 #include "gtest/gtest.h"
 #include "../src/common/exceptions/WizardException.h"
 #include "../src/common/game_state/cards/card.h"
+#include "../src/common/game_state/cards/deck.h"
 #include "../src/common/serialization/json_utils.h"
 
 class CardTest : public ::testing::Test {
-
-
 };
 
 // check proper initialization and getters
@@ -55,6 +54,8 @@ TEST_F(CardTest, SerializationEquality) {
     EXPECT_EQ(card_send.get_value(), card_recv->get_value());
     EXPECT_EQ(card_send.get_color(), card_recv->get_color());
     delete card_recv;
+
+
 }
 
 // Deserializing an invalid string must throw a WizardException
