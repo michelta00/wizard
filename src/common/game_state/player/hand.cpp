@@ -56,10 +56,6 @@ card* hand::remove_card(const std::vector<card*>::iterator pos) {
     return nullptr;
 }
 
-std::vector<card*>::iterator hand::get_card_iterator() {
-    return _cards.begin();
-}
-
 
 #ifdef WIZARD_SERVER
 bool hand::add_card(card* card, std::string &err) {
