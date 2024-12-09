@@ -10,6 +10,7 @@
 
 class serializable {
 public:
+    virtual ~serializable() = default;
 
     virtual rapidjson::Document* to_json() const {
         rapidjson::Document* json = new rapidjson::Document();

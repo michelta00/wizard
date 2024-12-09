@@ -1,125 +1,154 @@
-//
-// Created by Manuel on 25.01.2021.
-//
-
 #include "player.h"
-
 #include "../../exceptions/WizardException.h"
+#include "../../serialization/vector_utils.h"
 
-player::player(std::string name) : unique_serializable() {
+// constructor for client
+player::player(const std::string& name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_has_folded = new serializable_value<bool>(false);
-    this->_score = new serializable_value<int>(0);
+    this->_nof_predicted = new serializable_value<int>(-1);
+    this->_nof_tricks = new serializable_value<int>(0);
+    this->_scores = std::vector<serializable_value<int>*>(0);
     this->_hand = new hand();
+
 }
 
-player::player(std::string id, serializable_value<std::string>* name,
-               serializable_value<int>* score, hand *hand, serializable_value<bool>* has_folded) :
+// deserialization constructor
+player::player(const std::string& id, serializable_value<std::string>* name,
+               serializable_value<int>* nof_tricks,
+               serializable_value<int>* nof_predicted,
+               const std::vector<serializable_value<int>*>& scores, hand *hand) :
         unique_serializable(id),
         _player_name(name),
-        _hand(hand),
-        _score(score),
-        _has_folded(has_folded)
+        _nof_tricks(nof_tricks),
+        _nof_predicted(nof_predicted),
+        _scores(scores),
+        _hand(hand)
 { }
 
 player::~player() {
     if (_player_name != nullptr) {
         delete _hand;
         delete _player_name;
-        delete _score;
-        delete _has_folded;
+        delete _nof_predicted;
+        delete _nof_tricks;
+
 
         _hand = nullptr;
         _player_name = nullptr;
-        _score = nullptr;
-        _has_folded = nullptr;
+        _nof_predicted = nullptr;
+        _nof_tricks = nullptr;
     }
 }
 
 #ifdef WIZARD_SERVER
-player::player(std::string id, std::string name) :
+// constructor for server
+player::player(const std::string& id, const std::string& name) :
         unique_serializable(id)
 {
     this->_player_name = new serializable_value<std::string>(name);
-    this->_has_folded = new serializable_value<bool>(false);
-    this->_score = new serializable_value<int>(0);
+    this->_scores = std::vector<serializable_value<int>*>(1, new serializable_value<int>(0));
     this->_hand = new hand();
+    this->_nof_predicted = new serializable_value<int>(-1);
+    this->_nof_tricks = new serializable_value<int>(0);
 }
 
-std::string player::get_game_id() {
+std::string player::get_game_id()
+{
     return _game_id;
 }
 
-void player::set_game_id(std::string game_id) {
+void player::set_game_id(const std::string& game_id)
+{
     _game_id = game_id;
 }
 #endif
 
 
-int player::get_score() const noexcept {
-    return _score->get_value();
+// getter and setter for scores
+std::vector<serializable_value<int>*> player::get_scores() const noexcept
+{
+    return _scores;
 }
 
-std::string player::get_player_name() const noexcept {
+void player::set_scores(const int score)
+{
+    _scores.push_back(new serializable_value<int>(score));
+}
+
+
+// getter and setter for number of won tricks
+int player::get_nof_tricks() const noexcept
+{
+    return _nof_tricks->get_value();
+}
+
+void player::set_nof_tricks(const int nof_tricks)
+{
+    _nof_tricks->set_value(nof_tricks);
+}
+
+
+// getter and setter for number of predicted tricks
+int player::get_nof_predicted() const noexcept
+{
+    return _nof_predicted->get_value();
+}
+
+void player::set_nof_predicted(const int nof_predicted)
+{
+    _nof_predicted->set_value(nof_predicted);
+}
+
+
+// other getters
+std::string player::get_player_name() const noexcept
+{
     return this->_player_name->get_value();
 }
 
-const hand* player::get_hand() const noexcept {
+hand* player::get_hand() const noexcept
+{
     return this->_hand;
 }
 
-bool player::has_folded() const noexcept {
-    return this->_has_folded->get_value();
-}
-
-int player::get_nof_cards() const noexcept {
+unsigned int player::get_nof_cards() const noexcept
+{
     return _hand->get_nof_cards();
 }
 
 
 #ifdef WIZARD_SERVER
-void player::setup_round(std::string& err) {
-    _has_folded->set_value(false);
-    _hand->setup_round(err);
+void player::setup_round()
+{
+    _nof_predicted->set_value(-1);
+    _nof_tricks->set_value(0);
+    //delete _hand;
+    //_hand = new hand();
+    // TODO: check if the set up of new hand is necessary
 }
 
-void player::wrap_up_round(std::string &err) {
-    int cards_value = _hand->get_score();
-    int new_score = _score->get_value();
-    if (cards_value > 0) {
-        new_score = _score->get_value() + cards_value;
-    } else {
-        // The player got rid of all cards. Deduct 10 points
-        new_score = std::max(0, _score->get_value() - 10);
+void player::wrap_up_round() {
+    int new_score = 0;
+    if (!_scores.empty())
+    {
+        new_score = _scores.back()->get_value();
     }
-    _score->set_value(new_score);
-}
 
-bool player::fold(std::string &err) {
-    if (has_folded()) {
-        err = "This player has already folded.";
-        return false;
+    if (_nof_predicted->get_value() == _nof_tricks->get_value())
+    {
+        new_score += 20 + (10 * _nof_predicted->get_value());
     }
-    _has_folded->set_value(true);
-    return true;
+    else
+    {
+        new_score -= std::abs(_nof_predicted->get_value() - _nof_tricks->get_value()) * 10;
+    }
+    _scores.push_back(new serializable_value<int>(new_score));
 }
 
 bool player::add_card(card *card, std::string &err) {
-    if (has_folded()) {
-        err = "Player has already folded and is not allowed to draw any cards";
-        return false;
-    }
     return _hand->add_card(card, err);
 }
 
-bool player::remove_card(std::string card_id, card*& card, std::string &err) {
-    card = nullptr;
-    if (has_folded()) {
-        err = "Player has already folded and is not allowed to play any cards";
-        return false;
-    }
-    return _hand->remove_card(card_id, card, err);
-}
 
 #endif
 
@@ -134,32 +163,40 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     _player_name->write_into_json(name_val, allocator);
     json.AddMember("player_name", name_val, allocator);
 
-    rapidjson::Value has_folded_val(rapidjson::kObjectType);
-    _has_folded->write_into_json(has_folded_val, allocator);
-    json.AddMember("has_folded", has_folded_val, allocator);
+    rapidjson::Value nof_tricks_val(rapidjson::kObjectType);
+    _nof_tricks->write_into_json(nof_tricks_val, allocator);
+    json.AddMember("nof_tricks", nof_tricks_val, allocator);
 
-    rapidjson::Value score_val(rapidjson::kObjectType);
-    _score->write_into_json(score_val, allocator);
-    json.AddMember("score", score_val, allocator);
+    rapidjson::Value nof_predicted_val(rapidjson::kObjectType);
+    _nof_predicted->write_into_json(nof_predicted_val, allocator);
+    json.AddMember("nof_predicted", nof_predicted_val, allocator);
+
+    json.AddMember("scores", vector_utils::serialize_vector(_scores, allocator), allocator);
 
     rapidjson::Value hand_val(rapidjson::kObjectType);
     _hand->write_into_json(hand_val, allocator);
     json.AddMember("hand", hand_val, allocator);
 }
 
-
-player *player::from_json(const rapidjson::Value &json) {
+player* player::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
+        && json.HasMember("nof_predicted")
+        && json.HasMember("nof_tricks")
         && json.HasMember("player_name")
-        && json.HasMember("has_folded")
+        && json.HasMember("scores")
         && json.HasMember("hand"))
     {
+        std::vector<serializable_value<int>*> deserialized_scores;
+        for (auto &serialized_score : json["scores"].GetArray()) {
+            deserialized_scores.push_back(serializable_value<int>::from_json(serialized_score.GetObject()));
+        }
         return new player(
                 json["id"].GetString(),
                 serializable_value<std::string>::from_json(json["player_name"].GetObject()),
-                serializable_value<int>::from_json(json["score"].GetObject()),
-                hand::from_json(json["hand"].GetObject()),
-                serializable_value<bool>::from_json(json["has_folded"].GetObject()));
+                serializable_value<int>::from_json(json["nof_tricks"].GetObject()),
+                serializable_value<int>::from_json(json["nof_predicted"].GetObject()),
+                deserialized_scores,
+                hand::from_json(json["hand"].GetObject()));
     } else {
         throw WizardException("Failed to deserialize player from json. Required json entries were missing.");
     }

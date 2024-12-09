@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(sockpp/include)
 
-find_package(wxWidgets COMPONENTS core base net REQUIRED)
+#find_package(wxWidgets COMPONENTS core base net REQUIRED)
+find_package(wxWidgets REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 # define a variable CLIENT_SOURCE_FILES that contains the paths to all source files required to compile the client executable
@@ -17,7 +18,6 @@ set(CLIENT_SOURCE_FILES
         src/client/windows/GameWindow.cpp src/client/windows/GameWindow.h
         src/client/uiElements/ImagePanel.cpp src/client/uiElements/ImagePanel.h
         src/client/panels/ConnectionPanel.cpp src/client/panels/ConnectionPanel.h
-        src/client/panels/MainGamePanel.cpp src/client/panels/MainGamePanel.h
         src/client/uiElements/InputField.cpp src/client/uiElements/InputField.h
         src/client/uiElements/ImagePanel.cpp src/client/uiElements/ImagePanel.h
         # network
@@ -28,14 +28,15 @@ set(CLIENT_SOURCE_FILES
         src/common/game_state/game_state.cpp src/common/game_state/game_state.h
         src/common/game_state/player/hand.cpp src/common/game_state/player/hand.h
         src/common/game_state/player/player.cpp src/common/game_state/player/player.h
-        src/common/game_state/cards/draw_pile.cpp src/common/game_state/cards/draw_pile.h
-        src/common/game_state/cards/discard_pile.cpp src/common/game_state/cards/discard_pile.h
+        src/common/game_state/cards/trick.cpp src/common/game_state/cards/trick.h
+        src/common/game_state/cards/deck.cpp src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
-        src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
-        src/common/network/requests/draw_card_request.cpp src/common/network/requests/draw_card_request.h
-        src/common/network/requests/fold_request.cpp src/common/network/requests/fold_request.h
+        src/common/network/requests/decide_trump_color_request.cpp src/common/network/requests/decide_trump_color_request.h
+        src/common/network/requests/estimate_tricks_request.cpp src/common/network/requests/estimate_tricks_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
+        src/common/network/requests/leave_game_request.cpp src/common/network/requests/leave_game_request.h
+        src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
         src/common/network/requests/start_game_request.cpp src/common/network/requests/start_game_request.h
         # server responses
         src/common/network/responses/server_response.cpp src/common/network/responses/server_response.h
@@ -49,6 +50,13 @@ set(CLIENT_SOURCE_FILES
         src/common/serialization/json_utils.h
         src/common/serialization/uuid_generator.h
         src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
+        src/common/network/requests/decide_trump_color_request.cpp
+        src/common/network/requests/decide_trump_color_request.h
+        src/common/network/requests/leave_game_request.cpp
+        src/common/network/requests/leave_game_request.h
+        src/common/network/requests/estimate_tricks_request.cpp
+        src/common/network/requests/estimate_tricks_request.h
+        src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
         src/client/messageBoxes/ErrorDialog.cpp
         src/client/messageBoxes/ErrorDialog.h
         src/client/panels/TrickEstimationPanel.cpp
@@ -56,7 +64,9 @@ set(CLIENT_SOURCE_FILES
         src/client/messageBoxes/ScoreDialog.cpp
         src/client/messageBoxes/ScoreDialog.h
         src/client/panels/MainGamePanelWizard.cpp
-        src/client/panels/MainGamePanelWizard.h)
+        src/client/panels/MainGamePanelWizard.h
+        src/client/messageBoxes/ScoreBoardDialog.cpp
+        src/client/messageBoxes/ScoreBoardDialog.h)
 
 # define a variable SERVER_SOURCE_FILES that contains the paths to all source files required to compile the server executable
 set(SERVER_SOURCE_FILES
@@ -70,14 +80,15 @@ set(SERVER_SOURCE_FILES
         src/common/game_state/game_state.cpp src/common/game_state/game_state.h
         src/common/game_state/player/hand.cpp src/common/game_state/player/hand.h
         src/common/game_state/player/player.cpp src/common/game_state/player/player.h
-        src/common/game_state/cards/draw_pile.cpp src/common/game_state/cards/draw_pile.h
-        src/common/game_state/cards/discard_pile.cpp src/common/game_state/cards/discard_pile.h
+        src/common/game_state/cards/trick.cpp src/common/game_state/cards/trick.h
+        src/common/game_state/cards/deck.cpp src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
-        src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
-        src/common/network/requests/draw_card_request.cpp src/common/network/requests/draw_card_request.h
-        src/common/network/requests/fold_request.cpp src/common/network/requests/fold_request.h
+        src/common/network/requests/decide_trump_color_request.cpp src/common/network/requests/decide_trump_color_request.h
+        src/common/network/requests/estimate_tricks_request.cpp src/common/network/requests/estimate_tricks_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
+        src/common/network/requests/leave_game_request.cpp src/common/network/requests/leave_game_request.h
+        src/common/network/requests/play_card_request.cpp src/common/network/requests/play_card_request.h
         src/common/network/requests/start_game_request.cpp src/common/network/requests/start_game_request.h
         # server responses
         src/common/network/responses/server_response.cpp src/common/network/responses/server_response.h
@@ -90,7 +101,8 @@ set(SERVER_SOURCE_FILES
         src/common/serialization/serializable_value.h
         src/common/serialization/json_utils.h
         src/common/serialization/uuid_generator.h
-        src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h src/server/request_handler.h src/server/request_handler.cpp)
+        src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h src/server/request_handler.h src/server/request_handler.cpp
+)
 
 
 # set source files for client-executable

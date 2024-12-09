@@ -13,12 +13,14 @@ public:
     void buildGameState(game_state* gameState, player* me);
 
 private:
-    void  buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
+    void buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildTurnIndicator(wxGridBagSizer* sizer, game_state* gameState, player* me);
     void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player *me, int myPosition);
 
     void buildTrickPile(wxGridBagSizer* sizer, game_state* gameState, player *me);
     void buildTrumpCard(wxGridBagSizer* sizer, game_state* gameState);
+
+    void buildScoreBoardButton(wxGridBagSizer* sizer, game_state* gameState);
 
     wxSize const panelSize = wxSize(960, 680); // also set in the constructor implementation
     wxSize const cardSize = wxSize(70, 108.5);

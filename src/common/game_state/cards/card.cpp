@@ -1,53 +1,66 @@
-//
-// Created by Manuel on 25.01.2021.
-//
-
 #include "card.h"
-
 #include "../../exceptions/WizardException.h"
 
 
-card::card(std::string id) : unique_serializable(id) { }
+// constructors (from_diff and deserialization)
+card::card(const std::string& id) : unique_serializable(id) { }
 
-card::card(std::string id, serializable_value<int> *val)
-        : unique_serializable(id), _value(val)
+card::card(const std::string& id, serializable_value<int>* value, serializable_value<int>* color)
+        : unique_serializable(id), _value(value), _color(color)
 { }
 
-card::card(int val) :
-        unique_serializable(),
-        _value(new serializable_value<int>(val))
-{ }
+// constructor
+card::card(const int value, const int color) : unique_serializable()
+{
+    _value = new serializable_value<int>(value);
+    _color = new serializable_value<int>(color);
+}
 
-card::~card() { }
+// destructor
+card::~card() {
+    delete _value;
+    delete _color;
+}
 
-
-int card::get_value() const noexcept {
+// getter functions, return the value of the card or its color
+// (see header file for more details)
+int card::get_value() const noexcept
+{
     return _value->get_value();
 }
-
-bool card::can_be_played_on(const card *const other) const noexcept {
-    // return true if this card has a one higher or of equal value OR if 'other' is Wizard and this is 1
-    int value_delta = this->get_value() - other->get_value();
-    return value_delta == 0 || value_delta == 1 || (other->get_value() == 7 && this->get_value() == 1);
+int card::get_color() const noexcept
+{
+    return _color->get_value();
 }
 
 
-card *card::from_json(const rapidjson::Value &json) {
-    if (json.HasMember("id") && json.HasMember("value")) {
-        return new card(json["id"].GetString(), serializable_value<int>::from_json(json["value"].GetObject()));
-    } else {
-        throw WizardException("Could not parse json of card. Was missing 'id' or 'val'.");
-    }
-}
-
-
+// serializable interface
 void card::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
     unique_serializable::write_into_json(json, allocator);
 
-    rapidjson::Value value_val(rapidjson::kObjectType);
-    _value->write_into_json(value_val, allocator);
-    json.AddMember("value", value_val, allocator);
+    rapidjson::Value value(rapidjson::kObjectType);
+    _value->write_into_json(value, allocator);
+    json.AddMember("value", value, allocator);
+
+    rapidjson::Value color(rapidjson::kObjectType);
+    _color->write_into_json(color, allocator);
+    json.AddMember("color", color, allocator);
 }
+
+card* card::from_json(const rapidjson::Value &json) {
+    if (json.HasMember("id") &&
+        json.HasMember("value") &&
+        json.HasMember("color"))
+    {
+        const auto value = serializable_value<int>::from_json(json["value"].GetObject());
+        const auto color = serializable_value<int>::from_json(json["color"].GetObject());
+        return new card(json["id"].GetString(), value, color);
+    }
+    throw WizardException("Could not parse json of card. Was missing 'id', 'value', or 'color'.");
+}
+
+
+
 
 
 

@@ -3,12 +3,12 @@
 
 #include "windows/GameWindow.h"
 #include "panels/ConnectionPanel.h"
-#include "panels/MainGamePanel.h"
 #include "panels/MainGamePanelWizard.h"
 #include "panels/TrickEstimationPanel.h"
 #include "network/ResponseListenerThread.h"
 #include "../common/game_state/game_state.h"
 
+// TODO: include decide_trump_request
 
 class GameController {
 
@@ -18,8 +18,8 @@ public:
     static void connectToServer();
     static void updateGameState(game_state* newGameState);
     static void startGame();
-    static void drawCard();
-    static void fold();
+    static void estimateTricks(int nof_cards);
+    static void leaveGame();
     static void playCard(card* cardToPlay);
     static void estimateTrick();
 
@@ -27,13 +27,12 @@ public:
     static void showError(const std::string& title, const std::string& message);
     static void showStatus(const std::string& message);
     static void showNewRoundMessage(game_state* oldGameState, game_state* newGameState);
+    static void showTrickOverMessage();
     static void showGameOverMessage();
-    static void showTrickEstimationPanel(int roundNumber);
 
 private:
     static GameWindow* _gameWindow;
     static ConnectionPanel* _connectionPanel;
-    static MainGamePanel* _mainGamePanel;
     static MainGamePanelWizard* _mainGamePanelWizard;
     static TrickEstimationPanel* _trickEstimationPanel;
 

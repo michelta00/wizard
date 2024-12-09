@@ -196,7 +196,7 @@ void server_network_manager::broadcast_message(server_response &msg, const std::
     try {
         for(auto& player : players) {
             if (player != exclude) {
-                int nof_bytes_written = send_message(msg_string, _player_id_to_address.at(player->get_id()));
+                int nof_bytes_written = send_message(msg_string, _player_id_to_address.at(player->get_id())); // issue here
             }
         }
     } catch (std::exception& e) {

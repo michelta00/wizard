@@ -26,8 +26,8 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     // Add stretchable space to fill space in statusbar
     statusSizer->AddStretchSpacer(1);
 
-    statusSizer->Add(_settingsButton, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    statusSizer->Add(_rulesButton, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    statusSizer->Add(_settingsButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    statusSizer->Add(_rulesButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     _statusBar->SetSizer(statusSizer);
     _statusBar->Layout();
 
@@ -76,12 +76,16 @@ void GameWindow::setStatus(const std::string& message) {
     this->_statusBar->SetStatusText(message, 0);
 }
 
-void GameWindow::showRules(wxCommandEvent& event){
-    wxString rules = "Game Rules:\n"
-                     "Do not cheat!";
+void GameWindow::showRules(wxCommandEvent& event) {
+    wxString pdfPath = "../assets/Rules.pdf";
 
-    wxMessageDialog rulesDialog(this, rules, "Game Rules", wxOK | wxICON_INFORMATION);
-    rulesDialog.ShowModal();
+    if (wxFileExists(pdfPath)) {
+        if (!wxLaunchDefaultApplication(pdfPath)) {
+            wxMessageBox("Das PDF konnte nicht geöffnet werden.", "Fehler", wxICON_ERROR);
+        }
+    } else {
+        wxMessageBox("Die Datei 'Rules.pdf' wurde nicht gefunden!", "Fehler", wxICON_ERROR);
+    }
 }
 
 void GameWindow::show_settings(wxCommandEvent& event){
