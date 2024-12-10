@@ -3,6 +3,7 @@
 #include "../../exceptions/WizardException.h"
 #include "../../serialization/vector_utils.h"
 
+// constructor
 hand::hand() : unique_serializable() { }
 
 // from_diff constructor
@@ -13,10 +14,12 @@ hand::hand(const std::string& id, const std::vector<card*>& cards) : unique_seri
     this->_cards = cards;
 }
 
+// destructor
 hand::~hand() {
     _cards.clear();
 }
 
+// accessors
 unsigned int hand::get_nof_cards() const {
     return _cards.size();
 }
@@ -37,7 +40,7 @@ bool hand::try_get_card(const std::string &card_id, card *&hand_card) const {
     return false;
 }
 
-
+// remove card functions
 card* hand::remove_card(const int idx) {
     return remove_card(_cards.begin() + idx);
 }
@@ -56,8 +59,8 @@ card* hand::remove_card(const std::vector<card*>::iterator pos) {
     return nullptr;
 }
 
-
 #ifdef WIZARD_SERVER
+// state update functions
 bool hand::add_card(card* card, std::string &err) {
     _cards.push_back(card);
     return true;
@@ -76,7 +79,7 @@ bool hand::remove_card(std::string card_id, std::string &err) {
 }
 #endif
 
-
+// serialization interface
 void hand::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
     unique_serializable::write_into_json(json, allocator);
     json.AddMember("cards", vector_utils::serialize_vector(_cards, allocator), allocator);
@@ -94,6 +97,3 @@ hand* hand::from_json(const rapidjson::Value &json) {
     }
     throw WizardException("Could not parse hand from json. 'cards' were missing.");
 }
-
-
-

@@ -76,6 +76,16 @@ public:
      * @return The cards in the hand.
      */
     [[nodiscard]] std::vector<card*> get_cards() const;
+
+    /**
+     * @brief Tries to get a specific card from the hand.
+     * @param card_id The card's id.
+     * @param hand_card Pointer that will point to the card if found.
+     * @return A boolean indicating whether getting the card worked or not.
+     *
+     * This function tries to find a card in the hand given a provided card id. If the card is found, the given
+     * pointer reference will be updated to point to that card and true is returned, otherwise false is returned.
+     */
     bool try_get_card(const std::string& card_id, card*& hand_card) const;
 
 #ifdef WIZARD_SERVER

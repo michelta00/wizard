@@ -14,8 +14,9 @@ var searchData=
   ['server_3a_11',['Client -&gt; Server:',['../index.html#autotoc_md13',1,'']]],
   ['server_5fnetwork_5fmanager_12',['server_network_manager',['../classserver__network__manager.html',1,'']]],
   ['server_5fresponse_13',['server_response',['../classserver__response.html',1,'']]],
-  ['software_20engineering_20project_20wizard_14',['Software Engineering Project - Wizard',['../index.html',1,'']]],
-  ['start_5fgame_5frequest_15',['start_game_request',['../classstart__game__request.html',1,'']]],
-  ['state_16',['4.3 Game State',['../index.html#autotoc_md16',1,'']]],
-  ['structure_20important_20classes_17',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md18',1,'']]]
+  ['set_5fgame_5fid_14',['set_game_id',['../classplayer.html#aa916eeacf97f00507f412fd91bfe37d4',1,'player']]],
+  ['software_20engineering_20project_20wizard_15',['Software Engineering Project - Wizard',['../index.html',1,'']]],
+  ['start_5fgame_5frequest_16',['start_game_request',['../classstart__game__request.html',1,'']]],
+  ['state_17',['4.3 Game State',['../index.html#autotoc_md16',1,'']]],
+  ['structure_20important_20classes_18',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md18',1,'']]]
 ];

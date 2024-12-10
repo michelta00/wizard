@@ -1,7 +1,6 @@
 #include "card.h"
 #include "../../exceptions/WizardException.h"
 
-
 // constructors (from_diff and deserialization)
 card::card(const std::string& id) : unique_serializable(id) { }
 
@@ -32,7 +31,6 @@ int card::get_color() const noexcept
 {
     return _color->get_value();
 }
-
 
 // serializable interface
 void card::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
