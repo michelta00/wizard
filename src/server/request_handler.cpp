@@ -150,8 +150,8 @@ request_response* request_handler::handle_request(const client_request* const re
                 }
             }
         // ##################### UNKNOWN REQUEST ##################### //
-        default:
-            return new request_response("", req_id, false, nullptr, "Unknown RequestType " + type);
+    default:
+            return new request_response("", req_id, false, nullptr, "Unknown RequestType " + std::to_string(type));
     }
 }
 

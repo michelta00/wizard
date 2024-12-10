@@ -290,7 +290,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
     // if game has not started yet display picture in the lobby
     else{
         std::string wizardLogoImage = "assets/Wizard_round.png";
-        ImagePanel* wizardLogo = new ImagePanel(trickPanel, wizardLogoImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, wxSize(130,116.6));
+        ImagePanel* wizardLogo = new ImagePanel(trickPanel, wizardLogoImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, wxSize(130,116));
         trickPanelSizer_hor->Add(wizardLogo, 0, wxALIGN_CENTER );
     }
 }

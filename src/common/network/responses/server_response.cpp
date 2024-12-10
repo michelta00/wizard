@@ -70,7 +70,7 @@ server_response *server_response::from_json(const rapidjson::Value& json) {
         else if (response_type == ResponseType::full_state_msg) {
             return full_state_response::from_json(json);
         } else {
-            throw WizardException("Encountered unknown ServerResponse type " + response_type);
+            throw WizardException("Encountered unknown ServerResponse type " + std::to_string(response_type));
         }
     }
     throw WizardException("Could not determine type of ClientRequest");
