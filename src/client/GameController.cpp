@@ -96,7 +96,7 @@ void GameController::updateGameState(game_state* newGameState) {
 
     // save the new game state as our current game state
     GameController::_currentGameState = newGameState;
-
+    std::cout << "Updating game state has started" << std::endl;
     if(oldGameState != nullptr) {
 
         if(GameController::_currentGameState->is_finished()) {
@@ -106,9 +106,22 @@ void GameController::updateGameState(game_state* newGameState) {
         {
             int round_number = _currentGameState->get_round_number();
 
+            // end of trick
+            if(_currentGameState->get_trick_number() != oldGameState->get_trick_number())
+            {
+                std::cout << "We are at the end of the trick" << std::endl;
+                oldGameState->set_trick(_currentGameState->get_last_trick());
+                GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
+                GameController::_mainGamePanelWizard->buildGameState(oldGameState, GameController::_me);
+                std::cout << "Main game panel was shown with old game state" << std::endl;
+                oldGameState->set_trick(nullptr);
+                showTrickOverMessage();
+            }
+
             if(round_number != oldGameState->get_round_number())
             {
                 // new round has started
+                std::cout << "We are at the end of the round" << std::endl;
                 showNewRoundMessage(oldGameState, newGameState);
                 showStatus("Round " + std::to_string(newGameState->get_round_number() + 1));
             }
@@ -117,26 +130,25 @@ void GameController::updateGameState(game_state* newGameState) {
             if(GameController::_currentGameState->is_estimation_phase()) {
                 GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
                 GameController::_trickEstimationPanel->buildGameState(GameController::_currentGameState, GameController::_me);
+                std::cout << "Estimation game panel was shown." << std::endl;
                 delete oldGameState;
                 return;
             }
-
-            // end of trick
-            if(_currentGameState->get_trick_number() != oldGameState->get_trick_number())
-            {
-                showTrickOverMessage();
-            }
         }
         // delete the old game state, we don't need it anymore
+        std::cout << "Just before old game state is deleted" << std::endl;
         delete oldGameState;
+        std::cout << "Old game state deleted successfully" << std::endl;
     }
 
 
 
     // make sure we are showing the main game panel in the window (if we are already showing it, nothing will happen)
+    std::cout << "Just before show panel was called" << std::endl;
     GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
+    std::cout << "ShowPanel was called." << std::endl;
     GameController::_mainGamePanelWizard->buildGameState(GameController::_currentGameState, GameController::_me);
-
+    std::cout << "Main game panel was shown for new game state." << std::endl;
 }
 
 

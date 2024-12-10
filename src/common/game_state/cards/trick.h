@@ -29,6 +29,7 @@ public:
         std::vector<std::pair<card*, player*>> &cards,
         serializable_value<int>* trick_color,
         serializable_value<int>* trump_color);
+    trick(const trick &other);
     explicit trick(int trump);
     ~trick();
 
