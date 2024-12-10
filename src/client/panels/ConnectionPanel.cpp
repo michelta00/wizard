@@ -7,6 +7,10 @@
 
 ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
 
+    // font for buttons
+    wxFont magicalFont = wxFont(wxFontInfo(24).FaceName("Magic School One"));
+    //font for regular text
+    wxFont regularFont(14, wxFONTFAMILY_DECORATIVE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
     // Load the background image
     _backgroundImage.LoadFile("./assets/Wizard_big.png", wxBITMAP_TYPE_ANY);
 
@@ -17,30 +21,37 @@ ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
 
     // Main vertical layout for input fields and button
     wxBoxSizer* verticalLayout = new wxBoxSizer(wxVERTICAL);
-
-    int fieldSpacing = 10; // Space between input fields and button
+    wxBoxSizer* horizontalSizer = new wxBoxSizer(wxHORIZONTAL);
+    int fieldSpacing = 15; // Space between input fields and button
 
     // Default values for server host and port
     wxString default_server_host = "127.0.0.1";
     int default_port = 50505;
 
     // Server Address Input Field
-    this->_serverAddressField = new InputField(this, "Server address:", 100, default_server_host, 240);
+    this->_serverAddressField = new InputField(this, "Server address:", 100, default_server_host, 240); //field width is the width of the white text field
+    //label width is the width of the label text
+    this->_serverAddressField->SetFont(regularFont); //set font
     this->_serverAddressField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
     verticalLayout->Add(this->_serverAddressField, 0, wxALL | wxEXPAND, fieldSpacing);
-
+    horizontalSizer->Add(this->_serverAddressField, 0, wxALL, 5);
     // Server Port Input Field
     this->_serverPortField = new InputField(this, "Server port:", 100, wxString::Format("%i", default_port), 240);
+    this->_serverPortField->SetFont(regularFont);
     this->_serverPortField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
     verticalLayout->Add(this->_serverPortField, 0, wxALL | wxEXPAND, fieldSpacing);
-
+    horizontalSizer->Add(this->_serverPortField, 0, wxALL, 5);
     // Player Name Input Field
     this->_playerNameField = new InputField(this, "Player name:", 100, "", 240);
+    this->_playerNameField->SetFont(regularFont);
     this->_playerNameField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
     verticalLayout->Add(this->_playerNameField, 0, wxALL | wxEXPAND, fieldSpacing);
 
+    //TODO: fix spacing between the three lines
+
     // Connect Button with custom style
-    wxButton* connectButton = new wxButton(this, wxID_ANY, "Connect", wxDefaultPosition, wxDefaultSize);
+    wxButton* connectButton = new wxButton(this, wxID_ANY, "Connect", wxDefaultPosition, wxSize(100, 40)); //changed size to make margins between text and button smaller
+    connectButton->SetFont(magicalFont);
     connectButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
     connectButton->SetBackgroundColour(wxColour(102, 0, 51));    // Set button background color
     connectButton->SetWindowStyleFlag(wxBORDER_SIMPLE);          // Set border style
