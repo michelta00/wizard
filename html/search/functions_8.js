@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['try_5fget_5fcard_0',['try_get_card',['../classhand.html#a0a50cbbb167e6a1d633dd48bc4b695fe',1,'hand']]]
+  ['remove_5fcard_0',['remove_card',['../classhand.html#aa466496b7ce0b58dbd63620535430439',1,'hand']]]
 ];

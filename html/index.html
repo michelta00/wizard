@@ -286,7 +286,7 @@ Server -&gt; Client:</h3>
 <div class="line"> </div>
 <div class="line">...</div>
 <div class="line"><span class="comment">// Create a request to serialize</span></div>
-<div class="line">join_game_request* req = <span class="keyword">new</span> <a class="code hl_class" href="classjoin__game__request.html">join_game_request</a>(<a class="code hl_class" href="classplayer.html">player</a>-&gt;get_id(), <a class="code hl_class" href="classplayer.html">player</a>-&gt;get_player_name());</div>
+<div class="line">join_game_request* req = <span class="keyword">new</span> <a class="code hl_class" href="classjoin__game__request.html">join_game_request</a>(<a class="code hl_class" href="classplayer.html">player</a>-&gt;get_id(), <a class="code hl_class" href="classplayer.html">player</a>-&gt;<a class="code hl_function" href="classplayer.html#a42d01dcf4cdbd452fc5dcaf5e6f21773">get_player_name</a>());</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// serialize the request object</span></div>
 <div class="line">rapidjson::Document* req_json = req-&gt;to_json();</div>
@@ -294,6 +294,7 @@ Server -&gt; Client:</h3>
 <div class="line"><span class="comment">// print serialization to the console.</span></div>
 <div class="line">std::cout &lt;&lt; json_utils::to_string(req_json) &lt;&lt; std::endl;</div>
 <div class="ttc" id="aclassjoin__game__request_html"><div class="ttname"><a href="classjoin__game__request.html">join_game_request</a></div><div class="ttdef"><b>Definition</b> join_game_request.h:13</div></div>
+<div class="ttc" id="aclassplayer_html_a42d01dcf4cdbd452fc5dcaf5e6f21773"><div class="ttname"><a href="classplayer.html#a42d01dcf4cdbd452fc5dcaf5e6f21773">player::get_player_name</a></div><div class="ttdeci">std::string get_player_name() const noexcept</div><div class="ttdoc">Gets the player's name.</div><div class="ttdef"><b>Definition</b> player.cpp:104</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 4.3 Game State</h2>
 <p>The <code><a class="el" href="classgame__state.html">game_state</a></code> class stores all parameters that are required to represent the game on the client (resp. server) side. In order to synchronize this <code><a class="el" href="classgame__state.html">game_state</a></code> among all players, the <code><a class="el" href="classgame__state.html">game_state</a></code> can also be <b>serialized</b> and <b>deserialized</b>. If a <code><a class="el" href="classclient__request.html">client_request</a></code> was successfully executed on the server, then the <code><a class="el" href="classrequest__response.html">request_response</a></code> that is sent back to the client contains a serialized version of the updated <code><a class="el" href="classgame__state.html">game_state</a></code>. All other players receive the updated <code><a class="el" href="classgame__state.html">game_state</a></code> at the same time through a <code><a class="el" href="classfull__state__response.html">full_state_response</a></code>.</p>
@@ -408,7 +409,7 @@ Server -&gt; Client:</h3>
 <div class="line">        <span class="comment">// deserialize all players</span></div>
 <div class="line">        std::vector&lt;player*&gt; deserialized_players;</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;serialized_player : json[<span class="stringliteral">&quot;players&quot;</span>].GetArray()) {</div>
-<div class="line">            deserialized_players.push_back(player::from_json(serialized_player.GetObject()));</div>
+<div class="line">            deserialized_players.push_back(<a class="code hl_function" href="classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5">player::from_json</a>(serialized_player.GetObject()));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="comment">// Invoke deserialization constructor</span></div>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="classgame__state.html">game_state</a>(unique_serializable::extract_id(json),   <span class="comment">// extract base_params from JSON</span></div>
@@ -424,6 +425,7 @@ Server -&gt; Client:</h3>
 <div class="line">        <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Failed to deserialize game_state. Required entries were missing.&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
+<div class="ttc" id="aclassplayer_html_a5955c5f26db6a08862ccfb443fbe99c5"><div class="ttname"><a href="classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5">player::from_json</a></div><div class="ttdeci">static player * from_json(const rapidjson::Value &amp;json)</div><div class="ttdoc">Deserializes a player object from a json object.</div><div class="ttdef"><b>Definition</b> player.cpp:177</div></div>
 </div><!-- fragment --><p>A similar scheme is applied in all other objects that inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>. Namely, these are:</p><ul>
 <li><code>player</code></li>
 <li><code>hand</code></li>

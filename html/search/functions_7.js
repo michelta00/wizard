@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['set_5fgame_5fid_0',['set_game_id',['../classplayer.html#aa916eeacf97f00507f412fd91bfe37d4',1,'player']]]
+  ['player_0',['player',['../classplayer.html#a1f0916939a8caa2e7140d5c89a6aa718',1,'player::player(const std::string &amp;name)'],['../classplayer.html#aa97dd36228b56912bc5dad63f64e1ccf',1,'player::player(const std::string &amp;id, const std::string &amp;name)']]]
 ];
