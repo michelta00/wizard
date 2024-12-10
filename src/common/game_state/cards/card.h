@@ -74,6 +74,7 @@ public:
      * @return A pointer to a new card object created from the given json object.
      */
     static card* from_json(const rapidjson::Value& json);
+
 };
 
 #endif //WIZARD_CARD_H

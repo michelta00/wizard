@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad104b0376b1a13d987f349dd524ca47f" id="r_ad104b0376b1a13d987f349dd524ca47f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classcard.html">card</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad104b0376b1a13d987f349dd524ca47f">get_cards</a> () const</td></tr>
 <tr class="memdesc:ad104b0376b1a13d987f349dd524ca47f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the cards in the hand.  <br /></td></tr>
 <tr class="separator:ad104b0376b1a13d987f349dd524ca47f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a50cbbb167e6a1d633dd48bc4b695fe" id="r_a0a50cbbb167e6a1d633dd48bc4b695fe"><td class="memItemLeft" align="right" valign="top"><a id="a0a50cbbb167e6a1d633dd48bc4b695fe" name="a0a50cbbb167e6a1d633dd48bc4b695fe"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_get_card</b> (const std::string &amp;card_id, <a class="el" href="classcard.html">card</a> *&amp;hand_card) const</td></tr>
+<tr class="memitem:a0a50cbbb167e6a1d633dd48bc4b695fe" id="r_a0a50cbbb167e6a1d633dd48bc4b695fe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a50cbbb167e6a1d633dd48bc4b695fe">try_get_card</a> (const std::string &amp;card_id, <a class="el" href="classcard.html">card</a> *&amp;hand_card) const</td></tr>
+<tr class="memdesc:a0a50cbbb167e6a1d633dd48bc4b695fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a specific card from the hand.  <br /></td></tr>
 <tr class="separator:a0a50cbbb167e6a1d633dd48bc4b695fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4749893f36ff1d6dcda3bb18eaedffb" id="r_ad4749893f36ff1d6dcda3bb18eaedffb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4749893f36ff1d6dcda3bb18eaedffb">add_card</a> (<a class="el" href="classcard.html">card</a> *<a class="el" href="classcard.html">card</a>, std::string &amp;err)</td></tr>
 <tr class="memdesc:ad4749893f36ff1d6dcda3bb18eaedffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a card to the hand.  <br /></td></tr>
@@ -388,6 +388,38 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether removing the card worked or not. </dd></dl>
+
+</div>
+</div>
+<a id="a0a50cbbb167e6a1d633dd48bc4b695fe" name="a0a50cbbb167e6a1d633dd48bc4b695fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a50cbbb167e6a1d633dd48bc4b695fe">&#9670;&#160;</a></span>try_get_card()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hand::try_get_card </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>card_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcard.html">card</a> *&amp;</td>          <td class="paramname"><span class="paramname"><em>hand_card</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tries to get a specific card from the hand. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">card_id</td><td>The card's id. </td></tr>
+    <tr><td class="paramname">hand_card</td><td>Pointer that will point to the card if found. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether getting the card worked or not.</dd></dl>
+<p>This function tries to find a card in the hand given a provided card id. If the card is found, the given pointer reference will be updated to point to that card and true is returned, otherwise false is returned. </p>
 
 </div>
 </div>

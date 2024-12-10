@@ -25,13 +25,13 @@ player::player(const std::string& id, serializable_value<std::string>* name,
         _hand(hand)
 { }
 
+// deconstructor
 player::~player() {
     if (_player_name != nullptr) {
         delete _hand;
         delete _player_name;
         delete _nof_predicted;
         delete _nof_tricks;
-
 
         _hand = nullptr;
         _player_name = nullptr;
@@ -52,6 +52,7 @@ player::player(const std::string& id, const std::string& name) :
     this->_nof_tricks = new serializable_value<int>(0);
 }
 
+// server accessors
 std::string player::get_game_id()
 {
     return _game_id;
@@ -62,7 +63,6 @@ void player::set_game_id(const std::string& game_id)
     _game_id = game_id;
 }
 #endif
-
 
 // getter and setter for scores
 std::vector<serializable_value<int>*> player::get_scores() const noexcept
@@ -82,7 +82,7 @@ int player::get_nof_tricks() const noexcept
     return _nof_tricks->get_value();
 }
 
-void player::set_nof_tricks(const int nof_tricks)
+void player::set_nof_tricks(const int nof_tricks) const
 {
     _nof_tricks->set_value(nof_tricks);
 }
@@ -94,7 +94,7 @@ int player::get_nof_predicted() const noexcept
     return _nof_predicted->get_value();
 }
 
-void player::set_nof_predicted(const int nof_predicted)
+void player::set_nof_predicted(const int nof_predicted) const
 {
     _nof_predicted->set_value(nof_predicted);
 }
@@ -118,13 +118,15 @@ unsigned int player::get_nof_cards() const noexcept
 
 
 #ifdef WIZARD_SERVER
-void player::setup_round()
+bool player::add_card(card *card, std::string &err) const
+{
+    return _hand->add_card(card, err);
+}
+
+void player::setup_round() const
 {
     _nof_predicted->set_value(-1);
     _nof_tricks->set_value(0);
-    //delete _hand;
-    //_hand = new hand();
-    // TODO: check if the set up of new hand is necessary
 }
 
 void player::wrap_up_round() {
@@ -144,15 +146,9 @@ void player::wrap_up_round() {
     }
     _scores.push_back(new serializable_value<int>(new_score));
 }
-
-bool player::add_card(card *card, std::string &err) {
-    return _hand->add_card(card, err);
-}
-
-
 #endif
 
-
+// serialization interface
 void player::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const {
     unique_serializable::write_into_json(json, allocator);
 
