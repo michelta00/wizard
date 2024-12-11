@@ -222,7 +222,7 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         // Lobby: display names
         if(!gameState->is_started())
         {
-        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 25), wxALIGN_CENTER);
+        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(150, 35), wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
         playerNameText->SetFont(regularFontBig);
 
@@ -236,11 +236,12 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         // game started: display names, predicted and scored tricks
         else
         {
-        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            // 15 characters for player name
+        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(150, 35), wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
-        playerNameText->SetFont(regularFont);
+        playerNameText->SetFont(regularFontBig);
 
-        wxStaticText* trickText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_tricks()) + "/" +  std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* trickText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_tricks()) + "/" +  std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxSize(100, 20), wxALIGN_CENTER);
         trickText->SetForegroundColour(*wxWHITE);
         trickText->SetFont(regularFont);
         playerSizer_vert->Add(playerNameText,0,wxALIGN_CENTER|wxTOP,5);
@@ -331,7 +332,7 @@ void MainGamePanelWizard::buildTurnIndicator(wxGridBagSizer* sizer, game_state* 
         }
 
         wxStaticText* turnText = new wxStaticText(turnPanel, wxID_ANY, turnIndicatorText,wxDefaultPosition, wxSize(270, 50), wxALIGN_CENTER);
-            // width 12 + 15 player name
+            // width 12 + 15 player name --> 27 characters
         turnText->SetForegroundColour(*wxWHITE);
         turnText->SetFont(regularFontBig);
         turnIndicatorPanelSizer_hor->Add(turnText, 0, wxALIGN_CENTER);
@@ -352,7 +353,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     meSizer_hor->Add(meSizer, 1, wxALIGN_BOTTOM);
 
     // add player name to the panel
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 50), wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
     playerName->SetFont(regularFontBig);
 
@@ -391,7 +392,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     else
     {
         // show estimated and scored tricks instead of status text
-        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_tricks()) + "/" +  std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_tricks()) + "/" +  std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxSize(100, 20), wxALIGN_CENTER);
         playerScore->SetForegroundColour(*wxWHITE);
         playerScore->SetFont(regularFont);
         meSizer->Add(playerScore, 0, wxALIGN_CENTER);
