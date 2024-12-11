@@ -18,6 +18,8 @@ TrickEstimationPanel* GameController::_trickEstimationPanel = nullptr;
 player* GameController::_me = nullptr;
 game_state* GameController::_currentGameState = nullptr;
 
+static wxFont regularFont = wxFont(wxFontInfo(12).FaceName("Junicode"));
+static wxFont magicalFont = wxFont(wxFontInfo(20).FaceName("Magic School One"));
 
 
 void GameController::init(GameWindow* gameWindow) {
@@ -246,6 +248,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     //dialogBox.ShowModal();
 
     auto* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+
     dialog->ShowModal();
 }
 
@@ -300,6 +303,7 @@ void GameController::showGameOverMessage() {
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     int buttonClicked = dialogBox.ShowModal();
+
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
