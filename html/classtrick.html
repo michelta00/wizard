@@ -92,6 +92,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">trick Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the trick in the game.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trick_8h_source.html">trick.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for trick:</div>
 <div class="dyncontent">
@@ -105,37 +110,46 @@ Inheritance diagram for trick:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aacca60238ca600d8298a182926642417" id="r_aacca60238ca600d8298a182926642417"><td class="memItemLeft" align="right" valign="top"><a id="aacca60238ca600d8298a182926642417" name="aacca60238ca600d8298a182926642417"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>trick</b> (std::string id)</td></tr>
-<tr class="separator:aacca60238ca600d8298a182926642417"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c920637d04e63feff6ff160f22ebce6" id="r_a3c920637d04e63feff6ff160f22ebce6"><td class="memItemLeft" align="right" valign="top"><a id="a3c920637d04e63feff6ff160f22ebce6" name="a3c920637d04e63feff6ff160f22ebce6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>trick</b> (std::string id, std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt; &amp;cards, <a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *trick_color, <a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *trump_color)</td></tr>
-<tr class="separator:a3c920637d04e63feff6ff160f22ebce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ecb1c5ebe84a300d7388e2846737fa4" id="r_a3ecb1c5ebe84a300d7388e2846737fa4"><td class="memItemLeft" align="right" valign="top"><a id="a3ecb1c5ebe84a300d7388e2846737fa4" name="a3ecb1c5ebe84a300d7388e2846737fa4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>trick</b> (int trump)</td></tr>
+<tr class="memitem:a3b0a12789b87d15d9cdc4e5b6f85b47d" id="r_a3b0a12789b87d15d9cdc4e5b6f85b47d"><td class="memItemLeft" align="right" valign="top"><a id="a3b0a12789b87d15d9cdc4e5b6f85b47d" name="a3b0a12789b87d15d9cdc4e5b6f85b47d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>trick</b> ()</td></tr>
+<tr class="memdesc:a3b0a12789b87d15d9cdc4e5b6f85b47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new trick object. <br /></td></tr>
+<tr class="separator:a3b0a12789b87d15d9cdc4e5b6f85b47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb172ad9a476e96a754eea0c33e1eda9" id="r_abb172ad9a476e96a754eea0c33e1eda9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb172ad9a476e96a754eea0c33e1eda9">trick</a> (const std::string &amp;id)</td></tr>
+<tr class="memdesc:abb172ad9a476e96a754eea0c33e1eda9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new trick object (from_diff).  <br /></td></tr>
+<tr class="separator:abb172ad9a476e96a754eea0c33e1eda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab756ba7a19c4bf98f0d8456ad0081fc3" id="r_ab756ba7a19c4bf98f0d8456ad0081fc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab756ba7a19c4bf98f0d8456ad0081fc3">trick</a> (const std::string &amp;id, const std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt; &amp;cards, <a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *trick_color, <a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *trump_color)</td></tr>
+<tr class="memdesc:ab756ba7a19c4bf98f0d8456ad0081fc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new trick object during deserialization.  <br /></td></tr>
+<tr class="separator:ab756ba7a19c4bf98f0d8456ad0081fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ecb1c5ebe84a300d7388e2846737fa4" id="r_a3ecb1c5ebe84a300d7388e2846737fa4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ecb1c5ebe84a300d7388e2846737fa4">trick</a> (int trump)</td></tr>
+<tr class="memdesc:a3ecb1c5ebe84a300d7388e2846737fa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new trick object.  <br /></td></tr>
 <tr class="separator:a3ecb1c5ebe84a300d7388e2846737fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41f315804ac73454c8e41438da20a9c3" id="r_a41f315804ac73454c8e41438da20a9c3"><td class="memItemLeft" align="right" valign="top"><a id="a41f315804ac73454c8e41438da20a9c3" name="a41f315804ac73454c8e41438da20a9c3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_trick_color</b> () const</td></tr>
+<tr class="memitem:a22c0b586f1d6c3baeb7bb0e22eb7dfe2" id="r_a22c0b586f1d6c3baeb7bb0e22eb7dfe2"><td class="memItemLeft" align="right" valign="top"><a id="a22c0b586f1d6c3baeb7bb0e22eb7dfe2" name="a22c0b586f1d6c3baeb7bb0e22eb7dfe2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~trick</b> () override</td></tr>
+<tr class="memdesc:a22c0b586f1d6c3baeb7bb0e22eb7dfe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs a trick object. <br /></td></tr>
+<tr class="separator:a22c0b586f1d6c3baeb7bb0e22eb7dfe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f315804ac73454c8e41438da20a9c3" id="r_a41f315804ac73454c8e41438da20a9c3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41f315804ac73454c8e41438da20a9c3">get_trick_color</a> () const</td></tr>
+<tr class="memdesc:a41f315804ac73454c8e41438da20a9c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trick color.  <br /></td></tr>
 <tr class="separator:a41f315804ac73454c8e41438da20a9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d75f9e8fc94fd122adfc39a20089268" id="r_a1d75f9e8fc94fd122adfc39a20089268"><td class="memItemLeft" align="right" valign="top"><a id="a1d75f9e8fc94fd122adfc39a20089268" name="a1d75f9e8fc94fd122adfc39a20089268"></a>
-std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_cards_and_players</b> () const</td></tr>
+<tr class="memitem:a1d75f9e8fc94fd122adfc39a20089268" id="r_a1d75f9e8fc94fd122adfc39a20089268"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d75f9e8fc94fd122adfc39a20089268">get_cards_and_players</a> () const</td></tr>
+<tr class="memdesc:a1d75f9e8fc94fd122adfc39a20089268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the played cards and players who played them as pairs.  <br /></td></tr>
 <tr class="separator:a1d75f9e8fc94fd122adfc39a20089268"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69c49e2968abb235a6c7148cb05b0e64" id="r_a69c49e2968abb235a6c7148cb05b0e64"><td class="memItemLeft" align="right" valign="top"><a id="a69c49e2968abb235a6c7148cb05b0e64" name="a69c49e2968abb235a6c7148cb05b0e64"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_trump_color</b> () const</td></tr>
+<tr class="memitem:a69c49e2968abb235a6c7148cb05b0e64" id="r_a69c49e2968abb235a6c7148cb05b0e64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69c49e2968abb235a6c7148cb05b0e64">get_trump_color</a> () const</td></tr>
+<tr class="memdesc:a69c49e2968abb235a6c7148cb05b0e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trump color.  <br /></td></tr>
 <tr class="separator:a69c49e2968abb235a6c7148cb05b0e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14bd514e6be089b06706fe9604eb81e" id="r_ad14bd514e6be089b06706fe9604eb81e"><td class="memItemLeft" align="right" valign="top"><a id="ad14bd514e6be089b06706fe9604eb81e" name="ad14bd514e6be089b06706fe9604eb81e"></a>
-<a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>wrap_up_trick</b> (std::string &amp;err)</td></tr>
-<tr class="separator:ad14bd514e6be089b06706fe9604eb81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0423586d2ae513841f9ce73725f6baae" id="r_a0423586d2ae513841f9ce73725f6baae"><td class="memItemLeft" align="right" valign="top"><a id="a0423586d2ae513841f9ce73725f6baae" name="a0423586d2ae513841f9ce73725f6baae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_up_round</b> (std::string &amp;err, int trump)</td></tr>
-<tr class="separator:a0423586d2ae513841f9ce73725f6baae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d3b5aa88a1469dc3d58f30885752f5d" id="r_a2d3b5aa88a1469dc3d58f30885752f5d"><td class="memItemLeft" align="right" valign="top"><a id="a2d3b5aa88a1469dc3d58f30885752f5d" name="a2d3b5aa88a1469dc3d58f30885752f5d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>add_card</b> (<a class="el" href="classcard.html">card</a> *played_card, <a class="el" href="classplayer.html">player</a> *current_player, std::string &amp;err)</td></tr>
+<tr class="memitem:ae5b769ed0fc2933c1a44b5e481c18b00" id="r_ae5b769ed0fc2933c1a44b5e481c18b00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5b769ed0fc2933c1a44b5e481c18b00">set_up_round</a> (int trump, std::string &amp;err)</td></tr>
+<tr class="memdesc:ae5b769ed0fc2933c1a44b5e481c18b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up a trick.  <br /></td></tr>
+<tr class="separator:ae5b769ed0fc2933c1a44b5e481c18b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384560623ffaf776797948cf35197c73" id="r_a384560623ffaf776797948cf35197c73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a384560623ffaf776797948cf35197c73">wrap_up_trick</a> (std::string &amp;err) const</td></tr>
+<tr class="memdesc:a384560623ffaf776797948cf35197c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps up a trick at the end of a trick or round.  <br /></td></tr>
+<tr class="separator:a384560623ffaf776797948cf35197c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d3b5aa88a1469dc3d58f30885752f5d" id="r_a2d3b5aa88a1469dc3d58f30885752f5d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d3b5aa88a1469dc3d58f30885752f5d">add_card</a> (<a class="el" href="classcard.html">card</a> *played_card, <a class="el" href="classplayer.html">player</a> *current_player, std::string &amp;err)</td></tr>
+<tr class="memdesc:a2d3b5aa88a1469dc3d58f30885752f5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a card to the trick.  <br /></td></tr>
 <tr class="separator:a2d3b5aa88a1469dc3d58f30885752f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8ebb9597fd3a523cba150f5a1ab2b2a" id="r_ab8ebb9597fd3a523cba150f5a1ab2b2a"><td class="memItemLeft" align="right" valign="top"><a id="ab8ebb9597fd3a523cba150f5a1ab2b2a" name="ab8ebb9597fd3a523cba150f5a1ab2b2a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_trick_color</b> (int color)</td></tr>
-<tr class="separator:ab8ebb9597fd3a523cba150f5a1ab2b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97176df194eae794691356cd83292b04" id="r_a97176df194eae794691356cd83292b04"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97176df194eae794691356cd83292b04">write_into_json</a> (rapidjson::Value &amp;json, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
+<tr class="memitem:a0f8c45882691509564ec42efed0d1aaa" id="r_a0f8c45882691509564ec42efed0d1aaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f8c45882691509564ec42efed0d1aaa">set_trick_color</a> (int color) const</td></tr>
+<tr class="memdesc:a0f8c45882691509564ec42efed0d1aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the trick color.  <br /></td></tr>
+<tr class="separator:a0f8c45882691509564ec42efed0d1aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97176df194eae794691356cd83292b04" id="r_a97176df194eae794691356cd83292b04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97176df194eae794691356cd83292b04">write_into_json</a> (rapidjson::Value &amp;json, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
+<tr class="memdesc:a97176df194eae794691356cd83292b04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes a trick object into a json object.  <br /></td></tr>
 <tr class="separator:a97176df194eae794691356cd83292b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classunique__serializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classunique__serializable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classunique__serializable.html">unique_serializable</a></td></tr>
 <tr class="memitem:afda021db3c4d16dfc6cd8cd6a7c2aad7 inherit pub_methods_classunique__serializable" id="r_afda021db3c4d16dfc6cd8cd6a7c2aad7"><td class="memItemLeft" align="right" valign="top">
@@ -151,8 +165,8 @@ virtual rapidjson::Document *&#160;</td><td class="memItemRight" valign="bottom"
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1a3d94f638672d3d60d596190ae59dfb" id="r_a1a3d94f638672d3d60d596190ae59dfb"><td class="memItemLeft" align="right" valign="top"><a id="a1a3d94f638672d3d60d596190ae59dfb" name="a1a3d94f638672d3d60d596190ae59dfb"></a>
-static <a class="el" href="classtrick.html">trick</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const rapidjson::Value &amp;json)</td></tr>
+<tr class="memitem:a1a3d94f638672d3d60d596190ae59dfb" id="r_a1a3d94f638672d3d60d596190ae59dfb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtrick.html">trick</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a3d94f638672d3d60d596190ae59dfb">from_json</a> (const rapidjson::Value &amp;json)</td></tr>
+<tr class="memdesc:a1a3d94f638672d3d60d596190ae59dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes a trick object from a json object.  <br /></td></tr>
 <tr class="separator:a1a3d94f638672d3d60d596190ae59dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -166,7 +180,359 @@ Additional Inherited Members</h2></td></tr>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></tr>
 <tr class="separator:a7d95a28fd25510504eedde50c0e3c95b inherit pro_attribs_classunique__serializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the trick in the game. </p>
+<p>This class encapsulates all information about a trick, including the trick color (suit of the trick), the trump color, and the cards played in the trick.</p>
+<p>Every round consists of round-number-many tricks. In each trick, each player plays exactly one card. The first played color determines the trick color, and other players must play cards of that color if they hold any (exception: wizards and jesters can always be played). Each trick has one winner, which is determined by the player who played the first wizard, or by the player who played the highest trump color card, or by the player who played the highest trick color card (in that order). </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abb172ad9a476e96a754eea0c33e1eda9" name="abb172ad9a476e96a754eea0c33e1eda9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb172ad9a476e96a754eea0c33e1eda9">&#9670;&#160;</a></span>trick() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">trick::trick </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new trick object (from_diff). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The trick's id. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab756ba7a19c4bf98f0d8456ad0081fc3" name="ab756ba7a19c4bf98f0d8456ad0081fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab756ba7a19c4bf98f0d8456ad0081fc3">&#9670;&#160;</a></span>trick() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">trick::trick </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>cards</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *</td>          <td class="paramname"><span class="paramname"><em>trick_color</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classserializable__value.html">serializable_value</a>&lt; int &gt; *</td>          <td class="paramname"><span class="paramname"><em>trump_color</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a new trick object during deserialization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The trick's id. </td></tr>
+    <tr><td class="paramname">cards</td><td>The trick's cards. </td></tr>
+    <tr><td class="paramname">trick_color</td><td>The trick color. </td></tr>
+    <tr><td class="paramname">trump_color</td><td>The trump color. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3ecb1c5ebe84a300d7388e2846737fa4" name="a3ecb1c5ebe84a300d7388e2846737fa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ecb1c5ebe84a300d7388e2846737fa4">&#9670;&#160;</a></span>trick() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">trick::trick </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>trump</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new trick object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trump</td><td>The trump color. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2d3b5aa88a1469dc3d58f30885752f5d" name="a2d3b5aa88a1469dc3d58f30885752f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d3b5aa88a1469dc3d58f30885752f5d">&#9670;&#160;</a></span>add_card()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool trick::add_card </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcard.html">card</a> *</td>          <td class="paramname"><span class="paramname"><em>played_card</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>current_player</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a card to the trick. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">played_card</td><td>The card that is played. </td></tr>
+    <tr><td class="paramname">current_player</td><td>The player who played the card. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the card could be added to the trick or not.</dd></dl>
+<p>To keep track of who played which card, this function adds both the card that has been played and the player who played the card as a pair to the trick. In case there is no trick color yet, the function also determines the trick color. </p>
+
+</div>
+</div>
+<a id="a1a3d94f638672d3d60d596190ae59dfb" name="a1a3d94f638672d3d60d596190ae59dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a3d94f638672d3d60d596190ae59dfb">&#9670;&#160;</a></span>from_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtrick.html">trick</a> * trick::from_json </td>
+          <td>(</td>
+          <td class="paramtype">const rapidjson::Value &amp;</td>          <td class="paramname"><span class="paramname"><em>json</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deserializes a trick object from a json object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json</td><td>The json object containing the trick information. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a new trick object created from the given json object. </dd></dl>
+
+</div>
+</div>
+<a id="a1d75f9e8fc94fd122adfc39a20089268" name="a1d75f9e8fc94fd122adfc39a20089268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d75f9e8fc94fd122adfc39a20089268">&#9670;&#160;</a></span>get_cards_and_players()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; <a class="el" href="classcard.html">card</a> *, <a class="el" href="classplayer.html">player</a> * &gt; &gt; trick::get_cards_and_players </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the played cards and players who played them as pairs. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pairs of played cards and players who played them. </dd></dl>
+
+</div>
+</div>
+<a id="a41f315804ac73454c8e41438da20a9c3" name="a41f315804ac73454c8e41438da20a9c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41f315804ac73454c8e41438da20a9c3">&#9670;&#160;</a></span>get_trick_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int trick::get_trick_color </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the trick color. </p>
+<dl class="section return"><dt>Returns</dt><dd>The trick color. </dd></dl>
+
+</div>
+</div>
+<a id="a69c49e2968abb235a6c7148cb05b0e64" name="a69c49e2968abb235a6c7148cb05b0e64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69c49e2968abb235a6c7148cb05b0e64">&#9670;&#160;</a></span>get_trump_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int trick::get_trump_color </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the trump color. </p>
+<dl class="section return"><dt>Returns</dt><dd>The trump color. </dd></dl>
+
+</div>
+</div>
+<a id="a0f8c45882691509564ec42efed0d1aaa" name="a0f8c45882691509564ec42efed0d1aaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f8c45882691509564ec42efed0d1aaa">&#9670;&#160;</a></span>set_trick_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void trick::set_trick_color </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the trick color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>The trick color to be set. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae5b769ed0fc2933c1a44b5e481c18b00" name="ae5b769ed0fc2933c1a44b5e481c18b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b769ed0fc2933c1a44b5e481c18b00">&#9670;&#160;</a></span>set_up_round()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void trick::set_up_round </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>trump</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up a trick. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trump</td><td>The trump color. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>To set up a trick, the played cards are removed from the trick (not the actual card objects, just the pointers), the trick color is set to no color (0), and the trump color is set to the input value. </p>
+
+</div>
+</div>
+<a id="a384560623ffaf776797948cf35197c73" name="a384560623ffaf776797948cf35197c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384560623ffaf776797948cf35197c73">&#9670;&#160;</a></span>wrap_up_trick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplayer.html">player</a> * trick::wrap_up_trick </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wraps up a trick at the end of a trick or round. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The player who won the trick.</dd></dl>
+<p>To wrap up the trick, this function determines the winner of the trick. This is done considering the cards that have been played during the trick, and considering the trump color. The round is won by the player who played the first wizard, or the first jester in case all players play jesters. If neither wizards nor 4 jesters are played, the player who played the highest card of the trump color wins the trick. If no such card is played, the player with the highest trick color (suit) card wins. </p>
+
+</div>
+</div>
 <a id="a97176df194eae794691356cd83292b04" name="a97176df194eae794691356cd83292b04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97176df194eae794691356cd83292b04">&#9670;&#160;</a></span>write_into_json()</h2>
 
@@ -193,6 +559,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Serializes a trick object into a json object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json</td><td>The json object for serializing the trick. </td></tr>
+    <tr><td class="paramname">allocator</td><td>The json allocator for serializing the trick. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classserializable.html">serializable</a>.</p>
 
