@@ -401,7 +401,7 @@ TEST_F(TrickTest, SetupRound)
 
     test_trick = new trick("test_trick_id", cards_and_players, trick_color, trump_color);
     std::string error = "";
-    test_trick->set_up_round(error, 4);
+    test_trick->set_up_round(4, error);
     EXPECT_EQ(0, test_trick->get_trick_color()); //expect trick color 0 after reset
     EXPECT_EQ(0, test_trick->get_cards_and_players().size()); //expect empty cards and players vector
 
@@ -422,7 +422,7 @@ TEST_F(TrickTest, AddCard)
     std::vector<std::pair<card*, player*>> cards_and_players = {{card1, player1}};
 
     test_trick = new trick();
-    test_trick->set_up_round(err, trump_color);
+    test_trick->set_up_round(trump_color, err);
     EXPECT_TRUE(test_trick->add_card(card1, player1, err));//card1 is in hand
     //EXPECT_FALSE(test_trick->add_card(card2, player1, err));//card 2 is not in hand
     EXPECT_EQ(test_trick->get_cards_and_players(), cards_and_players); //check if player was added to cards_
@@ -454,7 +454,7 @@ TEST_F(TrickTest, EntireRound)
 
     //create trick
     test_trick = new trick();
-    test_trick->set_up_round(err, trump_color);
+    test_trick->set_up_round(trump_color, err);
 
     // Test adding valid cards from player 1
     EXPECT_TRUE(test_trick->add_card(card1, player1, err));
