@@ -9,8 +9,15 @@
 
 // font for buttons
 wxFont magicalFont = wxFont(wxFontInfo(20).FaceName("Magic School One"));
-wxFont regularFont = wxFont(wxFontInfo(12).FaceName("Junicode"));
-wxFont regularFontBig = wxFont(wxFontInfo(16).FaceName("Junicode"));
+
+//font for general text
+wxFont regularFont = wxFont(wxFontInfo(12).FaceName("Junicode")); //requires yy:20
+
+//font for player names
+wxFont regularFontBig = wxFont(wxFontInfo(16).FaceName("Junicode")); //requires yy:35, xx:150
+
+//font for round announcement
+wxFont magicalFontGigantic = wxFont(wxFontInfo(70).FaceName("Magic School One"));
 
 
 MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
@@ -304,6 +311,39 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
         trickPanelSizer_hor->Add(wizardLogo, 0, wxALIGN_CENTER );
     }
 }
+
+// round announcement shown at the beginning of every new round
+void MainGamePanelWizard::showRoundOverlay(int roundNumber) { //obtain round number with std::to_string(gameState->get_round_number()+1)
+    // Create a panel to act as the overlay
+    wxPanel* overlayPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, this->GetSize()); //create panel the size of the main game panel
+    overlayPanel->SetBackgroundColour(wxColour(0, 0, 0, 70)); // make current game panel opaque
+
+    // Create the text
+    wxString roundText = wxString::Format("ROUND %d", roundNumber);
+    wxStaticText* roundLabel = new wxStaticText(overlayPanel, wxID_ANY, roundText, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    roundLabel->SetFont(magicalFontGigantic);
+    roundLabel->SetForegroundColour(*wxWHITE);
+
+    // center text
+    wxBoxSizer* overlaySizer = new wxBoxSizer(wxVERTICAL);
+    overlaySizer->AddStretchSpacer(1);
+    overlaySizer->Add(roundLabel, 0, wxALIGN_CENTER_HORIZONTAL);
+    overlaySizer->AddStretchSpacer(1);
+
+    overlayPanel->SetSizer(overlaySizer);
+
+    // Show the overlay
+    overlayPanel->Raise();
+    overlayPanel->Show();
+
+    // Set a timer to remove the overlay after 1 second
+    wxTimer* timer = new wxTimer(this, wxID_ANY);
+    timer->Bind(wxEVT_TIMER, [this, overlayPanel](wxTimerEvent& event) {
+        overlayPanel->Destroy(); // Remove the overlay panel
+    });
+    timer->Start(1000, wxTIMER_ONE_SHOT); // 1-second delay
+}
+
 
 void MainGamePanelWizard::buildTurnIndicator(wxGridBagSizer* sizer, game_state* gameState, player* me)
 {
