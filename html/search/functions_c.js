@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['main_0',['Main',['../namespacegmock__test__utils.html#ab436e920b5feb62a33936b0d839702e7',1,'gmock_test_utils.Main()'],['../namespacegtest__test__utils.html#affb42cd189bf8fb9618e5b7178fd34fd',1,'gtest_test_utils.Main()']]],
-  ['main_1',['main',['../namespacecpp_1_1tokenize.html#a28ff7996105f9b03b22335c579838769',1,'cpp::tokenize']]],
-  ['malloc_2',['Malloc',['../class_memory_pool_allocator.html#a8d300531c1f556172aef1259ff55cb48',1,'MemoryPoolAllocator']]],
-  ['memorypoolallocator_3',['MemoryPoolAllocator',['../class_memory_pool_allocator.html#aeec85ac657f242ac5620115141be5209',1,'MemoryPoolAllocator::MemoryPoolAllocator(size_t chunkSize=kDefaultChunkCapacity, BaseAllocator *baseAllocator=0)'],['../class_memory_pool_allocator.html#a1f0d865093fdb955d956b7a445a8ddbf',1,'MemoryPoolAllocator::MemoryPoolAllocator(void *buffer, size_t size, size_t chunkSize=kDefaultChunkCapacity, BaseAllocator *baseAllocator=0)']]]
+  ['_7ecard_0',['~card',['../classcard.html#ac7a5d8d53e8cc33f5c5a03d8ccb806c4',1,'card']]],
+  ['_7edeck_1',['~deck',['../classdeck.html#a63a688bda08bfef8d2c37d53523b7b12',1,'deck']]],
+  ['_7ehand_2',['~hand',['../classhand.html#af3ffc5e5b46f04b14f12a9fc130b220a',1,'hand']]],
+  ['_7eplayer_3',['~player',['../classplayer.html#a0a62c0208584465db2daa1ac6e15b1ad',1,'player']]],
+  ['_7etrick_4',['~trick',['../classtrick.html#a22c0b586f1d6c3baeb7bb0e22eb7dfe2',1,'trick']]]
 ];

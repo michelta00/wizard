@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['remove_5fcard_0',['remove_card',['../classhand.html#aa466496b7ce0b58dbd63620535430439',1,'hand']]]
+  ['is_5fempty_0',['is_empty',['../classdeck.html#a6aef528ff7b9c608863cc77c19b7882d',1,'deck']]]
 ];

@@ -223,7 +223,7 @@ std::vector<player*>& game_state::get_players() {
                 // round has not ended yet
                 if (_trick_number->get_value() < _round_number->get_value()){
                     _trick_number->set_value(_trick_number->get_value() + 1);
-      	            _trick->set_up_round(err, _trump_color->get_value());
+      	            _trick->set_up_round(_trump_color->get_value(), err);
 
                     // winner of trick is starting player of next trick
                     int winner_index = get_player_index(winner);
@@ -280,7 +280,7 @@ std::vector<player*>& game_state::get_players() {
             _deck->draw_cards(player, _round_number->get_value() + 1, err);
         }
         determine_trump_color();
-        _trick->set_up_round(err, _trump_color->get_value());
+        _trick->set_up_round(_trump_color->get_value(), err);
     }
 
     bool game_state::start_game(std::string &err) {
