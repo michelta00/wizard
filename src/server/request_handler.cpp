@@ -140,6 +140,7 @@ request_response* request_handler::handle_request(const client_request* const re
                         return new request_response(game_instance_ptr->get_id(), req_id, true,
                                                     game_instance_ptr->get_game_state()->to_json(), err);
                     }
+                    // TODO: I think this logic makes no sense, if the player is not in the game this should be outside the if cond it is in
                     // Case 2: player is already in player_LUT of player_manager but not yet in a game
                     player_manager::remove_player(player_id, player);
 
