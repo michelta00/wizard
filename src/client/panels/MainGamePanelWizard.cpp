@@ -144,6 +144,9 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     // show button to display score board
     this->buildScoreBoardButton(sizer, gameState);
 
+    // show button to leave game
+    this->buildLeaveGameButton(sizer, gameState, me);
+
     // update Layout
     this->Layout();
 }
@@ -162,6 +165,24 @@ void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_stat
         scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
             ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
             scoreBoard.ShowModal();
+        });
+    }
+
+}
+
+void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState, player* me) {
+    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,4));
+    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
+
+    if (gameState->is_started()) {
+        wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
+        panel->SetSizer(sizer_vert);
+
+        wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+
+        leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+            GameController::leaveGame();
         });
     }
 

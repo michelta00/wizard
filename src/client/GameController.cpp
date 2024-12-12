@@ -147,6 +147,11 @@ void GameController::startGame() {
     ClientNetworkManager::sendRequest(request);
 }
 
+void GameController::leaveGame() {
+    leave_game_request request = leave_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), _me->get_player_name());
+    ClientNetworkManager::sendRequest(request);
+}
+
 void GameController::estimateTricks(int nof_tricks) {
     estimate_tricks_request request = estimate_tricks_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), nof_tricks);
     ClientNetworkManager::sendRequest(request);
@@ -154,12 +159,6 @@ void GameController::estimateTricks(int nof_tricks) {
 
 void GameController::playCard(card* cardToPlay) {
     play_card_request request = play_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), cardToPlay->get_id());
-    ClientNetworkManager::sendRequest(request);
-}
-
-void GameController::leaveGame()
-{
-    leave_game_request request = leave_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
 }
 

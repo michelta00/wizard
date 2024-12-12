@@ -18,8 +18,8 @@ public:
     static void connectToServer();
     static void updateGameState(game_state* newGameState);
     static void startGame();
-    static void estimateTricks(int nof_cards);
     static void leaveGame();
+    static void estimateTricks(int nof_cards);
     static void playCard(card* cardToPlay);
     static void estimateTrick();
 
