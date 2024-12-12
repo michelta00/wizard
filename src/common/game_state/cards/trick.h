@@ -93,6 +93,15 @@ public:
      */
     [[nodiscard]] int get_trump_color() const;
 
+    /**
+     * @brief Gets the winner of the trick.
+     * @return The winner of the trick.
+     *
+     * This function is used by the client to determine the winner of a trick, and to display the winner after the trick.
+     * It uses the same logic as the wrap_up_round function on the server side.
+     */
+    [[nodiscard]] player* get_winner() const;
+
 #ifdef WIZARD_SERVER
 // state update functions
     /**

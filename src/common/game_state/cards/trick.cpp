@@ -68,6 +68,58 @@ std::vector<std::pair<card*, player*>> trick::get_cards_and_players() const
         return this->_cards;
 }
 
+player* trick::get_winner() const
+{
+        player* winner = _cards[0].second; // base winner is first player, in case of 4 jokers
+
+        // Determine and return winner
+        // wizard check
+        for (auto & _card : _cards) {
+                if (_card.first->get_value() == 14)
+                {
+                        return _card.second;
+                }
+        }
+        // all joker check
+        if (_trick_color->get_value() == 0)
+        {
+                return winner; // would be first joker player
+        }
+        // trump check
+        bool trump_present = false;
+        int highest_trump = 0;
+        for (auto & _card : _cards) {
+                if (_card.first->get_color() == _trump_color->get_value())
+                {
+                        trump_present = true;
+                        if (_card.first->get_value() > highest_trump)
+                        {
+                                highest_trump = _card.first->get_value();
+                                winner = _card.second;
+                        }
+                }
+        }
+        if (trump_present) {
+                return winner;
+        }
+        // highest card of trick color check
+        int winner_idx = -1; // use a non joker idx;
+        for (int i = 0; i < _cards.size(); i++) {
+                //check if played card color matches trick color
+                if (_cards[i].first->get_color() == _trick_color->get_value())
+                        if (winner_idx == -1 ||
+                                _cards[i].first->get_value()
+                                > _cards[winner_idx].first->get_value()) {
+                                winner_idx = i;
+                                }
+        }
+        if (winner_idx != -1) {
+                winner = _cards[winner_idx].second;
+        }
+
+        return winner;
+}
+
 
 #ifdef WIZARD_SERVER
 // state update functions

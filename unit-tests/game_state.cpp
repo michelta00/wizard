@@ -315,7 +315,7 @@ TEST_F(GameStatePlayCardTest, PlayCardRound1)
 
 // this function enables us to start from arbitrary points in the game and test from there
 void create_json(rapidjson::Value &json, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator,
-                 std::vector<player*>& test_players, deck* test_deck, trick* test_trick,
+                 std::vector<player*>& test_players, deck* test_deck, trick* test_trick, trick* test_last_trick,
                  serializable_value<bool>* test_is_finished, serializable_value<bool>* test_is_started,
                  serializable_value<bool>* test_is_estimation_phase, serializable_value<int>* test_round_number,
                  serializable_value<int>* test_trick_number, serializable_value<int>* test_starting_player_idx,
@@ -337,6 +337,11 @@ void create_json(rapidjson::Value &json, rapidjson::MemoryPoolAllocator<rapidjso
     rapidjson::Value trick_val(rapidjson::kObjectType);
     test_trick->write_into_json(trick_val, allocator);
     json.AddMember("trick", trick_val, allocator);
+
+    // last trick
+    rapidjson::Value last_trick_val(rapidjson::kObjectType);
+    test_last_trick->write_into_json(last_trick_val, allocator);
+    json.AddMember("last_trick", last_trick_val, allocator);
 
     // is finished
     rapidjson::Value is_finished_val(rapidjson::kObjectType);
@@ -395,6 +400,7 @@ TEST(GameStateJson, CreateJson)
     std::vector test_players = { new player("player1"), new player("player2"), new player("player3") };
     const auto test_deck = new deck();
     const auto test_trick = new trick();
+    const auto test_last_trick = new trick();
     const auto test_is_finished = new serializable_value<bool>(false);
     const auto test_is_started = new serializable_value<bool>(false);
     const auto test_is_estimation_phase = new serializable_value<bool>(true);
@@ -408,8 +414,8 @@ TEST(GameStateJson, CreateJson)
 
     auto* json = new rapidjson::Document();
     json->SetObject();
-    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_is_finished, test_is_started,
-                test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
+    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick, test_is_finished,
+                test_is_started, test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
                 test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
@@ -433,6 +439,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimation)
                                  new player("player3"), new player("player4") };
     const auto test_deck = new deck();
     const auto test_trick = new trick();
+    const auto test_last_trick = new trick();
     const auto test_is_finished = new serializable_value<bool>(false);
     const auto test_is_started = new serializable_value<bool>(true);
     const auto test_is_estimation_phase = new serializable_value<bool>(true);
@@ -446,9 +453,10 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimation)
 
     auto* json = new rapidjson::Document();
     json->SetObject();
-    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_is_finished, test_is_started,
-                test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
-                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
+    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
+                test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
+                test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
+                test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -473,6 +481,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimationToPlaying)
                                  new player("player3"), new player("player4") };
     const auto test_deck = new deck();
     const auto test_trick = new trick();
+    const auto test_last_trick = new trick();
     const auto test_is_finished = new serializable_value<bool>(false);
     const auto test_is_started = new serializable_value<bool>(true);
     const auto test_is_estimation_phase = new serializable_value<bool>(true);
@@ -486,9 +495,10 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimationToPlaying)
 
     auto* json = new rapidjson::Document();
     json->SetObject();
-    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_is_finished, test_is_started,
-                test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
-                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
+    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
+                test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
+                test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
+                test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -514,6 +524,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerPlayingToNextRound)
                                  new player("player3"), new player("player4") };
     const auto test_deck = new deck();
     const auto test_trick = new trick();
+    const auto test_last_trick = new trick();
     const auto test_is_finished = new serializable_value<bool>(false);
     const auto test_is_started = new serializable_value<bool>(true);
     const auto test_is_estimation_phase = new serializable_value<bool>(false);
@@ -527,9 +538,10 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerPlayingToNextRound)
 
     auto* json = new rapidjson::Document();
     json->SetObject();
-    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_is_finished, test_is_started,
-                test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
-                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
+    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
+                test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
+                test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
+                test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -582,6 +594,7 @@ TEST(GameStateFinishGameTest, FinishGame)
                                  new player("player3"), new player("player4") };
     const auto test_deck = new deck();
     const auto test_trick = new trick();
+    const auto test_last_trick = new trick();
     const auto test_is_finished = new serializable_value<bool>(false);
     const auto test_is_started = new serializable_value<bool>(true);
     const auto test_is_estimation_phase = new serializable_value<bool>(false);
@@ -595,9 +608,10 @@ TEST(GameStateFinishGameTest, FinishGame)
 
     auto* json = new rapidjson::Document();
     json->SetObject();
-    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_is_finished, test_is_started,
-                test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
-                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
+    create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
+                test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
+                test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
+                test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
