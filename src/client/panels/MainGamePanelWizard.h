@@ -21,7 +21,7 @@ private:
     void buildTrumpCard(wxGridBagSizer* sizer, game_state* gameState);
 
     void buildScoreBoardButton(wxGridBagSizer* sizer, game_state* gameState);
-    void buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState, player* me);
+    void buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState);
 
     wxSize const panelSize = wxSize(960, 680); // also set in the constructor implementation
     wxSize const cardSize = wxSize(70, 108);

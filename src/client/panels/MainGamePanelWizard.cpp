@@ -170,7 +170,7 @@ void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_stat
 
 }
 
-void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState, player* me) {
+void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,4));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
