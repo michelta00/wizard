@@ -208,6 +208,7 @@ std::vector<player*>& game_state::get_players() {
 
 void game_state::set_trick(trick* new_trick) {
     if(new_trick != nullptr){
+        delete _trick;
         _trick = new_trick;
     }
 }

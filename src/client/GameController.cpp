@@ -107,14 +107,14 @@ void GameController::updateGameState(game_state* newGameState) {
             int round_number = _currentGameState->get_round_number();
 
             // end of trick
-            if(_currentGameState->get_trick_number() != oldGameState->get_trick_number())
+            if(_currentGameState->get_trick_number() != oldGameState->get_trick_number() || round_number != oldGameState->get_round_number())
             {
                 std::cout << "We are at the end of the trick" << std::endl;
-                oldGameState->set_trick(_currentGameState->get_last_trick());
+                trick* trick_to_show = new trick(*_currentGameState->get_last_trick());
+                oldGameState->set_trick(trick_to_show);
                 GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
                 GameController::_mainGamePanelWizard->buildGameState(oldGameState, GameController::_me);
                 std::cout << "Main game panel was shown with old game state" << std::endl;
-                oldGameState->set_trick(nullptr);
                 showTrickOverMessage();
             }
 
