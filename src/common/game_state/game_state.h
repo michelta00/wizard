@@ -24,6 +24,7 @@ private:
     std::vector<player*> _players;
     deck* _deck;
     trick* _trick; // only save current trick, won tricks are saved with the players
+    trick* _last_trick;
 
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
@@ -47,7 +48,8 @@ private:
             std::string id,
             std::vector<player*>& players,
             deck* deck,
-            trick* trick,
+            trick* current_trick,
+            trick* last_trick,
 
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
@@ -87,7 +89,10 @@ public:
     player* get_trick_starting_player() const;
     player* get_starting_player() const;
     trick* get_trick() const;
+    trick* get_last_trick() const;
     std::vector<player*>& get_players();
+
+    void set_trick(trick* new_trick);
 
 
 // all in block behind ifdef is only included if wizard server is defined

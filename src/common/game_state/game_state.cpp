@@ -10,6 +10,7 @@ game_state::game_state(std::string id) : unique_serializable(id) {
     _players = std::vector<player*>();
     _deck = new deck();
     _trick = new trick();
+    _last_trick = new trick();
 
     _is_started = new serializable_value<bool>(false);
     _is_finished = new serializable_value<bool>(false);
@@ -25,7 +26,7 @@ game_state::game_state(std::string id) : unique_serializable(id) {
 }
 
 // deserialization constructor
-game_state::game_state(std::string id, std::vector<player*>& players, deck* deck, trick* trick,
+game_state::game_state(std::string id, std::vector<player*>& players, deck* deck, trick* current_trick, trick* last_trick,
                        serializable_value<bool>* is_started, serializable_value<bool>* is_finished,
                        serializable_value<bool>* is_estimation_phase, serializable_value<int>* round_number,
                        serializable_value<int>* trick_number, serializable_value<int>* starting_player_idx,
@@ -34,7 +35,8 @@ game_state::game_state(std::string id, std::vector<player*>& players, deck* deck
         : unique_serializable(id),
           _players(players),
           _deck(deck),
-          _trick(trick),
+          _trick(current_trick),
+          _last_trick(last_trick),
 
           _is_started(is_started),
           _is_finished(is_finished),
@@ -54,6 +56,7 @@ game_state::game_state() : unique_serializable() {
     _players = std::vector<player*>();
     _deck = new deck();
     _trick = new trick();
+    _last_trick = new trick();
 
     _is_started = new serializable_value<bool>(false);
     _is_finished = new serializable_value<bool>(false);
@@ -71,8 +74,13 @@ game_state::game_state() : unique_serializable() {
 // destructor
 game_state::~game_state() {
     delete _deck;
-    delete _trick;
-
+    if(_trick != nullptr)
+    {
+        delete _trick;
+    }
+    if (_last_trick != nullptr){
+        delete _last_trick;
+    }
     delete _is_started;
     delete _is_finished;
     delete _is_estimation_phase;
@@ -87,6 +95,7 @@ game_state::~game_state() {
 
     _deck = nullptr;
     _trick = nullptr;
+    _last_trick = nullptr;
 
     _is_started = nullptr;
     _is_finished = nullptr;
@@ -140,6 +149,11 @@ trick* game_state::get_trick() const
     return _trick;
 }
 
+trick* game_state::get_last_trick() const
+{
+    return _last_trick;
+}
+
 
 bool game_state::is_full() const {
     return _players.size() == _max_nof_players;
@@ -189,6 +203,13 @@ std::vector<player*>& game_state::get_players() {
     return _players;
 }
 
+void game_state::set_trick(trick* new_trick) {
+    if(new_trick != nullptr){
+        delete _trick;
+        _trick = new_trick;
+    }
+}
+
 
 
 
@@ -223,6 +244,10 @@ std::vector<player*>& game_state::get_players() {
                 // round has not ended yet
                 if (_trick_number->get_value() < _round_number->get_value()){
                     _trick_number->set_value(_trick_number->get_value() + 1);
+                    if (_trick != nullptr) {
+                        delete _last_trick;
+                        _last_trick = new trick(*_trick);
+                    }
       	            _trick->set_up_round(_trump_color->get_value(), err);
 
                     // winner of trick is starting player of next trick
@@ -280,6 +305,10 @@ std::vector<player*>& game_state::get_players() {
             _deck->draw_cards(player, _round_number->get_value() + 1, err);
         }
         determine_trump_color();
+        if (_trick != nullptr) {
+            delete _last_trick;
+            _last_trick = new trick(*_trick);
+        }
         _trick->set_up_round(_trump_color->get_value(), err);
     }
 
@@ -457,6 +486,10 @@ void game_state::write_into_json(rapidjson::Value &json,
     _trick->write_into_json(trick_val, allocator);
     json.AddMember("trick", trick_val, allocator);
 
+    rapidjson::Value last_trick_val(rapidjson::kObjectType);
+    _last_trick->write_into_json(last_trick_val, allocator);
+    json.AddMember("last_trick", last_trick_val, allocator);
+
 
 
     rapidjson::Value is_finished_val(rapidjson::kObjectType);
@@ -508,6 +541,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
         && json.HasMember("players")
         && json.HasMember("deck")
         && json.HasMember("trick")
+        && json.HasMember("last_trick")
 
         && json.HasMember("is_finished")
         && json.HasMember("is_started")
@@ -529,6 +563,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
                               deserialized_players,
                               deck::from_json(json["deck"].GetObject()),
                               trick::from_json(json["trick"].GetObject()),
+                              trick::from_json(json["last_trick"].GetObject()),
 
                               serializable_value<bool>::from_json(json["is_started"].GetObject()),
                               serializable_value<bool>::from_json(json["is_finished"].GetObject()),

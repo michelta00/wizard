@@ -38,6 +38,18 @@ public:
      * @brief Constructs a new trick object.
      */
     trick();
+    explicit trick(std::string id);
+    trick(std::string id,
+        std::vector<std::pair<card*, player*>> &cards,
+        serializable_value<int>* trick_color,
+        serializable_value<int>* trump_color);
+
+    /**
+     * @brief Constructs a new trick object as a deep copy of another trick object.
+     * @param other The trick it is copied from.
+     */
+
+    trick(const trick &other);
 
     /**
      * @brief Constructs a new trick object (from_diff).

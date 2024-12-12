@@ -34,6 +34,16 @@ trick::trick(const int trump) : unique_serializable()
         *_trump_color = trump;
 }
 
+trick::trick(const trick &other)
+        : unique_serializable() {
+        // shallow copy
+        _cards = other._cards;
+        // deep copy
+        _trick_color = new serializable_value<int>(*other._trick_color);
+        _trump_color = new serializable_value<int>(*other._trump_color);
+}
+
+
 trick::~trick()
 {
         delete _trick_color;
