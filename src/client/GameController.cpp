@@ -112,7 +112,8 @@ void GameController::updateGameState(game_state* newGameState) {
                 oldGameState->set_trick(trick_to_show);
                 GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
                 GameController::_mainGamePanelWizard->buildGameState(oldGameState, GameController::_me);
-                showTrickOverMessage();
+                player* winner = oldGameState->get_trick()->get_winner();
+                showTrickOverMessage(winner);
             }
 
             if(round_number != oldGameState->get_round_number())
@@ -251,12 +252,10 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     dialog->ShowModal();
 }
 
-void GameController::showTrickOverMessage()
+void GameController::showTrickOverMessage(const player* winner)
 {
     std::string title = "Trick Completed";
     std::string message = " won the trick\n";
-
-    player* winner =  _currentGameState->get_trick_starting_player();
     message = winner->get_player_name() + message;
 
     auto dialog = new ScoreDialog(GameController::_gameWindow, title, message);
