@@ -73,41 +73,15 @@ Compiling the code creates executables for the client (Wizard-client) and for th
 
 #### 2.2.1 Ubuntu 20.04
 
-Compiling the code can either be done manually or by running the provided script.
+Compiling the code can be done by running the provided script.
 
 To use the provided script, run `bash scripts/compile_ubuntu.sh` inside the **wizard** directory.
 
-To manually compile the code on Ubuntu, perform the following steps:
-1. Move into the **wizard** directory if not yet done: `cd /your/path/to/wizard/`
-2. Move into the **sockpp** directory: `cd sockpp/`
-3. Create the following new directory: `mkdir cmake-build-debug`
-4. Move into the **cmake-build-debug** directory: `cd cmake-build-debug`
-5. Run cmake: `cmake ..`
-6. Run make: `make`
-7. Move back into the **wizard** directory: `cd ../..`
-8. Create the following new directory: `mkdir cmake-build-debug`
-9. Move into the **cmake-build-debug** directory: `cd cmake-build-debug`
-10. Run cmake: `cmake ..`
-11. Run make: `make`
-
 #### 2.2.1 macOS Sequoia
 
-Compiling the code can either be done manually or by running the provided script.
+Compiling the code can be done by running the provided script.
 
 To use the provided script, run `zsh scripts/compile_macos.sh` inside the **wizard** directory.
-
-To manually compile the code on Ubuntu, perform the following steps:
-1. Move into the **wizard** directory if not yet done: `cd /your/path/to/wizard/`
-2. Move into the **sockpp** directory: `cd sockpp/`
-3. Create the following new directory: `mkdir cmake-build-debug`
-4. Move into the **cmake-build-debug** directory: `cd cmake-build-debug`
-5. Run cmake: `cmake ..`
-6. Run make: `make`
-7. Move back into the **wizard** directory: `cd ../..`
-8. Create the following new directory: `mkdir cmake-build-debug`
-9. Move into the **cmake-build-debug** directory: `cd cmake-build-debug`
-10. Run cmake: `cmake ..`
-11. Run make: `make`
 
 ---
 
