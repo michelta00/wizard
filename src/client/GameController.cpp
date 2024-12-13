@@ -19,7 +19,6 @@ player* GameController::_me = nullptr;
 game_state* GameController::_currentGameState = nullptr;
 
 
-
 void GameController::init(GameWindow* gameWindow) {
 
     //TODO: panels need to be adapted
@@ -77,6 +76,13 @@ void GameController::connectToServer() {
 
     // convert player name from wxString to std::string
     std::string playerName = inputPlayerName.ToStdString();
+    //player name length check
+    if (playerName.size() > 15)
+    {
+        GameController::showError("Connection error", "Invalid player name length. Please enter a player name between 1 and 15 characters.");
+        return;
+    }
+
 
     // connect to network
     ClientNetworkManager::init(host, port);
@@ -85,6 +91,7 @@ void GameController::connectToServer() {
     GameController::_me = new player(playerName);
     join_game_request request = join_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
+
 
 }
 
@@ -146,6 +153,7 @@ void GameController::updateGameState(game_state* newGameState) {
 void GameController::startGame() {
     start_game_request request = start_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id());
     ClientNetworkManager::sendRequest(request);
+
 }
 
 void GameController::estimateTricks(int nof_tricks) {
@@ -249,6 +257,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     //dialogBox.ShowModal();
 
     auto* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+
     dialog->ShowModal();
 }
 
@@ -301,6 +310,7 @@ void GameController::showGameOverMessage() {
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     int buttonClicked = dialogBox.ShowModal();
+
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
