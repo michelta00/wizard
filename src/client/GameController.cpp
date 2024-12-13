@@ -110,9 +110,10 @@ void GameController::updateGameState(game_state* newGameState) {
             {
                 trick* trick_to_show = new trick(*_currentGameState->get_last_trick());
                 oldGameState->set_trick(trick_to_show);
+                player* winner = oldGameState->get_trick()->get_winner();
+                //TODO: add trick to winner in old game state.
                 GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
                 GameController::_mainGamePanelWizard->buildGameState(oldGameState, GameController::_me);
-                player* winner = oldGameState->get_trick()->get_winner();
                 showTrickOverMessage(winner);
             }
 
@@ -272,7 +273,7 @@ void GameController::showGameOverMessage() {
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
-        return a->get_scores().back()->get_value() < b->get_scores().back()->get_value();
+        return a->get_scores().back()->get_value() > b->get_scores().back()->get_value();
     });
 
     // list all players
