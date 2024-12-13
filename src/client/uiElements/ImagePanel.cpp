@@ -42,7 +42,7 @@ void ImagePanel::paintEvent(wxPaintEvent& event) {
         wxImage transformed;
 
         if(this->_rotation == 0.0) {
-            transformed = this->_image.Scale(newWidth, newHeight, wxIMAGE_QUALITY_BILINEAR);
+            transformed = this->_image.Scale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
 
         } else {
             wxPoint centerOfRotation = wxPoint(this->_image.GetWidth() / 2, this->_image.GetHeight() / 2);
