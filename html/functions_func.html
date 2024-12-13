@@ -95,6 +95,7 @@ $(function(){ initResizable(false); });
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
 <li>card()&#160;:&#160;<a class="el" href="classcard.html#a764d65641c619aedf1842a30e54905b7">card</a></li>
+<li>connectToServer()&#160;:&#160;<a class="el" href="class_game_controller.html#a023da21da545374ee46fb873149976c4">GameController</a></li>
 </ul>
 
 
@@ -106,7 +107,8 @@ $(function(){ initResizable(false); });
 
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
-<li>estimate_tricks()&#160;:&#160;<a class="el" href="classgame__state.html#ac4ebff625d83c633c124890537d60354">game_state</a></li>
+<li>estimate_tricks()&#160;:&#160;<a class="el" href="classgame__instance.html#af1434756e3041deca68b4f4f84176f05">game_instance</a>, <a class="el" href="classgame__state.html#ac4ebff625d83c633c124890537d60354">game_state</a></li>
+<li>estimateTricks()&#160;:&#160;<a class="el" href="class_game_controller.html#abd110563d0f37f06096176c199d22055">GameController</a></li>
 </ul>
 
 
@@ -117,13 +119,16 @@ $(function(){ initResizable(false); });
 
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
+<li>game_instance()&#160;:&#160;<a class="el" href="classgame__instance.html#a2b1d00adf8c933a98698f972827e48b9">game_instance</a></li>
 <li>game_state()&#160;:&#160;<a class="el" href="classgame__state.html#a0c10b830e222d726557c3c33685c595a">game_state</a></li>
 <li>get_cards()&#160;:&#160;<a class="el" href="classhand.html#ad104b0376b1a13d987f349dd524ca47f">hand</a></li>
 <li>get_cards_and_players()&#160;:&#160;<a class="el" href="classtrick.html#a1d75f9e8fc94fd122adfc39a20089268">trick</a></li>
 <li>get_color()&#160;:&#160;<a class="el" href="classcard.html#ab033bc0e71b09d3cf3ac28c2f1fbde18">card</a></li>
 <li>get_current_player()&#160;:&#160;<a class="el" href="classgame__state.html#a2d16f420a8aa651685461a5efb8bb600">game_state</a></li>
 <li>get_game_id()&#160;:&#160;<a class="el" href="classplayer.html#afeb6c5483a59042fcc4a3a2aed6a6a2c">player</a></li>
+<li>get_game_state()&#160;:&#160;<a class="el" href="classgame__instance.html#a852c73a12031d7fbd2095530df595c5c">game_instance</a></li>
 <li>get_hand()&#160;:&#160;<a class="el" href="classplayer.html#af333dcbf7123726c9bda3ab94ba9ee6d">player</a></li>
+<li>get_id()&#160;:&#160;<a class="el" href="classgame__instance.html#a72cd93738171ffc856c3d77df5f967da">game_instance</a></li>
 <li>get_last_trick()&#160;:&#160;<a class="el" href="classgame__state.html#a4327f753f1f5341f9fe3774ea3fbc99b">game_state</a></li>
 <li>get_max_round_number()&#160;:&#160;<a class="el" href="classgame__state.html#aa75c4da6c0056e48e5040be8127d7473">game_state</a></li>
 <li>get_nof_cards()&#160;:&#160;<a class="el" href="classhand.html#adc90d109b7b564a0dbca0b0798c99641">hand</a>, <a class="el" href="classplayer.html#a457c5ab90b0ecd610eead66b41c8333a">player</a></li>
@@ -142,6 +147,8 @@ $(function(){ initResizable(false); });
 <li>get_trick_starting_player()&#160;:&#160;<a class="el" href="classgame__state.html#aa40554d105939c5dce934daaa858c242">game_state</a></li>
 <li>get_trump_color()&#160;:&#160;<a class="el" href="classgame__state.html#abdf6c5116ed643773d676c90a05e6fe4">game_state</a>, <a class="el" href="classtrick.html#a69c49e2968abb235a6c7148cb05b0e64">trick</a></li>
 <li>get_value()&#160;:&#160;<a class="el" href="classcard.html#a2baf8dfef09ac8c1a67b34c2e67186c3">card</a></li>
+<li>get_winner()&#160;:&#160;<a class="el" href="classtrick.html#a4b93ae88c17db486d975408cd8cfad1b">trick</a></li>
+<li>getMainThreadEventHandler()&#160;:&#160;<a class="el" href="class_game_controller.html#abec8c73ea01e4b7e01b2ca1d932e0c16">GameController</a></li>
 </ul>
 
 
@@ -151,18 +158,26 @@ $(function(){ initResizable(false); });
 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>init()&#160;:&#160;<a class="el" href="class_game_controller.html#a8889bad76bc35487d3391fb8a5791616">GameController</a></li>
 <li>is_empty()&#160;:&#160;<a class="el" href="classdeck.html#a6aef528ff7b9c608863cc77c19b7882d">deck</a></li>
 <li>is_estimation_phase()&#160;:&#160;<a class="el" href="classgame__state.html#a88d19342ee76acc4660b3e56e8c126eb">game_state</a></li>
-<li>is_finished()&#160;:&#160;<a class="el" href="classgame__state.html#a9b83de8a89e3bb506184492d22c3cf45">game_state</a></li>
-<li>is_full()&#160;:&#160;<a class="el" href="classgame__state.html#ae161c283e275a57d71834754d11e9e40">game_state</a></li>
+<li>is_finished()&#160;:&#160;<a class="el" href="classgame__instance.html#a5a080dfced3d2d1c697e36160b996a9c">game_instance</a>, <a class="el" href="classgame__state.html#a9b83de8a89e3bb506184492d22c3cf45">game_state</a></li>
+<li>is_full()&#160;:&#160;<a class="el" href="classgame__instance.html#a77d1f40b8727c74f278efe9168f26831">game_instance</a>, <a class="el" href="classgame__state.html#ae161c283e275a57d71834754d11e9e40">game_state</a></li>
 <li>is_player_in_game()&#160;:&#160;<a class="el" href="classgame__state.html#a371d6a6d84395b90c15d84549b05d553">game_state</a></li>
-<li>is_started()&#160;:&#160;<a class="el" href="classgame__state.html#aa0092c41779f38eba5e921e43b38559c">game_state</a></li>
+<li>is_started()&#160;:&#160;<a class="el" href="classgame__instance.html#a2c8a8be71f8c3016075cc08768ebbb64">game_instance</a>, <a class="el" href="classgame__state.html#aa0092c41779f38eba5e921e43b38559c">game_state</a></li>
+</ul>
+
+
+<h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
+<li>leaveGame()&#160;:&#160;<a class="el" href="class_game_controller.html#a8d42b2e41759bfd65cdebad87437369e">GameController</a></li>
 </ul>
 
 
 <h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
-<li>play_card()&#160;:&#160;<a class="el" href="classgame__state.html#a6c65d95086a88b8d111de5553e1210ec">game_state</a></li>
+<li>play_card()&#160;:&#160;<a class="el" href="classgame__instance.html#a1a7e19a4b0907cb0b5f1523edb7e68ca">game_instance</a>, <a class="el" href="classgame__state.html#a6c65d95086a88b8d111de5553e1210ec">game_state</a></li>
+<li>playCard()&#160;:&#160;<a class="el" href="class_game_controller.html#a87b164e2094901861e5b47056634facc">GameController</a></li>
 <li>player()&#160;:&#160;<a class="el" href="classplayer.html#a1f0916939a8caa2e7140d5c89a6aa718">player</a></li>
+<li>processEstimateTricks()&#160;:&#160;<a class="el" href="class_game_controller.html#a5f1023f2029e5dbb25b795a0606e06a9">GameController</a></li>
 </ul>
 
 
@@ -181,18 +196,27 @@ $(function(){ initResizable(false); });
 <li>set_trick_color()&#160;:&#160;<a class="el" href="classtrick.html#a0f8c45882691509564ec42efed0d1aaa">trick</a></li>
 <li>set_up_round()&#160;:&#160;<a class="el" href="classtrick.html#ae5b769ed0fc2933c1a44b5e481c18b00">trick</a></li>
 <li>setup_round()&#160;:&#160;<a class="el" href="classdeck.html#a77851e5cb8297849e91a885ed7959de1">deck</a>, <a class="el" href="classgame__state.html#ab520d4076c53f70a68bc19f355243a4d">game_state</a>, <a class="el" href="classplayer.html#a8cc6464ca3284140c92c6983ee62a299">player</a></li>
-<li>start_game()&#160;:&#160;<a class="el" href="classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67">game_state</a></li>
+<li>showError()&#160;:&#160;<a class="el" href="class_game_controller.html#adf043f9026a62f634a873c9f9d292034">GameController</a></li>
+<li>showGameOverMessage()&#160;:&#160;<a class="el" href="class_game_controller.html#abb91c546ab8400c1e2e9f2a2ccc8298f">GameController</a></li>
+<li>showNewRoundMessage()&#160;:&#160;<a class="el" href="class_game_controller.html#a3c350056b82df662c946cb9119f11ced">GameController</a></li>
+<li>showStatus()&#160;:&#160;<a class="el" href="class_game_controller.html#a6a43eb061a9882b3937fc88bb4794324">GameController</a></li>
+<li>showTrickOverMessage()&#160;:&#160;<a class="el" href="class_game_controller.html#a8108659ad09724318c3a251d93bd5869">GameController</a></li>
+<li>start_game()&#160;:&#160;<a class="el" href="classgame__instance.html#aee2eedd24991ce59dbcf2ec4f6cae8ac">game_instance</a>, <a class="el" href="classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67">game_state</a></li>
+<li>startGame()&#160;:&#160;<a class="el" href="class_game_controller.html#a8f30ab3ff471ac0a5c8b88dc7fea45f4">GameController</a></li>
 </ul>
 
 
 <h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
 <li>trick()&#160;:&#160;<a class="el" href="classtrick.html#a3b0a12789b87d15d9cdc4e5b6f85b47d">trick</a></li>
+<li>try_add_player()&#160;:&#160;<a class="el" href="classgame__instance.html#a1176ce8464586487f9ae5676ca900e10">game_instance</a></li>
 <li>try_get_card()&#160;:&#160;<a class="el" href="classhand.html#a0a50cbbb167e6a1d633dd48bc4b695fe">hand</a></li>
+<li>try_remove_player()&#160;:&#160;<a class="el" href="classgame__instance.html#a2c6fed45a14273b09a9f202481fa62aa">game_instance</a></li>
 </ul>
 
 
 <h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
 <li>update_current_player()&#160;:&#160;<a class="el" href="classgame__state.html#a49851709fcec061d36478ed2fdcc3d9d">game_state</a></li>
+<li>updateGameState()&#160;:&#160;<a class="el" href="class_game_controller.html#a994773f79be8c9e8dc8c19ee2d389103">GameController</a></li>
 </ul>
 
 
@@ -206,6 +230,7 @@ $(function(){ initResizable(false); });
 <h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
 <li>~card()&#160;:&#160;<a class="el" href="classcard.html#ac7a5d8d53e8cc33f5c5a03d8ccb806c4">card</a></li>
 <li>~deck()&#160;:&#160;<a class="el" href="classdeck.html#a63a688bda08bfef8d2c37d53523b7b12">deck</a></li>
+<li>~game_instance()&#160;:&#160;<a class="el" href="classgame__instance.html#a1fa390603341beb15e09e5a4b03465c1">game_instance</a></li>
 <li>~game_state()&#160;:&#160;<a class="el" href="classgame__state.html#a2fbc370f93617298719f61514afdb5bc">game_state</a></li>
 <li>~hand()&#160;:&#160;<a class="el" href="classhand.html#af3ffc5e5b46f04b14f12a9fc130b220a">hand</a></li>
 <li>~player()&#160;:&#160;<a class="el" href="classplayer.html#a0a62c0208584465db2daa1ac6e15b1ad">player</a></li>

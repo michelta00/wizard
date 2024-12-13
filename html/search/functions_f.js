@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['pair_0',['pair',['../classsockpp_1_1datagram__socket__tmpl.html#a9c84b05c86658e71c144a948a5bcf52e',1,'sockpp::datagram_socket_tmpl::pair()'],['../classsockpp_1_1socket.html#a6bf7632a36a4ebc8f8a703d9b80b5d7a',1,'sockpp::socket::pair()'],['../classsockpp_1_1stream__socket__tmpl.html#a41f3fc0e79890b77212829a829daedfe',1,'sockpp::stream_socket_tmpl::pair()']]],
-  ['parse_1',['Parse',['../class_generic_document.html#a901db1678f99a1b550003eed75bc380a',1,'GenericDocument::Parse(const typename SourceEncoding::Ch *str)'],['../class_generic_document.html#a3c3977dcf15fafe17d57f6784e0ce2b5',1,'GenericDocument::Parse(const Ch *str)'],['../class_generic_document.html#afc8eb27bf748df642d27f5767ae4eaab',1,'GenericDocument::Parse(const Ch *str)'],['../class_generic_reader.html#a0c450620d14ff1824e58bb7bd9b42099',1,'GenericReader::Parse(InputStream &amp;is, Handler &amp;handler)'],['../class_generic_reader.html#a76d91e5fd8dfe48aea7dd6d8a51dd6dc',1,'GenericReader::Parse(InputStream &amp;is, Handler &amp;handler)']]],
-  ['parseinsitu_2',['ParseInsitu',['../class_generic_document.html#a13f68b1896a24eea4cdbc03a3916225f',1,'GenericDocument::ParseInsitu(Ch *str)'],['../class_generic_document.html#a9bd648666f9c538e272bc980aff1b807',1,'GenericDocument::ParseInsitu(Ch *str)']]],
-  ['parseresult_3',['ParseResult',['../struct_parse_result.html#acd4a266f815bec59fa27f64f1923fe9e',1,'ParseResult::ParseResult()'],['../struct_parse_result.html#a38ca49a53e80633d0864ad5026adaf84',1,'ParseResult::ParseResult(ParseErrorCode code, size_t offset)']]],
-  ['parsestream_4',['ParseStream',['../class_generic_document.html#a7bc1827a7ab04de4789fe46237f0e921',1,'GenericDocument::ParseStream(InputStream &amp;is)'],['../class_generic_document.html#a54d96ce0902d2afe033faebfd2863bbc',1,'GenericDocument::ParseStream(InputStream &amp;is)'],['../class_generic_document.html#a78f0a1448172e3e998778662e2beb0e3',1,'GenericDocument::ParseStream(InputStream &amp;is)']]],
-  ['path_5',['path',['../classsockpp_1_1unix__address.html#ac38ead0f8847fe0cc2afa54a7953bc53',1,'sockpp::unix_address']]],
-  ['peer_5faddress_6',['peer_address',['../classsockpp_1_1connector__tmpl.html#a75fb126a048eb8de6818ded35a47260f',1,'sockpp::connector_tmpl::peer_address()'],['../classsockpp_1_1socket.html#ad587531eacdcb75310b14f3918a15554',1,'sockpp::socket::peer_address()'],['../classsockpp_1_1stream__socket__tmpl.html#af9b830063c42dfb7ddb31c82604934c3',1,'sockpp::stream_socket_tmpl::peer_address()']]],
-  ['populate_7',['Populate',['../class_generic_document.html#ac30b4e8887974060b695be20c3ceb02c',1,'GenericDocument']]],
-  ['port_8',['port',['../classsockpp_1_1inet6__address.html#aadc9e616bace44971a9e8d7f3ebbbcd1',1,'sockpp::inet6_address::port()'],['../classsockpp_1_1inet__address.html#a3546fe2fbc6a5b355b796da4aaff58ad',1,'sockpp::inet_address::port()']]],
-  ['prettywriter_9',['PrettyWriter',['../class_pretty_writer.html#a928ac2a5235b8877048ebdd5f35a556f',1,'PrettyWriter']]],
-  ['printallindentifiers_10',['PrintAllIndentifiers',['../namespacecpp_1_1ast.html#ab1c1e79e979189e7f3aa93151c189279',1,'cpp::ast']]],
-  ['printindentifiers_11',['PrintIndentifiers',['../namespacecpp_1_1ast.html#af529298ecedc51e778b85444b7912154',1,'cpp::ast']]]
+  ['_7ecard_0',['~card',['../classcard.html#ac7a5d8d53e8cc33f5c5a03d8ccb806c4',1,'card']]],
+  ['_7edeck_1',['~deck',['../classdeck.html#a63a688bda08bfef8d2c37d53523b7b12',1,'deck']]],
+  ['_7egame_5finstance_2',['~game_instance',['../classgame__instance.html#a1fa390603341beb15e09e5a4b03465c1',1,'game_instance']]],
+  ['_7egame_5fstate_3',['~game_state',['../classgame__state.html#a2fbc370f93617298719f61514afdb5bc',1,'game_state']]],
+  ['_7ehand_4',['~hand',['../classhand.html#af3ffc5e5b46f04b14f12a9fc130b220a',1,'hand']]],
+  ['_7eplayer_5',['~player',['../classplayer.html#a0a62c0208584465db2daa1ac6e15b1ad',1,'player']]],
+  ['_7etrick_6',['~trick',['../classtrick.html#a22c0b586f1d6c3baeb7bb0e22eb7dfe2',1,'trick']]]
 ];

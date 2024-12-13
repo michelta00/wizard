@@ -139,6 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69c49e2968abb235a6c7148cb05b0e64" id="r_a69c49e2968abb235a6c7148cb05b0e64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69c49e2968abb235a6c7148cb05b0e64">get_trump_color</a> () const</td></tr>
 <tr class="memdesc:a69c49e2968abb235a6c7148cb05b0e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trump color.  <br /></td></tr>
 <tr class="separator:a69c49e2968abb235a6c7148cb05b0e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b93ae88c17db486d975408cd8cfad1b" id="r_a4b93ae88c17db486d975408cd8cfad1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b93ae88c17db486d975408cd8cfad1b">get_winner</a> () const</td></tr>
+<tr class="memdesc:a4b93ae88c17db486d975408cd8cfad1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the winner of the trick.  <br /></td></tr>
+<tr class="separator:a4b93ae88c17db486d975408cd8cfad1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5b769ed0fc2933c1a44b5e481c18b00" id="r_ae5b769ed0fc2933c1a44b5e481c18b00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5b769ed0fc2933c1a44b5e481c18b00">set_up_round</a> (int trump, std::string &amp;err)</td></tr>
 <tr class="memdesc:ae5b769ed0fc2933c1a44b5e481c18b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up a trick.  <br /></td></tr>
 <tr class="separator:ae5b769ed0fc2933c1a44b5e481c18b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -475,6 +478,35 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
 
 <p>Gets the trump color. </p>
 <dl class="section return"><dt>Returns</dt><dd>The trump color. </dd></dl>
+
+</div>
+</div>
+<a id="a4b93ae88c17db486d975408cd8cfad1b" name="a4b93ae88c17db486d975408cd8cfad1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b93ae88c17db486d975408cd8cfad1b">&#9670;&#160;</a></span>get_winner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplayer.html">player</a> * trick::get_winner </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the winner of the trick. </p>
+<dl class="section return"><dt>Returns</dt><dd>The winner of the trick.</dd></dl>
+<p>This function is used by the client to determine the winner of a trick, and to display the winner after the trick. It uses the same logic as the wrap_up_round function on the server side. </p>
 
 </div>
 </div>

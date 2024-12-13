@@ -8,5 +8,6 @@ var searchData=
   ['clientnetworkmanager_5',['ClientNetworkManager',['../class_client_network_manager.html',1,'']]],
   ['compile_20instructions_6',['2 Compile Instructions',['../index.html#autotoc_md4',1,'']]],
   ['connection_20panel_7',['4.1 Connection Panel',['../index.html#autotoc_md7',1,'']]],
-  ['connectionpanel_8',['ConnectionPanel',['../class_connection_panel.html',1,'']]]
+  ['connectionpanel_8',['ConnectionPanel',['../class_connection_panel.html',1,'']]],
+  ['connecttoserver_9',['connectToServer',['../class_game_controller.html#a023da21da545374ee46fb873149976c4',1,'GameController']]]
 ];

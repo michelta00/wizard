@@ -22,9 +22,15 @@ var searchData=
   ['set_5ftrick_5fcolor_19',['set_trick_color',['../classtrick.html#a0f8c45882691509564ec42efed0d1aaa',1,'trick']]],
   ['set_5fup_5fround_20',['set_up_round',['../classtrick.html#ae5b769ed0fc2933c1a44b5e481c18b00',1,'trick']]],
   ['setup_5fround_21',['setup_round',['../classdeck.html#a77851e5cb8297849e91a885ed7959de1',1,'deck::setup_round()'],['../classgame__state.html#ab520d4076c53f70a68bc19f355243a4d',1,'game_state::setup_round()'],['../classplayer.html#a8cc6464ca3284140c92c6983ee62a299',1,'player::setup_round()']]],
-  ['software_20engineering_20project_20wizard_22',['Software Engineering Project - Wizard',['../index.html',1,'']]],
-  ['start_5fgame_23',['start_game',['../classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67',1,'game_state']]],
-  ['start_5fgame_5frequest_24',['start_game_request',['../classstart__game__request.html',1,'']]],
-  ['state_25',['4.3 Game State',['../index.html#autotoc_md16',1,'']]],
-  ['structure_20important_20classes_26',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md18',1,'']]]
+  ['showerror_22',['showError',['../class_game_controller.html#adf043f9026a62f634a873c9f9d292034',1,'GameController']]],
+  ['showgameovermessage_23',['showGameOverMessage',['../class_game_controller.html#abb91c546ab8400c1e2e9f2a2ccc8298f',1,'GameController']]],
+  ['shownewroundmessage_24',['showNewRoundMessage',['../class_game_controller.html#a3c350056b82df662c946cb9119f11ced',1,'GameController']]],
+  ['showstatus_25',['showStatus',['../class_game_controller.html#a6a43eb061a9882b3937fc88bb4794324',1,'GameController']]],
+  ['showtrickovermessage_26',['showTrickOverMessage',['../class_game_controller.html#a8108659ad09724318c3a251d93bd5869',1,'GameController']]],
+  ['software_20engineering_20project_20wizard_27',['Software Engineering Project - Wizard',['../index.html',1,'']]],
+  ['start_5fgame_28',['start_game',['../classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67',1,'game_state::start_game()'],['../classgame__instance.html#aee2eedd24991ce59dbcf2ec4f6cae8ac',1,'game_instance::start_game()']]],
+  ['start_5fgame_5frequest_29',['start_game_request',['../classstart__game__request.html',1,'']]],
+  ['startgame_30',['startGame',['../class_game_controller.html#a8f30ab3ff471ac0a5c8b88dc7fea45f4',1,'GameController']]],
+  ['state_31',['4.3 Game State',['../index.html#autotoc_md16',1,'']]],
+  ['structure_20important_20classes_32',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md18',1,'']]]
 ];

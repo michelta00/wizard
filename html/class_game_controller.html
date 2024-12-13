@@ -91,52 +91,368 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">GameController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Controls visualization of the game state and processes client actions.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_game_controller_8h_source.html">GameController.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8889bad76bc35487d3391fb8a5791616" id="r_a8889bad76bc35487d3391fb8a5791616"><td class="memItemLeft" align="right" valign="top"><a id="a8889bad76bc35487d3391fb8a5791616" name="a8889bad76bc35487d3391fb8a5791616"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="class_game_window.html">GameWindow</a> *gameWindow)</td></tr>
+<tr class="memitem:a8889bad76bc35487d3391fb8a5791616" id="r_a8889bad76bc35487d3391fb8a5791616"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8889bad76bc35487d3391fb8a5791616">init</a> (<a class="el" href="class_game_window.html">GameWindow</a> *gameWindow)</td></tr>
+<tr class="memdesc:a8889bad76bc35487d3391fb8a5791616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes game window when a new Wizard-client is started.  <br /></td></tr>
 <tr class="separator:a8889bad76bc35487d3391fb8a5791616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a023da21da545374ee46fb873149976c4" id="r_a023da21da545374ee46fb873149976c4"><td class="memItemLeft" align="right" valign="top"><a id="a023da21da545374ee46fb873149976c4" name="a023da21da545374ee46fb873149976c4"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>connectToServer</b> ()</td></tr>
+<tr class="memdesc:a023da21da545374ee46fb873149976c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles connection to server when a user joins a game. <br /></td></tr>
 <tr class="separator:a023da21da545374ee46fb873149976c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a994773f79be8c9e8dc8c19ee2d389103" id="r_a994773f79be8c9e8dc8c19ee2d389103"><td class="memItemLeft" align="right" valign="top"><a id="a994773f79be8c9e8dc8c19ee2d389103" name="a994773f79be8c9e8dc8c19ee2d389103"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>updateGameState</b> (<a class="el" href="classgame__state.html">game_state</a> *newGameState)</td></tr>
+<tr class="memitem:a994773f79be8c9e8dc8c19ee2d389103" id="r_a994773f79be8c9e8dc8c19ee2d389103"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a994773f79be8c9e8dc8c19ee2d389103">updateGameState</a> (<a class="el" href="classgame__state.html">game_state</a> *newGameState)</td></tr>
+<tr class="memdesc:a994773f79be8c9e8dc8c19ee2d389103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates game state whenever any player interacted with the server based on parameters of current game state.  <br /></td></tr>
 <tr class="separator:a994773f79be8c9e8dc8c19ee2d389103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f30ab3ff471ac0a5c8b88dc7fea45f4" id="r_a8f30ab3ff471ac0a5c8b88dc7fea45f4"><td class="memItemLeft" align="right" valign="top"><a id="a8f30ab3ff471ac0a5c8b88dc7fea45f4" name="a8f30ab3ff471ac0a5c8b88dc7fea45f4"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>startGame</b> ()</td></tr>
+<tr class="memdesc:a8f30ab3ff471ac0a5c8b88dc7fea45f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out 'start game' request to server. <br /></td></tr>
 <tr class="separator:a8f30ab3ff471ac0a5c8b88dc7fea45f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a987fed0a0d9158efd69428b87b9132e9" id="r_a987fed0a0d9158efd69428b87b9132e9"><td class="memItemLeft" align="right" valign="top"><a id="a987fed0a0d9158efd69428b87b9132e9" name="a987fed0a0d9158efd69428b87b9132e9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>estimateTricks</b> (int nof_cards)</td></tr>
-<tr class="separator:a987fed0a0d9158efd69428b87b9132e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d42b2e41759bfd65cdebad87437369e" id="r_a8d42b2e41759bfd65cdebad87437369e"><td class="memItemLeft" align="right" valign="top"><a id="a8d42b2e41759bfd65cdebad87437369e" name="a8d42b2e41759bfd65cdebad87437369e"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>leaveGame</b> ()</td></tr>
+<tr class="memdesc:a8d42b2e41759bfd65cdebad87437369e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out 'leave game' request to server. <br /></td></tr>
 <tr class="separator:a8d42b2e41759bfd65cdebad87437369e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b164e2094901861e5b47056634facc" id="r_a87b164e2094901861e5b47056634facc"><td class="memItemLeft" align="right" valign="top"><a id="a87b164e2094901861e5b47056634facc" name="a87b164e2094901861e5b47056634facc"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>playCard</b> (<a class="el" href="classcard.html">card</a> *cardToPlay)</td></tr>
+<tr class="memitem:a5f1023f2029e5dbb25b795a0606e06a9" id="r_a5f1023f2029e5dbb25b795a0606e06a9"><td class="memItemLeft" align="right" valign="top"><a id="a5f1023f2029e5dbb25b795a0606e06a9" name="a5f1023f2029e5dbb25b795a0606e06a9"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>processEstimateTricks</b> ()</td></tr>
+<tr class="memdesc:a5f1023f2029e5dbb25b795a0606e06a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process input from trick estimation panel and trigger estimateTricks function. <br /></td></tr>
+<tr class="separator:a5f1023f2029e5dbb25b795a0606e06a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd110563d0f37f06096176c199d22055" id="r_abd110563d0f37f06096176c199d22055"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd110563d0f37f06096176c199d22055">estimateTricks</a> (int nof_tricks)</td></tr>
+<tr class="memdesc:abd110563d0f37f06096176c199d22055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out 'estimate tricks' request to server.  <br /></td></tr>
+<tr class="separator:abd110563d0f37f06096176c199d22055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b164e2094901861e5b47056634facc" id="r_a87b164e2094901861e5b47056634facc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b164e2094901861e5b47056634facc">playCard</a> (<a class="el" href="classcard.html">card</a> *cardToPlay)</td></tr>
+<tr class="memdesc:a87b164e2094901861e5b47056634facc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out 'play card' request to server.  <br /></td></tr>
 <tr class="separator:a87b164e2094901861e5b47056634facc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaabc13bc223e6c5760a96885843bf1a9" id="r_aaabc13bc223e6c5760a96885843bf1a9"><td class="memItemLeft" align="right" valign="top"><a id="aaabc13bc223e6c5760a96885843bf1a9" name="aaabc13bc223e6c5760a96885843bf1a9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>estimateTrick</b> ()</td></tr>
-<tr class="separator:aaabc13bc223e6c5760a96885843bf1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec8c73ea01e4b7e01b2ca1d932e0c16" id="r_abec8c73ea01e4b7e01b2ca1d932e0c16"><td class="memItemLeft" align="right" valign="top"><a id="abec8c73ea01e4b7e01b2ca1d932e0c16" name="abec8c73ea01e4b7e01b2ca1d932e0c16"></a>
-static wxEvtHandler *&#160;</td><td class="memItemRight" valign="bottom"><b>getMainThreadEventHandler</b> ()</td></tr>
+<tr class="memitem:abec8c73ea01e4b7e01b2ca1d932e0c16" id="r_abec8c73ea01e4b7e01b2ca1d932e0c16"><td class="memItemLeft" align="right" valign="top">static wxEvtHandler *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abec8c73ea01e4b7e01b2ca1d932e0c16">getMainThreadEventHandler</a> ()</td></tr>
+<tr class="memdesc:abec8c73ea01e4b7e01b2ca1d932e0c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds event handler for main thread.  <br /></td></tr>
 <tr class="separator:abec8c73ea01e4b7e01b2ca1d932e0c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf043f9026a62f634a873c9f9d292034" id="r_adf043f9026a62f634a873c9f9d292034"><td class="memItemLeft" align="right" valign="top"><a id="adf043f9026a62f634a873c9f9d292034" name="adf043f9026a62f634a873c9f9d292034"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>showError</b> (const std::string &amp;title, const std::string &amp;message)</td></tr>
+<tr class="memitem:adf043f9026a62f634a873c9f9d292034" id="r_adf043f9026a62f634a873c9f9d292034"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf043f9026a62f634a873c9f9d292034">showError</a> (const std::string &amp;title, const std::string &amp;message)</td></tr>
+<tr class="memdesc:adf043f9026a62f634a873c9f9d292034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles showing of error messages.  <br /></td></tr>
 <tr class="separator:adf043f9026a62f634a873c9f9d292034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a43eb061a9882b3937fc88bb4794324" id="r_a6a43eb061a9882b3937fc88bb4794324"><td class="memItemLeft" align="right" valign="top"><a id="a6a43eb061a9882b3937fc88bb4794324" name="a6a43eb061a9882b3937fc88bb4794324"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>showStatus</b> (const std::string &amp;message)</td></tr>
+<tr class="memitem:a6a43eb061a9882b3937fc88bb4794324" id="r_a6a43eb061a9882b3937fc88bb4794324"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a43eb061a9882b3937fc88bb4794324">showStatus</a> (const std::string &amp;message)</td></tr>
+<tr class="memdesc:a6a43eb061a9882b3937fc88bb4794324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set status message.  <br /></td></tr>
 <tr class="separator:a6a43eb061a9882b3937fc88bb4794324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c350056b82df662c946cb9119f11ced" id="r_a3c350056b82df662c946cb9119f11ced"><td class="memItemLeft" align="right" valign="top"><a id="a3c350056b82df662c946cb9119f11ced" name="a3c350056b82df662c946cb9119f11ced"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>showNewRoundMessage</b> (<a class="el" href="classgame__state.html">game_state</a> *oldGameState, <a class="el" href="classgame__state.html">game_state</a> *newGameState)</td></tr>
+<tr class="memitem:a3c350056b82df662c946cb9119f11ced" id="r_a3c350056b82df662c946cb9119f11ced"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c350056b82df662c946cb9119f11ced">showNewRoundMessage</a> (<a class="el" href="classgame__state.html">game_state</a> *oldGameState, <a class="el" href="classgame__state.html">game_state</a> *newGameState)</td></tr>
+<tr class="memdesc:a3c350056b82df662c946cb9119f11ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows message that round has finished and current scores of players at the end of a round.  <br /></td></tr>
 <tr class="separator:a3c350056b82df662c946cb9119f11ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43165cb5f259a99e9fa74a7250d05397" id="r_a43165cb5f259a99e9fa74a7250d05397"><td class="memItemLeft" align="right" valign="top"><a id="a43165cb5f259a99e9fa74a7250d05397" name="a43165cb5f259a99e9fa74a7250d05397"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>showTrickOverMessage</b> ()</td></tr>
-<tr class="separator:a43165cb5f259a99e9fa74a7250d05397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8108659ad09724318c3a251d93bd5869" id="r_a8108659ad09724318c3a251d93bd5869"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8108659ad09724318c3a251d93bd5869">showTrickOverMessage</a> (const <a class="el" href="classplayer.html">player</a> *winner)</td></tr>
+<tr class="memdesc:a8108659ad09724318c3a251d93bd5869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows message at the end of each trick stating which player won the trick.  <br /></td></tr>
+<tr class="separator:a8108659ad09724318c3a251d93bd5869"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb91c546ab8400c1e2e9f2a2ccc8298f" id="r_abb91c546ab8400c1e2e9f2a2ccc8298f"><td class="memItemLeft" align="right" valign="top"><a id="abb91c546ab8400c1e2e9f2a2ccc8298f" name="abb91c546ab8400c1e2e9f2a2ccc8298f"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>showGameOverMessage</b> ()</td></tr>
+<tr class="memdesc:abb91c546ab8400c1e2e9f2a2ccc8298f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows message at the end of the game that the game has ended and states the winner. <br /></td></tr>
 <tr class="separator:abb91c546ab8400c1e2e9f2a2ccc8298f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Controls visualization of the game state and processes client actions. </p>
+<p>This class handles the visualization of the game state a client received. It adapts the visualization based on the parameters found in the game state and reacts to interactions of a user with the GUI by sending out requests via the client network manager to the server. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="abd110563d0f37f06096176c199d22055" name="abd110563d0f37f06096176c199d22055"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd110563d0f37f06096176c199d22055">&#9670;&#160;</a></span>estimateTricks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::estimateTricks </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>nof_tricks</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Send out 'estimate tricks' request to server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nof_tricks</td><td>Number of predicted tricks to win in the next round. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abec8c73ea01e4b7e01b2ca1d932e0c16" name="abec8c73ea01e4b7e01b2ca1d932e0c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec8c73ea01e4b7e01b2ca1d932e0c16">&#9670;&#160;</a></span>getMainThreadEventHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxEvtHandler * GameController::getMainThreadEventHandler </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds event handler for main thread. </p>
+<dl class="section return"><dt>Returns</dt><dd>wxwidgets event handler </dd></dl>
+
+</div>
+</div>
+<a id="a8889bad76bc35487d3391fb8a5791616" name="a8889bad76bc35487d3391fb8a5791616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8889bad76bc35487d3391fb8a5791616">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_window.html">GameWindow</a> *</td>          <td class="paramname"><span class="paramname"><em>gameWindow</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes game window when a new Wizard-client is started. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameWindow</td><td>The game window that needs to be initialized </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a87b164e2094901861e5b47056634facc" name="a87b164e2094901861e5b47056634facc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b164e2094901861e5b47056634facc">&#9670;&#160;</a></span>playCard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::playCard </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcard.html">card</a> *</td>          <td class="paramname"><span class="paramname"><em>cardToPlay</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Send out 'play card' request to server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cardToPlay</td><td>Pointer to card that user chooses to play. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf043f9026a62f634a873c9f9d292034" name="adf043f9026a62f634a873c9f9d292034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf043f9026a62f634a873c9f9d292034">&#9670;&#160;</a></span>showError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::showError </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>title</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles showing of error messages. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>Title of the error message. </td></tr>
+    <tr><td class="paramname">message</td><td>Text of the error message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3c350056b82df662c946cb9119f11ced" name="a3c350056b82df662c946cb9119f11ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c350056b82df662c946cb9119f11ced">&#9670;&#160;</a></span>showNewRoundMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::showNewRoundMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame__state.html">game_state</a> *</td>          <td class="paramname"><span class="paramname"><em>oldGameState</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgame__state.html">game_state</a> *</td>          <td class="paramname"><span class="paramname"><em>newGameState</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows message that round has finished and current scores of players at the end of a round. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldGameState</td><td>Game state of last round. </td></tr>
+    <tr><td class="paramname">newGameState</td><td>Updated game state of new round. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6a43eb061a9882b3937fc88bb4794324" name="a6a43eb061a9882b3937fc88bb4794324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a43eb061a9882b3937fc88bb4794324">&#9670;&#160;</a></span>showStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::showStatus </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set status message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Text of status message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8108659ad09724318c3a251d93bd5869" name="a8108659ad09724318c3a251d93bd5869"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8108659ad09724318c3a251d93bd5869">&#9670;&#160;</a></span>showTrickOverMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::showTrickOverMessage </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>winner</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows message at the end of each trick stating which player won the trick. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">winner</td><td>Winner of the trick. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a994773f79be8c9e8dc8c19ee2d389103" name="a994773f79be8c9e8dc8c19ee2d389103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a994773f79be8c9e8dc8c19ee2d389103">&#9670;&#160;</a></span>updateGameState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameController::updateGameState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame__state.html">game_state</a> *</td>          <td class="paramname"><span class="paramname"><em>newGameState</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates game state whenever any player interacted with the server based on parameters of current game state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newGameState</td><td>The new game state send from the server. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/client/<a class="el" href="_game_controller_8h_source.html">GameController.h</a></li>
 <li>src/client/<b>GameController.cpp</b></li>
