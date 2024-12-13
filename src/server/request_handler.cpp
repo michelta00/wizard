@@ -133,21 +133,20 @@ request_response* request_handler::handle_request(const client_request* const re
                 std::string player_name = ((leave_game_request *) req)->get_player_name();
                 // Case 1: player is in a game
                 //remove player from game via game instance manager -> game instance -> game state
-                if (game_instance_manager::try_remove_player(player, game_id, err))
-                {
+                if (game_instance_manager::try_remove_player(player, game_id, err)) {
                     //remove player from list of active players (delete from LUT table)
                     if (player_manager::remove_player(player_id, player)){
                         return new request_response(game_instance_ptr->get_id(), req_id, true,
                                                     game_instance_ptr->get_game_state()->to_json(), err);
                     }
-                    // TODO: I think this logic makes no sense, if the player is not in the game this should be outside the if cond it is in
-                    // Case 2: player is already in player_LUT of player_manager but not yet in a game
-                    player_manager::remove_player(player_id, player);
-
-                    //Case 3: player either couldn't be removed from game or player LUT
+                }
+                // player not in game instance yet but already in LUT
+                else if (player_manager::remove_player(player_id, player)) {
+                    return new request_response("", req_id, true, nullptr, err);
+                }
+                else {
+                    err = "Player was found neither in any game nor in lookup table.";
                     return new request_response("", req_id, false, nullptr, err);
-
-
                 }
             }
         // ##################### UNKNOWN REQUEST ##################### //
