@@ -139,6 +139,15 @@ public:
      */
     [[nodiscard]] std::string get_player_name() const noexcept;
 
+    /**
+     * @brief Sets the player's name to the given input.
+     * @param new_name The new player name.
+     *
+     * This function is used to change the player's name in case duplicate names appear within one game.
+     */
+
+    void set_player_name(const std::string& new_name);
+
 #ifdef WIZARD_SERVER
 // state update functions
     /**

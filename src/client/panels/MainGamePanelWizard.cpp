@@ -311,8 +311,8 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
         trickPanelSizer_hor->Add(wizardLogo, 0, wxALIGN_CENTER );
     }
 }
-
-// round announcement shown at the beginning of every new round
+/*
+// TODO: round announcement shown at the beginning of every new round
 void MainGamePanelWizard::showRoundOverlay(int roundNumber) { //obtain round number with std::to_string(gameState->get_round_number()+1)
     // Create a panel to act as the overlay
     wxPanel* overlayPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, this->GetSize()); //create panel the size of the main game panel
@@ -343,7 +343,7 @@ void MainGamePanelWizard::showRoundOverlay(int roundNumber) { //obtain round num
     });
     timer->Start(1000, wxTIMER_ONE_SHOT); // 1-second delay
 }
-
+*/
 
 void MainGamePanelWizard::buildTurnIndicator(wxGridBagSizer* sizer, game_state* gameState, player* me)
 {

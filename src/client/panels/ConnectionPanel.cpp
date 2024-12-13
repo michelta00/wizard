@@ -52,7 +52,6 @@ ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
     this->_playerNameField->SetMinSize(wxSize(-1, 27));
     verticalLayout->Add(this->_playerNameField, 0, wxALL | wxEXPAND, fieldSpacing);
 
-    //TODO: fix spacing between the three lines
 
     // Connect Button with custom style
     wxButton* connectButton = new wxButton(this, wxID_ANY, "Connect", wxDefaultPosition, wxSize(80, 37)); //changed size to make margins between text and button smaller
