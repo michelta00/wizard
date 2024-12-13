@@ -3,7 +3,7 @@
 # path to the assets folder containing the .ttf files
 ASSETS_DIR="./assets"
 FONT_NAME1="JunicodeBold.ttf"
-FONT_NAME2="MagicSchhoolOne.ttf"
+FONT_NAME2="MagicSchoolOne.ttf"
 
 # path to the system fonts directory
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
