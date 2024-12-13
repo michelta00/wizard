@@ -100,25 +100,44 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     this->buildTrumpColor(sizer, gameState);
 
-    this->buildScoreBoardButton(sizer, gameState);
+    this->buildScoreLeaveButtons(sizer, gameState);
 
     this->Layout();
 }
 
 
-void TrickEstimationPanel::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(2,2));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
     wxBoxSizer* sizer_vert = new wxBoxSizer(wxVERTICAL);
     panel->SetSizer(sizer_vert);
+    auto sizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    sizer_vert->Add(sizer_hor, 1, wxALIGN_CENTER);
 
     wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
-    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    scoreBoardButton->SetMinSize(wxSize(90, 35));
+
+    scoreBoardButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+    scoreBoardButton->SetForegroundColour(*wxWHITE);
+
+
+    sizer_hor->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
 
     scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent& event) {
         ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
         scoreBoard.ShowModal();
+    });
+
+    wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+    leaveGameButton->SetMinSize(wxSize(90, 35));
+    sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
+    leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+    leaveGameButton->SetForegroundColour(*wxWHITE);
+
+    leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+        GameController::leaveGame();
     });
 
 }

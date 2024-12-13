@@ -142,44 +142,43 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     this->buildOtherPlayers(sizer, gameState, me, myPosition);
 
     // show button to display score board
-    this->buildScoreBoardButton(sizer, gameState);
+    this->buildScoreLeaveButtons(sizer, gameState);
 
     // show button to leave game
-    this->buildLeaveGameButton(sizer, gameState);
+    // this->buildLeaveGameButton(sizer, gameState);
 
     // update Layout
     this->Layout();
 }
 
-void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
     if (gameState->is_started()) {
         wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(sizer_vert);
+        auto sizer_hor = new wxBoxSizer(wxHORIZONTAL);
+        sizer_vert->Add(sizer_hor, 1, wxALIGN_LEFT);
 
         wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
-        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+        scoreBoardButton->SetMinSize(wxSize(90, 35));
+        sizer_hor->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
+        scoreBoardButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+        scoreBoardButton->SetForegroundColour(*wxWHITE);
 
         scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
             ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
             scoreBoard.ShowModal();
         });
-    }
-
-}
-
-void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState) {
-    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,4));
-    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
-
-    if (gameState->is_started()) {
-        wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
-        panel->SetSizer(sizer_vert);
 
         wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
-        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+        leaveGameButton->SetMinSize(wxSize(90, 35));
+        sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
+        leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+        leaveGameButton->SetForegroundColour(*wxWHITE);
 
         leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
             GameController::leaveGame();
@@ -188,6 +187,26 @@ void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state
 
 }
 
+/*
+void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState) {
+    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
+    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
+
+    if (gameState->is_started()) {
+        wxSizer* sizer_vert = panel->GetSizer();
+        // wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
+        // panel->SetSizer(sizer_vert);
+
+        wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 1);
+
+        leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+            GameController::leaveGame();
+        });
+    }
+
+}
+*/
 void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player* me, int myPosition)
 {
     std::vector<player*> players = gameState->get_players();
