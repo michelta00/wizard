@@ -145,7 +145,7 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     this->buildScoreBoardButton(sizer, gameState);
 
     // show button to leave game
-    this->buildLeaveGameButton(sizer, gameState, me);
+    this->buildLeaveGameButton(sizer, gameState);
 
     // update Layout
     this->Layout();
