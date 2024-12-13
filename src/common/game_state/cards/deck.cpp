@@ -4,10 +4,8 @@
 
 #include "deck.h"
 #include <random>
-#include <algorithm>
 #include "../../serialization/vector_utils.h"
 #include "../../exceptions/WizardException.h"
-
 
 // deserialization constructor
 deck::deck(const std::string& id, const std::vector<card*> &all_cards, const std::vector<card*> &remaining_cards)
@@ -105,7 +103,7 @@ bool deck::draw_cards(const player* player, const int round_number, std::string&
     for (int i = 0; i < round_number; ++i) {
         // randomly select an index from remaining_cards
         std::uniform_int_distribution<> dist(0, _remaining_cards.size() - 1);
-        int random_index = dist(gen);
+        const int random_index = dist(gen);
         // try to add card to player's hand
         if (!hand->add_card(_remaining_cards[random_index], err))
         {
@@ -174,8 +172,3 @@ deck* deck::from_json(const rapidjson::Value& json)
     }
     throw WizardException("Could not parse draw_pile from json. 'id' or 'cards' were missing.");
 }
-
-
-
-
-

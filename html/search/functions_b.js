@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['last_5ferror_0',['last_error',['../classsockpp_1_1socket.html#a64e7106624f70f1a648036bb49d4307e',1,'sockpp::socket']]],
-  ['last_5ferror_5fstr_1',['last_error_str',['../classsockpp_1_1socket.html#abd086fc9354bf834d456bd9eace99b15',1,'sockpp::socket']]],
-  ['listen_2',['listen',['../classsockpp_1_1acceptor.html#a517540b3133b3584c83d669012cb1119',1,'sockpp::acceptor']]],
-  ['loopback_3',['loopback',['../classsockpp_1_1inet6__address.html#a1dc3ccb8f801e737e90ac7c9575d8ba8',1,'sockpp::inet6_address']]]
+  ['trick_0',['trick',['../classtrick.html#a3b0a12789b87d15d9cdc4e5b6f85b47d',1,'trick::trick()'],['../classtrick.html#ad55ad2f0462144ee39c0e6d392543a14',1,'trick::trick(const trick &amp;other)'],['../classtrick.html#abb172ad9a476e96a754eea0c33e1eda9',1,'trick::trick(const std::string &amp;id)'],['../classtrick.html#ab756ba7a19c4bf98f0d8456ad0081fc3',1,'trick::trick(const std::string &amp;id, const std::vector&lt; std::pair&lt; card *, player * &gt; &gt; &amp;cards, serializable_value&lt; int &gt; *trick_color, serializable_value&lt; int &gt; *trump_color)'],['../classtrick.html#a3ecb1c5ebe84a300d7388e2846737fa4',1,'trick::trick(int trump)']]],
+  ['try_5fget_5fcard_1',['try_get_card',['../classhand.html#a0a50cbbb167e6a1d633dd48bc4b695fe',1,'hand']]]
 ];

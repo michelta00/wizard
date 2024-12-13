@@ -92,6 +92,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">game_state Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the state of the game.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="game__state_8h_source.html">game_state.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for game_state:</div>
 <div class="dyncontent">
@@ -105,82 +110,92 @@ Inheritance diagram for game_state:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae161c283e275a57d71834754d11e9e40" id="r_ae161c283e275a57d71834754d11e9e40"><td class="memItemLeft" align="right" valign="top"><a id="ae161c283e275a57d71834754d11e9e40" name="ae161c283e275a57d71834754d11e9e40"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_full</b> () const</td></tr>
+<tr class="memitem:a0c10b830e222d726557c3c33685c595a" id="r_a0c10b830e222d726557c3c33685c595a"><td class="memItemLeft" align="right" valign="top"><a id="a0c10b830e222d726557c3c33685c595a" name="a0c10b830e222d726557c3c33685c595a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>game_state</b> ()</td></tr>
+<tr class="memdesc:a0c10b830e222d726557c3c33685c595a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object. <br /></td></tr>
+<tr class="separator:a0c10b830e222d726557c3c33685c595a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fbc370f93617298719f61514afdb5bc" id="r_a2fbc370f93617298719f61514afdb5bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fbc370f93617298719f61514afdb5bc">~game_state</a> () override</td></tr>
+<tr class="separator:a2fbc370f93617298719f61514afdb5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae161c283e275a57d71834754d11e9e40" id="r_ae161c283e275a57d71834754d11e9e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae161c283e275a57d71834754d11e9e40">is_full</a> () const</td></tr>
+<tr class="memdesc:ae161c283e275a57d71834754d11e9e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the game is full.  <br /></td></tr>
 <tr class="separator:ae161c283e275a57d71834754d11e9e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0092c41779f38eba5e921e43b38559c" id="r_aa0092c41779f38eba5e921e43b38559c"><td class="memItemLeft" align="right" valign="top"><a id="aa0092c41779f38eba5e921e43b38559c" name="aa0092c41779f38eba5e921e43b38559c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_started</b> () const</td></tr>
+<tr class="memitem:aa0092c41779f38eba5e921e43b38559c" id="r_aa0092c41779f38eba5e921e43b38559c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0092c41779f38eba5e921e43b38559c">is_started</a> () const</td></tr>
+<tr class="memdesc:aa0092c41779f38eba5e921e43b38559c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the game is started.  <br /></td></tr>
 <tr class="separator:aa0092c41779f38eba5e921e43b38559c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b83de8a89e3bb506184492d22c3cf45" id="r_a9b83de8a89e3bb506184492d22c3cf45"><td class="memItemLeft" align="right" valign="top"><a id="a9b83de8a89e3bb506184492d22c3cf45" name="a9b83de8a89e3bb506184492d22c3cf45"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_finished</b> () const</td></tr>
+<tr class="memitem:a9b83de8a89e3bb506184492d22c3cf45" id="r_a9b83de8a89e3bb506184492d22c3cf45"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b83de8a89e3bb506184492d22c3cf45">is_finished</a> () const</td></tr>
+<tr class="memdesc:a9b83de8a89e3bb506184492d22c3cf45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the game is finished.  <br /></td></tr>
 <tr class="separator:a9b83de8a89e3bb506184492d22c3cf45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88d19342ee76acc4660b3e56e8c126eb" id="r_a88d19342ee76acc4660b3e56e8c126eb"><td class="memItemLeft" align="right" valign="top"><a id="a88d19342ee76acc4660b3e56e8c126eb" name="a88d19342ee76acc4660b3e56e8c126eb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_estimation_phase</b> () const</td></tr>
+<tr class="memitem:a88d19342ee76acc4660b3e56e8c126eb" id="r_a88d19342ee76acc4660b3e56e8c126eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88d19342ee76acc4660b3e56e8c126eb">is_estimation_phase</a> () const</td></tr>
+<tr class="memdesc:a88d19342ee76acc4660b3e56e8c126eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the game is in estimation phase.  <br /></td></tr>
 <tr class="separator:a88d19342ee76acc4660b3e56e8c126eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a371d6a6d84395b90c15d84549b05d553" id="r_a371d6a6d84395b90c15d84549b05d553"><td class="memItemLeft" align="right" valign="top"><a id="a371d6a6d84395b90c15d84549b05d553" name="a371d6a6d84395b90c15d84549b05d553"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_player_in_game</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>) const</td></tr>
+<tr class="memitem:a371d6a6d84395b90c15d84549b05d553" id="r_a371d6a6d84395b90c15d84549b05d553"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a371d6a6d84395b90c15d84549b05d553">is_player_in_game</a> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>) const</td></tr>
+<tr class="memdesc:a371d6a6d84395b90c15d84549b05d553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given player is in the game.  <br /></td></tr>
 <tr class="separator:a371d6a6d84395b90c15d84549b05d553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3ef836a1b3a1e2bc9e429a018c72eca" id="r_ab3ef836a1b3a1e2bc9e429a018c72eca"><td class="memItemLeft" align="right" valign="top"><a id="ab3ef836a1b3a1e2bc9e429a018c72eca" name="ab3ef836a1b3a1e2bc9e429a018c72eca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_round_number</b> () const</td></tr>
+<tr class="memitem:ab3ef836a1b3a1e2bc9e429a018c72eca" id="r_ab3ef836a1b3a1e2bc9e429a018c72eca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3ef836a1b3a1e2bc9e429a018c72eca">get_round_number</a> () const</td></tr>
+<tr class="memdesc:ab3ef836a1b3a1e2bc9e429a018c72eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the round number.  <br /></td></tr>
 <tr class="separator:ab3ef836a1b3a1e2bc9e429a018c72eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fce12f31ad0aab82b0d2da90e3e8e15" id="r_a3fce12f31ad0aab82b0d2da90e3e8e15"><td class="memItemLeft" align="right" valign="top"><a id="a3fce12f31ad0aab82b0d2da90e3e8e15" name="a3fce12f31ad0aab82b0d2da90e3e8e15"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_trick_number</b> () const</td></tr>
+<tr class="memitem:a3fce12f31ad0aab82b0d2da90e3e8e15" id="r_a3fce12f31ad0aab82b0d2da90e3e8e15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fce12f31ad0aab82b0d2da90e3e8e15">get_trick_number</a> () const</td></tr>
+<tr class="memdesc:a3fce12f31ad0aab82b0d2da90e3e8e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trick number.  <br /></td></tr>
 <tr class="separator:a3fce12f31ad0aab82b0d2da90e3e8e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5263d03c85bce1e9d252e9017cbe282" id="r_aa5263d03c85bce1e9d252e9017cbe282"><td class="memItemLeft" align="right" valign="top"><a id="aa5263d03c85bce1e9d252e9017cbe282" name="aa5263d03c85bce1e9d252e9017cbe282"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_trick_estimate_sum</b> () const</td></tr>
+<tr class="memitem:aa5263d03c85bce1e9d252e9017cbe282" id="r_aa5263d03c85bce1e9d252e9017cbe282"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5263d03c85bce1e9d252e9017cbe282">get_trick_estimate_sum</a> () const</td></tr>
+<tr class="memdesc:aa5263d03c85bce1e9d252e9017cbe282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trick estimate sum.  <br /></td></tr>
 <tr class="separator:aa5263d03c85bce1e9d252e9017cbe282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58b83ac26d0fd99b3ac5c4cf664d3ece" id="r_a58b83ac26d0fd99b3ac5c4cf664d3ece"><td class="memItemLeft" align="right" valign="top"><a id="a58b83ac26d0fd99b3ac5c4cf664d3ece" name="a58b83ac26d0fd99b3ac5c4cf664d3ece"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_max_round_number</b> () const</td></tr>
-<tr class="separator:a58b83ac26d0fd99b3ac5c4cf664d3ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdf6c5116ed643773d676c90a05e6fe4" id="r_abdf6c5116ed643773d676c90a05e6fe4"><td class="memItemLeft" align="right" valign="top"><a id="abdf6c5116ed643773d676c90a05e6fe4" name="abdf6c5116ed643773d676c90a05e6fe4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_trump_color</b> () const</td></tr>
+<tr class="memitem:aa75c4da6c0056e48e5040be8127d7473" id="r_aa75c4da6c0056e48e5040be8127d7473"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa75c4da6c0056e48e5040be8127d7473">get_max_round_number</a> () const</td></tr>
+<tr class="memdesc:aa75c4da6c0056e48e5040be8127d7473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the maximum round number.  <br /></td></tr>
+<tr class="separator:aa75c4da6c0056e48e5040be8127d7473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf6c5116ed643773d676c90a05e6fe4" id="r_abdf6c5116ed643773d676c90a05e6fe4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdf6c5116ed643773d676c90a05e6fe4">get_trump_color</a> () const</td></tr>
+<tr class="memdesc:abdf6c5116ed643773d676c90a05e6fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the trump color.  <br /></td></tr>
 <tr class="separator:abdf6c5116ed643773d676c90a05e6fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d16f420a8aa651685461a5efb8bb600" id="r_a2d16f420a8aa651685461a5efb8bb600"><td class="memItemLeft" align="right" valign="top"><a id="a2d16f420a8aa651685461a5efb8bb600" name="a2d16f420a8aa651685461a5efb8bb600"></a>
-<a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_current_player</b> () const</td></tr>
+<tr class="memitem:a2d16f420a8aa651685461a5efb8bb600" id="r_a2d16f420a8aa651685461a5efb8bb600"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d16f420a8aa651685461a5efb8bb600">get_current_player</a> () const</td></tr>
+<tr class="memdesc:a2d16f420a8aa651685461a5efb8bb600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current player.  <br /></td></tr>
 <tr class="separator:a2d16f420a8aa651685461a5efb8bb600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa40554d105939c5dce934daaa858c242" id="r_aa40554d105939c5dce934daaa858c242"><td class="memItemLeft" align="right" valign="top"><a id="aa40554d105939c5dce934daaa858c242" name="aa40554d105939c5dce934daaa858c242"></a>
-<a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_trick_starting_player</b> () const</td></tr>
+<tr class="memitem:aa40554d105939c5dce934daaa858c242" id="r_aa40554d105939c5dce934daaa858c242"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa40554d105939c5dce934daaa858c242">get_trick_starting_player</a> () const</td></tr>
+<tr class="memdesc:aa40554d105939c5dce934daaa858c242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the starting player of the current trick.  <br /></td></tr>
 <tr class="separator:aa40554d105939c5dce934daaa858c242"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c553229260e307ff1f78dd0c74506d" id="r_af4c553229260e307ff1f78dd0c74506d"><td class="memItemLeft" align="right" valign="top"><a id="af4c553229260e307ff1f78dd0c74506d" name="af4c553229260e307ff1f78dd0c74506d"></a>
-<a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_starting_player</b> () const</td></tr>
+<tr class="memitem:af4c553229260e307ff1f78dd0c74506d" id="r_af4c553229260e307ff1f78dd0c74506d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplayer.html">player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4c553229260e307ff1f78dd0c74506d">get_starting_player</a> () const</td></tr>
+<tr class="memdesc:af4c553229260e307ff1f78dd0c74506d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the starting player of the current round.  <br /></td></tr>
 <tr class="separator:af4c553229260e307ff1f78dd0c74506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a472fd1721c7cc9e3689394f18c767bf9" id="r_a472fd1721c7cc9e3689394f18c767bf9"><td class="memItemLeft" align="right" valign="top"><a id="a472fd1721c7cc9e3689394f18c767bf9" name="a472fd1721c7cc9e3689394f18c767bf9"></a>
-<a class="el" href="classtrick.html">trick</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_trick</b> () const</td></tr>
+<tr class="memitem:a472fd1721c7cc9e3689394f18c767bf9" id="r_a472fd1721c7cc9e3689394f18c767bf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtrick.html">trick</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a472fd1721c7cc9e3689394f18c767bf9">get_trick</a> () const</td></tr>
+<tr class="memdesc:a472fd1721c7cc9e3689394f18c767bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current trick.  <br /></td></tr>
 <tr class="separator:a472fd1721c7cc9e3689394f18c767bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcaccd551f938f961d12266e34c037d2" id="r_abcaccd551f938f961d12266e34c037d2"><td class="memItemLeft" align="right" valign="top"><a id="abcaccd551f938f961d12266e34c037d2" name="abcaccd551f938f961d12266e34c037d2"></a>
-std::vector&lt; <a class="el" href="classplayer.html">player</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_players</b> ()</td></tr>
+<tr class="memitem:a4327f753f1f5341f9fe3774ea3fbc99b" id="r_a4327f753f1f5341f9fe3774ea3fbc99b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtrick.html">trick</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4327f753f1f5341f9fe3774ea3fbc99b">get_last_trick</a> () const</td></tr>
+<tr class="memdesc:a4327f753f1f5341f9fe3774ea3fbc99b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the previous trick.  <br /></td></tr>
+<tr class="separator:a4327f753f1f5341f9fe3774ea3fbc99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcaccd551f938f961d12266e34c037d2" id="r_abcaccd551f938f961d12266e34c037d2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplayer.html">player</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcaccd551f938f961d12266e34c037d2">get_players</a> ()</td></tr>
+<tr class="memdesc:abcaccd551f938f961d12266e34c037d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the players that joined the game.  <br /></td></tr>
 <tr class="separator:abcaccd551f938f961d12266e34c037d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a734fc594d457aa4e6db5bc7467e6442d" id="r_a734fc594d457aa4e6db5bc7467e6442d"><td class="memItemLeft" align="right" valign="top"><a id="a734fc594d457aa4e6db5bc7467e6442d" name="a734fc594d457aa4e6db5bc7467e6442d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove_player</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err)</td></tr>
+<tr class="memitem:a745dd23945b6165470c494b036ac4667" id="r_a745dd23945b6165470c494b036ac4667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a745dd23945b6165470c494b036ac4667">set_trick</a> (<a class="el" href="classtrick.html">trick</a> *new_trick)</td></tr>
+<tr class="memdesc:a745dd23945b6165470c494b036ac4667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the trick to the given trick.  <br /></td></tr>
+<tr class="separator:a745dd23945b6165470c494b036ac4667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734fc594d457aa4e6db5bc7467e6442d" id="r_a734fc594d457aa4e6db5bc7467e6442d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a734fc594d457aa4e6db5bc7467e6442d">remove_player</a> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err)</td></tr>
+<tr class="memdesc:a734fc594d457aa4e6db5bc7467e6442d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a player from the game.  <br /></td></tr>
 <tr class="separator:a734fc594d457aa4e6db5bc7467e6442d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a4fde0700a05c589a6b9c4dbcffac18" id="r_a4a4fde0700a05c589a6b9c4dbcffac18"><td class="memItemLeft" align="right" valign="top"><a id="a4a4fde0700a05c589a6b9c4dbcffac18" name="a4a4fde0700a05c589a6b9c4dbcffac18"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>add_player</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err)</td></tr>
+<tr class="memitem:a4a4fde0700a05c589a6b9c4dbcffac18" id="r_a4a4fde0700a05c589a6b9c4dbcffac18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a4fde0700a05c589a6b9c4dbcffac18">add_player</a> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err)</td></tr>
+<tr class="memdesc:a4a4fde0700a05c589a6b9c4dbcffac18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a player to the game.  <br /></td></tr>
 <tr class="separator:a4a4fde0700a05c589a6b9c4dbcffac18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ca6536eaec3404ff9b1ab39b8df4e67" id="r_a6ca6536eaec3404ff9b1ab39b8df4e67"><td class="memItemLeft" align="right" valign="top"><a id="a6ca6536eaec3404ff9b1ab39b8df4e67" name="a6ca6536eaec3404ff9b1ab39b8df4e67"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>start_game</b> (std::string &amp;err)</td></tr>
+<tr class="memitem:a6ca6536eaec3404ff9b1ab39b8df4e67" id="r_a6ca6536eaec3404ff9b1ab39b8df4e67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ca6536eaec3404ff9b1ab39b8df4e67">start_game</a> (std::string &amp;err)</td></tr>
+<tr class="memdesc:a6ca6536eaec3404ff9b1ab39b8df4e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the game.  <br /></td></tr>
 <tr class="separator:a6ca6536eaec3404ff9b1ab39b8df4e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef74df457394582c6767ad9dc0162360" id="r_aef74df457394582c6767ad9dc0162360"><td class="memItemLeft" align="right" valign="top"><a id="aef74df457394582c6767ad9dc0162360" name="aef74df457394582c6767ad9dc0162360"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>finish_game</b> (std::string &amp;err)</td></tr>
-<tr class="separator:aef74df457394582c6767ad9dc0162360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab520d4076c53f70a68bc19f355243a4d" id="r_ab520d4076c53f70a68bc19f355243a4d"><td class="memItemLeft" align="right" valign="top"><a id="ab520d4076c53f70a68bc19f355243a4d" name="ab520d4076c53f70a68bc19f355243a4d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setup_round</b> (std::string &amp;err)</td></tr>
+<tr class="memitem:a67fdd4b5682715cd2d848031a9911b17" id="r_a67fdd4b5682715cd2d848031a9911b17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67fdd4b5682715cd2d848031a9911b17">finish_game</a> (std::string &amp;err) const</td></tr>
+<tr class="memdesc:a67fdd4b5682715cd2d848031a9911b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finishes a game.  <br /></td></tr>
+<tr class="separator:a67fdd4b5682715cd2d848031a9911b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab520d4076c53f70a68bc19f355243a4d" id="r_ab520d4076c53f70a68bc19f355243a4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab520d4076c53f70a68bc19f355243a4d">setup_round</a> (std::string &amp;err)</td></tr>
+<tr class="memdesc:ab520d4076c53f70a68bc19f355243a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up a round.  <br /></td></tr>
 <tr class="separator:ab520d4076c53f70a68bc19f355243a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2e967638043670ebae93dd6ec32e91e" id="r_ad2e967638043670ebae93dd6ec32e91e"><td class="memItemLeft" align="right" valign="top"><a id="ad2e967638043670ebae93dd6ec32e91e" name="ad2e967638043670ebae93dd6ec32e91e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>wrap_up_round</b> (std::string &amp;err)</td></tr>
+<tr class="memitem:ad2e967638043670ebae93dd6ec32e91e" id="r_ad2e967638043670ebae93dd6ec32e91e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2e967638043670ebae93dd6ec32e91e">wrap_up_round</a> (std::string &amp;err)</td></tr>
+<tr class="memdesc:ad2e967638043670ebae93dd6ec32e91e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps up a round.  <br /></td></tr>
 <tr class="separator:ad2e967638043670ebae93dd6ec32e91e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f16f3d986305dbbf271233329a3eba1" id="r_a1f16f3d986305dbbf271233329a3eba1"><td class="memItemLeft" align="right" valign="top"><a id="a1f16f3d986305dbbf271233329a3eba1" name="a1f16f3d986305dbbf271233329a3eba1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>estimate_tricks</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err, int trick_estimate)</td></tr>
-<tr class="separator:a1f16f3d986305dbbf271233329a3eba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab909b3801d96854daebd26f399834a72" id="r_ab909b3801d96854daebd26f399834a72"><td class="memItemLeft" align="right" valign="top"><a id="ab909b3801d96854daebd26f399834a72" name="ab909b3801d96854daebd26f399834a72"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_be_played</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, const <a class="el" href="classcard.html">card</a> *<a class="el" href="classcard.html">card</a>, std::string &amp;err) const noexcept</td></tr>
-<tr class="separator:ab909b3801d96854daebd26f399834a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c65d95086a88b8d111de5553e1210ec" id="r_a6c65d95086a88b8d111de5553e1210ec"><td class="memItemLeft" align="right" valign="top"><a id="a6c65d95086a88b8d111de5553e1210ec" name="a6c65d95086a88b8d111de5553e1210ec"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_card</b> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, const std::string &amp;card_id, std::string &amp;err)</td></tr>
+<tr class="memitem:ac4ebff625d83c633c124890537d60354" id="r_ac4ebff625d83c633c124890537d60354"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4ebff625d83c633c124890537d60354">estimate_tricks</a> (const <a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, std::string &amp;err, int trick_estimate)</td></tr>
+<tr class="memdesc:ac4ebff625d83c633c124890537d60354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the trick estimates for a player.  <br /></td></tr>
+<tr class="separator:ac4ebff625d83c633c124890537d60354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c65d95086a88b8d111de5553e1210ec" id="r_a6c65d95086a88b8d111de5553e1210ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c65d95086a88b8d111de5553e1210ec">play_card</a> (<a class="el" href="classplayer.html">player</a> *<a class="el" href="classplayer.html">player</a>, const std::string &amp;card_id, std::string &amp;err)</td></tr>
+<tr class="memdesc:a6c65d95086a88b8d111de5553e1210ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays a card.  <br /></td></tr>
 <tr class="separator:a6c65d95086a88b8d111de5553e1210ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49851709fcec061d36478ed2fdcc3d9d" id="r_a49851709fcec061d36478ed2fdcc3d9d"><td class="memItemLeft" align="right" valign="top"><a id="a49851709fcec061d36478ed2fdcc3d9d" name="a49851709fcec061d36478ed2fdcc3d9d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>update_current_player</b> (std::string &amp;err)</td></tr>
+<tr class="memitem:a49851709fcec061d36478ed2fdcc3d9d" id="r_a49851709fcec061d36478ed2fdcc3d9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49851709fcec061d36478ed2fdcc3d9d">update_current_player</a> (std::string &amp;err)</td></tr>
+<tr class="memdesc:a49851709fcec061d36478ed2fdcc3d9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the current player after estimating tricks or playing cards.  <br /></td></tr>
 <tr class="separator:a49851709fcec061d36478ed2fdcc3d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54873cd18b46555915d150a6d8dd6f83" id="r_a54873cd18b46555915d150a6d8dd6f83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54873cd18b46555915d150a6d8dd6f83">write_into_json</a> (rapidjson::Value &amp;json, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
+<tr class="memdesc:a54873cd18b46555915d150a6d8dd6f83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes a <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object into a json object.  <br /></td></tr>
 <tr class="separator:a54873cd18b46555915d150a6d8dd6f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classunique__serializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classunique__serializable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classunique__serializable.html">unique_serializable</a></td></tr>
 <tr class="memitem:afda021db3c4d16dfc6cd8cd6a7c2aad7 inherit pub_methods_classunique__serializable" id="r_afda021db3c4d16dfc6cd8cd6a7c2aad7"><td class="memItemLeft" align="right" valign="top">
@@ -196,8 +211,8 @@ virtual rapidjson::Document *&#160;</td><td class="memItemRight" valign="bottom"
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a794d484961c92b5b737586ec5599963f" id="r_a794d484961c92b5b737586ec5599963f"><td class="memItemLeft" align="right" valign="top"><a id="a794d484961c92b5b737586ec5599963f" name="a794d484961c92b5b737586ec5599963f"></a>
-static <a class="el" href="classgame__state.html">game_state</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const rapidjson::Value &amp;json)</td></tr>
+<tr class="memitem:a794d484961c92b5b737586ec5599963f" id="r_a794d484961c92b5b737586ec5599963f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgame__state.html">game_state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a794d484961c92b5b737586ec5599963f">from_json</a> (const rapidjson::Value &amp;json)</td></tr>
+<tr class="memdesc:a794d484961c92b5b737586ec5599963f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes a <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object from a json object.  <br /></td></tr>
 <tr class="separator:a794d484961c92b5b737586ec5599963f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -211,7 +226,809 @@ Additional Inherited Members</h2></td></tr>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></tr>
 <tr class="separator:a7d95a28fd25510504eedde50c0e3c95b inherit pro_attribs_classunique__serializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the state of the game. </p>
+<p>This class encapsulates all information about a game, including the players, the deck, the trick, and some other variables.</p>
+<p>The <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> class contains most of the game logic and also holds all the other common classes as members (or as members of members, e.g., <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> has players and players have hands). It also contains information about the progress and current state of the game, e.g., if the game has already started, is finished, or which phase the game is in (estimation phase or play phase). Moreover, it also keeps track of who is currently able to make predictions or play cards, and changes the state of the game according to the players' actions. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2fbc370f93617298719f61514afdb5bc" name="a2fbc370f93617298719f61514afdb5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fbc370f93617298719f61514afdb5bc">&#9670;&#160;</a></span>~game_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">game_state::~game_state </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Destructs a trick object. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4a4fde0700a05c589a6b9c4dbcffac18" name="a4a4fde0700a05c589a6b9c4dbcffac18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4fde0700a05c589a6b9c4dbcffac18">&#9670;&#160;</a></span>add_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::add_player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>player</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a player to the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>The player that is added. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether adding the player worked or not.</dd></dl>
+<p>This function tries to add a player to a game. To do so, it checks several things including if the maximum number of players is already reached and if the game has already started. </p>
+
+</div>
+</div>
+<a id="ac4ebff625d83c633c124890537d60354" name="ac4ebff625d83c633c124890537d60354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4ebff625d83c633c124890537d60354">&#9670;&#160;</a></span>estimate_tricks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::estimate_tricks </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>player</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>trick_estimate</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the trick estimates for a player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>The player that is estimating tricks. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+    <tr><td class="paramname">trick_estimate</td><td>The trick estimate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the trick estimate was valid or not.</dd></dl>
+<p>This function is called whenever a player estimates their tricks (so predicts how many tricks they will win in the next round). To do so, the functions checks that the trick estimate is neither too low (smaller than zero), nor too high (greater than the round number), and for the last player, that the trick estimate sum of all players is not equal to the round number. If all of these checks pass, the players trick estimate is updated. Afterward, the game proceeds by calling update_current_player (see below). </p>
+
+</div>
+</div>
+<a id="a67fdd4b5682715cd2d848031a9911b17" name="a67fdd4b5682715cd2d848031a9911b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67fdd4b5682715cd2d848031a9911b17">&#9670;&#160;</a></span>finish_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::finish_game </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finishes a game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether finishing the game worked or not.</dd></dl>
+<p>This function finishes the game by setting _is_finished to true. </p>
+
+</div>
+</div>
+<a id="a794d484961c92b5b737586ec5599963f" name="a794d484961c92b5b737586ec5599963f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a794d484961c92b5b737586ec5599963f">&#9670;&#160;</a></span>from_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgame__state.html">game_state</a> * game_state::from_json </td>
+          <td>(</td>
+          <td class="paramtype">const rapidjson::Value &amp;</td>          <td class="paramname"><span class="paramname"><em>json</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deserializes a <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object from a json object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json</td><td>The json object containing the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> information. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a new <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object created from the given json object. </dd></dl>
+
+</div>
+</div>
+<a id="a2d16f420a8aa651685461a5efb8bb600" name="a2d16f420a8aa651685461a5efb8bb600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d16f420a8aa651685461a5efb8bb600">&#9670;&#160;</a></span>get_current_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplayer.html">player</a> * game_state::get_current_player </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current player. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current player. </dd></dl>
+
+</div>
+</div>
+<a id="a4327f753f1f5341f9fe3774ea3fbc99b" name="a4327f753f1f5341f9fe3774ea3fbc99b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4327f753f1f5341f9fe3774ea3fbc99b">&#9670;&#160;</a></span>get_last_trick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtrick.html">trick</a> * game_state::get_last_trick </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the previous trick. </p>
+<dl class="section return"><dt>Returns</dt><dd>The previous trick. </dd></dl>
+
+</div>
+</div>
+<a id="aa75c4da6c0056e48e5040be8127d7473" name="aa75c4da6c0056e48e5040be8127d7473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa75c4da6c0056e48e5040be8127d7473">&#9670;&#160;</a></span>get_max_round_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int game_state::get_max_round_number </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the maximum round number. </p>
+<dl class="section return"><dt>Returns</dt><dd>The maximum round number.</dd></dl>
+<p>The maximum number of rounds is determined by the number of players in the game. It is calculated by dividing 60 by the number of players. With 3 players, there are 20 rounds, while with 6 players, there are 10 rounds. </p>
+
+</div>
+</div>
+<a id="abcaccd551f938f961d12266e34c037d2" name="abcaccd551f938f961d12266e34c037d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcaccd551f938f961d12266e34c037d2">&#9670;&#160;</a></span>get_players()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classplayer.html">player</a> * &gt; &amp; game_state::get_players </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the players that joined the game. </p>
+<dl class="section return"><dt>Returns</dt><dd>The players that joined the game. </dd></dl>
+
+</div>
+</div>
+<a id="ab3ef836a1b3a1e2bc9e429a018c72eca" name="ab3ef836a1b3a1e2bc9e429a018c72eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3ef836a1b3a1e2bc9e429a018c72eca">&#9670;&#160;</a></span>get_round_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_state::get_round_number </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the round number. </p>
+<dl class="section return"><dt>Returns</dt><dd>The round number. </dd></dl>
+
+</div>
+</div>
+<a id="af4c553229260e307ff1f78dd0c74506d" name="af4c553229260e307ff1f78dd0c74506d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4c553229260e307ff1f78dd0c74506d">&#9670;&#160;</a></span>get_starting_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplayer.html">player</a> * game_state::get_starting_player </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the starting player of the current round. </p>
+<dl class="section return"><dt>Returns</dt><dd>The starting player of the current round. </dd></dl>
+
+</div>
+</div>
+<a id="a472fd1721c7cc9e3689394f18c767bf9" name="a472fd1721c7cc9e3689394f18c767bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a472fd1721c7cc9e3689394f18c767bf9">&#9670;&#160;</a></span>get_trick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtrick.html">trick</a> * game_state::get_trick </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current trick. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current trick. </dd></dl>
+
+</div>
+</div>
+<a id="aa5263d03c85bce1e9d252e9017cbe282" name="aa5263d03c85bce1e9d252e9017cbe282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5263d03c85bce1e9d252e9017cbe282">&#9670;&#160;</a></span>get_trick_estimate_sum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_state::get_trick_estimate_sum </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the trick estimate sum. </p>
+<dl class="section return"><dt>Returns</dt><dd>The trick estimate sum. </dd></dl>
+
+</div>
+</div>
+<a id="a3fce12f31ad0aab82b0d2da90e3e8e15" name="a3fce12f31ad0aab82b0d2da90e3e8e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fce12f31ad0aab82b0d2da90e3e8e15">&#9670;&#160;</a></span>get_trick_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_state::get_trick_number </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the trick number. </p>
+<dl class="section return"><dt>Returns</dt><dd>The trick number. </dd></dl>
+
+</div>
+</div>
+<a id="aa40554d105939c5dce934daaa858c242" name="aa40554d105939c5dce934daaa858c242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40554d105939c5dce934daaa858c242">&#9670;&#160;</a></span>get_trick_starting_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplayer.html">player</a> * game_state::get_trick_starting_player </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the starting player of the current trick. </p>
+<dl class="section return"><dt>Returns</dt><dd>The starting player of the current trick. </dd></dl>
+
+</div>
+</div>
+<a id="abdf6c5116ed643773d676c90a05e6fe4" name="abdf6c5116ed643773d676c90a05e6fe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf6c5116ed643773d676c90a05e6fe4">&#9670;&#160;</a></span>get_trump_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_state::get_trump_color </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the trump color. </p>
+<dl class="section return"><dt>Returns</dt><dd>The trump color. </dd></dl>
+
+</div>
+</div>
+<a id="a88d19342ee76acc4660b3e56e8c126eb" name="a88d19342ee76acc4660b3e56e8c126eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d19342ee76acc4660b3e56e8c126eb">&#9670;&#160;</a></span>is_estimation_phase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::is_estimation_phase </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the game is in estimation phase. </p>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the game is in estimation phase. </dd></dl>
+
+</div>
+</div>
+<a id="a9b83de8a89e3bb506184492d22c3cf45" name="a9b83de8a89e3bb506184492d22c3cf45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b83de8a89e3bb506184492d22c3cf45">&#9670;&#160;</a></span>is_finished()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::is_finished </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the game is finished. </p>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the game is finished. </dd></dl>
+
+</div>
+</div>
+<a id="ae161c283e275a57d71834754d11e9e40" name="ae161c283e275a57d71834754d11e9e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae161c283e275a57d71834754d11e9e40">&#9670;&#160;</a></span>is_full()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::is_full </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the game is full. </p>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the game is full </dd></dl>
+
+</div>
+</div>
+<a id="a371d6a6d84395b90c15d84549b05d553" name="a371d6a6d84395b90c15d84549b05d553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a371d6a6d84395b90c15d84549b05d553">&#9670;&#160;</a></span>is_player_in_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::is_player_in_game </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>player</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the given player is in the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>The player that is checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the given player is in the game. </dd></dl>
+
+</div>
+</div>
+<a id="aa0092c41779f38eba5e921e43b38559c" name="aa0092c41779f38eba5e921e43b38559c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0092c41779f38eba5e921e43b38559c">&#9670;&#160;</a></span>is_started()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::is_started </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the game is started. </p>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the game is started. </dd></dl>
+
+</div>
+</div>
+<a id="a6c65d95086a88b8d111de5553e1210ec" name="a6c65d95086a88b8d111de5553e1210ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c65d95086a88b8d111de5553e1210ec">&#9670;&#160;</a></span>play_card()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::play_card </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>player</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>card_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Plays a card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>The player that plays the card. </td></tr>
+    <tr><td class="paramname">card_id</td><td>The id of the card that is played. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the card could be played or not.</dd></dl>
+<p>This function is called whenever a player tries to play a card. If the card is in the player's hand, and it can be played (see can_be_played method of <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a>), the card is added to the trick and removed from the player's hand. Afterward, the game proceeds by calling update_current_player (see below). </p>
+
+</div>
+</div>
+<a id="a734fc594d457aa4e6db5bc7467e6442d" name="a734fc594d457aa4e6db5bc7467e6442d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a734fc594d457aa4e6db5bc7467e6442d">&#9670;&#160;</a></span>remove_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::remove_player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>player</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes a player from the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>The player that is removed. </td></tr>
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether removing the player worked or not.</dd></dl>
+<p>This function tries to remove a player from the game. While this is done, the players vector is updated so that the remaining players can start a new round. </p>
+
+</div>
+</div>
+<a id="a745dd23945b6165470c494b036ac4667" name="a745dd23945b6165470c494b036ac4667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745dd23945b6165470c494b036ac4667">&#9670;&#160;</a></span>set_trick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game_state::set_trick </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtrick.html">trick</a> *</td>          <td class="paramname"><span class="paramname"><em>new_trick</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the trick to the given trick. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_trick</td><td>The new trick. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab520d4076c53f70a68bc19f355243a4d" name="ab520d4076c53f70a68bc19f355243a4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab520d4076c53f70a68bc19f355243a4d">&#9670;&#160;</a></span>setup_round()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game_state::setup_round </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up a round. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function sets up a new round. To do so, it changes the phase to estimation phase, sets the trick estimate sum to zero, and updates the starting player indices. It also sets up the deck (which draws cards into players' hands), determines the trump, and sets up the trick. </p>
+
+</div>
+</div>
+<a id="a6ca6536eaec3404ff9b1ab39b8df4e67" name="a6ca6536eaec3404ff9b1ab39b8df4e67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca6536eaec3404ff9b1ab39b8df4e67">&#9670;&#160;</a></span>start_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::start_game </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the game could be started or not.</dd></dl>
+<p>This function tries to start the game. To do so, it checks if the round is already started and if enough players have joint the game. </p>
+
+</div>
+</div>
+<a id="a49851709fcec061d36478ed2fdcc3d9d" name="a49851709fcec061d36478ed2fdcc3d9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49851709fcec061d36478ed2fdcc3d9d">&#9670;&#160;</a></span>update_current_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game_state::update_current_player </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the current player after estimating tricks or playing cards. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean indicating whether the current player could be updated or not.</dd></dl>
+<p>This function is called whenever a trick estimation or playing of a card was successful, and it progresses the game after these actions. First, the function updates the current player to be the next player. If the updated current player still has to estimate their tricks or play their card in the current round or trick, the game just proceeds. However, if the updated current player is the same player that started the current trick or round, the current trick or round is wrapped up and a new one is set up. </p>
+
+</div>
+</div>
+<a id="ad2e967638043670ebae93dd6ec32e91e" name="ad2e967638043670ebae93dd6ec32e91e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2e967638043670ebae93dd6ec32e91e">&#9670;&#160;</a></span>wrap_up_round()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game_state::wrap_up_round </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wraps up a round. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error message updated in case something does not work.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function wraps up a round by moving the starting player index further to the next player, and by calling the wrap_up_round function of each player (this calculates the scores, see player class for more information). If the game is finished after the current round, the function also call finish_game to finish the game. </p>
+
+</div>
+</div>
 <a id="a54873cd18b46555915d150a6d8dd6f83" name="a54873cd18b46555915d150a6d8dd6f83"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54873cd18b46555915d150a6d8dd6f83">&#9670;&#160;</a></span>write_into_json()</h2>
 
@@ -238,6 +1055,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Serializes a <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> object into a json object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json</td><td>The json object for serializing the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a>. </td></tr>
+    <tr><td class="paramname">allocator</td><td>The json allocator for serializing the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classserializable.html">serializable</a>.</p>
 
