@@ -23,7 +23,7 @@ private:
     void buildScoreBoardButton(wxGridBagSizer* sizer, game_state* gameState);
 
     wxSize const panelSize = wxSize(960, 680); // also set in the constructor implementation
-    wxSize const cardSize = wxSize(70, 108);
+    wxSize const cardSize = wxSize(85, 131); // 70, 108
 };
 
 #endif //MAINGAMEPANELWIZARD_H

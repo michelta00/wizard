@@ -20,7 +20,7 @@ ScoreDialog::ScoreDialog(wxWindow* parent, const std::string& title, const std::
 
     // Initialize the timer to close the dialog after 5 seconds
     _closeTimer.SetOwner(this, wxID_ANY);
-    _closeTimer.Start(5000, wxTIMER_ONE_SHOT);  // 5 seconds
+    _closeTimer.Start(2000, wxTIMER_ONE_SHOT);  // 5 seconds
 }
 
 void ScoreDialog::OnTimerClose(wxTimerEvent& event) {

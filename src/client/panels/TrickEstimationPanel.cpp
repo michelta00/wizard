@@ -235,7 +235,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     mePanel->SetBackgroundColour(wxColour(120,0,51));
 
     // add our name
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(150, 35), wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
     playerName->SetFont(regularFontTrickBig);
 
