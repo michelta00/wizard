@@ -168,21 +168,26 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
 // shows current round number and total estimated tricks in the current round
 void MainGamePanelWizard::buildRoundDisplay(wxGridBagSizer* sizer, game_state* gameState)
 {
-    wxGBSizerItem* roundItem = sizer->FindItemAtPosition(wxGBPosition(0,0));
+    wxGBSizerItem* roundItem = sizer->FindItemAtPosition(wxGBPosition(5,0)); //round nr in bottom left corner
     wxPanel* roundPanel = dynamic_cast<wxPanel*>(roundItem->GetWindow());
     wxBoxSizer* roundSizer_vert = new wxBoxSizer(wxVERTICAL);
     roundPanel->SetSizer(roundSizer_vert);
 
+    wxGBSizerItem* trickItem = sizer->FindItemAtPosition(wxGBPosition(5,5)); //round nr in bottom left corner
+    wxPanel* trickPanel = dynamic_cast<wxPanel*>(trickItem->GetWindow());
+    wxBoxSizer* trickSizer_vert = new wxBoxSizer(wxVERTICAL);
+    trickPanel->SetSizer(trickSizer_vert);
     if(gameState->is_started())
     {
         wxStaticText* roundText = new wxStaticText(roundPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         roundText->SetForegroundColour(*wxWHITE);
         roundText->SetFont(magicalFont);
         roundSizer_vert->Add(roundText,0,wxALIGN_CENTER | wxALL);
+
+        wxStaticText* estimateText = new wxStaticText(trickPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         estimateText->SetForegroundColour(*wxWHITE);
         estimateText->SetFont(regularFont);
-        roundSizer_vert->Add(estimateText,0,wxALIGN_CENTER | wxALL);
+        trickSizer_vert->Add(estimateText,0,wxALIGN_CENTER | wxALL);
 
     }
 }
@@ -320,7 +325,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 
     if(gameState->is_started())
     {
-        trickPanel->SetBackgroundColour(wxColour(100,100,100));
+        //trickPanel->SetBackgroundColour(wxColour(100,100,100)); keep middle panel red
         const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards_and_players();
             for (const auto& it : trickCards)
             {
