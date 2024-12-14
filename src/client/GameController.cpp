@@ -290,7 +290,6 @@ void GameController::showGameOverMessage() {
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
-    // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {

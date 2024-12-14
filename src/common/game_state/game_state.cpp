@@ -208,6 +208,7 @@ int game_state::get_trick_estimate_sum() const
 
 unsigned int game_state::get_max_round_number() const
 {
+    //return 1;
     return 60 / _players.size();
 }
 
@@ -452,23 +453,35 @@ bool game_state::play_card(player* player, const std::string& card_id, std::stri
 
 bool game_state::remove_player(player *player_ptr, std::string &err)
 {
-    if (const int idx = get_player_index(player_ptr); idx != -1) {
-        if (_is_started->get_value() == false) {
-            if (idx < _current_player_idx->get_value()) {
-                // reduce current_player_idx if the player who left had a lower index
-                _current_player_idx->set_value(_current_player_idx->get_value() - 1);
-            }
-            _players.erase(_players.begin() + idx);
-            return true;
-        } else {
-            finish_game(err);
-            return true;
+    // only called when game hasn't been started yet
+    // get pointer of leaving player by id
+    if(player_ptr == nullptr)
+    {
+        std::cout << "Player does not exist." << std::endl;
+    }
+    std::cout << "Player" << player_ptr->get_id() << std::endl;
+    player* leaving_player = nullptr;
+    std::cout << "Loop started" << std::endl;
+    for (player* p : _players){
+        if (player_ptr->get_player_name() == p->get_player_name()) {
+            leaving_player = p;
         }
-    } else {
+    }
+    std::cout << "Loop ended" << std::endl;
+
+    if (leaving_player == nullptr) {
         err = "Could not leave game, as the requested player was not found in that game.";
         return false;
     }
-    return false;
+
+    const int idx = get_player_index(leaving_player);
+
+    if (idx < _current_player_idx->get_value()) {
+        // reduce current_player_idx if the player who left had a lower index
+        _current_player_idx->set_value(_current_player_idx->get_value() - 1);
+    }
+    _players.erase(_players.begin() + idx);
+    return true;
 }
 
 bool game_state::add_player(player* player, std::string& err)
@@ -497,7 +510,6 @@ bool game_state::add_player(player* player, std::string& err)
 bool game_state::finish_game(std::string &err) const
 {
     _is_finished->set_value(true);
-    // TODO: part to determine winner of the game, it is done in game controller right now and could stay there.
     return true;
 }
 #endif

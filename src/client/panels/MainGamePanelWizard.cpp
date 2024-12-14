@@ -178,7 +178,7 @@ void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_sta
 
         wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
         scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 , 35
-        sizer_hor->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+        sizer_hor->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
 
         scoreBoardButton->SetFont(magicalFont);
         scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
@@ -191,7 +191,7 @@ void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_sta
 
         wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
         leaveGameButton->SetMinSize(wxSize(110, 43));
-        sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+        sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
 
         leaveGameButton->SetFont(magicalFont);
         leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
