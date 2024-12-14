@@ -75,6 +75,15 @@ bool game_instance::start_game(player* player, std::string &err) {
 
 bool game_instance::try_remove_player(player *player, std::string &err) {
     modification_lock.lock();
+    if(_game_state->remove_player(player, err))
+    {
+        // player->set_game_id("");
+        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
+        modification_lock.unlock();
+        return true;
+    }
+    /*
     if (_game_state->is_started()) {
         // send state update to all other players
         _game_state->finish_game(err);
@@ -82,7 +91,8 @@ bool game_instance::try_remove_player(player *player, std::string &err) {
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
         return true;
-    }// else if (_game_state->remove_player(player, err)){
+    */
+    //}// else if (_game_state->remove_player(player, err)){
       //  player->set_game_id("");
         // send state update to all other players
       //  full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);

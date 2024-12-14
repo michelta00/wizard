@@ -453,35 +453,22 @@ bool game_state::play_card(player* player, const std::string& card_id, std::stri
 
 bool game_state::remove_player(player *player_ptr, std::string &err)
 {
-    // only called when game hasn't been started yet
-    // get pointer of leaving player by id
-    if(player_ptr == nullptr)
-    {
-        std::cout << "Player does not exist." << std::endl;
-    }
-    std::cout << "Player" << player_ptr->get_id() << std::endl;
-    player* leaving_player = nullptr;
-    std::cout << "Loop started" << std::endl;
-    for (player* p : _players){
-        if (player_ptr->get_player_name() == p->get_player_name()) {
-            leaving_player = p;
+    if (const int idx = get_player_index(player_ptr); idx != -1) {
+        // Case 1: Game has not been started yet.
+        if (_is_started->get_value() == false) {
+            if (idx < _current_player_idx->get_value()) {
+                // reduce current_player_idx if the player who left had a lower index
+                _current_player_idx->set_value(_current_player_idx->get_value() - 1);
+            }
+            _players.erase(_players.begin() + idx);
+            return true;
+        } else {
+            return finish_game(err);
         }
-    }
-    std::cout << "Loop ended" << std::endl;
-
-    if (leaving_player == nullptr) {
+    } else {
         err = "Could not leave game, as the requested player was not found in that game.";
         return false;
     }
-
-    const int idx = get_player_index(leaving_player);
-
-    if (idx < _current_player_idx->get_value()) {
-        // reduce current_player_idx if the player who left had a lower index
-        _current_player_idx->set_value(_current_player_idx->get_value() - 1);
-    }
-    _players.erase(_players.begin() + idx);
-    return true;
 }
 
 bool game_state::add_player(player* player, std::string& err)

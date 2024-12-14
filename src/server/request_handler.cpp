@@ -129,26 +129,23 @@ request_response* request_handler::handle_request(const client_request* const re
             // ##################### LEAVE GAME #####################  //
         case RequestType::leave_game:
             {
-
-
                 // Case 1: player is in a game
                 //remove player from game via game instance manager -> game instance -> game state
-                std::cout << "Leave game request reached request handler." << std::endl;
-                if (game_instance_manager::try_remove_player(player, game_id, err)) {
-                    std::cout << "Player successfully removed from the game " << std::endl;
-                    return new request_response(game_instance_ptr->get_id(), req_id, true,
-                                                    game_instance_ptr->get_game_state()->to_json(), err);
+                if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
+                    if (game_instance_manager::try_remove_player(player, game_id, err)) {
+                        std::cout << "Player successfully removed from the game " << std::endl;
+                        if (player_manager::remove_player(player_id, player)){
+                            return new request_response(game_instance_ptr->get_id(), req_id, true,
+                                                        game_instance_ptr->get_game_state()->to_json(), err);
+                        }
 
-                    //remove player from list of active players (delete from LUT table)
-                    //if (player_manager::remove_player(player_id, player)){
-                    //}
-                }
-                // player not in game instance yet but already in LUT
-                //else if (player_manager::remove_player(player_id, player)) {
-                //    return new request_response("", req_id, true, nullptr, err);
-                //}
-                else {
-                    err = "Player was found neither in any game nor in lookup table.";
+                    }
+                } // Case 2: player not in game yet but already in LUT
+                else if(player_manager::remove_player(player_id, player)) {
+                    return new request_response(game_instance_ptr->get_id(), req_id, true,
+                                                        game_instance_ptr->get_game_state()->to_json(), err);
+                } else {
+                    err = "Player or game instance were not found.";
                     return new request_response("", req_id, false, nullptr, err);
                 }
             }
