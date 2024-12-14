@@ -6,9 +6,7 @@ FONT_NAME1="JunicodeBold.ttf"
 FONT_NAME2="MagicSchoolOne.ttf"
 
 # path to the system fonts directory
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    FONT_DIR="$HOME/.fonts"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     FONT_DIR="$HOME/Library/Fonts"
 else
     echo "Unsupported operating system. Exiting."
