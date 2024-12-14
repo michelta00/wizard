@@ -132,7 +132,7 @@ void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_st
     });
 
     wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
-    leaveGameButton->SetMinSize(wxSize(90, 35));
+    leaveGameButton->SetMinSize(wxSize(110, 43));
     sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
 
     leaveGameButton->SetFont(magicalFontTrick);
