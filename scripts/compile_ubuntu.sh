@@ -1,39 +1,28 @@
 #!/bin/bash
 
+# INSTRUCTIONS
+# run this file from the wizard directory
+# make executable (if necessary) with chmod +x scripts/compile_ubuntu.sh
+# run with ./scripts/compile_ubuntu.sh
+
+
 # path to the assets folder containing the .ttf files
 ASSETS_DIR="./assets"
 FONT_NAME1="JunicodeBold.ttf"
 FONT_NAME2="MagicSchoolOne.ttf"
 
-# path to the system fonts directory
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    FONT_DIR="$HOME/.fonts"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    FONT_DIR="$HOME/Library/Fonts"
+# create new directory for wizard fonts if it doesn't exist yet
+if [ ! -d "~/.fonts" ]; then
+    echo "Directory ~/.fonts does not exist. Creating it now..."
+    mkdir ~/.fonts
+    echo "Directory ~/.fonts created successfully."
 else
-    echo "Unsupported operating system. Exiting."
-    exit 1
+    echo "Directory ~/.fonts already exists."
 fi
 
-# check if the .ttf files exists
-if [[ ! -f "$ASSETS_DIR/$FONT_NAME1" ]]; then
-    echo "Font file $FONT_NAME1 not found in $ASSETS_DIR. Exiting."
-    exit 1
-fi
-if [[ ! -f "$ASSETS_DIR/$FONT_NAME2" ]]; then
-    echo "Font file $FONT_NAME2 not found in $ASSETS_DIR. Exiting."
-    exit 1
-fi
-
-# copy font 1
-cp "$ASSETS_DIR/$FONT_NAME1" "$FONT_DIR"
-# refresh cache
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    fc-cache -f -v
-fi
-
-# copy font 2
-cp "$ASSETS_DIR/$FONT_NAME2" "$FONT_DIR"
+# copy the fonts into the new directory
+cp $ASSETS_DIR/$FONT_NAME1 ~/.fonts
+cp $ASSETS_DIR/$FONT_NAME2 ~/.fonts
 # refresh cache
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fc-cache -f -v
