@@ -17,8 +17,8 @@ wxFont regularFont = wxFont(wxFontInfo(12).FaceName("Junicode")); //requires yy:
 wxFont regularFontBig = wxFont(wxFontInfo(16).FaceName("Junicode")); //requires yy:35, xx:150
 
 
-MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(1000, 680)) {
-    this->SetMinSize(wxSize(1000, 680));
+MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(1200, 850)) {
+    this->SetMinSize(wxSize(1200, 850));
 }
 
 
@@ -60,7 +60,7 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
 
 
 
-    this->SetMinSize(wxSize(1000, 680));
+    this->SetMinSize(wxSize(1200, 850));
 
     //create Grid to partition game panel
     auto sizer = new wxGridBagSizer(4,5);
@@ -156,11 +156,13 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     // show button to display score board
     this->buildScoreBoardButton(sizer, gameState);
 
+    // update Layout
+    this->Layout();
+
     // show round number and trick estimate sum
     this->buildRoundDisplay(sizer, gameState);
 
-    // update Layout
-    this->Layout();
+
 }
 
 // shows current round number and total estimated tricks in the current round
@@ -174,7 +176,7 @@ void MainGamePanelWizard::buildRoundDisplay(wxGridBagSizer* sizer, game_state* g
     if(gameState->is_started())
     {
         wxStaticText* roundText = new wxStaticText(roundPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
         roundText->SetForegroundColour(*wxWHITE);
         roundText->SetFont(magicalFont);
         roundSizer_vert->Add(roundText,0,wxALIGN_CENTER | wxALL);

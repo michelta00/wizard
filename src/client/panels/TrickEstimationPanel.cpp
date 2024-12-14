@@ -8,7 +8,7 @@ wxFont regularFontTrick = wxFont(wxFontInfo(12).FaceName("Junicode"));
 wxFont regularFontTrickBig = wxFont(wxFontInfo(18).FaceName("Junicode"));
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
-                                                                      wxSize(1000, 680)){}
+                                                                      wxSize(1200, 850)){}
 TrickEstimationPanel::~TrickEstimationPanel()
 {
     delete _trickEstimateField;
@@ -25,7 +25,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     this->SetBackgroundColour(wxColour(102,0,51));
 
-    this->SetMinSize(wxSize(1000, 680)); // a bit wider to make scoreboard button fit fully
+    this->SetMinSize(wxSize(1200, 850)); // a bit wider to make scoreboard button fit fully
 
     //create 3x3 Grid
     auto sizer = new wxGridBagSizer(4,3);
