@@ -12,17 +12,18 @@ FONT_NAME1="JunicodeBold.ttf"
 FONT_NAME2="MagicSchoolOne.ttf"
 
 # create new directory for wizard fonts if it doesn't exist yet
-if [ ! -d "~/.fonts" ]; then
-    echo "Directory ~/.fonts does not exist. Creating it now..."
-    mkdir ~/.fonts
-    echo "Directory ~/.fonts created successfully."
+if [ ! -d "~/.local/share/fonts" ]; then
+    echo "Directory ~/.local/share/fonts does not exist. Creating it now..."
+    mkdir ~/.local/share/fonts
+    echo "Directory ~/.local/share/fonts created successfully."
 else
-    echo "Directory ~/.fonts already exists."
+    echo "Directory ~/.local/share/fonts already exists."
 fi
 
 # copy the fonts into the new directory
-cp $ASSETS_DIR/$FONT_NAME1 ~/.fonts
-cp $ASSETS_DIR/$FONT_NAME2 ~/.fonts
+cp $ASSETS_DIR/$FONT_NAME1 ~/.local/share/fonts
+cp $ASSETS_DIR/$FONT_NAME2 ~/.local/share/fonts
+
 # refresh cache
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fc-cache -f -v
