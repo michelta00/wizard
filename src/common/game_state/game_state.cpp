@@ -185,7 +185,6 @@ int game_state::get_trick_estimate_sum() const
 
 unsigned int game_state::get_max_round_number() const
 {
-    return 1;
     return 60 / _players.size();
 }
 

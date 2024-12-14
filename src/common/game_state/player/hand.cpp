@@ -59,13 +59,6 @@ card* hand::remove_card(const std::vector<card*>::iterator pos) {
     return nullptr;
 }
 
-#ifdef WIZARD_SERVER
-// state update functions
-bool hand::add_card(card* card, std::string &err) {
-    _cards.push_back(card);
-    return true;
-}
-
 bool hand::remove_card(std::string card_id, std::string &err) {
     const auto it = std::ranges::find_if(_cards,
                                          [&card_id](const card* x) { return x->get_id() == card_id;});
@@ -76,6 +69,13 @@ bool hand::remove_card(std::string card_id, std::string &err) {
         err = "Could not play card, as the requested card was not on the player's hand.";
         return false;
     }
+}
+
+#ifdef WIZARD_SERVER
+// state update functions
+bool hand::add_card(card* card, std::string &err) {
+    _cards.push_back(card);
+    return true;
 }
 #endif
 
