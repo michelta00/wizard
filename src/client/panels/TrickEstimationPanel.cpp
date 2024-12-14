@@ -8,7 +8,7 @@ wxFont regularFontTrick = wxFont(wxFontInfo(12).FaceName("Junicode"));
 wxFont regularFontTrickBig = wxFont(wxFontInfo(18).FaceName("Junicode"));
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
-                                                                      wxSize(960, 680)){}
+                                                                      wxSize(1000, 680)){}
 TrickEstimationPanel::~TrickEstimationPanel()
 {
     delete _trickEstimateField;
@@ -139,7 +139,7 @@ void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *ga
 
     wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
     trumpText->SetForegroundColour(*wxWHITE);
-    trumpText->SetFont(regularFontTrickBig);
+    trumpText->SetFont(regularFontTrick);
 
     int trumpColor = gameState->get_trump_color();
 
@@ -202,7 +202,7 @@ void TrickEstimationPanel::buildHand(wxGridBagSizer *sizer, game_state *gameStat
 void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameState){
     wxGBSizerItem* centerItem = sizer->FindItemAtPosition(wxGBPosition(1,1));
     wxPanel* centerPanel = dynamic_cast<wxPanel*>(centerItem->GetWindow());
-
+    centerPanel->SetBackgroundColour(wxColor(100, 100, 100)); //grey panel
     // add sizer to center the text
     auto centerPanelSizer_vert = new wxBoxSizer(wxVERTICAL);
     centerPanel->SetSizer(centerPanelSizer_vert);
@@ -212,18 +212,16 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     centerPanelSizer_hor->Add(centerPanelSizer_vert2, 1, wxALIGN_CENTER);
 
     // add round number
-    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxSize(80, 43), wxALIGN_CENTER);
     roundNumber->SetForegroundColour(*wxWHITE);
-    roundNumber->SetFont(regularFontTrick);
+    roundNumber->SetFont(magicalFontTrick);
 
-    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum: " + std::to_string(gameState->get_trick_estimate_sum()),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     trickSum->SetForegroundColour(*wxWHITE);
     trickSum->SetFont(regularFontTrick);
 
-
-    centerPanelSizer_vert2->Add(roundNumber, 0, wxALIGN_CENTER);
-    centerPanelSizer_vert2->Add(trickSum, 0, wxALIGN_CENTER);
-
+    centerPanelSizer_vert2->Add(roundNumber, 0, wxALIGN_CENTER|wxALL);
+    centerPanelSizer_vert2->Add(trickSum, 0, wxALIGN_CENTER|wxALL);
 }
 
 void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* gameState, player* me)
@@ -251,7 +249,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             mePanel->SetBackgroundColour(wxColour(50,0,51));
 
             // add input field for trick estimate
-            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick Estimate:",wxDefaultPosition, wxSize(130, 20), wxALIGN_CENTER);
+            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick estimate:",wxDefaultPosition, wxSize(130, 20), wxALIGN_CENTER);
             inputLabel->SetForegroundColour(*wxWHITE);
             inputLabel->SetFont(regularFontTrick);
             mePanelSizer_vert->Add(inputLabel, 0, wxALIGN_CENTER);
@@ -260,7 +258,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             this->_trickEstimateField = new InputField(mePanel, "", 0, "", 80);
             this->_trickEstimateField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
             mePanelSizer_vert->Add(_trickEstimateField, 0, wxALIGN_CENTER|wxALL, 10);
-
+            _trickEstimateField->SetFont(regularFontTrick);
             // show button that allows our player to start the game
             wxButton* submitEstimateButton = new wxButton(mePanel, wxID_ANY, "Submit", wxDefaultPosition, wxSize(80, 43));
             submitEstimateButton->SetFont(magicalFontTrick);

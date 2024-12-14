@@ -49,22 +49,19 @@ game_state::game_state(const std::string& id, const std::vector<player*>& player
           _trump_color(trump_color),
           _trick_estimate_sum(trick_estimate_sum)
 {
-    //checks if all player names are unique. if not, add _1, _2 etc. to the duplicate names
+    //checks if all player names are unique. if not, add #1, #2 etc. to the duplicate names
     std::unordered_map<std::string, int> name_counts; // track occurrences of names
 
     for (player* p : _players) {
         std::string original_name = p->get_player_name();
         std::string unique_name = original_name;
-        if (name_counts[original_name] > 0) {
-            // Assign a unique suffix based on the current count
-            unique_name = original_name + "_" + std::to_string(name_counts[original_name]);
-        }
-
-        // Increment count for new and original name
         name_counts[original_name]++;
-        name_counts[unique_name]++;
-
-        // update player's name if modified
+        if (name_counts[original_name] > 1) {
+            // append #i to players where i is the current count
+            unique_name = original_name + "#" + std::to_string(name_counts[original_name]);
+            name_counts[unique_name]++;
+        }
+        // update player name if modified
         if (unique_name != original_name) {
             p->set_player_name(unique_name);
         }

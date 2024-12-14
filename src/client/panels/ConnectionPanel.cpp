@@ -33,7 +33,7 @@ ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
     //label width is the width of the label text
     this->_serverAddressField->SetFont(regularFont); //set font
     this->_serverAddressField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
-    this->_serverAddressField->SetMinSize(wxSize(-1, 27));
+    this->_serverAddressField->SetMinSize(wxSize(-1, 30));
     verticalLayout->Add(this->_serverAddressField, 0, wxALL | wxEXPAND, fieldSpacing);
 
 
@@ -42,14 +42,14 @@ ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
     this->_serverPortField = new InputField(this, "Server port:", 100, wxString::Format("%i", default_port), 240);
     this->_serverPortField->SetFont(regularFont);
     this->_serverPortField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
-    this->_serverPortField->SetMinSize(wxSize(-1, 27));
+    this->_serverPortField->SetMinSize(wxSize(-1, 30));
     verticalLayout->Add(this->_serverPortField, 0, wxALL | wxEXPAND, fieldSpacing);
 
     // Player Name Input Field
     this->_playerNameField = new InputField(this, "Player name:", 100, "", 240);
     this->_playerNameField->SetFont(regularFont);
     this->_playerNameField->SetLabelTextColour(wxColour(255, 255, 255)); // Set label text color to white
-    this->_playerNameField->SetMinSize(wxSize(-1, 27));
+    this->_playerNameField->SetMinSize(wxSize(-1, 30));
     verticalLayout->Add(this->_playerNameField, 0, wxALL | wxEXPAND, fieldSpacing);
 
 
