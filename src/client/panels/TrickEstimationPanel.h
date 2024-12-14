@@ -19,7 +19,7 @@ public:
     void buildGameState(game_state* gameState, player* me);
 private:
     wxSize const panelSize = wxSize(960, 680);
-    wxSize const cardSize = wxSize(70, 108);
+    wxSize const cardSize = wxSize(85, 131);
 
     void buildCenter(wxGridBagSizer* sizer, game_state* gameState);
     void buildTrumpColor(wxGridBagSizer* sizer, game_state* gameState);

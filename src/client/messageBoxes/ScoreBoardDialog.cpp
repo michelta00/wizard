@@ -2,7 +2,6 @@
 #include <wx/grid.h>
 #include <algorithm>
 
-
 ScoreBoardDialog::ScoreBoardDialog(wxWindow* parent, const std::string& title, const std::string& message, game_state* gameState)
         : wxDialog(parent, wxID_ANY, title, wxDefaultPosition, wxSize(400, 250), wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP){
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -18,10 +17,38 @@ ScoreBoardDialog::ScoreBoardDialog(wxWindow* parent, const std::string& title, c
         playerNames.at(i) = players.at(i)->get_player_name();
     }
 
+
+    std::vector<int> currentScores(numberOfPlayers);
+    for (int i = 0; i < numberOfPlayers; i++)
+    {
+        currentScores[i] = players.at(i)->get_scores().back()->get_value();
+    }
+
+    // determine current winners
+    // Find the maximum value
+    int maxValue = *std::max_element(currentScores.begin(), currentScores.end());
+    int minValue = *std::min_element(currentScores.begin(), currentScores.end());
+
+    // Find all indices with the maximum value
+    std::vector<int> maxIndices;
+    for (int i = 0; i < currentScores.size(); ++i) {
+        if (currentScores[i] == maxValue) {
+            maxIndices.push_back(i);
+        }
+    }
+    // Find all indices with the maximum value
+    std::vector<int> minIndices;
+    for (int i = 0; i < currentScores.size(); ++i)
+    {
+        if (currentScores[i] == minValue) {
+            minIndices.push_back(i);
+        }
+    }
+
     int numRows = players.at(0)->get_scores().size()-1;
     int numCols = tableData.size(); // Assumes all vectors are the same length
 
-    // avoid showing scores that are initialized with 0 but not actual acores yet
+    // avoid showing scores that are initialized with 0 but not actual scores yet
     if (numRows >= 1) {
         for (int i = 0; i < numberOfPlayers; i++) {
             auto scores = players.at(i)->get_scores();
@@ -42,6 +69,8 @@ ScoreBoardDialog::ScoreBoardDialog(wxWindow* parent, const std::string& title, c
 
         grid->CreateGrid(numRows, numCols);
 
+        grid->SetDefaultCellAlignment(wxALIGN_CENTER, wxALIGN_CENTER);
+
         for (int col = 0; col < numCols; ++col) {
             grid->SetColLabelValue(col, playerNames[col]);
         }
@@ -50,8 +79,30 @@ ScoreBoardDialog::ScoreBoardDialog(wxWindow* parent, const std::string& title, c
         for (int row = 0; row < numRows; ++row) {
             for (int col = 0; col < numCols; ++col) {
                 grid->SetCellValue(row, col, wxString::Format("%d", tableData[col][row]->get_value()));
+                if (maxIndices.size() != numberOfPlayers) // do not mark anything if all players have the same score
+                {
+                    for (auto i: maxIndices) // mark all leaders
+                    {
+                        if (col == i && row == numRows-1)
+                        {
+                            grid->SetCellBackgroundColour(row, col, wxColour(0, 100, 0));
+                            grid->SetCellTextColour(row,col,*wxWHITE);
+                        }
+                    }
+                    for (auto i: minIndices) // mark all losers
+                    {
+                        if (col == i && row == numRows-1)
+                        {
+                            grid->SetCellBackgroundColour(row, col, wxColour(102,0,51));
+                            grid->SetCellTextColour(row,col,*wxWHITE);
+                        }
+                    }
+                }
             }
         }
+        // Automatically size columns and rows to fit content
+        grid->AutoSizeColumns();
+        grid->AutoSizeRows();
 
         sizer->Add(grid, 1, wxEXPAND | wxALL, 10);
 
