@@ -100,12 +100,18 @@ void player::set_nof_predicted(const int nof_predicted) const
 }
 
 
-// other getters
+// getter and setter for player name
 std::string player::get_player_name() const noexcept
 {
     return this->_player_name->get_value();
 }
 
+void player::set_player_name(const std::string& new_name)
+{
+    _player_name->set_value(new_name);
+}
+
+// other getters
 hand* player::get_hand() const noexcept
 {
     return this->_hand;

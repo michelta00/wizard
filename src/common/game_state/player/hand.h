@@ -32,11 +32,12 @@ private:
     card* remove_card(int idx);
 
     /**
-     * @brief Removes a card from the hand.
-     * @param card A pointer to the card that should be removed.
-     * @return A pointer to the removed card.
-     */
+       * @brief Removes a card from the hand.
+       * @param card A pointer to the card that should be removed.
+       * @return A pointer to the removed card.
+       */
     card* remove_card(card* card);
+
 
 public:
 
@@ -88,6 +89,14 @@ public:
      */
     bool try_get_card(const std::string& card_id, card*& hand_card) const;
 
+    /**
+    * @brief Removes a card from the hand.
+    * @param card_id The id of the card that should be removed.
+    * @param err The error message updated in case something does not work.
+    * @return A boolean indicating whether removing the card worked or not.
+    */
+    bool remove_card(std::string card_id, std::string& err);
+
 #ifdef WIZARD_SERVER
 // state update functions
     /**
@@ -98,13 +107,6 @@ public:
      */
     bool add_card(card* card, std::string& err);
 
-    /**
-     * @brief Removes a card from the hand.
-     * @param card_id The id of the card that should be removed.
-     * @param err The error message updated in case something does not work.
-     * @return A boolean indicating whether removing the card worked or not.
-     */
-    bool remove_card(std::string card_id, std::string& err);
 #endif
 
 // serialization interface

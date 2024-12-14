@@ -187,7 +187,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
 </div><div class="memdoc">
 
 <p>Constructs a new deck object. </p>
-<p>This is the main constructor of the deck class used by the <a class="el" href="classgame__state.html">game_state</a> to create a deck for a game. When this constructor is called, all possible cards in <a class="el" href="class_wizard.html">Wizard</a> are created and added to the deck. This is the only time actual card objects are created, every card only exists exactly once. In all other instances where cards are removed or added somewhere (e.g., to a player's hand), actually only pointers are added or removed. </p>
+<p>This is the main constructor of the deck class used by the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> to create a deck for a game. When this constructor is called, all possible cards in <a class="el" href="class_wizard.html">Wizard</a> are created and added to the deck. This is the only time actual card objects are created, every card only exists exactly once. In all other instances where cards are removed or added somewhere (e.g., to a player's hand), actually only pointers are added or removed. </p>
 
 </div>
 </div>
@@ -316,7 +316,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
 
 <p>Draws a random trump card from the remaining cards. </p>
 <dl class="section return"><dt>Returns</dt><dd>The card used as trump.</dd></dl>
-<p>This function randomly draws one card from the remaining cards, which is then used as the trump for a round. In the last round, there are no more remaining cards after dealing. In this case, a nullptr is returned. The logic to handle this case further is implemented in the <a class="el" href="classgame__state.html">game_state</a> class. </p>
+<p>This function randomly draws one card from the remaining cards, which is then used as the trump for a round. In the last round, there are no more remaining cards after dealing. In this case, a nullptr is returned. The logic to handle this case further is implemented in the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> class. </p>
 
 </div>
 </div>

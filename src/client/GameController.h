@@ -27,7 +27,7 @@ public:
     static void showError(const std::string& title, const std::string& message);
     static void showStatus(const std::string& message);
     static void showNewRoundMessage(game_state* oldGameState, game_state* newGameState);
-    static void showTrickOverMessage();
+    static void showTrickOverMessage(const player* winner);
     static void showGameOverMessage();
 
 private:
