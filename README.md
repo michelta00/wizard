@@ -33,7 +33,7 @@ player can run their own client and connect to the same server in the same local
 ## 2 Compile Instructions
 
 This project only works on UNIX systems (Linux / macOS). We thus only explain the how to compile the game on these 
-systems. The following description was tested on Ubuntu 22.04 and on macOS Sequoia.
+systems. The following description was tested on Ubuntu 24.04 and on macOS Sequoia.
 
 ### 2.1 Prepare OS Environment
 
@@ -44,7 +44,7 @@ running `git clone https://gitlab.ethz.ch/beckermar/wizard.git` (clone with HTTP
 Cloning the game as a first step also makes provided scripts for preparing the OS environment and for compiling the code
 available.
 
-#### 2.1.1 Ubuntu 22.04
+#### 2.1.1 Ubuntu 24.04
 
 The necessary packages and software can either be installed manually or by running the provided script. 
 
@@ -53,7 +53,7 @@ To use the provided script, run `bash scripts/prepare_ubuntu.sh` inside the **wi
 To manually prepare Ubuntu, execute the following commands:
 1. `sudo apt-get update` (update package list)
 2. `sudo apt-get install build-essential` (install software to build from source)
-3. `sudo apt-get install libwxgtk3.2-dev` (install wxwidgets, use libwxgtk3.0-gtk3-dev on Ubuntu 20.04)
+3. `sudo apt-get install libwxgtk3.2-dev` (install wxwidgets, use libwxgtk3.0-gtk3-dev on Ubuntu 20.04 / 22.04)
 4. `sudo apt-get install cmake` (install cmake)
 5. `sudo reboot` (reboot system)
 
@@ -72,7 +72,7 @@ To manually prepare macOS, execute the following commands:
 
 Compiling the code creates executables for the client (Wizard-client) and for the server (Wizard-server).
 
-#### 2.2.1 Ubuntu 22.04
+#### 2.2.1 Ubuntu 24.04
 
 Compiling the code can be done by running the provided script.
 
