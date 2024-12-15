@@ -19,7 +19,6 @@ player* GameController::_me = nullptr;
 game_state* GameController::_currentGameState = nullptr;
 
 
-
 void GameController::init(GameWindow* gameWindow) {
 
     //TODO: panels need to be adapted
@@ -77,6 +76,13 @@ void GameController::connectToServer() {
 
     // convert player name from wxString to std::string
     std::string playerName = inputPlayerName.ToStdString();
+    //player name length check
+    if (playerName.size() > 15)
+    {
+        GameController::showError("Connection error", "Invalid player name length. Please enter a player name between 1 and 15 characters.");
+        return;
+    }
+
 
     // connect to network
     ClientNetworkManager::init(host, port);
@@ -85,6 +91,7 @@ void GameController::connectToServer() {
     GameController::_me = new player(playerName);
     join_game_request request = join_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
+
 
 }
 
@@ -110,9 +117,23 @@ void GameController::updateGameState(game_state* newGameState) {
             {
                 trick* trick_to_show = new trick(*_currentGameState->get_last_trick());
                 oldGameState->set_trick(trick_to_show);
+                player* winner = oldGameState->get_trick()->get_winner();
+                // get player of oldGameState that has same id as winner (winner is player of current game state)
+                for (auto& player_ : oldGameState->get_players()) {
+                    if (player_->get_id() == winner->get_id()) {
+                        winner = player_;
+                    }
+                }
+                // add trick to winning player
+                winner->set_nof_tricks(winner->get_nof_tricks() + 1);
+
+                // make sure that last card is removed from hand
+                const player* last_player = oldGameState->get_current_player();
+                std::string last_player_error = "Card of last player of trick could not be removed from hand";
+                last_player->get_hand()->remove_card(trick_to_show->get_cards_and_players().back().first->get_id(), last_player_error);
+
                 GameController::_gameWindow->showPanel(GameController::_mainGamePanelWizard);
                 GameController::_mainGamePanelWizard->buildGameState(oldGameState, GameController::_me);
-                player* winner = oldGameState->get_trick()->get_winner();
                 showTrickOverMessage(winner);
             }
 
@@ -146,6 +167,13 @@ void GameController::updateGameState(game_state* newGameState) {
 void GameController::startGame() {
     start_game_request request = start_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id());
     ClientNetworkManager::sendRequest(request);
+
+}
+
+void GameController::leaveGame() {
+    _me->set_has_left_game(true);
+    leave_game_request request = leave_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), _me->get_player_name());
+    ClientNetworkManager::sendRequest(request);
 }
 
 void GameController::estimateTricks(int nof_tricks) {
@@ -155,12 +183,6 @@ void GameController::estimateTricks(int nof_tricks) {
 
 void GameController::playCard(card* cardToPlay) {
     play_card_request request = play_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), cardToPlay->get_id());
-    ClientNetworkManager::sendRequest(request);
-}
-
-void GameController::leaveGame()
-{
-    leave_game_request request = leave_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
 }
 
@@ -239,6 +261,7 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
     //dialogBox.ShowModal();
 
     auto* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
+
     dialog->ShowModal();
 }
 
@@ -252,17 +275,15 @@ void GameController::showTrickOverMessage(const player* winner)
     dialog->ShowModal();
 }
 
-
 void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
-    // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
-        return a->get_scores().back()->get_value() < b->get_scores().back()->get_value();
+        return a->get_scores().back()->get_value() > b->get_scores().back()->get_value();
     });
 
     // list all players
@@ -291,7 +312,13 @@ void GameController::showGameOverMessage() {
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
     int buttonClicked = dialogBox.ShowModal();
+
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
+}
+
+void GameController::closeGameWindow()
+{
+    GameController::_gameWindow->Close();
 }

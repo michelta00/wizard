@@ -320,7 +320,8 @@ void create_json(rapidjson::Value &json, rapidjson::MemoryPoolAllocator<rapidjso
                  serializable_value<bool>* test_is_estimation_phase, serializable_value<int>* test_round_number,
                  serializable_value<int>* test_trick_number, serializable_value<int>* test_starting_player_idx,
                  serializable_value<int>* test_trick_starting_player_idx, serializable_value<int>* test_current_player_idx,
-                 serializable_value<int>* test_trump_color, serializable_value<int>* test_trick_estimate_sum)
+                 serializable_value<int>* test_trump_color, serializable_value<int>* test_trump_card_value,
+                 serializable_value<int>* test_trick_estimate_sum)
 {
     // id
     json.AddMember("id", "4f38hvid20dj", allocator);
@@ -388,10 +389,15 @@ void create_json(rapidjson::Value &json, rapidjson::MemoryPoolAllocator<rapidjso
     test_trump_color->write_into_json(trump_color_val, allocator);
     json.AddMember("trump_color", trump_color_val, allocator);
 
+    // trump card value
+    rapidjson::Value trump_card_value_val(rapidjson::kObjectType);
+    test_trump_card_value->write_into_json(trump_card_value_val, allocator);
+    json.AddMember("trump_card_value", trump_card_value_val, allocator);
+
     // trick estimate sum
     rapidjson::Value trick_estimate_sum_val(rapidjson::kObjectType);
     test_trick_estimate_sum->write_into_json(trick_estimate_sum_val, allocator);
-    json.AddMember("trick_estimate_sum_val", trick_estimate_sum_val, allocator);
+    json.AddMember("trick_estimate_sum", trick_estimate_sum_val, allocator);
 
 }
 
@@ -410,13 +416,15 @@ TEST(GameStateJson, CreateJson)
     const auto test_trick_starting_player_idx = new serializable_value<int>(0);
     const auto test_current_player_idx = new serializable_value<int>(0);
     const auto test_trump_color = new serializable_value<int>(0);
+    const auto test_trump_card_value = new serializable_value<int>(0);
     const auto test_trick_estimate_sum = new serializable_value<int>(0);
 
     auto* json = new rapidjson::Document();
     json->SetObject();
     create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick, test_is_finished,
                 test_is_started, test_is_estimation_phase, test_round_number, test_trick_number, test_starting_player_idx,
-                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trick_estimate_sum);
+                test_trick_starting_player_idx, test_current_player_idx, test_trump_color, test_trump_card_value,
+                test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -449,6 +457,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimation)
     const auto test_trick_starting_player_idx = new serializable_value<int>(2);     // depends on who won last trick
     const auto test_current_player_idx = new serializable_value<int>(2);            // first one to estimate
     const auto test_trump_color = new serializable_value<int>(2);
+    const auto test_trump_card_value = new serializable_value<int>(2);
     const auto test_trick_estimate_sum = new serializable_value<int>(0);
 
     auto* json = new rapidjson::Document();
@@ -456,7 +465,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimation)
     create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
                 test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
                 test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
-                test_trick_estimate_sum);
+                test_trump_card_value, test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -491,6 +500,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimationToPlaying)
     const auto test_trick_starting_player_idx = new serializable_value<int>(0);     // round starter starts
     const auto test_current_player_idx = new serializable_value<int>(3);            // last one to estimate
     const auto test_trump_color = new serializable_value<int>(2);
+    const auto test_trump_card_value = new serializable_value<int>(2);
     const auto test_trick_estimate_sum = new serializable_value<int>(4);
 
     auto* json = new rapidjson::Document();
@@ -498,7 +508,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerEstimationToPlaying)
     create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
                 test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
                 test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
-                test_trick_estimate_sum);
+                test_trump_card_value, test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -534,6 +544,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerPlayingToNextRound)
     const auto test_trick_starting_player_idx = new serializable_value<int>(2);     // depends on last trick
     const auto test_current_player_idx = new serializable_value<int>(1);            // last one to play
     const auto test_trump_color = new serializable_value<int>(2);
+    const auto test_trump_card_value = new serializable_value<int>(2);
     const auto test_trick_estimate_sum = new serializable_value<int>(4);
 
     auto* json = new rapidjson::Document();
@@ -541,7 +552,7 @@ TEST(GameStateUpdateCurrentPlayerTest, UpatePLayerPlayingToNextRound)
     create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
                 test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
                 test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
-                test_trick_estimate_sum);
+                test_trump_card_value, test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;
@@ -604,6 +615,7 @@ TEST(GameStateFinishGameTest, FinishGame)
     const auto test_trick_starting_player_idx = new serializable_value<int>(2);     // depends on last trick
     const auto test_current_player_idx = new serializable_value<int>(1);            // last one to play
     const auto test_trump_color = new serializable_value<int>(2);
+    const auto test_trump_card_value = new serializable_value<int>(2);
     const auto test_trick_estimate_sum = new serializable_value<int>(12);
 
     auto* json = new rapidjson::Document();
@@ -611,7 +623,7 @@ TEST(GameStateFinishGameTest, FinishGame)
     create_json(*json, json->GetAllocator(), test_players, test_deck, test_trick, test_last_trick,
                 test_is_finished, test_is_started, test_is_estimation_phase, test_round_number, test_trick_number,
                 test_starting_player_idx, test_trick_starting_player_idx, test_current_player_idx, test_trump_color,
-                test_trick_estimate_sum);
+                test_trump_card_value, test_trick_estimate_sum);
 
     const std::string message = json_utils::to_string(json);
     delete json;

@@ -3,6 +3,9 @@
 #include "../GameController.h"
 #include "../messageBoxes/ScoreBoardDialog.h"
 
+wxFont magicalFontTrick = wxFont(wxFontInfo(20).FaceName("Magic School One"));
+wxFont regularFontTrick = wxFont(wxFontInfo(12).FaceName("Junicode"));
+wxFont regularFontTrickBig = wxFont(wxFontInfo(18).FaceName("Junicode"));
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
                                                                       wxSize(960, 680)){}
@@ -22,7 +25,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     this->SetBackgroundColour(wxColour(102,0,51));
 
-    this->SetMinSize(wxSize(960, 680));
+    this->SetMinSize(wxSize(1000, 680)); // a bit wider to make scoreboard button fit fully
 
     //create 3x3 Grid
     auto sizer = new wxGridBagSizer(4,3);
@@ -100,25 +103,44 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     this->buildTrumpColor(sizer, gameState);
 
-    this->buildScoreBoardButton(sizer, gameState);
+    this->buildScoreLeaveButtons(sizer, gameState);
 
     this->Layout();
 }
 
 
-void TrickEstimationPanel::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(2,2));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
     wxBoxSizer* sizer_vert = new wxBoxSizer(wxVERTICAL);
     panel->SetSizer(sizer_vert);
+    auto sizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    sizer_vert->Add(sizer_hor, 1, wxALIGN_CENTER);
 
     wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
-    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 35
+
+    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+    scoreBoardButton->SetFont(magicalFontTrick);
+    scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
+    scoreBoardButton->SetBackgroundColour(wxColour(50, 0, 51));    //make button same purple as estimation panel once clickable
 
     scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent& event) {
         ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
         scoreBoard.ShowModal();
+    });
+
+    wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+    leaveGameButton->SetMinSize(wxSize(110, 43));
+    sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
+    leaveGameButton->SetFont(magicalFontTrick);
+    leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+    leaveGameButton->SetForegroundColour(*wxWHITE);
+
+    leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+        GameController::leaveGame();
     });
 
 }
@@ -132,15 +154,12 @@ void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *ga
 
     wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
     trumpText->SetForegroundColour(*wxWHITE);
-
-    // increase font size of trump card text
-    wxFont font = trumpText->GetFont(); // Get the current font of the wxStaticText
-    font.SetPointSize(14);
-    trumpText->SetFont(font);
+    trumpText->SetFont(regularFontTrickBig);
 
     int trumpColor = gameState->get_trump_color();
+    int trumpCardValue = gameState->get_trump_card_value();
 
-    std::string cardImage = "assets/card_" + std::to_string(trumpColor) + ".png";
+    std::string cardImage = "assets/card_" + std::to_string(trumpCardValue) + "_" + std::to_string(trumpColor)+".png";
     ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, TrickEstimationPanel::cardSize);
 
 
@@ -211,9 +230,11 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     // add round number
     wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round: " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     roundNumber->SetForegroundColour(*wxWHITE);
+    roundNumber->SetFont(regularFontTrick);
 
     wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum: " + std::to_string(gameState->get_trick_estimate_sum()),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     trickSum->SetForegroundColour(*wxWHITE);
+    trickSum->SetFont(regularFontTrick);
 
 
     centerPanelSizer_vert2->Add(roundNumber, 0, wxALIGN_CENTER);
@@ -232,13 +253,9 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     mePanel->SetBackgroundColour(wxColour(120,0,51));
 
     // add our name
-    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
+    wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, me->get_player_name(),wxDefaultPosition, wxSize(150, 35), wxALIGN_CENTER);
     playerName->SetForegroundColour(*wxWHITE);
-
-    // increase font size of the player name
-    wxFont font = playerName->GetFont(); // Get the current font of the wxStaticText
-    font.SetPointSize(14);
-    playerName->SetFont(font);
+    playerName->SetFont(regularFontTrickBig);
 
     mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
 
@@ -250,8 +267,9 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             mePanel->SetBackgroundColour(wxColour(50,0,51));
 
             // add input field for trick estimate
-            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick Estimate:",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick Estimate:",wxDefaultPosition, wxSize(130, 20), wxALIGN_CENTER);
             inputLabel->SetForegroundColour(*wxWHITE);
+            inputLabel->SetFont(regularFontTrick);
             mePanelSizer_vert->Add(inputLabel, 0, wxALIGN_CENTER);
 
 
@@ -260,7 +278,12 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             mePanelSizer_vert->Add(_trickEstimateField, 0, wxALIGN_CENTER|wxALL, 10);
 
             // show button that allows our player to start the game
-            wxButton* submitEstimateButton = new wxButton(mePanel, wxID_ANY, "Submit", wxDefaultPosition, wxSize(80, 32));
+            wxButton* submitEstimateButton = new wxButton(mePanel, wxID_ANY, "Submit", wxDefaultPosition, wxSize(80, 43));
+            submitEstimateButton->SetFont(magicalFontTrick);
+            submitEstimateButton->SetWindowStyleFlag(wxBORDER_SIMPLE);
+            submitEstimateButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
+            submitEstimateButton->SetBackgroundColour(wxColour(102, 0, 51));    // Set button background color
+            //make button the same as the connect button in the connection panel since the background is red
             submitEstimateButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
                 GameController::processEstimateTricks();
             });
@@ -268,8 +291,10 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
         }
         else
         {
-            wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxSize(110, 20), wxALIGN_CENTER);
+            //large enough for a 15 character name
             playerName->SetForegroundColour(*wxWHITE);
+            playerName->SetFont(regularFontTrick);
             mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
         }
     }
@@ -278,8 +303,9 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     else
     {
         // display the number of tricks
-        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxSize(110, 20), wxALIGN_CENTER);
         estimatedTricks->SetForegroundColour(*wxWHITE);
+        estimatedTricks->SetFont(regularFontTrick);
         mePanelSizer_vert->Add(estimatedTricks, 0, wxALIGN_CENTER);
     }
     // mePanel->SetSizer(mePanelSizer_hor);
@@ -316,19 +342,16 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
         wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
+        panel->SetFont(regularFontTrick);
 
         panel->SetBackgroundColour(wxColour(120,0,51));
 
         player* otherPlayer = players.at((myPosition + i +1) % numberOfPlayers);
 
         // display name
-        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 25), wxALIGN_CENTER);
+        wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, otherPlayer->get_player_name(),wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
         playerNameText->SetForegroundColour(*wxWHITE);
-
-        // increase font size of the player name
-        wxFont font = playerNameText->GetFont(); // Get the current font of the wxStaticText
-        font.SetPointSize(14);
-        playerNameText->SetFont(font);
+        playerNameText->SetFont(regularFontTrickBig);
 
         playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER|wxTOP, 5);
 
@@ -340,19 +363,23 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
             if (otherPlayer == gameState->get_current_player()){
                 statusText = "estimating...";
                 panel->SetBackgroundColour(wxColour(50,0,51));
+
             }
             else{
                 statusText = "waiting...";
             }
 
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, statusText,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, statusText,wxDefaultPosition, wxSize(150, 30), wxALIGN_CENTER);
             playerNameText->SetForegroundColour(*wxWHITE);
+            playerNameText->SetFont(regularFontTrick);
             playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
         }
         else
         {
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition,  wxSize(80, 20), wxALIGN_CENTER);
+            //8 characters, width 80
             playerNameText->SetForegroundColour(*wxWHITE);
+            playerNameText->SetFont(regularFontTrick);
             playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
         }
 

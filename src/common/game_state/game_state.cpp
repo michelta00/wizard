@@ -1,5 +1,6 @@
 #include "game_state.h"
 #include <vector>
+#include <unordered_map>
 
 #include "../exceptions/WizardException.h"
 #include "../serialization/vector_utils.h"
@@ -21,6 +22,7 @@ game_state::game_state(const std::string& id) : unique_serializable(id) {
     _trick_starting_player_idx = new serializable_value<int>(0);
     _current_player_idx = new serializable_value<int>(0);
     _trump_color = new serializable_value<int>(0);
+    _trump_card_value = new serializable_value<int>(0);
     _trick_estimate_sum = new serializable_value<int>(0);
 }
 
@@ -30,7 +32,7 @@ game_state::game_state(const std::string& id, const std::vector<player*>& player
                        serializable_value<bool>* is_estimation_phase, serializable_value<int>* round_number,
                        serializable_value<int>* trick_number, serializable_value<int>* starting_player_idx,
                        serializable_value<int>* trick_starting_player_idx, serializable_value<int>* current_player_idx,
-                       serializable_value<int>* trump_color, serializable_value<int>* trick_estimate_sum)
+                       serializable_value<int>* trump_color, serializable_value<int>* trump_card_value, serializable_value<int>* trick_estimate_sum)
         : unique_serializable(id),
           _players(players),
           _deck(deck),
@@ -47,8 +49,8 @@ game_state::game_state(const std::string& id, const std::vector<player*>& player
           _trick_starting_player_idx(trick_starting_player_idx),
           _current_player_idx(current_player_idx),
           _trump_color(trump_color),
-          _trick_estimate_sum(trick_estimate_sum)
-{ }
+          _trump_card_value(trump_card_value),
+          _trick_estimate_sum(trick_estimate_sum){}
 
 // public constructor
 game_state::game_state() : unique_serializable()
@@ -68,6 +70,7 @@ game_state::game_state() : unique_serializable()
     _trick_starting_player_idx = new serializable_value<int>(0);
     _current_player_idx = new serializable_value<int>(0);
     _trump_color = new serializable_value<int>(0);
+    _trump_card_value = new serializable_value<int>(0);
     _trick_estimate_sum = new serializable_value<int>(0);
 }
 
@@ -89,6 +92,7 @@ game_state::~game_state()
     delete _trick_starting_player_idx;
     delete _current_player_idx;
     delete _trump_color;
+    delete _trump_card_value;
     delete _trick_estimate_sum;
 
     _deck = nullptr;
@@ -105,6 +109,7 @@ game_state::~game_state()
     _trick_starting_player_idx = nullptr;
     _current_player_idx = nullptr;
     _trump_color = nullptr;
+    _trump_card_value = nullptr;
     _trick_estimate_sum = nullptr;
 }
 
@@ -125,6 +130,11 @@ bool game_state::is_estimation_phase() const
 int game_state::get_trump_color() const
 {
     return _trump_color->get_value();
+}
+
+int game_state::get_trump_card_value() const
+{
+    return _trump_card_value->get_value();
 }
 
 player* game_state::get_trick_starting_player() const
@@ -185,6 +195,7 @@ int game_state::get_trick_estimate_sum() const
 
 unsigned int game_state::get_max_round_number() const
 {
+    //return 1;
     return 60 / _players.size();
 }
 
@@ -221,13 +232,16 @@ void game_state::determine_trump_color() const
 {
     if(_round_number->get_value() * _players.size() == 60) {
         _trump_color->set_value(0); // there is no trump since it is the last round
+        _trump_card_value->set_value(0);
     } else {
         card* trump_card = _deck->draw_trump();
         if (trump_card->get_color() != 0){
             _trump_color->set_value(trump_card->get_color());
+            _trump_card_value->set_value(trump_card->get_value());
         }
         else if (trump_card->get_value() == 0) {	//jester
             _trump_color->set_value(0);
+            _trump_card_value->set_value(0);
         }
         else if (trump_card->get_value() == 14){	//wizard
             // for now: just randomly generates number
@@ -235,6 +249,7 @@ void game_state::determine_trump_color() const
             std::mt19937 gen(rd());
             std::uniform_int_distribution<> distrib(1, 4);
             _trump_color->set_value(distrib(gen));
+            _trump_card_value->set_value(15);
             // TODO: include get trump_color_request()
         }
     }
@@ -430,25 +445,25 @@ bool game_state::play_card(player* player, const std::string& card_id, std::stri
 bool game_state::remove_player(player *player_ptr, std::string &err)
 {
     if (const int idx = get_player_index(player_ptr); idx != -1) {
+        // Case 1: Game has not been started yet.
         if (_is_started->get_value() == false) {
             if (idx < _current_player_idx->get_value()) {
                 // reduce current_player_idx if the player who left had a lower index
                 _current_player_idx->set_value(_current_player_idx->get_value() - 1);
             }
+            player_ptr->set_has_left_game(true);
             _players.erase(_players.begin() + idx);
             return true;
         } else {
-            finish_game(err);
-            return true;
+            return finish_game(err);
         }
     } else {
         err = "Could not leave game, as the requested player was not found in that game.";
         return false;
     }
-    return false;
 }
 
-bool game_state::add_player(player* player, std::string& err)
+bool game_state::add_player(player* player_, std::string& err)
 {
     if (_is_started->get_value()) {
         err = "Could not join game, because the requested game is already started.";
@@ -462,19 +477,39 @@ bool game_state::add_player(player* player, std::string& err)
         err = "Could not join game, because the max number of players is already reached.";
         return false;
     }
-    if (std::ranges::find(_players, player) != _players.end()) {
+    if (std::ranges::find(_players, player_) != _players.end()) {
         err = "Could not join game, because this player is already subscribed to this game.";
         return false;
     }
 
-    _players.push_back(player);
+    _players.push_back(player_);
+
+    //checks if all player names are unique. if not, add _1, _2 etc. to the duplicate names
+    std::unordered_map<std::string, int> name_counts; // track occurrences of names
+
+    for (player* p: _players) {
+        std::string original_name = p->get_player_name();
+        std::string unique_name = original_name;
+        if (name_counts[original_name] > 0) {
+            // Assign a unique suffix based on the current count
+            unique_name = original_name + "_" + std::to_string(name_counts[original_name]);
+        }
+
+        // Increment count for new and original name
+        name_counts[original_name]++;
+        name_counts[unique_name]++;
+
+        // update player's name if modified
+        if (unique_name != original_name) {
+            p->set_player_name(unique_name);
+        }
+    }
     return true;
 }
 
 bool game_state::finish_game(std::string &err) const
 {
     _is_finished->set_value(true);
-    // TODO: part to determine winner of the game, it is done in game controller right now and could stay there.
     return true;
 }
 #endif
@@ -538,9 +573,13 @@ void game_state::write_into_json(rapidjson::Value &json,
     _trump_color->write_into_json(trump_color_val, allocator);
     json.AddMember("trump_color", trump_color_val, allocator);
 
+    rapidjson::Value trump_card_value_val(rapidjson::kObjectType);
+    _trump_card_value->write_into_json(trump_card_value_val, allocator);
+    json.AddMember("trump_card_value", trump_card_value_val, allocator);
+
     rapidjson::Value trick_estimate_sum_val(rapidjson::kObjectType);
     _trick_estimate_sum->write_into_json(trick_estimate_sum_val, allocator);
-    json.AddMember("trick_estimate_sum_val", trick_estimate_sum_val, allocator);
+    json.AddMember("trick_estimate_sum", trick_estimate_sum_val, allocator);
 
 }
 
@@ -561,7 +600,8 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
         && json.HasMember("trick_starting_player_idx")
         && json.HasMember("current_player_idx")
         && json.HasMember("trump_color")
-        && json.HasMember("trick_estimate_sum_val"))
+        && json.HasMember("trump_card_value")
+        && json.HasMember("trick_estimate_sum"))
     {
         std::vector<player*> deserialized_players;
         for (auto &serialized_player : json["players"].GetArray()) {
@@ -583,7 +623,8 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
                               serializable_value<int>::from_json(json["trick_starting_player_idx"].GetObject()),
                               serializable_value<int>::from_json(json["current_player_idx"].GetObject()),
                               serializable_value<int>::from_json(json["trump_color"].GetObject()),
-                              serializable_value<int>::from_json(json["trick_estimate_sum_val"].GetObject()));
+                              serializable_value<int>::from_json(json["trump_card_value"].GetObject()),
+                              serializable_value<int>::from_json(json["trick_estimate_sum"].GetObject()));
     }
     throw WizardException("Failed to deserialize game_state. Required entries were missing.");
 }
