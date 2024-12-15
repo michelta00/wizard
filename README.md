@@ -99,25 +99,43 @@ server, run `./Wizard-server`. In new consoles, you can now start as many client
 ## 4 Play the Game
 
 Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most
-cases default can be left unchanged), as well as their player name.
+cases the default input can be left unchanged), as well as their player name. Next to these input fields, a *Rules* and a *Settings*
+button are shown on the bottom right of the screen. The buttons will be shown throughout the whole game and can be clicked
+to access the rules and the settings.
 
-<img src="assets/readme/connection_panel.png" width=2880 height=1800 alt="Connection panel"> <br>
+<img src="assets/readme/connection_panel.png" width=50% height=50% alt="Connection panel"> <br>
 
-After clicking on the *Connect* button, the lobby shows up. Here all players that have joined the game can be seen. 
+After clicking on the *Connect* button, the lobby shows up. Here all players that have joined the game can be seen. The 
+*Start Game* button can be clicked to start a game once enough players joined, and the *Leave Game* button can be clicked
+to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started,
+the game is over.
 
-<img src="assets/readme/lobby_one_player.png" width=2880 height=1800 alt="Lobby panel"> <br>
+<img src="assets/readme/lobby_one_player.png" width=50% height=50% alt="Lobby panel"> <br>
 
-To start a game, at least 3 players have to connect to the server. The maximum number of players per game is 6. Once at
-least 3 players are connected to the server, the *Start Game* button turns purple and the game can be started by clicking
-it.
+To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per 
+game is 6. Once at least 3 players are connected to the server and have joined the game, the *Start Game* button turns 
+purple and the game can be started by clicking the button. 
 
-<img src="assets/readme/lobby_six_players.png" width=2880 height=1800 alt="Lobby panel"> <br>
+<img src="assets/readme/lobby_six_players.png" width=50% height=50% alt="Lobby panel"> <br>
 
 Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the 
-provided input filed, and then submit it by clicking on the *Submit* button. 
+provided input filed, and then submit it by clicking on the *Submit* button. In this phase of the game, each player can
+see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number
+and the sum of already submitted trick estimations in shown in the middle of the screen and can help players submitting
+a valid estimate (e.g., estimate cannot be greater than the current round number). Above the *Leave Game* button, the 
+scoreboard can now be accessed by clicking on the *Scoreboard* button. This will be available throughout the whole game.
 
-<img src="assets/readme/estimation_panel.png" width=2880 height=1800 alt="Estimation phase"> <br>
+<img src="assets/readme/estimation_panel.png" width=50% height=50% alt="Estimation phase"> <br>
 
-After every player has submitted their estimation, the play phase starts. Cards can be played by 
+After every player has submitted their estimation, the play phase starts. Cards can be played by clicking on the 
+respective card. An announcement in middle of the screen shows whose turn it is, and played cards are displayed in the 
+middle of the screen as well. Below each players' name, the won and predicted numbers of tricks can be seen.
+
+<img src="assets/readme/play_phase_last_player.png" width=50% height=50% alt="Play phase"> <br>
+
+At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of
+a round, also the points gained or lost in this round are shown, and the new round starts automatically.
+
+Enjoy the game!
 
 ## 5 Special Features
