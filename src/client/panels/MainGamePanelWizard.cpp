@@ -490,6 +490,22 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
 
                 ImagePanel *cardButton = new ImagePanel(cardPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
+                // Bind hover events for size change -> just these two
+                cardButton->Bind(wxEVT_ENTER_WINDOW, [cardButton, scaledCardSize](wxMouseEvent& event) {
+                    cardButton->SetMinSize(wxSize(scaledCardSize.GetWidth() * 1.2, scaledCardSize.GetHeight() * 1.2));
+                    cardButton->Refresh();
+                    cardButton->Update();
+                    cardButton->GetParent()->Layout();
+                });
+
+                cardButton->Bind(wxEVT_LEAVE_WINDOW, [cardButton, scaledCardSize](wxMouseEvent& event) {
+                    cardButton->SetMinSize(scaledCardSize);
+                    cardButton->Refresh();
+                    cardButton->Update();
+                    cardButton->GetParent()->Layout();
+                });
+
+
                 if (gameState->get_current_player() == me && gameState->is_estimation_phase() == false) {
                     cardButton->SetToolTip("Play card");
                     cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
