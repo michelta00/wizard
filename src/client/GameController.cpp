@@ -171,6 +171,7 @@ void GameController::startGame() {
 }
 
 void GameController::leaveGame() {
+    _me->set_has_left_game(true);
     leave_game_request request = leave_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), _me->get_player_name());
     ClientNetworkManager::sendRequest(request);
 }
@@ -284,7 +285,6 @@ void GameController::showTrickOverMessage(const player* winner)
     dialog->ShowModal();
 }
 
-
 void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
@@ -326,4 +326,9 @@ void GameController::showGameOverMessage() {
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
+}
+
+void GameController::closeGameWindow()
+{
+    GameController::_gameWindow->Close();
 }

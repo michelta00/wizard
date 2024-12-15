@@ -29,6 +29,7 @@ public:
     static void showNewRoundMessage(game_state* oldGameState, game_state* newGameState);
     static void showTrickOverMessage(const player* winner);
     static void showGameOverMessage();
+    static void closeGameWindow();
 
 private:
     static GameWindow* _gameWindow;

@@ -98,10 +98,18 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [me](const player* x) {
        return x->get_id() == me->get_id();
     });
+    std::cout << me->has_left_game() << std::endl;
     if (it < players.end()) {
         me = *it;
         myPosition = it - players.begin();
-    } else {
+    }
+    else if (me->has_left_game() == true)
+    {
+        //GameController::showError("Left Game", "You have left the game.");
+        GameController::closeGameWindow();
+        return;
+    }
+    else {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
     }
@@ -176,7 +184,7 @@ void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_sta
     {
         wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
         scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 , 35
-        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
+        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
 
         scoreBoardButton->SetFont(magicalFont);
         scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
@@ -189,7 +197,7 @@ void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_sta
     }
         wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
         leaveGameButton->SetMinSize(wxSize(110, 43));
-        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
+        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
 
         leaveGameButton->SetFont(magicalFont);
         leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue

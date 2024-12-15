@@ -451,6 +451,7 @@ bool game_state::remove_player(player *player_ptr, std::string &err)
                 // reduce current_player_idx if the player who left had a lower index
                 _current_player_idx->set_value(_current_player_idx->get_value() - 1);
             }
+            player_ptr->set_has_left_game(true);
             _players.erase(_players.begin() + idx);
             return true;
         } else {
