@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['game_0',['Game',['../index.html#autotoc_md14',1,'3 Run the Game'],['../index.html#autotoc_md16',1,'4 Play the Game']]],
-  ['game_20state_1',['4.3 Game State',['../index.html#autotoc_md26',1,'']]],
-  ['game_5finstance_2',['game_instance',['../classgame__instance.html',1,'game_instance'],['../classgame__instance.html#a2b1d00adf8c933a98698f972827e48b9',1,'game_instance::game_instance()']]],
-  ['game_5finstance_5fmanager_3',['game_instance_manager',['../classgame__instance__manager.html',1,'']]],
-  ['game_5fstate_4',['game_state',['../classgame__state.html',1,'game_state'],['../classgame__state.html#a0c10b830e222d726557c3c33685c595a',1,'game_state::game_state()']]],
-  ['gamecontroller_5',['GameController',['../class_game_controller.html',1,'']]],
-  ['gamewindow_6',['GameWindow',['../class_game_window.html',1,'']]],
+  ['game_0',['Game',['../md__r_e_a_d_m_e.html#autotoc_md14',1,'3 Run the Game'],['../index.html#autotoc_md34',1,'3 Run the Game'],['../md__r_e_a_d_m_e.html#autotoc_md16',1,'4 Play the Game'],['../index.html#autotoc_md36',1,'4 Play the Game']]],
+  ['game_5finstance_1',['game_instance',['../classgame__instance.html',1,'game_instance'],['../classgame__instance.html#a2b1d00adf8c933a98698f972827e48b9',1,'game_instance::game_instance()']]],
+  ['game_5finstance_5fmanager_2',['game_instance_manager',['../classgame__instance__manager.html',1,'']]],
+  ['game_5fstate_3',['game_state',['../classgame__state.html',1,'game_state'],['../classgame__state.html#a0c10b830e222d726557c3c33685c595a',1,'game_state::game_state()']]],
+  ['gamecontroller_4',['GameController',['../class_game_controller.html',1,'']]],
+  ['gamewindow_5',['GameWindow',['../class_game_window.html',1,'']]],
+  ['get_20local_20ip_20address_20to_20host_20server_6',['Get local IP address to host server',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'Get local IP address to host server'],['../index.html#autotoc_md38',1,'Get local IP address to host server']]],
   ['get_5fcards_7',['get_cards',['../classhand.html#ad104b0376b1a13d987f349dd524ca47f',1,'hand']]],
   ['get_5fcards_5fand_5fplayers_8',['get_cards_and_players',['../classtrick.html#a1d75f9e8fc94fd122adfc39a20089268',1,'trick']]],
   ['get_5fcolor_9',['get_color',['../classcard.html#ab033bc0e71b09d3cf3ac28c2f1fbde18',1,'card']]],
@@ -35,6 +35,5 @@ var searchData=
   ['get_5ftrump_5fcolor_32',['get_trump_color',['../classtrick.html#a69c49e2968abb235a6c7148cb05b0e64',1,'trick::get_trump_color()'],['../classgame__state.html#abdf6c5116ed643773d676c90a05e6fe4',1,'game_state::get_trump_color()']]],
   ['get_5fvalue_33',['get_value',['../classcard.html#a2baf8dfef09ac8c1a67b34c2e67186c3',1,'card']]],
   ['get_5fwinner_34',['get_winner',['../classtrick.html#a4b93ae88c17db486d975408cd8cfad1b',1,'trick']]],
-  ['getmainthreadeventhandler_35',['getMainThreadEventHandler',['../class_game_controller.html#abec8c73ea01e4b7e01b2ca1d932e0c16',1,'GameController']]],
-  ['gui_20with_20wxwidgets_36',['4.4 GUI with wxWidgets',['../index.html#autotoc_md27',1,'']]]
+  ['getmainthreadeventhandler_35',['getMainThreadEventHandler',['../class_game_controller.html#abec8c73ea01e4b7e01b2ca1d932e0c16',1,'GameController']]]
 ];

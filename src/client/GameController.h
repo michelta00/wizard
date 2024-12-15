@@ -90,10 +90,6 @@ public:
      * @brief Shows message at the end of the game that the game has ended and states the winner.
      */
     static void showGameOverMessage();
-    /**
-     * @brief Closes game window.
-     */
-    static void closeGameWindow();
 
 private:
     static GameWindow* _gameWindow; ///< The window which contains all panels shown to the user.
