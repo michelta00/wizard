@@ -22,7 +22,6 @@ enum RequestType {
     join_game,
     start_game,
     play_card,
-    decide_trump_color,
     estimate_tricks,
     leave_game
 };

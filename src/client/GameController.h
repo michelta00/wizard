@@ -91,6 +91,11 @@ public:
      */
     static void showGameOverMessage();
 
+    /**
+     * @brief Closes Game Window.
+     */
+    static void closeGameWindow();
+
 private:
     static GameWindow* _gameWindow; ///< The window which contains all panels shown to the user.
     static ConnectionPanel* _connectionPanel; ///< The pannel used to connect to the game.

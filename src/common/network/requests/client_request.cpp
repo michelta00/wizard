@@ -5,7 +5,6 @@
 #include "client_request.h"
 #include "play_card_request.h"
 #include "estimate_tricks_request.h"
-#include "decide_trump_color_request.h"
 #include "join_game_request.h"
 #include "start_game_request.h"
 #include "leave_game_request.h"
@@ -18,7 +17,6 @@ const std::unordered_map<std::string, RequestType> client_request::_string_to_re
         {"start_game", RequestType::start_game},
         {"play_card", RequestType::play_card},
         {"estimate_tricks", RequestType::estimate_tricks},
-        {"decide_trump_color", RequestType::decide_trump_color},
         {"leave_game", RequestType::leave_game}
 };
 // for serialization
@@ -27,7 +25,6 @@ const std::unordered_map<RequestType, std::string> client_request::_request_type
         { RequestType::start_game, "start_game"},
         { RequestType::play_card, "play_card"},
         {RequestType::estimate_tricks, "estimate_tricks"},
-        {RequestType::decide_trump_color, "decide_trump_color"},
         {RequestType::leave_game, "leave_game"}
 
 };
@@ -107,9 +104,6 @@ client_request* client_request::from_json(const rapidjson::Value &json) {
         }
         else if (request_type == RequestType::estimate_tricks) {
             return estimate_tricks_request::from_json(json);
-        }
-        else if (request_type == RequestType::decide_trump_color) {
-            return decide_trump_color_request::from_json(json);
         }
         else if (request_type == RequestType::leave_game) {
             return leave_game_request::from_json(json);

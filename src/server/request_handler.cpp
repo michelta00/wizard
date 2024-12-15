@@ -13,7 +13,6 @@
 
 #include "../common/network/requests/join_game_request.h"
 #include "../common/network/requests/estimate_tricks_request.h"
-#include "../common/network/requests/decide_trump_color_request.h"
 #include "../common/network/requests/play_card_request.h"
 #include "../common/network/requests/leave_game_request.h"
 
@@ -111,22 +110,6 @@ request_response* request_handler::handle_request(const client_request* const re
                 }
                 return new request_response("", req_id, false, nullptr, err);
         }
-            // ##################### DECIDE TRUMP COLOR #####################  //
-            /*
-                    case RequestType:: decide_trump_color: {
-                            //TODO: figure out where to get trick estimate from and how to handle request
-                            if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
-                                int trump_color = ((decide_trump_color_request* )req)->get_trump_color(); //call getter function in decide trump color request
-                                if (game_instance_ptr->decide_trump_color(player, trump_color, err)) { // randomly selects number between 1 and 4
-                                    return new request_response(game_instance_ptr->get_id(), req_id, true,
-                                                                game_instance_ptr->get_game_state()->to_json(), err);
-                                }
-                            }
-                            return new request_response("", req_id, false, nullptr, err);
-
-                    }
-            */
-            // ##################### LEAVE GAME #####################  //
         case RequestType::leave_game:
             {
                 // Case 1: player is in a game
