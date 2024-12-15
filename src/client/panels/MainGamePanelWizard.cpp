@@ -98,14 +98,12 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [me](const player* x) {
        return x->get_id() == me->get_id();
     });
-    std::cout << me->has_left_game() << std::endl;
     if (it < players.end()) {
         me = *it;
         myPosition = it - players.begin();
     }
     else if (me->has_left_game() == true)
     {
-        //GameController::showError("Left Game", "You have left the game.");
         GameController::closeGameWindow();
         return;
     }
@@ -316,7 +314,6 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
         int trumpCardValue = gameState->get_trump_card_value();
 
         std::string cardImage = "assets/card_" + std::to_string(trumpCardValue) + "_" + std::to_string(trumpColor)+".png";
-        std::cout << cardImage << std::endl;
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
 
