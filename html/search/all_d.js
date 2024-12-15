@@ -35,5 +35,9 @@ var searchData=
   ['get_5ftrump_5fcolor_32',['get_trump_color',['../classtrick.html#a69c49e2968abb235a6c7148cb05b0e64',1,'trick::get_trump_color()'],['../classgame__state.html#abdf6c5116ed643773d676c90a05e6fe4',1,'game_state::get_trump_color()']]],
   ['get_5fvalue_33',['get_value',['../classcard.html#a2baf8dfef09ac8c1a67b34c2e67186c3',1,'card']]],
   ['get_5fwinner_34',['get_winner',['../classtrick.html#a4b93ae88c17db486d975408cd8cfad1b',1,'trick']]],
-  ['getmainthreadeventhandler_35',['getMainThreadEventHandler',['../class_game_controller.html#abec8c73ea01e4b7e01b2ca1d932e0c16',1,'GameController']]]
+  ['getmainthreadeventhandler_35',['getMainThreadEventHandler',['../class_game_controller.html#abec8c73ea01e4b7e01b2ca1d932e0c16',1,'GameController']]],
+  ['getplayername_36',['getPlayerName',['../class_connection_panel.html#a166e8404b755b5bdf719356b8bd07071',1,'ConnectionPanel']]],
+  ['getserveraddress_37',['getServerAddress',['../class_connection_panel.html#aae98ee379bc9ba0ad2b41793658b8064',1,'ConnectionPanel']]],
+  ['getserverport_38',['getServerPort',['../class_connection_panel.html#ab0dc7af0934d4184aa04d220e0bd9719',1,'ConnectionPanel']]],
+  ['gettrickestimate_39',['getTrickEstimate',['../class_trick_estimation_panel.html#a7ebe75adf21a2bc63bc084b98d836f7c',1,'TrickEstimationPanel']]]
 ];

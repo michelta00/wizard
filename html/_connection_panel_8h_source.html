@@ -98,32 +98,35 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;wx/wx.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../uiElements/InputField.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_connection_panel.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_connection_panel.html">ConnectionPanel</a> : <span class="keyword">public</span> wxPanel {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="class_connection_panel.html">ConnectionPanel</a>(wxWindow* parent);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    wxString getServerAddress();</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    wxString getServerPort();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    wxString getPlayerName();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> OnPaint(wxPaintEvent&amp; event);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> OnSize(wxSizeEvent&amp; event);</div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_connection_panel.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_connection_panel.html">ConnectionPanel</a> : <span class="keyword">public</span> wxPanel {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_connection_panel.html#abc032283798f168176fc9af6fab9cbca">ConnectionPanel</a>(wxWindow* parent);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    wxBitmap _backgroundImage;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _serverAddressField;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _serverPortField;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _playerNameField;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    wxString <a class="code hl_function" href="class_connection_panel.html#aae98ee379bc9ba0ad2b41793658b8064">getServerAddress</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    wxString <a class="code hl_function" href="class_connection_panel.html#ab0dc7af0934d4184aa04d220e0bd9719">getServerPort</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    wxString <a class="code hl_function" href="class_connection_panel.html#a166e8404b755b5bdf719356b8bd07071">getPlayerName</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> OnPaint(wxPaintEvent&amp; event);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> OnSize(wxSizeEvent&amp; event);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    wxBitmap _backgroundImage; </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _serverAddressField; </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _serverPortField; </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_class" href="class_input_field.html">InputField</a>* _playerNameField; </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">//TEST_CONNECTIONPANEL_H</span></div>
-<div class="ttc" id="aclass_connection_panel_html"><div class="ttname"><a href="class_connection_panel.html">ConnectionPanel</a></div><div class="ttdef"><b>Definition</b> ConnectionPanel.h:8</div></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif </span><span class="comment">//TEST_CONNECTIONPANEL_H</span></div>
+<div class="ttc" id="aclass_connection_panel_html"><div class="ttname"><a href="class_connection_panel.html">ConnectionPanel</a></div><div class="ttdoc">A custom wxPanel for handling server connection input and UI. This panel provides fields for entering...</div><div class="ttdef"><b>Definition</b> ConnectionPanel.h:12</div></div>
+<div class="ttc" id="aclass_connection_panel_html_a166e8404b755b5bdf719356b8bd07071"><div class="ttname"><a href="class_connection_panel.html#a166e8404b755b5bdf719356b8bd07071">ConnectionPanel::getPlayerName</a></div><div class="ttdeci">wxString getPlayerName()</div><div class="ttdoc">Retrieves the player name entered by the user. The player name is entered in an input field and is us...</div><div class="ttdef"><b>Definition</b> ConnectionPanel.cpp:115</div></div>
+<div class="ttc" id="aclass_connection_panel_html_aae98ee379bc9ba0ad2b41793658b8064"><div class="ttname"><a href="class_connection_panel.html#aae98ee379bc9ba0ad2b41793658b8064">ConnectionPanel::getServerAddress</a></div><div class="ttdeci">wxString getServerAddress()</div><div class="ttdoc">Retrieves the server address entered by the user (default is set to 127.0.0.1).</div><div class="ttdef"><b>Definition</b> ConnectionPanel.cpp:105</div></div>
+<div class="ttc" id="aclass_connection_panel_html_ab0dc7af0934d4184aa04d220e0bd9719"><div class="ttname"><a href="class_connection_panel.html#ab0dc7af0934d4184aa04d220e0bd9719">ConnectionPanel::getServerPort</a></div><div class="ttdeci">wxString getServerPort()</div><div class="ttdoc">Retrieves the server port entered by the user (default is set to 50505).</div><div class="ttdef"><b>Definition</b> ConnectionPanel.cpp:110</div></div>
+<div class="ttc" id="aclass_connection_panel_html_abc032283798f168176fc9af6fab9cbca"><div class="ttname"><a href="class_connection_panel.html#abc032283798f168176fc9af6fab9cbca">ConnectionPanel::ConnectionPanel</a></div><div class="ttdeci">ConnectionPanel(wxWindow *parent)</div><div class="ttdoc">Constructs Connection Panel.</div><div class="ttdef"><b>Definition</b> ConnectionPanel.cpp:8</div></div>
 <div class="ttc" id="aclass_input_field_html"><div class="ttname"><a href="class_input_field.html">InputField</a></div><div class="ttdef"><b>Definition</b> InputField.h:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
