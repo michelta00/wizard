@@ -134,8 +134,9 @@ middle of the screen as well. Below each players' name, the won and predicted nu
 <img src="assets/readme/play_phase_last_player.png" width=50% height=50% alt="Play phase"> <br>
 
 At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of
-a round, also the points gained or lost in this round are shown, and the new round starts automatically.
+a round, also the points gained or lost in this round are shown, and the new round starts automatically. At the end of
+the game, the winner is announced and the players can close the game.
 
-Enjoy the game!
+Have fun playing!
 
 ## 5 Special Features
