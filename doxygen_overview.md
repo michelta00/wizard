@@ -156,8 +156,7 @@ Have fun playing!
 When playing the game on a single device, the default server address *127.0.0.1* and server port *50505*
 can be used during the connection phase.
 
-However, the game can also be played from different devices on the same Wi-Fi network 🛜 or if all devices are connected
-to the same VPN.
+However, the game can also be played from different devices on the same Wi-Fi network 🛜.
 In this case, one player needs to host the server, while all other players only have to run their client.
 When connecting to the game, all players have to enter the private IP address of the player hosting the server
 in the *server address* field. The default port *50505* can be kept.
