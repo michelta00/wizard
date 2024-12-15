@@ -11,7 +11,7 @@ InputField::InputField(wxWindow* parent, const wxString& labelText, int labelWid
             wxID_ANY, // element id
             labelText, // text that's displayed as label
             wxDefaultPosition, // position
-            wxSize(labelWidth, -1) // size (-1 means default size)
+            wxSize(labelWidth, 40)
      );
     horizontalLayout->Add(this->_label, 0, wxALIGN_CENTER);
 
@@ -20,7 +20,7 @@ InputField::InputField(wxWindow* parent, const wxString& labelText, int labelWid
             wxID_ANY, // element id
             fieldValue, // default value
             wxDefaultPosition, // position
-            wxSize(fieldWidth, -1) // size (-1 means default size)
+            wxSize(fieldWidth, 40)
     );
     horizontalLayout->Add(this->_field, 0, wxALIGN_CENTER);
 

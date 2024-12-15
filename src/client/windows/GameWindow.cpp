@@ -15,7 +15,7 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
 
     // Add "Rules" button directly to the status bar
     _rulesButton = new wxButton(_statusBar, wxID_ANY, "Rules");
-    _settingsButton = new wxButton(_statusBar, wxID_ANY, "Settings");
+    //_settingsButton = new wxButton(_statusBar, wxID_ANY, "Settings");
 
     // Set minimum height of status bar based on the button's height with padding
     _statusBar->SetMinHeight(_rulesButton->GetSize().GetHeight() + 10);
@@ -26,21 +26,19 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     // Add stretchable space to fill space in statusbar
     statusSizer->AddStretchSpacer(1);
 
-    statusSizer->Add(_settingsButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    //statusSizer->Add(_settingsButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     statusSizer->Add(_rulesButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     _statusBar->SetSizer(statusSizer);
     _statusBar->Layout();
 
     // Bind the button click event to showRules method
     _rulesButton->Bind(wxEVT_BUTTON, &GameWindow::showRules, this);
-    _settingsButton->Bind(wxEVT_BUTTON, &GameWindow::show_settings, this);
 
     // Set background
     wxColor lightBlue = wxColor(102, 0, 51);
     this->SetBackgroundColour(lightBlue);
 
-    // Set the minimum size of the window. The user won't be able to resize the window to a size smaller than this
-    this->SetMinSize(wxSize(1000, 720));
+    this->SetMinSize(wxSize(1200, 850));
 
 }
 
@@ -86,11 +84,4 @@ void GameWindow::showRules(wxCommandEvent& event) {
     } else {
         wxMessageBox("Die Datei 'Rules.pdf' wurde nicht gefunden!", "Fehler", wxICON_ERROR);
     }
-}
-
-void GameWindow::show_settings(wxCommandEvent& event){
-    wxString settings = "Not implemented yet";
-
-    wxMessageDialog rulesDialog(this, settings, "Game Rules", wxOK | wxICON_INFORMATION);
-    rulesDialog.ShowModal();
 }

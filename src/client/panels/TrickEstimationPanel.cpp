@@ -8,7 +8,10 @@ wxFont regularFontTrick = wxFont(wxFontInfo(12).FaceName("Junicode"));
 wxFont regularFontTrickBig = wxFont(wxFontInfo(18).FaceName("Junicode"));
 
 TrickEstimationPanel::TrickEstimationPanel(wxWindow* parent): wxPanel(parent, wxID_ANY, wxDefaultPosition,
-                                                                      wxSize(1200, 850)){}
+                                                                      wxSize(1200, 850))
+{
+    this->SetMinSize(wxSize(1200, 850));
+}
 TrickEstimationPanel::~TrickEstimationPanel()
 {
     delete _trickEstimateField;
@@ -61,8 +64,8 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
 
     // specify minimum size of the panels
-    int minWidth = TrickEstimationPanel::panelSize.GetWidth()/3;
-    int minHeight = TrickEstimationPanel::panelSize.GetHeight()/4;
+    int minWidth = TrickEstimationPanel::panelSize.GetWidth()/3-30;
+    int minHeight = TrickEstimationPanel::panelSize.GetHeight()/4-30;
 
     // fill the gridsizer with panels and set the minimum size accordingly
     for (auto &item : items)
@@ -70,7 +73,7 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
         auto p = new wxPanel(panel, wxID_ANY, wxDefaultPosition);
         p->SetMinSize(wxSize(minWidth,minHeight));
         p->SetBackgroundColour(wxColour(102,0,51));
-        sizer->Add(p, item.first, item.second, wxEXPAND|wxALL,5);
+        sizer->Add(p, item.first, item.second, wxEXPAND|wxALL,1);
     }
 
 
@@ -152,7 +155,7 @@ void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *ga
     wxBoxSizer* trumpSizer_vert = new wxBoxSizer(wxVERTICAL);
     trumpPanel->SetSizer(trumpSizer_vert);
 
-    wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxSize(120, 20), wxALIGN_CENTER);
+    wxStaticText* trumpText = new wxStaticText(trumpPanel, wxID_ANY, "TRUMP CARD",wxDefaultPosition, wxSize(trumpPanel->GetMinSize().GetWidth(), 20), wxALIGN_CENTER);
     trumpText->SetForegroundColour(*wxWHITE);
     trumpText->SetFont(regularFontTrick);
 
@@ -189,6 +192,7 @@ void TrickEstimationPanel::buildHand(wxGridBagSizer *sizer, game_state *gameStat
             int scaledCardHeight = (int) ((double) scaledCardWidth * cardAspectRatio);
             scaledCardSize = wxSize(scaledCardWidth, scaledCardHeight);
         }
+
 
         // Show all cards
         for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
@@ -228,7 +232,7 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     centerPanelSizer_hor->Add(centerPanelSizer_vert2, 1, wxALIGN_CENTER);
 
     // add round number
-    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxSize(80, 43), wxALIGN_CENTER);
+    wxStaticText* roundNumber = new wxStaticText(centerPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number()+1),wxDefaultPosition, wxSize(centerPanel->GetMinSize().GetWidth(), 43), wxALIGN_CENTER);
     roundNumber->SetForegroundColour(*wxWHITE);
     roundNumber->SetFont(magicalFontTrick);
 
@@ -255,7 +259,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     playerName->SetForegroundColour(*wxWHITE);
     playerName->SetFont(regularFontTrickBig);
 
-    mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER);
+    mePanelSizer_vert->Add(playerName, 0, wxALIGN_CENTER|wxTOP, 5);
 
     // if we have not submitted estimate yet
     if (me->get_nof_predicted() == -1)
@@ -265,7 +269,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             mePanel->SetBackgroundColour(wxColour(50,0,51));
 
             // add input field for trick estimate
-            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick estimate:",wxDefaultPosition, wxSize(130, 20), wxALIGN_CENTER);
+            wxStaticText* inputLabel = new wxStaticText(mePanel, wxID_ANY, "Trick estimate:",wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 20), wxALIGN_CENTER);
             inputLabel->SetForegroundColour(*wxWHITE);
             inputLabel->SetFont(regularFontTrick);
             mePanelSizer_vert->Add(inputLabel, 0, wxALIGN_CENTER);
@@ -289,7 +293,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
         }
         else
         {
-            wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxSize(110, 20), wxALIGN_CENTER);
+            wxStaticText* playerName = new wxStaticText(mePanel, wxID_ANY, "waiting...",wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 20), wxALIGN_CENTER);
             //large enough for a 15 character name
             playerName->SetForegroundColour(*wxWHITE);
             playerName->SetFont(regularFontTrick);
@@ -301,12 +305,11 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
     else
     {
         // display the number of tricks
-        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxSize(110, 20), wxALIGN_CENTER);
+        wxStaticText* estimatedTricks = new wxStaticText(mePanel, wxID_ANY, std::to_string(me->get_nof_predicted()) + " Tricks",wxDefaultPosition, wxSize(mePanel->GetMinSize().GetWidth(), 20), wxALIGN_CENTER);
         estimatedTricks->SetForegroundColour(*wxWHITE);
         estimatedTricks->SetFont(regularFontTrick);
         mePanelSizer_vert->Add(estimatedTricks, 0, wxALIGN_CENTER);
     }
-    // mePanel->SetSizer(mePanelSizer_hor);
 }
 
 void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, int myPosition)
@@ -367,14 +370,14 @@ void TrickEstimationPanel::buildOtherPlayers(wxGridBagSizer* sizer, game_state* 
                 statusText = "waiting...";
             }
 
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, statusText,wxDefaultPosition, wxSize(150, 30), wxALIGN_CENTER);
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, statusText,wxDefaultPosition, wxSize(panel->GetMinSize().GetWidth(), 30), wxALIGN_CENTER);
             playerNameText->SetForegroundColour(*wxWHITE);
             playerNameText->SetFont(regularFontTrick);
             playerSizer_vert->Add(playerNameText, 0, wxALIGN_CENTER);
         }
         else
         {
-            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition,  wxSize(80, 20), wxALIGN_CENTER);
+            wxStaticText* playerNameText = new wxStaticText(panel, wxID_ANY, std::to_string(otherPlayer->get_nof_predicted()) + " Tricks",wxDefaultPosition,  wxSize(panel->GetMinSize().GetWidth(), 20), wxALIGN_CENTER);
             //8 characters, width 80
             playerNameText->SetForegroundColour(*wxWHITE);
             playerNameText->SetFont(regularFontTrick);

@@ -18,7 +18,7 @@ ScoreDialog::ScoreDialog(wxWindow* parent, const std::string& title, const std::
     sizer->Add(messageText, 1, wxALL | wxEXPAND, 10);
     SetSizerAndFit(sizer);
 
-    // Initialize the timer to close the dialog after 5 seconds
+    // Initialize the timer to close the dialog after 2 seconds
     _closeTimer.SetOwner(this, wxID_ANY);
     _closeTimer.Start(2000, wxTIMER_ONE_SHOT);  // 5 seconds
 }
