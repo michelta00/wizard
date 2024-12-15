@@ -18,7 +18,7 @@ public:
     wxString getTrickEstimate();
     void buildGameState(game_state* gameState, player* me);
 private:
-    wxSize const panelSize = wxSize(960, 680);
+    wxSize const panelSize = wxSize(1200, 850);
     wxSize const cardSize = wxSize(85, 131);
 
     void buildCenter(wxGridBagSizer* sizer, game_state* gameState);

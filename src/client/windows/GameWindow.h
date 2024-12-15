@@ -21,7 +21,6 @@ private:
     wxPanel* _currentPanel;
 
     void showRules(wxCommandEvent& event);
-    void show_settings(wxCommandEvent& event);
 };
 
 

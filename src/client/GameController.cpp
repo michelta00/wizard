@@ -21,7 +21,6 @@ game_state* GameController::_currentGameState = nullptr;
 
 void GameController::init(GameWindow* gameWindow) {
 
-    //TODO: panels need to be adapted
     GameController::_gameWindow = gameWindow;
 
     // Set up main panels
@@ -137,13 +136,6 @@ void GameController::updateGameState(game_state* newGameState) {
                 showTrickOverMessage(winner);
             }
 
-            if(round_number != oldGameState->get_round_number())
-            {
-                // new round has started
-                showNewRoundMessage(oldGameState, newGameState);
-                showStatus("Round " + std::to_string(newGameState->get_round_number() + 1));
-            }
-
             // estimation phase
             if(GameController::_currentGameState->is_estimation_phase()) {
                 GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
@@ -186,7 +178,6 @@ void GameController::playCard(card* cardToPlay) {
     ClientNetworkManager::sendRequest(request);
 }
 
-// TODO: estimate trick request, here message box with entry
 void GameController::processEstimateTricks()
 {
     wxString trickEstimate = GameController::_trickEstimationPanel->getTrickEstimate().Trim();
@@ -254,11 +245,6 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
         }
         message += "\n" + playerName + ":     " + scoreText;
     }
-
-    //TODO: what to do with these? Is message just going away or do you have to press okay
-    //wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
-    //dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
-    //dialogBox.ShowModal();
 
     auto* dialog = new ScoreDialog(GameController::_gameWindow, title, message);
 

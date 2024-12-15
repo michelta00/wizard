@@ -52,7 +52,6 @@ ScoreBoardDialog::ScoreBoardDialog(wxWindow* parent, const std::string& title, c
     if (numRows >= 1) {
         for (int i = 0; i < numberOfPlayers; i++) {
             auto scores = players.at(i)->get_scores();
-            //tableData[i] = scores;
             tableData[i].insert(
                     tableData[i].end(),             // Insert starting at the end of tableData[i]
                     scores.begin()+1,                 // Start of scores

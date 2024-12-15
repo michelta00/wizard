@@ -6,8 +6,6 @@
 #define WIZARD_SCOREBOARDDIALOG_H
 
 #include <wx/wx.h>
-#include <wx/statbmp.h>
-#include<vector>
 #include "../../common/game_state/game_state.h"
 
 class ScoreBoardDialog: public wxDialog {
