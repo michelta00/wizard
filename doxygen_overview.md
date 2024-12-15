@@ -158,16 +158,23 @@ However, the game can also be played from different devices on the same wifi net
 to the same VPN.
 In this case one player needs to host the server, while all other players only run a client.
 When connecting to the game, all players have to enter the private IP address of the player hosting the server
-in the *server address* field. The default port *50505* can be kept.
+in the *server address* field. The player who hosts the game can just use the default loopback ip address *127.0.0.1*.
+The default port *50505* can be kept for all players.
 
 ### Get local IP address to host server
 On macOS version 10.4 throughout the latest version run the following command in the terminal:
 ```
 ipconfig getifaddr en0
 ```
-On Ubuntu 24.04 you can use the `hostname` command in the terminal:
+
+
+On Ubuntu 24.04 you can use the `hostname` command in the terminal to get the local ip address:
 ```
 hostname -I
+```
+Then, run the following to configure the firewall to allow incoming connections on port 50505.
+```
+sudo ufw allow 50505
 ```
 
 ## Find Coding Documentation
