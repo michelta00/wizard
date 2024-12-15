@@ -16,12 +16,11 @@ wxFont regularFont = wxFont(wxFontInfo(12).FaceName("Junicode")); //requires yy:
 //font for player names
 wxFont regularFontBig = wxFont(wxFontInfo(16).FaceName("Junicode")); //requires yy:35, xx:150
 
-//font for round announcement
-wxFont magicalFontGigantic = wxFont(wxFontInfo(70).FaceName("Magic School One"));
+bool isInitialized = false;
 
 
-MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
-    this->SetMinSize(wxSize(1000, 680));
+MainGamePanelWizard::MainGamePanelWizard(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(1200, 850)) {
+    this->SetMinSize(wxSize(1200, 850));
 }
 
 
@@ -63,7 +62,7 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
 
 
 
-    this->SetMinSize(wxSize(960, 680));
+    this->SetMinSize(wxSize(1200, 850));
 
     //create Grid to partition game panel
     auto sizer = new wxGridBagSizer(4,5);
@@ -165,9 +164,60 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     // show button to display score board
     this->buildScoreLeaveButtons(sizer, gameState);
 
+    // show round number and trick estimate sum
+    this->buildRoundDisplay(sizer, gameState);
+
     // update Layout
     this->Layout();
 }
+
+// shows current round number and total estimated tricks in the current round
+void MainGamePanelWizard::buildRoundDisplay(wxGridBagSizer* sizer, game_state* gameState)
+{
+    wxGBSizerItem* roundItem;
+
+    /*
+    //in top left corner for 3 players
+    if (gameState->get_players().size() == 3)
+    {
+        roundItem = sizer->FindItemAtPosition(wxGBPosition(0,0));
+    }
+    //in bottom left corner if 4-6 players
+    else
+    {
+    */
+    roundItem = sizer->FindItemAtPosition(wxGBPosition(0,0));
+    // }
+    wxPanel* roundPanel = dynamic_cast<wxPanel*>(roundItem->GetWindow());
+    wxBoxSizer* roundSizer_vert = new wxBoxSizer(wxVERTICAL);
+    roundPanel->SetSizer(roundSizer_vert);
+
+    /*
+    if (!roundPanel->GetSizer()) {
+        auto* roundSizer_vert = new wxBoxSizer(wxVERTICAL);
+        roundPanel->SetSizer(roundSizer_vert);
+        roundPanel->SetMinSize(wxSize(200, 60));  // Lock minimum size
+    }
+    */
+    if(gameState->is_started())
+    {
+        // roundPanel->GetSizer()->Clear(true); //clear existing content to avoid stacking
+        wxStaticText* roundText = new wxStaticText(roundPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxSize(roundPanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
+        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxSize(roundPanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
+        roundText->SetForegroundColour(*wxWHITE);
+        roundText->SetFont(magicalFont);
+        roundPanel->GetSizer()->Add(roundText, 0, wxALIGN_CENTER | wxALL, 5);
+
+        estimateText->SetForegroundColour(*wxWHITE);
+        estimateText->SetFont(regularFont);
+        roundPanel->GetSizer()->Add(estimateText, 0, wxALIGN_CENTER | wxALL, 5);
+    }
+    //roundPanel->Layout();
+    //roundPanel->Refresh();
+
+}
+
+
 
 void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
@@ -260,7 +310,8 @@ void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* g
         wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
         wxBoxSizer* playerSizer_vert = new wxBoxSizer(wxVERTICAL);
         panel->SetSizer(playerSizer_vert);
-
+        // TODO: look at this
+        panel->SetMinSize(wxSize(150,25));
         panel->SetBackgroundColour(wxColour(120,0,51));
 
         // get other player
@@ -335,7 +386,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
 
     if(gameState->is_started())
     {
-        trickPanel->SetBackgroundColour(wxColour(100,100,100));
+        trickPanel->SetBackgroundColour(wxColour(102,0,51));
         const std::vector<std::pair<card*, player*>> trickCards = gameState->get_trick()->get_cards_and_players();
             for (const auto& it : trickCards)
             {
@@ -352,39 +403,7 @@ void MainGamePanelWizard::buildTrickPile(wxGridBagSizer* sizer, game_state* game
         trickPanelSizer_hor->Add(wizardLogo, 0, wxALIGN_CENTER );
     }
 }
-/*
-// TODO: round announcement shown at the beginning of every new round
-void MainGamePanelWizard::showRoundOverlay(int roundNumber) { //obtain round number with std::to_string(gameState->get_round_number()+1)
-    // Create a panel to act as the overlay
-    wxPanel* overlayPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, this->GetSize()); //create panel the size of the main game panel
-    overlayPanel->SetBackgroundColour(wxColour(0, 0, 0, 70)); // make current game panel opaque
 
-    // Create the text
-    wxString roundText = wxString::Format("ROUND %d", roundNumber);
-    wxStaticText* roundLabel = new wxStaticText(overlayPanel, wxID_ANY, roundText, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    roundLabel->SetFont(magicalFontGigantic);
-    roundLabel->SetForegroundColour(*wxWHITE);
-
-    // center text
-    wxBoxSizer* overlaySizer = new wxBoxSizer(wxVERTICAL);
-    overlaySizer->AddStretchSpacer(1);
-    overlaySizer->Add(roundLabel, 0, wxALIGN_CENTER_HORIZONTAL);
-    overlaySizer->AddStretchSpacer(1);
-
-    overlayPanel->SetSizer(overlaySizer);
-
-    // Show the overlay
-    overlayPanel->Raise();
-    overlayPanel->Show();
-
-    // Set a timer to remove the overlay after 1 second
-    wxTimer* timer = new wxTimer(this, wxID_ANY);
-    timer->Bind(wxEVT_TIMER, [this, overlayPanel](wxTimerEvent& event) {
-        overlayPanel->Destroy(); // Remove the overlay panel
-    });
-    timer->Start(1000, wxTIMER_ONE_SHOT); // 1-second delay
-}
-*/
 
 void MainGamePanelWizard::buildTurnIndicator(wxGridBagSizer* sizer, game_state* gameState, player* me)
 {
@@ -427,7 +446,8 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     wxGBSizerItem* meItem = sizer->FindItemAtPosition(wxGBPosition(3,2));
     wxPanel* mePanel = dynamic_cast<wxPanel*>(meItem->GetWindow());
     mePanel->SetBackgroundColour(wxColour(120,0,51));
-
+    //TODO: anschauen
+    mePanel->SetMinSize(wxSize(290,25));
     // create sizer to align elements at bottom center
     wxBoxSizer* meSizer_hor = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* meSizer = new wxBoxSizer(wxVERTICAL);
@@ -444,8 +464,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
     if(!gameState->is_started())
     {
         // add status text (waiting)
-        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, "Waiting for the game to start",wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        //playerScore->SetFont(regularFont);
+        wxStaticText* playerScore = new wxStaticText(mePanel, wxID_ANY, "Waiting for the game to start",wxDefaultPosition, wxSize(290, 20), wxALIGN_CENTER);
         playerScore->SetForegroundColour(*wxWHITE);
         playerScore->SetFont(regularFont);
         meSizer->Add(playerScore, 0, wxALIGN_CENTER|wxALL,5);
@@ -512,6 +531,22 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
 
                 ImagePanel *cardButton = new ImagePanel(cardPanel, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
+                // Bind hover events for size change -> just these two
+                cardButton->Bind(wxEVT_ENTER_WINDOW, [cardButton, scaledCardSize](wxMouseEvent& event) {
+                    cardButton->SetMinSize(wxSize(scaledCardSize.GetWidth() * 1.2, scaledCardSize.GetHeight() * 1.2));
+                    cardButton->Refresh();
+                    cardButton->Update();
+                    cardButton->GetParent()->Layout();
+                });
+
+                cardButton->Bind(wxEVT_LEAVE_WINDOW, [cardButton, scaledCardSize](wxMouseEvent& event) {
+                    cardButton->SetMinSize(scaledCardSize);
+                    cardButton->Refresh();
+                    cardButton->Update();
+                    cardButton->GetParent()->Layout();
+                });
+
+
                 if (gameState->get_current_player() == me && gameState->is_estimation_phase() == false) {
                     cardButton->SetToolTip("Play card");
                     cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
@@ -519,7 +554,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
                         GameController::playCard(handCard);
                     });
                 }
-                cardPanelSizer_hor->Add(cardButton, 0, wxALIGN_TOP | wxALL, 4);
+                cardPanelSizer_hor->Add(cardButton, 0, wxALIGN_TOP | wxRIGHT | wxLEFT, 4);
             }
         }
 

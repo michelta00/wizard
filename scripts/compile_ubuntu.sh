@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# INSTRUCTIONS
+# run this file from the wizard directory
+# make executable (if necessary) with chmod +x scripts/compile_ubuntu.sh
+# run with ./scripts/compile_ubuntu.sh
+
+
 # path to the assets folder containing the .ttf files
 ASSETS_DIR="./assets"
 FONT_NAME1="JunicodeBold.ttf"

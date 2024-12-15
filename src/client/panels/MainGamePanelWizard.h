@@ -55,11 +55,6 @@ private:
      */
     void buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player *me, int myPosition);
     /**
-     * @brief Displays area of game which shows round number.
-     * @param roundNumber Number of current round.
-     */
-    void showRoundOverlay(int roundNumber);
-    /**
      * @brief Builds area of the deck which shows the trick pile.
      * @param sizer Positioning
      * @param gameState Current game state.
@@ -72,6 +67,7 @@ private:
      * @param gameState Current game state.
      */
     void buildTrumpCard(wxGridBagSizer* sizer, game_state* gameState);
+    void buildRoundDisplay(wxGridBagSizer* sizer, game_state* gameState);
 
     /**
      * @brief Builds score board button and leave game button.
@@ -85,7 +81,7 @@ private:
 
     // also set in the constructor implementation
     wxSize const panelSize = wxSize(960, 680); ///< Size of the panel.
-    wxSize const cardSize = wxSize(70, 108); ///< Size of the shown cards.
+    wxSize const cardSize = wxSize(85, 131); ///< Size of the shown cards.
 };
 
 #endif //MAINGAMEPANELWIZARD_H
