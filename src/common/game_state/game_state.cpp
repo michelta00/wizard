@@ -229,7 +229,7 @@ int game_state::get_player_index(player *player) const
 
 void game_state::determine_trump_color() const
 {
-    if(_round_number->get_value() * _players.size() == 60) {
+    if((_round_number->get_value() + 1) * _players.size() == 60) {
         _trump_color->set_value(0); // there is no trump since it is the last round
         _trump_card_value->set_value(0);
     } else {
