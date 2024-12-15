@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['features_0',['🚀 Features',['../index.html#autotoc_md1',1,'']]],
-  ['finish_5fgame_1',['finish_game',['../classgame__state.html#a67fdd4b5682715cd2d848031a9911b17',1,'game_state']]],
-  ['from_5fjson_2',['from_json',['../classcard.html#a48593187c9bff442d61f197991954011',1,'card::from_json()'],['../classdeck.html#abe8dbe828189696c22f35ac3ed4fd296',1,'deck::from_json()'],['../classtrick.html#a1a3d94f638672d3d60d596190ae59dfb',1,'trick::from_json()'],['../classgame__state.html#a794d484961c92b5b737586ec5599963f',1,'game_state::from_json()'],['../classhand.html#aa9cffdf932d80c7304a335074403e785',1,'hand::from_json()'],['../classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5',1,'player::from_json()']]],
-  ['full_5fstate_5fresponse_3',['full_state_response',['../classfull__state__response.html',1,'']]]
+  ['engineering_20project_20wizard_0',['Software Engineering Project - Wizard',['../index.html',1,'']]],
+  ['environment_1',['2.1 Prepare OS Environment',['../index.html#autotoc_md7',1,'']]],
+  ['errordialog_2',['ErrorDialog',['../class_error_dialog.html',1,'']]],
+  ['estimate_5ftricks_3',['estimate_tricks',['../classgame__state.html#ac4ebff625d83c633c124890537d60354',1,'game_state::estimate_tricks()'],['../classgame__instance.html#af1434756e3041deca68b4f4f84176f05',1,'game_instance::estimate_tricks()']]],
+  ['estimate_5ftricks_5frequest_4',['estimate_tricks_request',['../classestimate__tricks__request.html',1,'']]],
+  ['estimatetricks_5',['estimateTricks',['../class_game_controller.html#abd110563d0f37f06096176c199d22055',1,'GameController']]]
 ];

@@ -2,13 +2,11 @@
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer 
 gameplay!
 
-This project is part of the *Software Engineering* lecture at *ETH Zurich* in AS24. By Marie Becker, Janne Berger, Martina
+This project is part of the *Software Engineering* lecture at *ETH Zurich* in autumn semester 2024. By Marie Becker, Janne Berger, Martina
 Lehman, Aidan Meara, Michel Tarnow, and Hannah Winter.
 
-<div style="display: flex; align-items: center;">
-  <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="height: 150px; margin-right: 20px;">
-  <img src="./assets/cards.png" alt="Cards" style="height: 75px;">
-</div>
+![Cards](./assets/cards.png)
+
 
 ## 🚀 Features
 - 🌐 **Multiplayer Gameplay:** Play with 3 to 6 players.
@@ -140,3 +138,6 @@ the game, the winner is announced and the players can close the game.
 Have fun playing!
 
 ## 5 Special Features
+- The game provides a Lobby where people can players can come and go until enough players have joined and the game is started.
+- It is always possible to leave the game early. 
+- See the current state of the game on the score board. Scores are color-coded marking the leading and loosing player.
