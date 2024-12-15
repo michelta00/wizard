@@ -271,8 +271,10 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
         trumpText->SetForegroundColour(*wxWHITE);
         trumpText->SetFont(regularFont);
         int trumpColor = gameState->get_trump_color();
+        int trumpCardValue = gameState->get_trump_card_value();
 
-        std::string cardImage = "assets/card_" + std::to_string(trumpColor) + ".png";
+        std::string cardImage = "assets/card_" + std::to_string(trumpCardValue) + "_" + std::to_string(trumpColor)+".png";
+        std::cout << cardImage << std::endl;
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
 
