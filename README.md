@@ -98,24 +98,26 @@ server, run `./Wizard-server`. In new consoles, you can now start as many client
 
 ## 4 Play the Game
 
-Once you started your client, the connection panel shows up. Here you can enter the server address and port (in most
-cases default can be left unchanged), as well as your player name.
+Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most
+cases default can be left unchanged), as well as their player name.
 
-<img src="assets/readme/connection_panel.png" width=50% height=50% alt="Connection panel"> <br>
+<img src="assets/readme/connection_panel.png" width=2880 height=1800 alt="Connection panel"> <br>
 
-After clicking on the *Connect* button, the lobby shows up. Here you can see all players that have joined the game. To 
-play the game, at least 3 players have to connect to the server. The maximum number of players per game is 6. Once at
-least 3 players are connected to the server, the *Start Game* button turn purple and the game can be started by clicking
+After clicking on the *Connect* button, the lobby shows up. Here all players that have joined the game can be seen. 
+
+<img src="assets/readme/lobby_one_player.png" width=2880 height=1800 alt="Lobby panel"> <br>
+
+To start a game, at least 3 players have to connect to the server. The maximum number of players per game is 6. Once at
+least 3 players are connected to the server, the *Start Game* button turns purple and the game can be started by clicking
 it.
 
-<img src="assets/readme/lobby_one_player.png" width=50% height=50% alt="Lobby panel"> <br>
-
-<img src="assets/readme/lobby_six_players.png" width=50% height=50% alt="Lobby panel"> <br>
+<img src="assets/readme/lobby_six_players.png" width=2880 height=1800 alt="Lobby panel"> <br>
 
 Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the 
 provided input filed, and then submit it by clicking on the *Submit* button. 
 
-<img src="assets/readme/estimation_panel.png" width=50% height=50% alt="Estimation phase"> <br>
+<img src="assets/readme/estimation_panel.png" width=2880 height=1800 alt="Estimation phase"> <br>
 
+After every player has submitted their estimation, the play phase starts. Cards can be played by 
 
 ## 5 Special Features
