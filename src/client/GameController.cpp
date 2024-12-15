@@ -170,6 +170,12 @@ void GameController::startGame() {
 
 }
 
+void GameController::leaveGame() {
+    _me->set_has_left_game(true);
+    leave_game_request request = leave_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), _me->get_player_name());
+    ClientNetworkManager::sendRequest(request);
+}
+
 void GameController::estimateTricks(int nof_tricks) {
     estimate_tricks_request request = estimate_tricks_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), nof_tricks);
     ClientNetworkManager::sendRequest(request);
@@ -177,12 +183,6 @@ void GameController::estimateTricks(int nof_tricks) {
 
 void GameController::playCard(card* cardToPlay) {
     play_card_request request = play_card_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), cardToPlay->get_id());
-    ClientNetworkManager::sendRequest(request);
-}
-
-void GameController::leaveGame()
-{
-    leave_game_request request = leave_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
     ClientNetworkManager::sendRequest(request);
 }
 
@@ -285,13 +285,11 @@ void GameController::showTrickOverMessage(const player* winner)
     dialog->ShowModal();
 }
 
-
 void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
-    // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
@@ -328,4 +326,9 @@ void GameController::showGameOverMessage() {
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
+}
+
+void GameController::closeGameWindow()
+{
+    GameController::_gameWindow->Close();
 }

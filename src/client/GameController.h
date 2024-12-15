@@ -18,8 +18,8 @@ public:
     static void connectToServer();
     static void updateGameState(game_state* newGameState);
     static void startGame();
-    static void estimateTricks(int nof_cards);
     static void leaveGame();
+    static void estimateTricks(int nof_cards);
     static void playCard(card* cardToPlay);
     static void estimateTrick();
 
@@ -29,6 +29,7 @@ public:
     static void showNewRoundMessage(game_state* oldGameState, game_state* newGameState);
     static void showTrickOverMessage(const player* winner);
     static void showGameOverMessage();
+    static void closeGameWindow();
 
 private:
     static GameWindow* _gameWindow;

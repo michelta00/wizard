@@ -65,6 +65,7 @@ wxThread::ExitCode ResponseListenerThread::Entry() {
             }
         }
 
+        // took out check to not have this error at the end of the game when one player leaves
         if (count <= 0) {
             this->outputError("Network error", "Read error [" + std::to_string(this->_connection->last_error()) + "]: " + this->_connection->last_error_str());
         }

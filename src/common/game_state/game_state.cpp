@@ -195,6 +195,7 @@ int game_state::get_trick_estimate_sum() const
 
 unsigned int game_state::get_max_round_number() const
 {
+    //return 1;
     return 60 / _players.size();
 }
 
@@ -444,22 +445,22 @@ bool game_state::play_card(player* player, const std::string& card_id, std::stri
 bool game_state::remove_player(player *player_ptr, std::string &err)
 {
     if (const int idx = get_player_index(player_ptr); idx != -1) {
+        // Case 1: Game has not been started yet.
         if (_is_started->get_value() == false) {
             if (idx < _current_player_idx->get_value()) {
                 // reduce current_player_idx if the player who left had a lower index
                 _current_player_idx->set_value(_current_player_idx->get_value() - 1);
             }
+            player_ptr->set_has_left_game(true);
             _players.erase(_players.begin() + idx);
             return true;
         } else {
-            finish_game(err);
-            return true;
+            return finish_game(err);
         }
     } else {
         err = "Could not leave game, as the requested player was not found in that game.";
         return false;
     }
-    return false;
 }
 
 bool game_state::add_player(player* player_, std::string& err)
@@ -509,7 +510,6 @@ bool game_state::add_player(player* player_, std::string& err)
 bool game_state::finish_game(std::string &err) const
 {
     _is_finished->set_value(true);
-    // TODO: part to determine winner of the game, it is done in game controller right now and could stay there.
     return true;
 }
 #endif
@@ -579,7 +579,7 @@ void game_state::write_into_json(rapidjson::Value &json,
 
     rapidjson::Value trick_estimate_sum_val(rapidjson::kObjectType);
     _trick_estimate_sum->write_into_json(trick_estimate_sum_val, allocator);
-    json.AddMember("trick_estimate_sum_val", trick_estimate_sum_val, allocator);
+    json.AddMember("trick_estimate_sum", trick_estimate_sum_val, allocator);
 
 }
 
@@ -601,7 +601,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
         && json.HasMember("current_player_idx")
         && json.HasMember("trump_color")
         && json.HasMember("trump_card_value")
-        && json.HasMember("trick_estimate_sum_val"))
+        && json.HasMember("trick_estimate_sum"))
     {
         std::vector<player*> deserialized_players;
         for (auto &serialized_player : json["players"].GetArray()) {
@@ -624,7 +624,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
                               serializable_value<int>::from_json(json["current_player_idx"].GetObject()),
                               serializable_value<int>::from_json(json["trump_color"].GetObject()),
                               serializable_value<int>::from_json(json["trump_card_value"].GetObject()),
-                              serializable_value<int>::from_json(json["trick_estimate_sum_val"].GetObject()));
+                              serializable_value<int>::from_json(json["trick_estimate_sum"].GetObject()));
     }
     throw WizardException("Failed to deserialize game_state. Required entries were missing.");
 }

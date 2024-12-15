@@ -101,7 +101,13 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     if (it < players.end()) {
         me = *it;
         myPosition = it - players.begin();
-    } else {
+    }
+    else if (me->has_left_game() == true)
+    {
+        GameController::closeGameWindow();
+        return;
+    }
+    else {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
     }
@@ -157,35 +163,69 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     this->buildOtherPlayers(sizer, gameState, me, myPosition);
 
     // show button to display score board
-    this->buildScoreBoardButton(sizer, gameState);
+    this->buildScoreLeaveButtons(sizer, gameState);
 
     // update Layout
     this->Layout();
 }
 
-void MainGamePanelWizard::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+void MainGamePanelWizard::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
-    if (gameState->is_started()) {
-        wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
-        panel->SetSizer(sizer_vert);
+    wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
+    panel->SetSizer(sizer_vert);
+    auto sizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    sizer_vert->Add(sizer_hor, 1, wxALIGN_LEFT);
 
-        wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "Scoreboard", wxDefaultPosition, wxSize(110, 43));//size wxSize(110, 43)) for 10 characters;
-        // wxButton* startGameButton = new wxButton(mePanel, wxID_ANY, "Start Game!", wxDefaultPosition, wxSize(110, 43));
+    if (gameState->is_started())
+    {
+        wxButton *scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
+        scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 , 35
+        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
         scoreBoardButton->SetFont(magicalFont);
         scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
         scoreBoardButton->SetBackgroundColour(wxColour(50, 0, 51)); //same shade of purple as start game button and estimation panel
-        sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 
         scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
             ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
             scoreBoard.ShowModal();
         });
     }
+        wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+        leaveGameButton->SetMinSize(wxSize(110, 43));
+        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
 
+        leaveGameButton->SetFont(magicalFont);
+        leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+        leaveGameButton->SetForegroundColour(*wxWHITE);
+
+        leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+            GameController::leaveGame();
+        });
 }
 
+/*
+void MainGamePanelWizard::buildLeaveGameButton(wxGridBagSizer *sizer, game_state* gameState) {
+    wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(3,3));
+    wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
+
+    if (gameState->is_started()) {
+        wxSizer* sizer_vert = panel->GetSizer();
+        // wxBoxSizer *sizer_vert = new wxBoxSizer(wxVERTICAL);
+        // panel->SetSizer(sizer_vert);
+
+        wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+        sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 1);
+
+        leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+            GameController::leaveGame();
+        });
+    }
+
+}
+*/
 void MainGamePanelWizard::buildOtherPlayers(wxGridBagSizer* sizer, game_state* gameState, player* me, int myPosition)
 {
     std::vector<player*> players = gameState->get_players();
@@ -274,7 +314,6 @@ void MainGamePanelWizard::buildTrumpCard(wxGridBagSizer* sizer, game_state* game
         int trumpCardValue = gameState->get_trump_card_value();
 
         std::string cardImage = "assets/card_" + std::to_string(trumpCardValue) + "_" + std::to_string(trumpColor)+".png";
-        std::cout << cardImage << std::endl;
         ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, MainGamePanelWizard::cardSize);
 
 

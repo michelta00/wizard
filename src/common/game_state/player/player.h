@@ -22,6 +22,7 @@ private:
     serializable_value<int>* _nof_tricks;           ///< The number of tricks won in the current round.
     serializable_value<int>* _nof_predicted;        ///< The number of predicted tricks in the current round.
     std::vector<serializable_value<int>*> _scores;  ///< The scores of the player (total game score, current and past ones).
+    serializable_value<bool>* _has_left_game;       ///< Boolean whether player has left the game.
     hand* _hand;                                    ///< The player's hand holding the player's cards.
 
 #ifdef WIZARD_SERVER
@@ -35,6 +36,7 @@ private:
      * @param nof_tricks The number of tricks won by the player in the current round.
      * @param nof_predicted The number of tricks predicted to be won by the player in the current round.
      * @param scores The player's scores.
+     * @param has_left_game Boolean whether player has left the game.
      * @param hand The player's hand.
      */
     player(const std::string& id,
@@ -42,6 +44,7 @@ private:
            serializable_value<int>* nof_tricks,
            serializable_value<int>* nof_predicted,
            const std::vector<serializable_value<int>*>& scores,
+           serializable_value<bool>* has_left_game,
            hand* hand);
 
 public:
@@ -107,6 +110,18 @@ public:
     void set_nof_tricks(int nof_tricks) const;
 
     /**
+     * @brief State whether player has left the game.
+     * @return Boolean stating whether player has left the game.
+     */
+    [[nodiscard]] bool has_left_game() const;
+
+    /**
+     * @brief Sets the players game to left when he leaves the game
+     * @param has_left_game Boolean whether player has left game
+     */
+    void set_has_left_game(bool has_left_game);
+
+    /**
      * @brief Gets the number of tricks predicted to be won by the player in the current round.
      * @return The number of tricks predicted to be won by the player in the current round.
      */
@@ -126,6 +141,7 @@ public:
      * @return The number of cards in the player's hand.
      */
     [[nodiscard]] unsigned int get_nof_cards() const noexcept;
+
 
     /**
      * @brief Gets the player's hand.

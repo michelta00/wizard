@@ -103,29 +103,44 @@ void TrickEstimationPanel::buildGameState(game_state* gameState, player* me)
 
     this->buildTrumpColor(sizer, gameState);
 
-    this->buildScoreBoardButton(sizer, gameState);
+    this->buildScoreLeaveButtons(sizer, gameState);
 
     this->Layout();
 }
 
 
-void TrickEstimationPanel::buildScoreBoardButton(wxGridBagSizer *sizer, game_state* gameState) {
+void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_state* gameState) {
     wxGBSizerItem* item = sizer->FindItemAtPosition(wxGBPosition(2,2));
     wxPanel* panel = dynamic_cast<wxPanel*>(item->GetWindow());
 
     wxBoxSizer* sizer_vert = new wxBoxSizer(wxVERTICAL);
     panel->SetSizer(sizer_vert);
+    auto sizer_hor = new wxBoxSizer(wxHORIZONTAL);
+    sizer_vert->Add(sizer_hor, 1, wxALIGN_CENTER);
 
-    wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "Scoreboard", wxDefaultPosition, wxSize(110, 43));
+    wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
+    scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 35
+
+    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
     scoreBoardButton->SetFont(magicalFontTrick);
     scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
     scoreBoardButton->SetBackgroundColour(wxColour(50, 0, 51));    //make button same purple as estimation panel once clickable
 
-    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
-
     scoreBoardButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent& event) {
         ScoreBoardDialog scoreBoard(nullptr, "ScoreBoard", "Here will be the scoreboard", gameState);
         scoreBoard.ShowModal();
+    });
+
+    wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
+    leaveGameButton->SetMinSize(wxSize(110, 43));
+    sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 3);
+
+    leaveGameButton->SetFont(magicalFontTrick);
+    leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
+    leaveGameButton->SetForegroundColour(*wxWHITE);
+
+    leaveGameButton->Bind(wxEVT_BUTTON, [gameState](wxCommandEvent &event) {
+        GameController::leaveGame();
     });
 
 }
@@ -145,7 +160,6 @@ void TrickEstimationPanel::buildTrumpColor(wxGridBagSizer *sizer, game_state *ga
     int trumpCardValue = gameState->get_trump_card_value();
 
     std::string cardImage = "assets/card_" + std::to_string(trumpCardValue) + "_" + std::to_string(trumpColor)+".png";
-    std::cout << cardImage << std::endl;
     ImagePanel* cardPanel = new ImagePanel(trumpPanel, cardImage, wxBITMAP_TYPE_ANY, wxDefaultPosition, TrickEstimationPanel::cardSize);
 
 
