@@ -166,9 +166,6 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     //this->Refresh();
     //this->Update();
 
-
-
-
 }
 
 // shows current round number and total estimated tricks in the current round
@@ -176,6 +173,7 @@ void MainGamePanelWizard::buildRoundDisplay(wxGridBagSizer* sizer, game_state* g
 {
     wxGBSizerItem* roundItem;
 
+    /*
     //in top left corner for 3 players
     if (gameState->get_players().size() == 3)
     {
@@ -184,22 +182,25 @@ void MainGamePanelWizard::buildRoundDisplay(wxGridBagSizer* sizer, game_state* g
     //in bottom left corner if 4-6 players
     else
     {
-        roundItem = sizer->FindItemAtPosition(wxGBPosition(4,0));
-    }
+    */
+    roundItem = sizer->FindItemAtPosition(wxGBPosition(0,0));
+    // }
     wxPanel* roundPanel = dynamic_cast<wxPanel*>(roundItem->GetWindow());
     wxBoxSizer* roundSizer_vert = new wxBoxSizer(wxVERTICAL);
     roundPanel->SetSizer(roundSizer_vert);
 
+    /*
     if (!roundPanel->GetSizer()) {
         auto* roundSizer_vert = new wxBoxSizer(wxVERTICAL);
         roundPanel->SetSizer(roundSizer_vert);
         roundPanel->SetMinSize(wxSize(200, 60));  // Lock minimum size
     }
+    */
     if(gameState->is_started())
     {
-        roundPanel->GetSizer()->Clear(true); //clear existing content to avoid stacking
-        wxStaticText* roundText = new wxStaticText(roundPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        // roundPanel->GetSizer()->Clear(true); //clear existing content to avoid stacking
+        wxStaticText* roundText = new wxStaticText(roundPanel, wxID_ANY, "Round " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxSize(roundPanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
+        wxStaticText* estimateText = new wxStaticText(roundPanel, wxID_ANY, "Predicted trick sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1) ,wxDefaultPosition, wxSize(roundPanel->GetMinSize().GetWidth(), 35), wxALIGN_CENTER);
         roundText->SetForegroundColour(*wxWHITE);
         roundText->SetFont(magicalFont);
         roundPanel->GetSizer()->Add(roundText, 0, wxALIGN_CENTER | wxALL, 5);
@@ -513,7 +514,7 @@ void MainGamePanelWizard::buildThisPlayer(wxGridBagSizer* sizer, game_state* gam
                         GameController::playCard(handCard);
                     });
                 }
-                cardPanelSizer_hor->Add(cardButton, 0, wxALIGN_TOP | wxALL, 4);
+                cardPanelSizer_hor->Add(cardButton, 0, wxALIGN_TOP | wxRIGHT | wxLEFT, 4);
             }
         }
 

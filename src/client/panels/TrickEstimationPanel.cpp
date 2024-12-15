@@ -216,7 +216,7 @@ void TrickEstimationPanel::buildCenter(wxGridBagSizer* sizer, game_state* gameSt
     roundNumber->SetForegroundColour(*wxWHITE);
     roundNumber->SetFont(magicalFontTrick);
 
-    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    wxStaticText* trickSum = new wxStaticText(centerPanel, wxID_ANY, "Current prediction sum " + std::to_string(gameState->get_trick_estimate_sum()) + " / " + std::to_string(gameState->get_round_number() + 1),wxDefaultPosition, wxSize(centerPanel->GetMinSize().GetWidth(), 43), wxALIGN_CENTER);
     trickSum->SetForegroundColour(*wxWHITE);
     trickSum->SetFont(regularFontTrick);
 
