@@ -155,7 +155,7 @@ Have fun playing!
 
 ---
 
-## 5 Play on different devices
+## 5 Play on Different Devices
 
 When playing the game on a single device, the default server address *127.0.0.1* and server port *50505* 
 can be used during the connection phase.

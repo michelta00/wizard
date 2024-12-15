@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['play_20on_20different_20devices_0',['Play on different devices',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'5 Play on different devices'],['../index.html#autotoc_md39',1,'Play on different devices']]],
+  ['play_20on_20different_20devices_0',['Play on Different Devices',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'5 Play on Different Devices'],['../index.html#autotoc_md40',1,'5 Play on Different Devices']]],
   ['play_20the_20game_1',['Play the Game',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'4 Play the Game'],['../index.html#autotoc_md38',1,'4 Play the Game']]],
   ['play_5fcard_2',['play_card',['../classgame__state.html#a6c65d95086a88b8d111de5553e1210ec',1,'game_state::play_card()'],['../classgame__instance.html#a1a7e19a4b0907cb0b5f1523edb7e68ca',1,'game_instance::play_card()']]],
   ['play_5fcard_5frequest_3',['play_card_request',['../classplay__card__request.html',1,'']]],

@@ -1,9 +1,0 @@
-var searchData=
-[
-  ['unittestpostamble_0',['UnitTestPostamble',['../namespacegen__gtest__pred__impl.html#a6766ef4e3c9e872a48a3815f8290db0e',1,'gen_gtest_pred_impl']]],
-  ['unittestpreamble_1',['UnitTestPreamble',['../namespacegen__gtest__pred__impl.html#a9e8ac01c257544c4d497ec7e01e9c971',1,'gen_gtest_pred_impl']]],
-  ['unix_5facceptor_2',['unix_acceptor',['../classsockpp_1_1unix__acceptor.html#a413b9dd014c988e33ee935bb45d1b733',1,'sockpp::unix_acceptor::unix_acceptor()'],['../classsockpp_1_1unix__acceptor.html#a93d560effe9fa77cdbce1558f2a6c105',1,'sockpp::unix_acceptor::unix_acceptor(const unix_address &amp;addr, int queSize=DFLT_QUE_SIZE)']]],
-  ['unix_5faddress_3',['unix_address',['../classsockpp_1_1unix__address.html#a4d115b530af7da5d6f0e319d6a9750b0',1,'sockpp::unix_address::unix_address()'],['../classsockpp_1_1unix__address.html#a3f15deab741ab9c8fc00778350a47a86',1,'sockpp::unix_address::unix_address(const std::string &amp;path)'],['../classsockpp_1_1unix__address.html#a667d4ab6510c2864dda3f86839170e2e',1,'sockpp::unix_address::unix_address(const sockaddr &amp;addr)'],['../classsockpp_1_1unix__address.html#a17119932b442e1f1fa5d6106c997e8ba',1,'sockpp::unix_address::unix_address(const sock_address &amp;addr)'],['../classsockpp_1_1unix__address.html#a367d93d36501c28fe6730a60edfe14a7',1,'sockpp::unix_address::unix_address(const sockaddr_un &amp;addr)'],['../classsockpp_1_1unix__address.html#a7f7088ee6d7bc90bdfe2e969b5a16962',1,'sockpp::unix_address::unix_address(const unix_address &amp;addr)']]],
-  ['uploadbasefiles_4',['UploadBaseFiles',['../classupload_1_1_version_control_system.html#ac1549d3e1616a01a27581a03ee754189',1,'upload::VersionControlSystem']]],
-  ['uploadseparatepatches_5',['UploadSeparatePatches',['../namespaceupload.html#a964ffb6ff9be2cdfb1d551db6f17231d',1,'upload']]]
-];

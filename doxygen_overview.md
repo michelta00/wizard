@@ -96,9 +96,8 @@ server, run `./Wizard-server`. In new consoles, you can now start as many client
 ## 4 Play the Game
 
 Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most
-cases the default input can be left unchanged), as well as their player name.
-If the player name chosen already exists in the game, a number will be automatically added to the name.
-Next to these input fields, a *Rules*
+cases, the default input can be left unchanged), as well as their player name. If the player name chosen already exists
+in the game, a number will be automatically added to the name (e.g., Marie_2). Next to these input fields, a *Rules*
 button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked
 to access the rules whenever needed.
 
@@ -107,66 +106,68 @@ to access the rules whenever needed.
 After clicking on the *Connect* button, the lobby shows up. Here all players that have joined the game can be seen. The
 *Start Game* button can be clicked to start a game once enough players joined, and the *Leave Game* button can be clicked
 to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started,
-the game is over.
+the game is over. During the lobby, players can join and leave the game without terminating it.
 
 \image html readme/lobby_one_player.png "Lobby panel" width=700
 
 To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per
 game is 6. Once at least 3 players are connected to the server and have joined the game, the *Start Game* button turns
-purple and the game can be started by clicking the button.
-
-If players decide throughout the waiting time that they want to leave the game again, they can press the *Leave Game* button
-and leave the Lobby. The player will be removed from the Lobby and the other players can keep waiting.
+purple and the game can be started by clicking the button. If players decide that they want to leave the game again
+throughout the waiting time, they can press the *Leave Game* button and leave the lobby. The player will be removed from
+the lobby and the other players can keep waiting.
 
 \image html readme/lobby_six_players.png "Lobby panel" width=700
 
 Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the
 provided input filed, and then submit it by clicking on the *Submit* button. In this phase of the game, each player can
 see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number
-and the sum of already submitted trick estimations in shown in the middle of the screen and can help players submitting
+and the sum of already submitted trick estimations is shown in the middle of the screen and can help players submitting
 a valid estimate (e.g., estimate cannot be greater than the current round number).
 
-Above the *Leave Game* button, the
-scoreboard can now be accessed by clicking on the *Scoreboard* button.
+\image html readme/estimation_panel.png "Estimation phase" width=700
+
+Above the *Leave Game* button, the scoreboard can now be accessed by clicking on the *Scoreboard* button.
 The scoreboard is available throughout the whole game and winning and loosing players are color-coded.
 If a player leaves the game now after it was already started, the game ends immediately for all players
 and the final scores are shown to everyone.
 
-\image html readme/estimation_panel.png "Estimation phase" width=700
+\image html readme/scoreboard.png "Scoreboard" width=700
 
 After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the
-respective card. Hovering over cards increases their size to get a closer look.
-An announcement in the middle of the screen shows whose turn it is.
-The player whose turn it is, is also highlighted in purple. Played cards are displayed in the
-middle of the screen as well and in the top left corner the round number and the sum of estimated tricks are shown.
+respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the
+screen shows whose turn it is. The player whose turn it is is also highlighted in purple. Played cards are displayed in
+the middle of the screen as well. In the top left corner the round number and the sum of estimated tricks are shown.
 Below each players' name, the won and predicted numbers of tricks can be seen.
 
 \image html readme/play_phase_last_player.png "Play phase" width=700
 
 At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of
-a round, also the points gained or lost in this round are shown, and the new round starts automatically. At the end of
-the game, the winner is announced and the players can close the game.
+a round, the points gained or lost in this round are shown as well, and the new round starts automatically. At the end of
+the game, the winner is announced and the players can close the game. This also happens when someone leaves the game.
+
+\image html readme/end_of_game.png "End of Game" width=700
 
 Have fun playing!
 
-## Play on different devices
+---
+
+## 5 Play on Different Devices
 
 When playing the game on a single device, the default server address *127.0.0.1* and server port *50505*
 can be used during the connection phase.
 
-However, the game can also be played from different devices on the same wifi network 🛜 or if all devices are connected
+However, the game can also be played from different devices on the same Wi-Fi network 🛜 or if all devices are connected
 to the same VPN.
-In this case one player needs to host the server, while all other players only run a client.
+In this case, one player needs to host the server, while all other players only have to run their client.
 When connecting to the game, all players have to enter the private IP address of the player hosting the server
-in the *server address* field. The player who hosts the game can just use the default loopback ip address *127.0.0.1*.
-The default port *50505* can be kept for all players.
+in the *server address* field. The default port *50505* can be kept.
 
 ### Get local IP address to host server
 On macOS version 10.4 throughout the latest version run the following command in the terminal:
 ```
 ipconfig getifaddr en0
 ```
-To host the server the firewall needs to be configured to allow connections on port *50505*.
+To host the server, the firewall needs to be configured to allow connections on port *50505*.
 This can be easiest done by going to `Network settings > Firewall` and turning of the firewall.
 
 On Ubuntu 24.04 you can use the `hostname` command in the terminal:
@@ -177,8 +178,9 @@ The firewall can be configured to allow incoming connections on port *50505* wit
 ```
 sudo ufw allow 50505
 ```
+---
 
-## Find Coding Documentation
+## 6 Coding Documentation
 
 The code in this project was documented via [Doxygen](https://doxygen.nl/).
 Doxygen documentation can be accessed by opening the `index.html` file in the `html` folder.

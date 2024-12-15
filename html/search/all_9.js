@@ -4,7 +4,7 @@ var searchData=
   ['client_5frequest_1',['client_request',['../classclient__request.html',1,'']]],
   ['clientnetworkmanager_2',['ClientNetworkManager',['../class_client_network_manager.html',1,'']]],
   ['code_3',['Code',['../md__r_e_a_d_m_e.html#autotoc_md10',1,'2.2 Compile Code'],['../index.html#autotoc_md32',1,'2.2 Compile Code']]],
-  ['coding_20documentation_4',['Coding Documentation',['../md__r_e_a_d_m_e.html#autotoc_md21',1,'6 Coding Documentation'],['../index.html#autotoc_md41',1,'Find Coding Documentation']]],
+  ['coding_20documentation_4',['Coding Documentation',['../md__r_e_a_d_m_e.html#autotoc_md21',1,'6 Coding Documentation'],['../index.html#autotoc_md43',1,'6 Coding Documentation']]],
   ['compile_20code_5',['Compile Code',['../md__r_e_a_d_m_e.html#autotoc_md10',1,'2.2 Compile Code'],['../index.html#autotoc_md32',1,'2.2 Compile Code']]],
   ['compile_20instructions_6',['Compile Instructions',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'2 Compile Instructions'],['../index.html#autotoc_md28',1,'2 Compile Instructions']]],
   ['connectionpanel_7',['ConnectionPanel',['../class_connection_panel.html',1,'']]],

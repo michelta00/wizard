@@ -8,7 +8,7 @@ var searchData=
   ['serializable_5fvalue_3c_20bool_20_3e_5',['serializable_value&lt; bool &gt;',['../classserializable__value.html',1,'']]],
   ['serializable_5fvalue_3c_20int_20_3e_6',['serializable_value&lt; int &gt;',['../classserializable__value.html',1,'']]],
   ['serializable_5fvalue_3c_20std_3a_3astring_20_3e_7',['serializable_value&lt; std::string &gt;',['../classserializable__value.html',1,'']]],
-  ['server_8',['server',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'Get local IP address to host server'],['../index.html#autotoc_md40',1,'Get local IP address to host server']]],
+  ['server_8',['server',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'Get local IP address to host server'],['../index.html#autotoc_md41',1,'Get local IP address to host server']]],
   ['server_5fnetwork_5fmanager_9',['server_network_manager',['../classserver__network__manager.html',1,'']]],
   ['server_5fresponse_10',['server_response',['../classserver__response.html',1,'']]],
   ['set_5fgame_5fid_11',['set_game_id',['../classplayer.html#aa916eeacf97f00507f412fd91bfe37d4',1,'player']]],

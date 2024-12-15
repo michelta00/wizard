@@ -6,7 +6,7 @@ var searchData=
   ['game_5fstate_3',['game_state',['../classgame__state.html',1,'game_state'],['../classgame__state.html#a0c10b830e222d726557c3c33685c595a',1,'game_state::game_state()']]],
   ['gamecontroller_4',['GameController',['../class_game_controller.html',1,'']]],
   ['gamewindow_5',['GameWindow',['../class_game_window.html',1,'']]],
-  ['get_20local_20ip_20address_20to_20host_20server_6',['Get local IP address to host server',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'Get local IP address to host server'],['../index.html#autotoc_md40',1,'Get local IP address to host server']]],
+  ['get_20local_20ip_20address_20to_20host_20server_6',['Get local IP address to host server',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'Get local IP address to host server'],['../index.html#autotoc_md41',1,'Get local IP address to host server']]],
   ['get_5fcards_7',['get_cards',['../classhand.html#ad104b0376b1a13d987f349dd524ca47f',1,'hand']]],
   ['get_5fcards_5fand_5fplayers_8',['get_cards_and_players',['../classtrick.html#a1d75f9e8fc94fd122adfc39a20089268',1,'trick']]],
   ['get_5fcolor_9',['get_color',['../classcard.html#ab033bc0e71b09d3cf3ac28c2f1fbde18',1,'card']]],
