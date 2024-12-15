@@ -91,6 +91,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">MainGamePanelWizard Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Visualizes Game State to user during the card playing phase. The Main Game Panel is shown before the game has started (Lobby) and also while the game is played (outside the trick estimation phase). It ensures that the game state is shown to all players in the GUI, and creates and positions all graphical elements. It also allows interaction of the user with the GUI via button clicks.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_main_game_panel_wizard_8h_source.html">MainGamePanelWizard.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MainGamePanelWizard:</div>
 <div class="dyncontent">
@@ -100,13 +105,72 @@ Inheritance diagram for MainGamePanelWizard:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ba532223a22fe5458e3f94a70e2bbf6" id="r_a6ba532223a22fe5458e3f94a70e2bbf6"><td class="memItemLeft" align="right" valign="top"><a id="a6ba532223a22fe5458e3f94a70e2bbf6" name="a6ba532223a22fe5458e3f94a70e2bbf6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MainGamePanelWizard</b> (wxWindow *parent)</td></tr>
+<tr class="memitem:a6ba532223a22fe5458e3f94a70e2bbf6" id="r_a6ba532223a22fe5458e3f94a70e2bbf6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ba532223a22fe5458e3f94a70e2bbf6">MainGamePanelWizard</a> (wxWindow *parent)</td></tr>
+<tr class="memdesc:a6ba532223a22fe5458e3f94a70e2bbf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs main game panel.  <br /></td></tr>
 <tr class="separator:a6ba532223a22fe5458e3f94a70e2bbf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83517cab2cccba78cce79450de3bb7f3" id="r_a83517cab2cccba78cce79450de3bb7f3"><td class="memItemLeft" align="right" valign="top"><a id="a83517cab2cccba78cce79450de3bb7f3" name="a83517cab2cccba78cce79450de3bb7f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>buildGameState</b> (<a class="el" href="classgame__state.html">game_state</a> *gameState, <a class="el" href="classplayer.html">player</a> *me)</td></tr>
+<tr class="memitem:a83517cab2cccba78cce79450de3bb7f3" id="r_a83517cab2cccba78cce79450de3bb7f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83517cab2cccba78cce79450de3bb7f3">buildGameState</a> (<a class="el" href="classgame__state.html">game_state</a> *gameState, <a class="el" href="classplayer.html">player</a> *me)</td></tr>
+<tr class="memdesc:a83517cab2cccba78cce79450de3bb7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the game state in the GUI the client gets from the server. This function is called by the game controller to update the shown game state.  <br /></td></tr>
 <tr class="separator:a83517cab2cccba78cce79450de3bb7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Visualizes Game State to user during the card playing phase. The Main Game Panel is shown before the game has started (Lobby) and also while the game is played (outside the trick estimation phase). It ensures that the game state is shown to all players in the GUI, and creates and positions all graphical elements. It also allows interaction of the user with the GUI via button clicks. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6ba532223a22fe5458e3f94a70e2bbf6" name="a6ba532223a22fe5458e3f94a70e2bbf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ba532223a22fe5458e3f94a70e2bbf6">&#9670;&#160;</a></span>MainGamePanelWizard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MainGamePanelWizard::MainGamePanelWizard </td>
+          <td>(</td>
+          <td class="paramtype">wxWindow *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs main game panel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Game window the main game panel is put onto. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a83517cab2cccba78cce79450de3bb7f3" name="a83517cab2cccba78cce79450de3bb7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83517cab2cccba78cce79450de3bb7f3">&#9670;&#160;</a></span>buildGameState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainGamePanelWizard::buildGameState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame__state.html">game_state</a> *</td>          <td class="paramname"><span class="paramname"><em>gameState</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplayer.html">player</a> *</td>          <td class="paramname"><span class="paramname"><em>me</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Shows the game state in the GUI the client gets from the server. This function is called by the game controller to update the shown game state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameState</td><td>New game state to show. </td></tr>
+    <tr><td class="paramname">me</td><td>Player to show the game state for (me). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/client/panels/<a class="el" href="_main_game_panel_wizard_8h_source.html">MainGamePanelWizard.h</a></li>
 <li>src/client/panels/<b>MainGamePanelWizard.cpp</b></li>

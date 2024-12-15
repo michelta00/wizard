@@ -170,6 +170,12 @@ void GameController::startGame() {
 
 }
 
+void GameController::leaveGame() {
+    _me->set_has_left_game(true);
+    leave_game_request request = leave_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), _me->get_player_name());
+    ClientNetworkManager::sendRequest(request);
+}
+
 void GameController::estimateTricks(int nof_tricks) {
     estimate_tricks_request request = estimate_tricks_request(GameController::_currentGameState->get_id(), GameController::_me->get_id(), nof_tricks);
     ClientNetworkManager::sendRequest(request);
@@ -180,14 +186,8 @@ void GameController::playCard(card* cardToPlay) {
     ClientNetworkManager::sendRequest(request);
 }
 
-void GameController::leaveGame()
-{
-    leave_game_request request = leave_game_request(GameController::_me->get_id(), GameController::_me->get_player_name());
-    ClientNetworkManager::sendRequest(request);
-}
-
 // TODO: estimate trick request, here message box with entry
-void GameController::estimateTrick()
+void GameController::processEstimateTricks()
 {
     wxString trickEstimate = GameController::_trickEstimationPanel->getTrickEstimate().Trim();
 
@@ -207,16 +207,6 @@ void GameController::estimateTrick()
         // Handle the error: the string was not a valid integer
         GameController::showError("Invalid input!"," Please enter a valid number for the trick estimate.");
     }
-
-    /*
-    std::string title = "How many tricks?";
-    std::string message = "Enter estimated number of tricks";
-    std::string buttonLabel = "OK";
-
-    wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
-    dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
-    dialogBox.ShowModal();
-    */
 }
 
 
@@ -285,13 +275,11 @@ void GameController::showTrickOverMessage(const player* winner)
     dialog->ShowModal();
 }
 
-
 void GameController::showGameOverMessage() {
     std::string title = "Game Over!";
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
-    // TODO: change logic to determine winner because now we have vector of scores
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
@@ -328,4 +316,9 @@ void GameController::showGameOverMessage() {
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
+}
+
+void GameController::closeGameWindow()
+{
+    GameController::_gameWindow->Close();
 }

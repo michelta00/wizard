@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['maingamepanelwizard_0',['MainGamePanelWizard',['../class_main_game_panel_wizard.html',1,'']]],
-  ['messages_1',['4.2.3 Debugging Messages',['../index.html#autotoc_md15',1,'']]],
-  ['messages_2',['messages',['../index.html#autotoc_md12',1,'4.2.2 Sending messages'],['../index.html#autotoc_md9',1,'Serialization &amp; Deserialization of messages']]]
+  ['leave_5fgame_5frequest_0',['leave_game_request',['../classleave__game__request.html',1,'']]],
+  ['leavegame_1',['leaveGame',['../class_game_controller.html#a8d42b2e41759bfd65cdebad87437369e',1,'GameController']]]
 ];
