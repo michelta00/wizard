@@ -1,28 +1,5 @@
 var searchData=
 [
-  ['game_5fstate_0',['game_state',['../classgame__state.html#a0c10b830e222d726557c3c33685c595a',1,'game_state']]],
-  ['get_5fcards_1',['get_cards',['../classhand.html#ad104b0376b1a13d987f349dd524ca47f',1,'hand']]],
-  ['get_5fcards_5fand_5fplayers_2',['get_cards_and_players',['../classtrick.html#a1d75f9e8fc94fd122adfc39a20089268',1,'trick']]],
-  ['get_5fcolor_3',['get_color',['../classcard.html#ab033bc0e71b09d3cf3ac28c2f1fbde18',1,'card']]],
-  ['get_5fcurrent_5fplayer_4',['get_current_player',['../classgame__state.html#a2d16f420a8aa651685461a5efb8bb600',1,'game_state']]],
-  ['get_5fgame_5fid_5',['get_game_id',['../classplayer.html#afeb6c5483a59042fcc4a3a2aed6a6a2c',1,'player']]],
-  ['get_5fhand_6',['get_hand',['../classplayer.html#af333dcbf7123726c9bda3ab94ba9ee6d',1,'player']]],
-  ['get_5flast_5ftrick_7',['get_last_trick',['../classgame__state.html#a4327f753f1f5341f9fe3774ea3fbc99b',1,'game_state']]],
-  ['get_5fmax_5fround_5fnumber_8',['get_max_round_number',['../classgame__state.html#aa75c4da6c0056e48e5040be8127d7473',1,'game_state']]],
-  ['get_5fnof_5fcards_9',['get_nof_cards',['../classhand.html#adc90d109b7b564a0dbca0b0798c99641',1,'hand::get_nof_cards()'],['../classplayer.html#a457c5ab90b0ecd610eead66b41c8333a',1,'player::get_nof_cards() const noexcept']]],
-  ['get_5fnof_5fpredicted_10',['get_nof_predicted',['../classplayer.html#a40333c302ff51707749c544930fb80aa',1,'player']]],
-  ['get_5fnof_5ftricks_11',['get_nof_tricks',['../classplayer.html#a5e3d1374aee685b08a29d0ac7cec3df4',1,'player']]],
-  ['get_5fnumber_5fof_5fremaining_5fcards_12',['get_number_of_remaining_cards',['../classdeck.html#ae1c7a4174108a14cb1180de1afdcb6d6',1,'deck']]],
-  ['get_5fplayer_5fname_13',['get_player_name',['../classplayer.html#a42d01dcf4cdbd452fc5dcaf5e6f21773',1,'player']]],
-  ['get_5fplayers_14',['get_players',['../classgame__state.html#abcaccd551f938f961d12266e34c037d2',1,'game_state']]],
-  ['get_5fround_5fnumber_15',['get_round_number',['../classgame__state.html#ab3ef836a1b3a1e2bc9e429a018c72eca',1,'game_state']]],
-  ['get_5fscores_16',['get_scores',['../classplayer.html#aef5c25a02a2fdbdb4d8270582faf5dac',1,'player']]],
-  ['get_5fstarting_5fplayer_17',['get_starting_player',['../classgame__state.html#af4c553229260e307ff1f78dd0c74506d',1,'game_state']]],
-  ['get_5ftrick_18',['get_trick',['../classgame__state.html#a472fd1721c7cc9e3689394f18c767bf9',1,'game_state']]],
-  ['get_5ftrick_5fcolor_19',['get_trick_color',['../classtrick.html#a41f315804ac73454c8e41438da20a9c3',1,'trick']]],
-  ['get_5ftrick_5festimate_5fsum_20',['get_trick_estimate_sum',['../classgame__state.html#aa5263d03c85bce1e9d252e9017cbe282',1,'game_state']]],
-  ['get_5ftrick_5fnumber_21',['get_trick_number',['../classgame__state.html#a3fce12f31ad0aab82b0d2da90e3e8e15',1,'game_state']]],
-  ['get_5ftrick_5fstarting_5fplayer_22',['get_trick_starting_player',['../classgame__state.html#aa40554d105939c5dce934daaa858c242',1,'game_state']]],
-  ['get_5ftrump_5fcolor_23',['get_trump_color',['../classtrick.html#a69c49e2968abb235a6c7148cb05b0e64',1,'trick::get_trump_color()'],['../classgame__state.html#abdf6c5116ed643773d676c90a05e6fe4',1,'game_state::get_trump_color()']]],
-  ['get_5fvalue_24',['get_value',['../classcard.html#a2baf8dfef09ac8c1a67b34c2e67186c3',1,'card']]]
+  ['finish_5fgame_0',['finish_game',['../classgame__state.html#a67fdd4b5682715cd2d848031a9911b17',1,'game_state']]],
+  ['from_5fjson_1',['from_json',['../classcard.html#a48593187c9bff442d61f197991954011',1,'card::from_json()'],['../classdeck.html#abe8dbe828189696c22f35ac3ed4fd296',1,'deck::from_json()'],['../classtrick.html#a1a3d94f638672d3d60d596190ae59dfb',1,'trick::from_json()'],['../classgame__state.html#a794d484961c92b5b737586ec5599963f',1,'game_state::from_json()'],['../classhand.html#aa9cffdf932d80c7304a335074403e785',1,'hand::from_json()'],['../classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5',1,'player::from_json()']]]
 ];

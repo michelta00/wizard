@@ -138,6 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a61aa38ceff0c856b36642c4bc0081433" id="r_a61aa38ceff0c856b36642c4bc0081433"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61aa38ceff0c856b36642c4bc0081433">set_nof_tricks</a> (int nof_tricks) const</td></tr>
 <tr class="memdesc:a61aa38ceff0c856b36642c4bc0081433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the player's number of won tricks to the given input.  <br /></td></tr>
 <tr class="separator:a61aa38ceff0c856b36642c4bc0081433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac1b87de3b686d8ee1049269f6c9f272" id="r_aac1b87de3b686d8ee1049269f6c9f272"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac1b87de3b686d8ee1049269f6c9f272">has_left_game</a> () const</td></tr>
+<tr class="memdesc:aac1b87de3b686d8ee1049269f6c9f272"><td class="mdescLeft">&#160;</td><td class="mdescRight">State whether player has left the game.  <br /></td></tr>
+<tr class="separator:aac1b87de3b686d8ee1049269f6c9f272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f88a13ce2b65360f6ee95281a09173" id="r_a42f88a13ce2b65360f6ee95281a09173"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42f88a13ce2b65360f6ee95281a09173">set_has_left_game</a> (bool <a class="el" href="#aac1b87de3b686d8ee1049269f6c9f272">has_left_game</a>)</td></tr>
+<tr class="memdesc:a42f88a13ce2b65360f6ee95281a09173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the players game to left when he leaves the game.  <br /></td></tr>
+<tr class="separator:a42f88a13ce2b65360f6ee95281a09173"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40333c302ff51707749c544930fb80aa" id="r_a40333c302ff51707749c544930fb80aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40333c302ff51707749c544930fb80aa">get_nof_predicted</a> () const noexcept</td></tr>
 <tr class="memdesc:a40333c302ff51707749c544930fb80aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of tricks predicted to be won by the player in the current round.  <br /></td></tr>
 <tr class="separator:a40333c302ff51707749c544930fb80aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +159,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a42d01dcf4cdbd452fc5dcaf5e6f21773" id="r_a42d01dcf4cdbd452fc5dcaf5e6f21773"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42d01dcf4cdbd452fc5dcaf5e6f21773">get_player_name</a> () const noexcept</td></tr>
 <tr class="memdesc:a42d01dcf4cdbd452fc5dcaf5e6f21773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the player's name.  <br /></td></tr>
 <tr class="separator:a42d01dcf4cdbd452fc5dcaf5e6f21773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f0b088e697fcb972bfc41302e63877" id="r_af8f0b088e697fcb972bfc41302e63877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8f0b088e697fcb972bfc41302e63877">set_player_name</a> (const std::string &amp;new_name)</td></tr>
+<tr class="memdesc:af8f0b088e697fcb972bfc41302e63877"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the player's name to the given input.  <br /></td></tr>
+<tr class="separator:af8f0b088e697fcb972bfc41302e63877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3b087d03dd2c81d893b2ffad459a26f" id="r_ab3b087d03dd2c81d893b2ffad459a26f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3b087d03dd2c81d893b2ffad459a26f">add_card</a> (<a class="el" href="classcard.html">card</a> *<a class="el" href="classcard.html">card</a>, std::string &amp;err) const</td></tr>
 <tr class="memdesc:ab3b087d03dd2c81d893b2ffad459a26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a card to the player's hand.  <br /></td></tr>
 <tr class="separator:ab3b087d03dd2c81d893b2ffad459a26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -515,6 +524,34 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
 
 </div>
 </div>
+<a id="aac1b87de3b686d8ee1049269f6c9f272" name="aac1b87de3b686d8ee1049269f6c9f272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac1b87de3b686d8ee1049269f6c9f272">&#9670;&#160;</a></span>has_left_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool player::has_left_game </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State whether player has left the game. </p>
+<dl class="section return"><dt>Returns</dt><dd>Boolean stating whether player has left the game. </dd></dl>
+
+</div>
+</div>
 <a id="aa916eeacf97f00507f412fd91bfe37d4" name="aa916eeacf97f00507f412fd91bfe37d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa916eeacf97f00507f412fd91bfe37d4">&#9670;&#160;</a></span>set_game_id()</h2>
 
@@ -534,6 +571,31 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">game_id</td><td>The game id of the game the player has joint. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a42f88a13ce2b65360f6ee95281a09173" name="a42f88a13ce2b65360f6ee95281a09173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f88a13ce2b65360f6ee95281a09173">&#9670;&#160;</a></span>set_has_left_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void player::set_has_left_game </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>has_left_game</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the players game to left when he leaves the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">has_left_game</td><td>Boolean whether player has left game </td></tr>
   </table>
   </dd>
 </dl>
@@ -589,6 +651,32 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b></td></
   </dd>
 </dl>
 <p>This function is used to update the player's won number of tricks in case a player wins a trick. </p>
+
+</div>
+</div>
+<a id="af8f0b088e697fcb972bfc41302e63877" name="af8f0b088e697fcb972bfc41302e63877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8f0b088e697fcb972bfc41302e63877">&#9670;&#160;</a></span>set_player_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void player::set_player_name </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>new_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the player's name to the given input. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_name</td><td>The new player name.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function is used to change the player's name in case duplicate names appear within one game. </p>
 
 </div>
 </div>

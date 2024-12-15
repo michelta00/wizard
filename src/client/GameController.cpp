@@ -187,7 +187,7 @@ void GameController::playCard(card* cardToPlay) {
 }
 
 // TODO: estimate trick request, here message box with entry
-void GameController::estimateTrick()
+void GameController::processEstimateTricks()
 {
     wxString trickEstimate = GameController::_trickEstimationPanel->getTrickEstimate().Trim();
 
@@ -207,16 +207,6 @@ void GameController::estimateTrick()
         // Handle the error: the string was not a valid integer
         GameController::showError("Invalid input!"," Please enter a valid number for the trick estimate.");
     }
-
-    /*
-    std::string title = "How many tricks?";
-    std::string message = "Enter estimated number of tricks";
-    std::string buttonLabel = "OK";
-
-    wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
-    dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
-    dialogBox.ShowModal();
-    */
 }
 
 

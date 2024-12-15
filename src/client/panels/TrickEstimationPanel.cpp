@@ -285,7 +285,7 @@ void TrickEstimationPanel::buildThisPlayer(wxGridBagSizer* sizer, game_state* ga
             submitEstimateButton->SetBackgroundColour(wxColour(102, 0, 51));    // Set button background color
             //make button the same as the connect button in the connection panel since the background is red
             submitEstimateButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
-                GameController::estimateTrick();
+                GameController::processEstimateTricks();
             });
             mePanelSizer_vert->Add(submitEstimateButton,0,wxALIGN_CENTER);
         }

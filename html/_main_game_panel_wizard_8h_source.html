@@ -99,31 +99,34 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;wx/gbsizer.h&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../common/game_state/game_state.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_main_game_panel_wizard.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_main_game_panel_wizard.html">MainGamePanelWizard</a> : <span class="keyword">public</span> wxPanel{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="class_main_game_panel_wizard.html">MainGamePanelWizard</a>(wxWindow* parent);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">void</span> buildGameState(<a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> buildThisPlayer(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> buildTurnIndicator(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> buildOtherPlayers(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a> *me, <span class="keywordtype">int</span> myPosition);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> buildTrickPile(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a> *me);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> buildTrumpCard(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> buildScoreBoardButton(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState);</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_main_game_panel_wizard.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_main_game_panel_wizard.html">MainGamePanelWizard</a> : <span class="keyword">public</span> wxPanel{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_function" href="class_main_game_panel_wizard.html#a6ba532223a22fe5458e3f94a70e2bbf6">MainGamePanelWizard</a>(wxWindow* parent);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    wxSize <span class="keyword">const</span> panelSize = wxSize(960, 680); <span class="comment">// also set in the constructor implementation</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    wxSize <span class="keyword">const</span> cardSize = wxSize(70, 108);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_main_game_panel_wizard.html#a83517cab2cccba78cce79450de3bb7f3">buildGameState</a>(<a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> buildThisPlayer(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> buildTurnIndicator(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a>* me);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> buildOtherPlayers(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a> *me, <span class="keywordtype">int</span> myPosition);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> showRoundOverlay(<span class="keywordtype">int</span> roundNumber);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> buildTrickPile(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState, <a class="code hl_class" href="classplayer.html">player</a> *me);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> buildTrumpCard(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> buildScoreLeaveButtons(wxGridBagSizer* sizer, <a class="code hl_class" href="classgame__state.html">game_state</a>* gameState);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// also set in the constructor implementation</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    wxSize <span class="keyword">const</span> panelSize = wxSize(960, 680); </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    wxSize <span class="keyword">const</span> cardSize = wxSize(70, 108); </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">//MAINGAMEPANELWIZARD_H</span></div>
-<div class="ttc" id="aclass_main_game_panel_wizard_html"><div class="ttname"><a href="class_main_game_panel_wizard.html">MainGamePanelWizard</a></div><div class="ttdef"><b>Definition</b> MainGamePanelWizard.h:8</div></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif </span><span class="comment">//MAINGAMEPANELWIZARD_H</span></div>
+<div class="ttc" id="aclass_main_game_panel_wizard_html"><div class="ttname"><a href="class_main_game_panel_wizard.html">MainGamePanelWizard</a></div><div class="ttdoc">Visualizes Game State to user during the card playing phase. The Main Game Panel is shown before the ...</div><div class="ttdef"><b>Definition</b> MainGamePanelWizard.h:16</div></div>
+<div class="ttc" id="aclass_main_game_panel_wizard_html_a6ba532223a22fe5458e3f94a70e2bbf6"><div class="ttname"><a href="class_main_game_panel_wizard.html#a6ba532223a22fe5458e3f94a70e2bbf6">MainGamePanelWizard::MainGamePanelWizard</a></div><div class="ttdeci">MainGamePanelWizard(wxWindow *parent)</div><div class="ttdoc">Constructs main game panel.</div><div class="ttdef"><b>Definition</b> MainGamePanelWizard.cpp:23</div></div>
+<div class="ttc" id="aclass_main_game_panel_wizard_html_a83517cab2cccba78cce79450de3bb7f3"><div class="ttname"><a href="class_main_game_panel_wizard.html#a83517cab2cccba78cce79450de3bb7f3">MainGamePanelWizard::buildGameState</a></div><div class="ttdeci">void buildGameState(game_state *gameState, player *me)</div><div class="ttdoc">Shows the game state in the GUI the client gets from the server. This function is called by the game ...</div><div class="ttdef"><b>Definition</b> MainGamePanelWizard.cpp:28</div></div>
 <div class="ttc" id="aclassgame__state_html"><div class="ttname"><a href="classgame__state.html">game_state</a></div><div class="ttdoc">Represents the state of the game.</div><div class="ttdef"><b>Definition</b> game_state.h:27</div></div>
 <div class="ttc" id="aclassplayer_html"><div class="ttname"><a href="classplayer.html">player</a></div><div class="ttdoc">Represents a player in the game.</div><div class="ttdef"><b>Definition</b> player.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
