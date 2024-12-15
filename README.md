@@ -101,7 +101,7 @@ cases the default input can be left unchanged), as well as their player name. Ne
 button are shown on the bottom right of the screen. The buttons will be shown throughout the whole game and can be clicked
 to access the rules and the settings.
 
-<img src="assets/readme/connection_panel.png" width=50% height=50% alt="Connection panel"> <br>
+![Connection Panel](./assets/readme/connection_panel.png)
 
 After clicking on the *Connect* button, the lobby shows up. Here all players that have joined the game can be seen. The 
 *Start Game* button can be clicked to start a game once enough players joined, and the *Leave Game* button can be clicked
