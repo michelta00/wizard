@@ -121,7 +121,7 @@ void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_st
     wxButton* scoreBoardButton = new wxButton(panel, wxID_ANY, "ScoreBoard");
     scoreBoardButton->SetMinSize(wxSize(110, 43)); //90 35
 
-    sizer_hor->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
+    sizer_vert->Add(scoreBoardButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
     scoreBoardButton->SetFont(magicalFontTrick);
     scoreBoardButton->SetForegroundColour(wxColour(225, 225, 225)); // Set button text color
     scoreBoardButton->SetBackgroundColour(wxColour(50, 0, 51));    //make button same purple as estimation panel once clickable
@@ -133,7 +133,7 @@ void TrickEstimationPanel::buildScoreLeaveButtons(wxGridBagSizer *sizer, game_st
 
     wxButton *leaveGameButton = new wxButton(panel, wxID_ANY, "Leave Game");
     leaveGameButton->SetMinSize(wxSize(110, 43));
-    sizer_hor->Add(leaveGameButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
+    sizer_vert->Add(leaveGameButton, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3);
 
     leaveGameButton->SetFont(magicalFontTrick);
     leaveGameButton->SetBackgroundColour(wxColour(50,0,51));  // Set background color to blue
