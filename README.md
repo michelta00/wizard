@@ -2,12 +2,13 @@
 Welcome to **Wizard**, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer 
 gameplay!
 
+This project is part of the *Software Engineering* lecture at *ETH Zurich* in AS24. By Marie Becker, Janne Berger, Martina
+Lehman, Aidan Meara, Michel Tarnow, and Hannah Winter.
+
 <div style="display: flex; align-items: center;">
   <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="height: 150px; margin-right: 20px;">
   <img src="./assets/cards.png" alt="Cards" style="height: 75px;">
 </div>
-
-
 
 ## 🚀 Features
 - 🌐 **Multiplayer Gameplay:** Play with 3 to 6 players.
@@ -16,23 +17,25 @@ gameplay!
 
 ---
 
-You can read the game's rules [here](https://www.amigo.games/content/ap/rule/19420--031-2019-Wizard_Manual_002_LAYOUT[1].pdf). The implementation features a client/server architecture for multiplayer 
-scenarios. It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) for object 
-serialization, and [googletest](https://github.com/google/googletest) for the unit tests. 
+You can read the game's rules [here](https://blog.amigo-spiele.de/content/ap/rule/06900-GB-AmigoRule.pdf). 
+The implementation features a client/server architecture for multiplayer scenarios. It uses [wxWidgets](https://www.wxwidgets.org/) 
+for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) 
+for object serialization, and [googletest](https://github.com/google/googletest) for the unit tests. 
 
 ---
 
 ## 1 Overview
 
-The game and source files are available on GitLab on the main branch. The game was developed based on the provided LAMA 
-example project game. This project consists of a **server** and a **client**, each with their own main.cpp file. Each 
-player can run their own client and connect to the same server in the same local network.
+The game and source files are available on GitLab on the main branch. The game was developed based on the provided 
+[LAMA example project](https://gitlab.ethz.ch/hraymond/cse-lama-example-project) game. This project consists of a 
+**server** and a **client**, each with their own main.cpp file. Each player can run their own client and connect to 
+a server in the same local network.
 
 ---
 
 ## 2 Compile Instructions
 
-This project only works on UNIX systems (Linux / macOS). We thus only explain the how to compile the game on these 
+This project only works on UNIX systems (Linux / macOS). We thus only explain how to compile and run the game on these 
 systems. The following description was tested on Ubuntu 24.04 and on macOS Sequoia.
 
 ### 2.1 Prepare OS Environment
@@ -88,11 +91,14 @@ To use the provided script, run `zsh scripts/compile_macos.sh` inside the **wiza
 
 ## 3 Run the Game
 
-After compiling the code, navigate into the **cmake-build-debug** directory (if not yet there). To start a server, run
-`./Wizard-server`. In new consoles, you can now start as many clients as you wish by running `./Wizard-client`.
+After compiling the code, navigate into the **cmake-build-debug** directory inside the **wizard** directory. To start a 
+server, run `./Wizard-server`. In new consoles, you can now start as many clients as you wish by running `./Wizard-client`.
 
 ---
 
 ## 4 Play the Game
 
-Enjoy the game!
+To play the game, at least 3 players have to connect to the server. The maximum number of players per game is 6. Once at
+least 3 players are connected to the server, the game can start.
+
+## 5 Special Features
