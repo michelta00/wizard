@@ -104,7 +104,7 @@ void MainGamePanelWizard::buildGameState(game_state* gameState, player* me)
     }
     else if (me->has_left_game() == true)
     {
-        GameController::closeGameWindow();
+        GameController::showGameOverMessage();
         return;
     }
     else {

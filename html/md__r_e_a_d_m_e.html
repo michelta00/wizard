@@ -88,395 +88,98 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Software Engineering Project - Wizard</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md439"></a></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
 <p>Welcome to <b><a class="el" href="class_wizard.html">Wizard</a></b>, a C++ implementation of the classic card game. Compete with your friends in exciting multiplayer gameplay!</p>
-<div style="display: flex; align-items: center;"> <img src="./assets/wizard_logo.png" alt="Wizard Logo" style="height: 150px; margin-right: 20px;" class="inline"/> <img src="./assets/cards.png" alt="Cards" style="height: 75px;" class="inline"/> </div><h1><a class="anchor" id="autotoc_md440"></a>
+<p>This project is part of the <em>Software Engineering</em> lecture at <em>ETH Zurich</em> in autumn semester 2024. By Marie Becker, Janne Berger, Martina Lehman, Aidan Meara, Michel Tarnow, and Hannah Winter.</p>
+<div style="display: flex; align-items: center;"> <img src="./assets/cards.png" alt="Cards" style="height: 200px;" class="inline"/> </div><h1><a class="anchor" id="autotoc_md1"></a>
 🚀 Features</h1>
 <ul>
 <li>🌐 <b>Multiplayer Gameplay:</b> Play with 3 to 6 players.</li>
 <li>🔄 <b>Synchronized Game State:</b> Real-time updates for all players.</li>
-<li>🖼 <b>Elegant User <a class="el" href="class_interface.html">Interface</a>:</b> A visually appealing UI powered by wxWidgets.</li>
+<li>🖼 <b>Elegant User Interface:</b> A visually appealing UI powered by wxWidgets.</li>
 </ul>
 <hr  />
-<p>You can read the game's rules <a href="https://www.amigo.games/content/ap/rule/19420--031-2019-Wizard_Manual_002_LAYOUT[1].pdf">here</a>. The implementation features a client/server architecture for multiplayer scenarios. It uses <a href="https://www.wxwidgets.org/">wxWidgets</a> for the GUI, <a href="https://github.com/fpagliughi/sockpp">sockpp</a> for the network interface, <a href="https://rapidjson.org/md_doc_tutorial.html">rapidjson</a> for object serialization, and <a href="https://github.com/google/googletest">googletest</a> for the unit tests.</p>
-<h1><a class="anchor" id="autotoc_md442"></a>
+<p>You can read the game's rules <a href="https://blog.amigo-spiele.de/content/ap/rule/06900-GB-AmigoRule.pdf">here</a>. The implementation features a client/server architecture for multiplayer scenarios. It uses <a href="https://www.wxwidgets.org/">wxWidgets</a> for the GUI, <a href="https://github.com/fpagliughi/sockpp">sockpp</a> for the network interface, <a href="https://rapidjson.org/md_doc_tutorial.html">rapidjson</a> for object serialization, and <a href="https://github.com/google/googletest">googletest</a> for the unit tests.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md4"></a>
 1 Overview</h1>
-<p>The game and source files is available on GitLab on the main branch. The game was developed based on the provided LAMA example project game. This project consists of a <b>server</b> and a <b>client</b>, each with their own main.cpp file. Each player can run his client and connect to the server in the same local network.</p>
-<h1><a class="anchor" id="autotoc_md443"></a>
+<p>The game and source files are available on GitLab on the main branch. The game was developed based on the provided <a href="https://gitlab.ethz.ch/hraymond/cse-lama-example-project">LAMA example project</a> game. This project consists of a <b>server</b> and a <b>client</b>, each with their own main.cpp file. Each player can run their own client and connect to a server in the same local network.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md6"></a>
 2 Compile Instructions</h1>
-<h1><a class="anchor" id="autotoc_md444"></a>
+<p>This project only works on UNIX systems (Linux / macOS). We thus only explain how to compile and run the game on these systems. The following description was tested on Ubuntu 24.04 and on macOS Sequoia.</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+2.1 Prepare OS Environment</h2>
+<p>If your OS does not yet have git installed, install git by running <code>sudo apt-get install git</code> on Ubuntu or by running <code>xcode-select --install</code> on macOS (this installs git as well). The <a class="el" href="class_wizard.html">Wizard</a> repository can then be cloned by running <code>git clone <a href="https://gitlab.ethz.ch/beckermar/wizard.git">https://gitlab.ethz.ch/beckermar/wizard.git</a></code> (clone with HTTPS) or by running <code>git clone git@gitlab.ethz.ch:beckermar/wizard.git</code> (clone with SSH) inside the directory that should contain the game. Cloning the game as a first step also makes provided scripts for preparing the OS environment and for compiling the code available.</p>
+<h3><a class="anchor" id="autotoc_md8"></a>
+2.1.1 Ubuntu 24.04</h3>
+<p>The necessary packages and software can either be installed manually or by running the provided script.</p>
+<p>To use the provided script, run <code>bash scripts/prepare_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
+<p>To manually prepare Ubuntu, execute the following commands:</p><ol type="1">
+<li><code>sudo apt-get update</code> (update package list)</li>
+<li><code>sudo apt-get install build-essential</code> (install software to build from source)</li>
+<li><code>sudo apt-get install libwxgtk3.2-dev</code> (install wxwidgets, use libwxgtk3.0-gtk3-dev on Ubuntu 20.04 / 22.04)</li>
+<li><code>sudo apt-get install cmake</code> (install cmake)</li>
+<li><code>sudo reboot</code> (reboot system)</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md9"></a>
+2.1.2 macOS Sequoia</h3>
+<p>The necessary packages and software can either be installed manually or by running the provided script.</p>
+<p>To use the provided script, run <code>zsh scripts/prepare_macos.sh</code> inside the <b>wizard</b> directory.</p>
+<p>To manually prepare macOS, execute the following commands:</p><ol type="1">
+<li><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code> (install homebrew)</li>
+<li><code>brew install cmake</code> (install cmake)</li>
+<li><code>brew install wxwidgets</code> (install wxwidgets)</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md10"></a>
+2.2 Compile Code</h2>
+<p>Compiling the code creates executables for the client (Wizard-client) and for the server (Wizard-server).</p>
+<h3><a class="anchor" id="autotoc_md11"></a>
+2.2.1 Ubuntu 24.04</h3>
+<p>Compiling the code can be done by running the provided script.</p>
+<p>To use the provided script, run <code>bash scripts/compile_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+2.2.1 macOS Sequoia</h3>
+<p>Compiling the code can be done by running the provided script.</p>
+<p>To use the provided script, run <code>zsh scripts/compile_macos.sh</code> inside the <b>wizard</b> directory.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md14"></a>
 3 Run the Game</h1>
-<h1><a class="anchor" id="autotoc_md445"></a>
+<p>After compiling the code, navigate into the <b>cmake-build-debug</b> directory inside the <b>wizard</b> directory. To start a server, run <code>./Wizard-server</code>. In new consoles, you can now start as many clients as you wish by running <code>./Wizard-client</code>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md16"></a>
 4 Play the Game</h1>
-<h2><a class="anchor" id="autotoc_md446"></a>
-4.1 Connection Panel</h2>
-<p>The client renders the GUI that is presented to the player, whereas the server is a console application without a user interface. Every action a player performs in the client application (for example playing a card) is sent as a formatted message to the server application, which processes the request. <br  />
-</p><ul>
-<li>If the <b>player's move was valid</b>, the server will update the game state (e.g. move a card from the player's hand to the discard pile) and broadcast this new game state to all players of the game. Whenever the client application receives a game state update, it will re-render the GUI accordingly and allow new interactions. <br  />
-</li>
-<li>If the <b>move was invalid</b>, the game state will not be updated and only the requesting player will get a response containing the error message.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md447"></a>
-Network Interface</h2>
-<p>Everything that is passed between client and server are objects of type <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code>. Since the underlying network protocol works with TCP, these <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code> objects are transformed into a <b><a href="https://wiki.selfhtml.org/wiki/JSON">JSON</a> string</b>, which can then be sent over the network. The receiving end reads the JSON string and constructs an object of type <code><a class="el" href="classclient__request.html">client_request</a></code> resp. <code><a class="el" href="classserver__response.html">server_response</a></code> that reflects the exact parameters that are specified in the JSON string. This process is known as <b>serialization</b> (object to string) and <b>deserialization</b> (string to object). If you want to read more about serialization, <a href="https://en.wikipedia.org/wiki/Serialization">read me on Wikipedia</a>.</p>
-<p><img src="./docs/img/client-server-diagram.png?raw=true" alt="client-server-diagram" class="inline"/></p>
-<h3><a class="anchor" id="autotoc_md448"></a>
-Serialization &amp; Deserialization of messages</h3>
-<p>Both, the <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code> base classes, implement the abstract class <code>serializable</code> with its <code>write_into_json(...)</code> function. It allows to serialize the object instance into a JSON string. Additionally, they have a static function <code>from_json(...)</code>, which allows creating an object instance from a JSON string.</p>
-<div class="fragment"><div class="line"><span class="comment">// All request types of your imlementation</span></div>
-<div class="line"><span class="comment">// IMPORTANT: Add your own types here (and remove unused ones)</span></div>
-<div class="line"><span class="keyword">enum</span> RequestType {</div>
-<div class="line">    join_game,</div>
-<div class="line">    start_game,</div>
-<div class="line">    estimate_tricks,</div>
-<div class="line">    decide_trump_color,</div>
-<div class="line">    leave_game,</div>
-<div class="line">    play_card,</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classclient__request.html">client_request</a> : <span class="keyword">public</span> <a class="code hl_class" href="classserializable.html">serializable</a> {</div>
-<div class="line"><span class="keyword">protected</span>:</div>
-<div class="line">    RequestType _type;   <span class="comment">// stores the type of request, such that the receiving end knows how to deserialize it</span></div>
-<div class="line">    std::string _req_id; <span class="comment">// unique id of this request</span></div>
-<div class="line">    std::string _player_id; <span class="comment">// id of the player sending the request</span></div>
-<div class="line">    std::string _game_id;   <span class="comment">// id of the game this request is for</span></div>
-<div class="line"> </div>
-<div class="line">    ...</div>
-<div class="line">private:</div>
-<div class="line">    <span class="comment">// for deserializing RequestType (contains mappings from string to RequestType)</span></div>
-<div class="line">    <span class="comment">// IMPORTANT: Add mapping for your own RequestTypes to this unordered_map</span></div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> std::unordered_map&lt;std::string, RequestType&gt; _string_to_request_type;</div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">// for serializing RequestType (contains mappings from RequestType to string)</span></div>
-<div class="line">    <span class="comment">// IMPORTANT: Add mapping for your own RequestTypes to this unordered_map</span></div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> std::unordered_map&lt;RequestType, std::string&gt; _request_type_to_string;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="comment">// DESERIALIZATION: Attempts to create the specific client_request from the provided json.</span></div>
-<div class="line">    <span class="keyword">static</span> <a class="code hl_class" href="classclient__request.html">client_request</a>* from_json(<span class="keyword">const</span> rapidjson::Value&amp; json);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// SERIALIZATION: Serializes the client_request into a json object that can be sent over the network</span></div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> write_into_json(rapidjson::Value&amp; json, <a class="code hl_typedef" href="class_generic_document.html#af60f06f357b8ed28b00198034cf0c1d5">rapidjson::Document::AllocatorType</a>&amp; allocator) <span class="keyword">const override</span>;</div>
-<div class="line">};</div>
-<div class="ttc" id="aclass_generic_document_html_af60f06f357b8ed28b00198034cf0c1d5"><div class="ttname"><a href="class_generic_document.html#af60f06f357b8ed28b00198034cf0c1d5">GenericDocument&lt; UTF8&lt;&gt; &gt;::AllocatorType</a></div><div class="ttdeci">RAPIDJSON_DEFAULT_ALLOCATOR AllocatorType</div><div class="ttdef"><b>Definition</b> document.h:2211</div></div>
-<div class="ttc" id="aclassclient__request_html"><div class="ttname"><a href="classclient__request.html">client_request</a></div><div class="ttdef"><b>Definition</b> client_request.h:30</div></div>
-<div class="ttc" id="aclassserializable_html"><div class="ttname"><a href="classserializable.html">serializable</a></div><div class="ttdef"><b>Definition</b> serializable.h:11</div></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md449"></a>
-Serialization</h4>
-<p>When you implement your own specializations of <code><a class="el" href="classclient__request.html">client_request</a></code> (and <code><a class="el" href="classserver__response.html">server_response</a></code>, if necessary) you will have to implement the <code>write_into_json(...)</code> functions yourself. Your subclass always has to call the <code>write_into_json(...)</code> function of its base-class, such that the parameters of the base-class are written into the JSON document:</p>
-<p>Here is the <b>base-class</b> implementation: </p><div class="fragment"><div class="line"><span class="comment">// Implementation in the base-class client_request</span></div>
-<div class="line"><span class="keywordtype">void</span> client_request::write_into_json(rapidjson::Value &amp;json,</div>
-<div class="line">                                     rapidjson::MemoryPoolAllocator&lt;rapidjson::CrtAllocator&gt; &amp;allocator)<span class="keyword"> const </span>{</div>
-<div class="line">    <span class="comment">// Look up string value of this client_request&#39;s RequestType and store it in the json document</span></div>
-<div class="line">    rapidjson::Value type_val(_request_type_to_string.at(this-&gt;_type).c_str(), allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;type&quot;</span>, type_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Save player_id in the JSON document</span></div>
-<div class="line">    rapidjson::Value player_id_val(_player_id.c_str(), allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;player_id&quot;</span>, player_id_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Save game_id in the JSON document</span></div>
-<div class="line">    rapidjson::Value game_id_val(_game_id.c_str(), allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;game_id&quot;</span>, game_id_val, allocator);</div>
-<div class="line">    ...</div>
-<div class="line">}</div>
-</div><!-- fragment --><p> And here is the <b>subclass</b> implementation (for the <code><a class="el" href="classplay__card__request.html">play_card_request</a></code> class), where an additional field <code>_card_id</code> is serialized. </p><div class="fragment"><div class="line"><span class="comment">// Implementation in the subclass play_card_request </span></div>
-<div class="line"><span class="keywordtype">void</span> play_card_request::write_into_json(rapidjson::Value &amp;json,</div>
-<div class="line">                                        rapidjson::MemoryPoolAllocator&lt;rapidjson::CrtAllocator&gt; &amp;allocator)<span class="keyword"> const </span>{</div>
-<div class="line">    <span class="comment">// IMPORTANT: call base-class, such that the parameters of the base-class are written into the &#39;json&#39; variable</span></div>
-<div class="line">    client_request::write_into_json(json, allocator);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Add parameters to the JSON that are unique to the play_card_request</span></div>
-<div class="line">    rapidjson::Value card_id_val(_card_id.c_str(), allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;card_id&quot;</span>, card_id_val,allocator);</div>
-<div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md450"></a>
-Deserialization</h4>
-<p>The deserialization of <code><a class="el" href="classclient__request.html">client_request</a></code> JSONs always goes through the <code>from_json(...)</code> function of the <code><a class="el" href="classclient__request.html">client_request</a></code> class. In this function, the "type" field, stored in the JSON, is inspected to determine, which subclass should be called to perform the deserialization:</p>
-<div class="fragment"><div class="line"><span class="keywordflow">if</span> (json.HasMember(<span class="stringliteral">&quot;type&quot;</span>) &amp;&amp; json[<span class="stringliteral">&quot;type&quot;</span>].IsString()) {</div>
-<div class="line">        <span class="comment">// Get the RequestType stored as a string in the JSON</span></div>
-<div class="line">        <span class="keyword">const</span> std::string type = json[<span class="stringliteral">&quot;type&quot;</span>].GetString();</div>
-<div class="line">        <span class="comment">// Lookup the actual RequestType per string from a pre-defined unordered_map</span></div>
-<div class="line">        <span class="keyword">const</span> RequestType request_type = client_request::_string_to_request_type.at(type);</div>
-<div class="line"> </div>
-<div class="line">        <span class="comment">// Call the correct from_json() specialization</span></div>
-<div class="line">        <span class="keywordflow">if</span> (request_type == RequestType::play_card) {</div>
-<div class="line">            <span class="keywordflow">return</span> play_card_request::from_json(json);</div>
-<div class="line">        }</div>
-<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (request_type == RequestType::draw_card) {</div>
-<div class="line">            <span class="keywordflow">return</span> draw_card_request::from_json(json);</div>
-<div class="line">        }</div>
-<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (...) {</div>
-<div class="line">            ...</div>
-<div class="line">        } <span class="keywordflow">else</span> {</div>
-<div class="line">            <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Encountered unknown ClientRequest type &quot;</span> + type);</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Could not determine type of ClientRequest. JSON was:\n&quot;</span> + json_utils::to_string(&amp;json));</div>
-<div class="ttc" id="aclass_wizard_exception_html"><div class="ttname"><a href="class_wizard_exception.html">WizardException</a></div><div class="ttdef"><b>Definition</b> WizardException.h:10</div></div>
-</div><!-- fragment --><p>Therefore, when you implement your own <code><a class="el" href="classclient__request.html">client_request</a></code> subclasses, remember to add a new element into the <code>RequestType</code> enum to define your new request type. You will also have to add an entry for this new RequestType in the two unordered_maps <code>_string_to_request_type</code>, resp. <code>_request_type_to_string</code> in the <code><a class="el" href="classclient__request.html">client_request</a></code> base-class. Once this is done, you can add a check for your new <code>RequestType</code> element in the <code>from_json(...)</code> function of the <code><a class="el" href="classclient__request.html">client_request</a></code> base-class and call the specialized <code>from_json(...)</code> function of your subclass from there.</p>
-<p>Also, don't forget to set the correct <code>RequestType</code> in the public constructor of your new <code><a class="el" href="classclient__request.html">client_request</a></code> subclass, here examplified at the <code><a class="el" href="classplay__card__request.html">play_card_request</a></code> class:</p>
-<div class="fragment"><div class="line"><span class="comment">// Public constructor</span></div>
-<div class="line">play_card_request::play_card_request(std::string game_id, std::string player_id, std::string card_id)</div>
-<div class="line">        : <a class="code hl_class" href="classclient__request.html">client_request</a>(<a class="code hl_class" href="classclient__request.html">client_request</a>::create_base_class_properties(  <span class="comment">// call base-class constructor</span></div>
-<div class="line">                                                    RequestType::play_card, <span class="comment">// IMPORTANT: set the RequestType of your subclass</span></div>
-<div class="line">                                                    <a class="code hl_class" href="classuuid__generator.html">uuid_generator</a>::generate_uuid_v4(), </div>
-<div class="line">                                                    player_id, </div>
-<div class="line">                                                    game_id) ),</div>
-<div class="line">        _card_id(card_id)   <span class="comment">// set subclass specific parameters</span></div>
-<div class="line">{ }</div>
-<div class="ttc" id="aclassuuid__generator_html"><div class="ttname"><a href="classuuid__generator.html">uuid_generator</a></div><div class="ttdef"><b>Definition</b> uuid_generator.h:13</div></div>
-</div><!-- fragment --><p>The deserialization in your subclass will look something like this:</p>
-<div class="fragment"><div class="line"><span class="comment">// private constructor for deserialization</span></div>
-<div class="line">play_card_request::play_card_request(<a class="code hl_struct" href="structclient__request_1_1base__class__properties.html">client_request::base_class_properties</a> props, std::string card_id) :</div>
-<div class="line">        <a class="code hl_class" href="classclient__request.html">client_request</a>(props),  <span class="comment">// call base-class constructor</span></div>
-<div class="line">        _card_id(card_id)   <span class="comment">// set subclass specific parameters</span></div>
-<div class="line">{ }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Deserialization</span></div>
-<div class="line"><a class="code hl_class" href="classplay__card__request.html">play_card_request</a>* play_card_request::from_json(<span class="keyword">const</span> rapidjson::Value&amp; json) {</div>
-<div class="line">    <span class="comment">// extract base-class properties from the json</span></div>
-<div class="line">    base_class_properties props = client_request::extract_base_class_properties(json);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// get subclass specific properties</span></div>
-<div class="line">    <span class="keywordflow">if</span> (json.HasMember(<span class="stringliteral">&quot;card_id&quot;</span>)) {</div>
-<div class="line">        <span class="comment">// invoke deserialization constructor</span></div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="classplay__card__request.html">play_card_request</a>(props, json[<span class="stringliteral">&quot;card_id&quot;</span>].GetString());</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">        <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Could not find &#39;card_id&#39; in play_card_request&quot;</span>);</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="ttc" id="aclassplay__card__request_html"><div class="ttname"><a href="classplay__card__request.html">play_card_request</a></div><div class="ttdef"><b>Definition</b> play_card_request.h:13</div></div>
-<div class="ttc" id="astructclient__request_1_1base__class__properties_html"><div class="ttname"><a href="structclient__request_1_1base__class__properties.html">client_request::base_class_properties</a></div><div class="ttdef"><b>Definition</b> client_request.h:33</div></div>
-</div><!-- fragment --><p>There are plenty of examples of subclasses in the network/requests folder, where you can see how the serialization/deserialization scheme works.</p>
-<h3><a class="anchor" id="autotoc_md451"></a>
-4.2.2 Sending messages</h3>
-<h3><a class="anchor" id="autotoc_md452"></a>
-Client -&gt; Server:</h3>
-<p>All you have to do is use the static class <code><a class="el" href="class_client_network_manager.html">ClientNetworkManager</a></code> on the client side and then invoke its <code>sendRequest(const <a class="el" href="classclient__request.html">client_request</a>&amp; request)</code> function with the <code><a class="el" href="classclient__request.html">client_request</a></code> that you want to send. The server's response will arrive as an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> and the <code><a class="el" href="class_client_network_manager.html">ClientNetworkManager</a></code> will invoke the <code>Process()</code> function of that <code><a class="el" href="classrequest__response.html">request_response</a></code> object automatically.</p>
-<h3><a class="anchor" id="autotoc_md453"></a>
-Server -&gt; Client:</h3>
-<p>All messages arriving at the server are being deserialized and then passed on to the <code>handle_request(client_request* req)</code> function of the <code><a class="el" href="classrequest__handler.html">request_handler</a></code> singleton class. This function returns a pointer to an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> (a subclass of <code><a class="el" href="classserver__response.html">server_response</a></code>), which is then automatically sent back to the requesting client. In your game implementation you should extend the <code>handle_request(client_request* req)</code> function of the <code><a class="el" href="classrequest__handler.html">request_handler</a></code>, such that it can handle the <code><a class="el" href="classclient__request.html">client_request</a></code> that you add to your game and return an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> with all parameters you want to send.</p>
-<p>If the <code><a class="el" href="classclient__request.html">client_request</a></code> causes an update of the <a class="el" href="classgame__state.html">game_state</a> you should also update all other players of that game about the <a class="el" href="classgame__state.html">game_state</a> change. This happens in the <code><a class="el" href="classgame__instance.html">game_instance</a></code> class, here examplified at the case where a <code><a class="el" href="classstart__game__request.html">start_game_request</a></code> calls the <code>start_game(...)</code> function on the respective <code><a class="el" href="classgame__instance.html">game_instance</a></code> on the server side:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">bool</span> game_instance::start_game(<a class="code hl_class" href="classplayer.html">player</a>* <a class="code hl_class" href="classplayer.html">player</a>, std::string &amp;err) {</div>
-<div class="line">    modification_lock.lock();   <span class="comment">// make sure only one request can modify the game_state at a time</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Try to start the game</span></div>
-<div class="line">    <span class="keywordflow">if</span> (_game_state-&gt;start_game(err)) { </div>
-<div class="line">        <span class="comment">// create a full_state_response (subclass of server_response) with the full game_state inside</span></div>
-<div class="line">        <a class="code hl_class" href="classfull__state__response.html">full_state_response</a> state_update_msg = <a class="code hl_class" href="classfull__state__response.html">full_state_response</a>(this-&gt;get_id(), *_game_state);</div>
-<div class="line">        <span class="comment">// BROADCAST new game_state to all other players</span></div>
-<div class="line">        server_network_manager::broadcast_message(state_update_msg, _game_state-&gt;get_players(), <a class="code hl_class" href="classplayer.html">player</a>);</div>
-<div class="line"> </div>
-<div class="line">        modification_lock.unlock(); <span class="comment">// allow other threads to modify the game_state</span></div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">    }</div>
-<div class="line">    modification_lock.unlock();</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aclassfull__state__response_html"><div class="ttname"><a href="classfull__state__response.html">full_state_response</a></div><div class="ttdef"><b>Definition</b> full_state_response.h:11</div></div>
-<div class="ttc" id="aclassplayer_html"><div class="ttname"><a href="classplayer.html">player</a></div><div class="ttdef"><b>Definition</b> player.h:11</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md454"></a>
-4.2.3 Debugging Messages</h3>
-<p>By default, the server (specifically, the <a class="el" href="classserver__network__manager.html">server_network_manager</a>) will print every valid message that it receives to the console. In order for this to work in your project as well, you have to make sure that your CMake file contains a line, where the preprocessor variable PRINT_NETWORK_MESSAGES is defined for your server executable.</p>
-<div class="fragment"><div class="line">target_compile_definitions(Wizard-server PRIVATE PRINT_NETWORK_MESSAGES=1)</div>
-</div><!-- fragment --><p>If a wrongly formatted message arrives at the server, it will print an error message with the received message string to the console, no matter if PRINT_NETWORK_MESSAGES is defined or not.</p>
-<p>If you want to manually print one of your serialized messages (or any other serialized object for that matter), you can use the helper function <code>json_utils::to_string(const rapidjson::Value* json)</code> as follows.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;src/common/serialization/json_utils.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="document_8h.html">rapidjson/include/rapidjson/document.h</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line"><span class="comment">// Create a request to serialize</span></div>
-<div class="line">join_game_request* req = <span class="keyword">new</span> <a class="code hl_class" href="classjoin__game__request.html">join_game_request</a>(<a class="code hl_class" href="classplayer.html">player</a>-&gt;get_id(), <a class="code hl_class" href="classplayer.html">player</a>-&gt;get_player_name());</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// serialize the request object</span></div>
-<div class="line">rapidjson::Document* req_json = req-&gt;to_json();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// print serialization to the console.</span></div>
-<div class="line">std::cout &lt;&lt; json_utils::to_string(req_json) &lt;&lt; std::endl;</div>
-<div class="ttc" id="aclassjoin__game__request_html"><div class="ttname"><a href="classjoin__game__request.html">join_game_request</a></div><div class="ttdef"><b>Definition</b> join_game_request.h:13</div></div>
-<div class="ttc" id="adocument_8h_html"><div class="ttname"><a href="document_8h.html">document.h</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md455"></a>
-4.3 Game State</h2>
-<p>The <code><a class="el" href="classgame__state.html">game_state</a></code> class stores all parameters that are required to represent the game on the client (resp. server) side. In order to synchronize this <code><a class="el" href="classgame__state.html">game_state</a></code> among all players, the <code><a class="el" href="classgame__state.html">game_state</a></code> can also be <b>serialized</b> and <b>deserialized</b>. If a <code><a class="el" href="classclient__request.html">client_request</a></code> was successfully executed on the server, then the <code><a class="el" href="classrequest__response.html">request_response</a></code> that is sent back to the client contains a serialized version of the updated <code><a class="el" href="classgame__state.html">game_state</a></code>. All other players receive the updated <code><a class="el" href="classgame__state.html">game_state</a></code> at the same time through a <code><a class="el" href="classfull__state__response.html">full_state_response</a></code>.</p>
-<p>To serialize the <code><a class="el" href="classgame__state.html">game_state</a></code>, the same <code>write_into_json(...)</code> function is used as for the <code><a class="el" href="classclient__request.html">client_request</a></code>.</p>
-<div class="fragment"><div class="line"><span class="keyword">class </span><a class="code hl_class" href="classgame__state.html">game_state</a> : <span class="keyword">public</span> <a class="code hl_class" href="classunique__serializable.html">unique_serializable</a> {</div>
-<div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="comment">// Properties</span></div>
-<div class="line">    std::vector&lt;player*&gt; _players;</div>
-<div class="line">    draw_pile* _draw_pile;</div>
-<div class="line">    discard_pile* _discard_pile;</div>
-<div class="line">    <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a>* _is_started;</div>
-<div class="line">    <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a>* _is_finished;</div>
-<div class="line">    <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* _round_number;</div>
-<div class="line">    <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* _current_player_idx;</div>
-<div class="line">    <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* _starting_player_idx;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// deserialization constructor</span></div>
-<div class="line">    <a class="code hl_class" href="classgame__state.html">game_state</a>(</div>
-<div class="line">            std::string <span class="keywordtype">id</span>,</div>
-<div class="line">            draw_pile* draw_pile,</div>
-<div class="line">            discard_pile* discard_pile,</div>
-<div class="line">            std::vector&lt;player*&gt;&amp; players,</div>
-<div class="line">            <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a>* is_started,</div>
-<div class="line">            <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a>* is_finished,</div>
-<div class="line">            <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* current_player_idx,</div>
-<div class="line">            <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* round_number,</div>
-<div class="line">            <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* starting_player_idx);</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <a class="code hl_class" href="classgame__state.html">game_state</a>();</div>
-<div class="line"> </div>
-<div class="line">    ...</div>
-<div class="line">    <span class="comment">// SERIALIZATION</span></div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> write_into_json(rapidjson::Value&amp; json, <a class="code hl_typedef" href="class_generic_document.html#af60f06f357b8ed28b00198034cf0c1d5">rapidjson::Document::AllocatorType</a>&amp; allocator) <span class="keyword">const override</span>;</div>
-<div class="line">    <span class="comment">// DESERIALIZATION</span></div>
-<div class="line">    <span class="keyword">static</span> <a class="code hl_class" href="classgame__state.html">game_state</a>* from_json(<span class="keyword">const</span> rapidjson::Value&amp; json);</div>
-<div class="line">};</div>
-<div class="ttc" id="aclassgame__state_html"><div class="ttname"><a href="classgame__state.html">game_state</a></div><div class="ttdef"><b>Definition</b> game_state.h:18</div></div>
-<div class="ttc" id="aclassserializable__value_html"><div class="ttname"><a href="classserializable__value.html">serializable_value</a></div><div class="ttdef"><b>Definition</b> serializable_value.h:27</div></div>
-<div class="ttc" id="aclassunique__serializable_html"><div class="ttname"><a href="classunique__serializable.html">unique_serializable</a></div><div class="ttdef"><b>Definition</b> unique_serializable.h:12</div></div>
-</div><!-- fragment --><p>The <code><a class="el" href="classgame__state.html">game_state</a></code> inherits from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>, which essentially requires the <code>write_into_json()</code> function and adds a unique <code>id</code> to the object, such that it can be uniquely identified. Similarly, each parameter nested inside the <code><a class="el" href="classgame__state.html">game_state</a></code> (e.g. players, draw_pile, etc.) also inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code> and therefore have their own <code>id</code> and serialization, resp. deserialization functions.</p>
-<p>On the client side, the new <code><a class="el" href="classgame__state.html">game_state</a></code> is then passed to the <code>updateGameState(game_state*)</code> function of the <code><a class="el" href="class_game_controller.html">GameController</a></code> class, which performs a redraw of the GUI.</p>
-<p>Since you will have to add your own properties to the <code><a class="el" href="classgame__state.html">game_state</a></code> class (and probably create other classes that inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code> to add to your <a class="el" href="classgame__state.html">game_state</a>), we want to shortly elaborate how the serialization and deserialization works for subclasses of <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>. It's very similar to the <code><a class="el" href="classclient__request.html">client_request</a></code> class discussed earlier. Here is how the <code>write_into_json(...)</code> function is implemented in the <code><a class="el" href="classgame__state.html">game_state</a></code> class of <a class="el" href="class_wizard.html">Wizard</a>. <b>Don't be shocked by the lengthy code. It's only a lot of repetition for each class property</b> :</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> game_state::write_into_json(rapidjson::Value &amp;json,</div>
-<div class="line">                                 rapidjson::MemoryPoolAllocator&lt;rapidjson::CrtAllocator&gt; &amp;allocator)<span class="keyword"> const </span>{</div>
-<div class="line">    <span class="comment">// call base-class to write id and object name into the json</span></div>
-<div class="line">    unique_serializable::write_into_json(json, allocator);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// write all properties of this game_state instance into the JSON</span></div>
-<div class="line">    rapidjson::Value is_finished_val(rapidjson::kObjectType);   <span class="comment">// create an empty rapidjson::Value that can hold an ObjectType</span></div>
-<div class="line">    _is_finished-&gt;write_into_json(is_finished_val, allocator);  <span class="comment">// write class property &#39;_is_finished&#39; into the created rapidjson::Value</span></div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;is_finished&quot;</span>, is_finished_val, allocator);  <span class="comment">// add the rapidjson::Value &#39;is_finished_val&#39; to the game_state json</span></div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value is_started_val(rapidjson::kObjectType);</div>
-<div class="line">    _is_started-&gt;write_into_json(is_started_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;is_started&quot;</span>, is_started_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value current_player_idx_val(rapidjson::kObjectType);</div>
-<div class="line">    _current_player_idx-&gt;write_into_json(current_player_idx_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;current_player_idx&quot;</span>, current_player_idx_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value starting_player_idx_val(rapidjson::kObjectType);</div>
-<div class="line">    _starting_player_idx-&gt;write_into_json(starting_player_idx_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;starting_player_idx&quot;</span>, starting_player_idx_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value round_number_val(rapidjson::kObjectType);</div>
-<div class="line">    _round_number-&gt;write_into_json(round_number_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;round_number&quot;</span>, round_number_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value draw_pile_val(rapidjson::kObjectType);</div>
-<div class="line">    _draw_pile-&gt;write_into_json(draw_pile_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;draw_pile&quot;</span>, draw_pile_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    rapidjson::Value discard_pile_val(rapidjson::kObjectType);</div>
-<div class="line">    _discard_pile-&gt;write_into_json(discard_pile_val, allocator);</div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;discard_pile&quot;</span>, discard_pile_val, allocator);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Special helper function to serialize vector of pointers</span></div>
-<div class="line">    <span class="comment">// The pointers inside the vector have to inherit from serializable (or unique_serializable)</span></div>
-<div class="line">    json.AddMember(<span class="stringliteral">&quot;players&quot;</span>, vector_utils::serialize_vector(_players, allocator), allocator);</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>For <b>deserialization</b>, the <code>from_json(...)</code> function is used, which is implemented as follows:</p>
-<div class="fragment"><div class="line"><span class="comment">// DESERIALIZATION CONSTRUCTOR receives pointers for all its properties and stores them</span></div>
-<div class="line">game_state::game_state(std::string <span class="keywordtype">id</span>, draw_pile *draw_pile, discard_pile *discard_pile,</div>
-<div class="line">                       std::vector&lt;player *&gt; &amp;players, <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a> *is_started,</div>
-<div class="line">                       <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;</a> *is_finished, <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a> *current_player_idx,</div>
-<div class="line">                       <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a>* round_number, <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;</a> *starting_player_idx)</div>
-<div class="line">        : <a class="code hl_class" href="classunique__serializable.html">unique_serializable</a>(id),  <span class="comment">// initialize the unique_serializable base-class</span></div>
-<div class="line">          _draw_pile(draw_pile),</div>
-<div class="line">          _discard_pile(discard_pile),</div>
-<div class="line">          _players(players),</div>
-<div class="line">          _is_started(is_started),</div>
-<div class="line">          _is_finished(is_finished),</div>
-<div class="line">          _current_player_idx(current_player_idx),</div>
-<div class="line">          _round_number(round_number),</div>
-<div class="line">          _starting_player_idx(starting_player_idx)</div>
-<div class="line">{ }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// DESERIALIZATION </span></div>
-<div class="line"><span class="comment">// returns a pointer to the new game_state</span></div>
-<div class="line"><a class="code hl_class" href="classgame__state.html">game_state</a>* game_state::from_json(<span class="keyword">const</span> rapidjson::Value &amp;json) {</div>
-<div class="line">    <span class="comment">// Make sure the json contains all required information</span></div>
-<div class="line">    <span class="keywordflow">if</span> (json.HasMember(<span class="stringliteral">&quot;is_finished&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;is_started&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;current_player_idx&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;round_number&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;starting_player_idx&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;players&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;draw_pile&quot;</span>)</div>
-<div class="line">        &amp;&amp; json.HasMember(<span class="stringliteral">&quot;discard_pile&quot;</span>))</div>
-<div class="line">    {</div>
-<div class="line">        <span class="comment">// deserialize all players</span></div>
-<div class="line">        std::vector&lt;player*&gt; deserialized_players;</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;serialized_player : json[<span class="stringliteral">&quot;players&quot;</span>].GetArray()) {</div>
-<div class="line">            deserialized_players.push_back(player::from_json(serialized_player.GetObject()));</div>
-<div class="line">        }</div>
-<div class="line">        <span class="comment">// Invoke deserialization constructor</span></div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="classgame__state.html">game_state</a>(unique_serializable::extract_id(json),   <span class="comment">// extract base_params from JSON</span></div>
-<div class="line">                              draw_pile::from_json(json[<span class="stringliteral">&quot;draw_pile&quot;</span>].GetObject()),  <span class="comment">// deserialize the draw_pile</span></div>
-<div class="line">                              discard_pile::from_json(json[<span class="stringliteral">&quot;discard_pile&quot;</span>].GetObject()),</div>
-<div class="line">                              deserialized_players,</div>
-<div class="line">                              <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;::from_json</a>(json[<span class="stringliteral">&quot;is_started&quot;</span>].GetObject()),</div>
-<div class="line">                              <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;bool&gt;::from_json</a>(json[<span class="stringliteral">&quot;is_finished&quot;</span>].GetObject()),</div>
-<div class="line">                              <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;::from_json</a>(json[<span class="stringliteral">&quot;current_player_idx&quot;</span>].GetObject()),</div>
-<div class="line">                              <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;::from_json</a>(json[<span class="stringliteral">&quot;round_number&quot;</span>].GetObject()),</div>
-<div class="line">                              <a class="code hl_class" href="classserializable__value.html">serializable_value&lt;int&gt;::from_json</a>(json[<span class="stringliteral">&quot;starting_player_idx&quot;</span>].GetObject()));</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">        <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Failed to deserialize game_state. Required entries were missing.&quot;</span>);</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>A similar scheme is applied in all other objects that inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>. Namely, these are:</p><ul>
-<li><code>player</code></li>
-<li><code>hand</code></li>
-<li><code>card</code></li>
-<li><code>draw_pile</code></li>
-<li><code>discard_pile</code></li>
-<li><code><a class="el" href="classserializable__value.html">serializable_value</a></code></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md456"></a>
-4.4 GUI with wxWidgets</h2>
-<p>The GUI of the example project was built using the cross-platform GUI library <a href="https://www.wxwidgets.org/">wxWidgets</a>. In order to build a project using wxWidget elements, you will first need to install wxWidgets on your system (see Section 1.1 above).</p>
-<h3><a class="anchor" id="autotoc_md457"></a>
-4.4.1 Structure &amp; Important Classes</h3>
-<p>Here is a list of the most important elements that you will need to create your GUI. This is just meant as an overview, you will need to look up their correct usage in wxWidget's <a href="https://docs.wxwidgets.org/3.0/index.html">documentation</a>.</p>
-<ul>
-<li><b>Application core</b><ul>
-<li><b><code>wxIMPLEMENT_APP()</code></b>: In order to properly interact with the operating system's GUI, wxWidgets takes over the control flow of your application. wxWidgets therefore has its own <code>main()</code> function, that you can reference with the macro <code>wxIMPLEMENT_APP(wxApp*)</code>.</li>
-<li><b><code>wxApp</code></b>: The core class of your application must inherit from the <code>wxApp</code> class. wxWidgets will call the <code>OnInit()</code> function when starting the application. You can find the example project's implementation in <code>src/client/app/Wizard</code>.</li>
-</ul>
-</li>
-<li><b>Windows</b><ul>
-<li><b><code>wxFrame</code></b>: Each window of your application must inherit from the <code>wxFrame</code> class. The example project has one window which you can find here: <code>src/client/windows/GameWindow</code></li>
-</ul>
-</li>
-<li><b>GUI elements</b><ul>
-<li><b><code>wxPanel</code></b>: Panels serve as containers for elements within a window. All panels must instantiate or inherit from the <code>wxPanel</code> class. A panel can contain one or more subpanels.</li>
-<li><b><code>wxBoxSizer</code></b>: <a class="el" href="class_box.html">Box</a> sizers allow you to layout your panels within a window, either horizontally or vertically. By nesting box sizers, you can create complex layouts. Have a look at <code>src/client/panels/ConnectionPanel</code> for an example.</li>
-<li><b><code>wxStaticText</code></b>: This class displays text in your GUI.</li>
-<li><b><code>wxButton</code></b>: This class creates a clickable button in your GUI.</li>
-</ul>
-</li>
-<li><b>Pop-ups</b><ul>
-<li><b><code>wxMessageBox()</code></b>: You can use this function to display a small pop-up window with text in front of the your current main window. This is useful to display error or status messages.</li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md458"></a>
-4.4.2 Events</h3>
-<p>Like in most GUI environments, objects in wxWidgets trigger <b>events</b> when they are interacted with by the user. For instance, a button will trigger a <code>wxEVT_BUTTON</code> event when clicked. Similarly, a panel will trigger a <code>wxEVT_LEFT_UP</code> event when clicked. There are many other events that can be triggered - for example when a keyboard key is pressed, when a window is resized, or when the cursor moves over an element.</p>
-<p>In order to make the GUI interactive, we must specify the effect of an event. The easiest way is to <b>bind</b> an event to a lambda function. A lambda function is an unnamed function that can be used as an r-value. In C++, lambda functions have the following syntax:</p>
-<div class="fragment"><div class="line">[ external_variables... ]( function_parameters ... ) {</div>
-<div class="line">    function_body...</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>Here is an example which binds a lambda function to a button click event:</p>
-<div class="fragment"><div class="line">wxButton* myButton = new wxButton(parentPanel, wxID_ANY, &quot;Click me!&quot;);</div>
-<div class="line">int myVariable = 42;</div>
-<div class="line">myButton-&gt;Bind(wxEVT_BUTTON, [myVariable](wxCommandEvent&amp; event) {</div>
-<div class="line">    doSomething(myVariable, event);</div>
-<div class="line">});</div>
-</div><!-- fragment --><p>In C++, we need to specify which variables from outside the lambda function's scope should be accessible within it. In the example above, <code>myVariable</code> is declared outside of the lambda function but is used by the <code>doSomething()</code> function call within the lambda function. We must therefore list <code>myVariable</code> within the square brackets at the beginning of the lambda function definition, in order to make it accessible from within the lambda function's scope. </p>
-</div></div><!-- contents -->
+<p>Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most cases the default input can be left unchanged), as well as their player name. If the player name chosen already exists in the game, a number will be automatically added to the name. Next to these input fields, a <em>Rules</em> button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked to access the rules whenever needed.</p>
+<p><img src="/assets/readme/connection_panel.png" alt="Connection panel" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>After clicking on the <em>Connect</em> button, the lobby shows up. Here all players that have joined the game can be seen. The <em>Start Game</em> button can be clicked to start a game once enough players joined, and the <em>Leave Game</em> button can be clicked to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started, the game is over.</p>
+<p><img src="assets/readme/lobby_one_player.png" alt="Lobby panel" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per game is 6. Once at least 3 players are connected to the server and have joined the game, the <em>Start Game</em> button turns purple and the game can be started by clicking the button.</p>
+<p>If players decide throughout the waiting time that they want to leave the game again, they can press the <em>Leave Game</em> button and leave the Lobby. The player will be removed from the Lobby and the other players can keep waiting.</p>
+<p><img src="assets/readme/lobby_six_players.png" alt="Lobby panel" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the provided input filed, and then submit it by clicking on the <em>Submit</em> button. In this phase of the game, each player can see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number and the sum of already submitted trick estimations in shown in the middle of the screen and can help players submitting a valid estimate (e.g., estimate cannot be greater than the current round number).</p>
+<p>Above the <em>Leave Game</em> button, the scoreboard can now be accessed by clicking on the <em>Scoreboard</em> button. The scoreboard is available throughout the whole game and winning and loosing players are color-coded. If a player leaves the game now after it was already started, the game ends immediately for all players and the final scores are shown to everyone.</p>
+<p><img src="assets/readme/estimation_panel.png" alt="Estimation phase" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the screen shows whose turn it is. The player whose turn it is, is also highlighted in purple. Played cards are displayed in the middle of the screen as well and in the top left corner the round number and the sum of estimated tricks are shown. Below each players' name, the won and predicted numbers of tricks can be seen.</p>
+<p><img src="assets/readme/play_phase_last_player.png" alt="Play phase" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of a round, also the points gained or lost in this round are shown, and the new round starts automatically. At the end of the game, the winner is announced and the players can close the game.</p>
+<p>Have fun playing!</p>
+<h1><a class="anchor" id="autotoc_md17"></a>
+Play on different devices</h1>
+<p>When playing the game on a single device, the default server address <em>127.0.0.1</em> and server port <em>50505</em> can be used during the connection phase.</p>
+<p>However, the game can also be played from different devices on the same wifi network 🛜 or if all devices are connected to the same VPN. In this case one player needs to host the server, while all other players only run a client. When connecting to the game, all players have to enter the private IP address of the player hosting the server in the <em>server address</em> field. The default port <em>50505</em> can be kept.</p>
+<h2><a class="anchor" id="autotoc_md18"></a>
+Get local IP address to host server</h2>
+<p>On macOS version 10.4 throughout the latest version run the following command in the terminal: </p><div class="fragment"><div class="line">ipconfig getifaddr en0</div>
+</div><!-- fragment --><p> On Ubuntu 24.04 you can use the <code>hostname</code> command in the terminal: </p><div class="fragment"><div class="line">hostname -I</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md19"></a>
+Find Coding Documentation</h1>
+<p>The code in this project was documented via <a href="https://doxygen.nl/">Doxygen</a>. Doxygen documentation can be accessed by opening the <code>index.html</code> file in the <code>html</code> folder. This can be automatically done by running the following command in the terminal out of the <code>wizard</code> project folder: </p><div class="fragment"><div class="line">open ./html/index.html</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

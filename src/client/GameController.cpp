@@ -317,8 +317,3 @@ void GameController::showGameOverMessage() {
         GameController::_gameWindow->Close();
     }
 }
-
-void GameController::closeGameWindow()
-{
-    GameController::_gameWindow->Close();
-}
