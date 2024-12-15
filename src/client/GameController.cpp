@@ -278,6 +278,8 @@ void GameController::showGameOverMessage() {
         return a->get_scores().back()->get_value() > b->get_scores().back()->get_value();
     });
 
+    int max_score = players.front()->get_scores().back()->get_value();
+
     // list all players
     for(int i = 0; i < players.size(); i++) {
 
@@ -289,12 +291,16 @@ void GameController::showGameOverMessage() {
         if(i == 0) {
             winnerText = "     Winner!";
         }
+        else if(players[i]->get_scores().back()->get_value() == max_score)
+        {
+            winnerText = "     Winner!";
+        }
 
         std::string playerName = playerState->get_player_name();
         if(playerState->get_id() == GameController::_me->get_id()) {
             playerName = "You";
 
-            if(i == 0) {
+            if(i == 0 || players[i]->get_scores().back()->get_value() == max_score) {
                 winnerText = "     You won!!!";
             }
         }
