@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['wrap_5fup_5fround_0',['wrap_up_round',['../classgame__state.html#ad2e967638043670ebae93dd6ec32e91e',1,'game_state::wrap_up_round()'],['../classplayer.html#a193bcc63da13e5bc98eb46ed99381302',1,'player::wrap_up_round()']]],
-  ['wrap_5fup_5ftrick_1',['wrap_up_trick',['../classtrick.html#a384560623ffaf776797948cf35197c73',1,'trick']]],
-  ['write_5finto_5fjson_2',['write_into_json',['../classcard.html#a7f900b843e44fb18364f32dbe6cdbc7a',1,'card::write_into_json()'],['../classdeck.html#a8d226fe699a36bf462010ba1f744fbeb',1,'deck::write_into_json()'],['../classtrick.html#a97176df194eae794691356cd83292b04',1,'trick::write_into_json()'],['../classgame__state.html#a54873cd18b46555915d150a6d8dd6f83',1,'game_state::write_into_json()'],['../classhand.html#a505a82447d0ae305dadcc9c4aa54071e',1,'hand::write_into_json()'],['../classplayer.html#a0cf13abfdb6b837faa88eda064bf51dc',1,'player::write_into_json()']]]
+  ['trick_0',['trick',['../classtrick.html#a3b0a12789b87d15d9cdc4e5b6f85b47d',1,'trick::trick()'],['../classtrick.html#ad55ad2f0462144ee39c0e6d392543a14',1,'trick::trick(const trick &amp;other)'],['../classtrick.html#abb172ad9a476e96a754eea0c33e1eda9',1,'trick::trick(const std::string &amp;id)'],['../classtrick.html#ab756ba7a19c4bf98f0d8456ad0081fc3',1,'trick::trick(const std::string &amp;id, const std::vector&lt; std::pair&lt; card *, player * &gt; &gt; &amp;cards, serializable_value&lt; int &gt; *trick_color, serializable_value&lt; int &gt; *trump_color)'],['../classtrick.html#a3ecb1c5ebe84a300d7388e2846737fa4',1,'trick::trick(int trump)']]],
+  ['try_5fadd_5fplayer_1',['try_add_player',['../classgame__instance.html#a1176ce8464586487f9ae5676ca900e10',1,'game_instance']]],
+  ['try_5fget_5fcard_2',['try_get_card',['../classhand.html#a0a50cbbb167e6a1d633dd48bc4b695fe',1,'hand']]],
+  ['try_5fremove_5fplayer_3',['try_remove_player',['../classgame__instance.html#a2c6fed45a14273b09a9f202481fa62aa',1,'game_instance']]]
 ];

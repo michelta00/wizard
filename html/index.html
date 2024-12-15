@@ -99,16 +99,57 @@ $(function(){ initResizable(false); });
 </ul>
 <hr  />
 <p>You can read the game's rules <a href="https://www.amigo.games/content/ap/rule/19420--031-2019-Wizard_Manual_002_LAYOUT[1].pdf">here</a>. The implementation features a client/server architecture for multiplayer scenarios. It uses <a href="https://www.wxwidgets.org/">wxWidgets</a> for the GUI, <a href="https://github.com/fpagliughi/sockpp">sockpp</a> for the network interface, <a href="https://rapidjson.org/md_doc_tutorial.html">rapidjson</a> for object serialization, and <a href="https://github.com/google/googletest">googletest</a> for the unit tests.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-1 Overview</h1>
-<p>The game and source files is available on GitLab on the main branch. The game was developed based on the provided LAMA example project game. This project consists of a <b>server</b> and a <b>client</b>, each with their own main.cpp file. Each player can run his client and connect to the server in the same local network.</p>
+<hr  />
 <h1><a class="anchor" id="autotoc_md4"></a>
-2 Compile Instructions</h1>
-<h1><a class="anchor" id="autotoc_md5"></a>
-3 Run the Game</h1>
+1 Overview</h1>
+<p>The game and source files are available on GitLab on the main branch. The game was developed based on the provided LAMA example project game. This project consists of a <b>server</b> and a <b>client</b>, each with their own main.cpp file. Each player can run their own client and connect to the same server in the same local network.</p>
+<hr  />
 <h1><a class="anchor" id="autotoc_md6"></a>
-4 Play the Game</h1>
+2 Compile Instructions</h1>
+<p>This project only works on UNIX systems (Linux / macOS). We thus only explain the how to compile the game on these systems. The following description was tested on Ubuntu 24.04 and on macOS Sequoia.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
+2.1 Prepare OS Environment</h2>
+<p>If your OS does not yet have git installed, install git by running <code>sudo apt-get install git</code> on Ubuntu or by running <code>xcode-select --install</code> on macOS (this installs git as well). The <a class="el" href="class_wizard.html">Wizard</a> repository can then be cloned by running <code>git clone <a href="https://gitlab.ethz.ch/beckermar/wizard.git">https://gitlab.ethz.ch/beckermar/wizard.git</a></code> (clone with HTTPS) or by running <code>git clone git@gitlab.ethz.ch:beckermar/wizard.git</code> (clone with SSH) inside the directory that should contain the game. Cloning the game as a first step also makes provided scripts for preparing the OS environment and for compiling the code available.</p>
+<h3><a class="anchor" id="autotoc_md8"></a>
+2.1.1 Ubuntu 24.04</h3>
+<p>The necessary packages and software can either be installed manually or by running the provided script.</p>
+<p>To use the provided script, run <code>bash scripts/prepare_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
+<p>To manually prepare Ubuntu, execute the following commands:</p><ol type="1">
+<li><code>sudo apt-get update</code> (update package list)</li>
+<li><code>sudo apt-get install build-essential</code> (install software to build from source)</li>
+<li><code>sudo apt-get install libwxgtk3.2-dev</code> (install wxwidgets, use libwxgtk3.0-gtk3-dev on Ubuntu 20.04 / 22.04)</li>
+<li><code>sudo apt-get install cmake</code> (install cmake)</li>
+<li><code>sudo reboot</code> (reboot system)</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md9"></a>
+2.1.2 macOS Sequoia</h3>
+<p>The necessary packages and software can either be installed manually or by running the provided script.</p>
+<p>To use the provided script, run <code>zsh scripts/prepare_macos.sh</code> inside the <b>wizard</b> directory.</p>
+<p>To manually prepare macOS, execute the following commands:</p><ol type="1">
+<li><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code> (install homebrew)</li>
+<li><code>brew install cmake</code> (install cmake)</li>
+<li><code>brew install wxwidgets</code> (install wxwidgets)</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md10"></a>
+2.2 Compile Code</h2>
+<p>Compiling the code creates executables for the client (Wizard-client) and for the server (Wizard-server).</p>
+<h3><a class="anchor" id="autotoc_md11"></a>
+2.2.1 Ubuntu 24.04</h3>
+<p>Compiling the code can be done by running the provided script.</p>
+<p>To use the provided script, run <code>bash scripts/compile_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+2.2.1 macOS Sequoia</h3>
+<p>Compiling the code can be done by running the provided script.</p>
+<p>To use the provided script, run <code>zsh scripts/compile_macos.sh</code> inside the <b>wizard</b> directory.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md14"></a>
+3 Run the Game</h1>
+<p>After compiling the code, navigate into the <b>cmake-build-debug</b> directory (if not yet there). To start a server, run <code>./Wizard-server</code>. In new consoles, you can now start as many clients as you wish by running <code>./Wizard-client</code>.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md16"></a>
+4 Play the Game</h1>
+<p>Enjoy the game!</p>
+<h2><a class="anchor" id="autotoc_md17"></a>
 4.1 Connection Panel</h2>
 <p>The client renders the GUI that is presented to the player, whereas the server is a console application without a user interface. Every action a player performs in the client application (for example playing a card) is sent as a formatted message to the server application, which processes the request. <br  />
 </p><ul>
@@ -116,11 +157,11 @@ $(function(){ initResizable(false); });
 </li>
 <li>If the <b>move was invalid</b>, the game state will not be updated and only the requesting player will get a response containing the error message.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Network Interface</h2>
 <p>Everything that is passed between client and server are objects of type <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code>. Since the underlying network protocol works with TCP, these <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code> objects are transformed into a <b><a href="https://wiki.selfhtml.org/wiki/JSON">JSON</a> string</b>, which can then be sent over the network. The receiving end reads the JSON string and constructs an object of type <code><a class="el" href="classclient__request.html">client_request</a></code> resp. <code><a class="el" href="classserver__response.html">server_response</a></code> that reflects the exact parameters that are specified in the JSON string. This process is known as <b>serialization</b> (object to string) and <b>deserialization</b> (string to object). If you want to read more about serialization, <a href="https://en.wikipedia.org/wiki/Serialization">read me on Wikipedia</a>.</p>
 <p><img src="./docs/img/client-server-diagram.png?raw=true" alt="client-server-diagram" class="inline"/></p>
-<h3><a class="anchor" id="autotoc_md9"></a>
+<h3><a class="anchor" id="autotoc_md19"></a>
 Serialization &amp; Deserialization of messages</h3>
 <p>Both, the <code><a class="el" href="classclient__request.html">client_request</a></code> and <code><a class="el" href="classserver__response.html">server_response</a></code> base classes, implement the abstract class <code>serializable</code> with its <code>write_into_json(...)</code> function. It allows to serialize the object instance into a JSON string. Additionally, they have a static function <code>from_json(...)</code>, which allows creating an object instance from a JSON string.</p>
 <div class="fragment"><div class="line"><span class="comment">// All request types of your imlementation</span></div>
@@ -160,7 +201,7 @@ Serialization &amp; Deserialization of messages</h3>
 <div class="line">};</div>
 <div class="ttc" id="aclassclient__request_html"><div class="ttname"><a href="classclient__request.html">client_request</a></div><div class="ttdef"><b>Definition</b> client_request.h:30</div></div>
 <div class="ttc" id="aclassserializable_html"><div class="ttname"><a href="classserializable.html">serializable</a></div><div class="ttdef"><b>Definition</b> serializable.h:11</div></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md20"></a>
 Serialization</h4>
 <p>When you implement your own specializations of <code><a class="el" href="classclient__request.html">client_request</a></code> (and <code><a class="el" href="classserver__response.html">server_response</a></code>, if necessary) you will have to implement the <code>write_into_json(...)</code> functions yourself. Your subclass always has to call the <code>write_into_json(...)</code> function of its base-class, such that the parameters of the base-class are written into the JSON document:</p>
 <p>Here is the <b>base-class</b> implementation: </p><div class="fragment"><div class="line"><span class="comment">// Implementation in the base-class client_request</span></div>
@@ -189,7 +230,7 @@ Serialization</h4>
 <div class="line">    rapidjson::Value card_id_val(_card_id.c_str(), allocator);</div>
 <div class="line">    json.AddMember(<span class="stringliteral">&quot;card_id&quot;</span>, card_id_val,allocator);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md21"></a>
 Deserialization</h4>
 <p>The deserialization of <code><a class="el" href="classclient__request.html">client_request</a></code> JSONs always goes through the <code>from_json(...)</code> function of the <code><a class="el" href="classclient__request.html">client_request</a></code> class. In this function, the "type" field, stored in the JSON, is inspected to determine, which subclass should be called to perform the deserialization:</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (json.HasMember(<span class="stringliteral">&quot;type&quot;</span>) &amp;&amp; json[<span class="stringliteral">&quot;type&quot;</span>].IsString()) {</div>
@@ -248,12 +289,12 @@ Deserialization</h4>
 <div class="ttc" id="aclassplay__card__request_html"><div class="ttname"><a href="classplay__card__request.html">play_card_request</a></div><div class="ttdef"><b>Definition</b> play_card_request.h:13</div></div>
 <div class="ttc" id="astructclient__request_1_1base__class__properties_html"><div class="ttname"><a href="structclient__request_1_1base__class__properties.html">client_request::base_class_properties</a></div><div class="ttdef"><b>Definition</b> client_request.h:33</div></div>
 </div><!-- fragment --><p>There are plenty of examples of subclasses in the network/requests folder, where you can see how the serialization/deserialization scheme works.</p>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 4.2.2 Sending messages</h3>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md23"></a>
 Client -&gt; Server:</h3>
 <p>All you have to do is use the static class <code><a class="el" href="class_client_network_manager.html">ClientNetworkManager</a></code> on the client side and then invoke its <code>sendRequest(const <a class="el" href="classclient__request.html">client_request</a>&amp; request)</code> function with the <code><a class="el" href="classclient__request.html">client_request</a></code> that you want to send. The server's response will arrive as an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> and the <code><a class="el" href="class_client_network_manager.html">ClientNetworkManager</a></code> will invoke the <code>Process()</code> function of that <code><a class="el" href="classrequest__response.html">request_response</a></code> object automatically.</p>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md24"></a>
 Server -&gt; Client:</h3>
 <p>All messages arriving at the server are being deserialized and then passed on to the <code>handle_request(client_request* req)</code> function of the <code><a class="el" href="classrequest__handler.html">request_handler</a></code> singleton class. This function returns a pointer to an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> (a subclass of <code><a class="el" href="classserver__response.html">server_response</a></code>), which is then automatically sent back to the requesting client. In your game implementation you should extend the <code>handle_request(client_request* req)</code> function of the <code><a class="el" href="classrequest__handler.html">request_handler</a></code>, such that it can handle the <code><a class="el" href="classclient__request.html">client_request</a></code> that you add to your game and return an object of type <code><a class="el" href="classrequest__response.html">request_response</a></code> with all parameters you want to send.</p>
 <p>If the <code><a class="el" href="classclient__request.html">client_request</a></code> causes an update of the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> you should also update all other players of that game about the <a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a> change. This happens in the <code><a class="el" href="classgame__instance.html" title="Class that modifies game state based on content received from client. The game instance functionaliti...">game_instance</a></code> class, here examplified at the case where a <code><a class="el" href="classstart__game__request.html">start_game_request</a></code> calls the <code>start_game(...)</code> function on the respective <code><a class="el" href="classgame__instance.html" title="Class that modifies game state based on content received from client. The game instance functionaliti...">game_instance</a></code> on the server side:</p>
@@ -276,10 +317,10 @@ Server -&gt; Client:</h3>
 <div class="ttc" id="aclassfull__state__response_html"><div class="ttname"><a href="classfull__state__response.html">full_state_response</a></div><div class="ttdef"><b>Definition</b> full_state_response.h:11</div></div>
 <div class="ttc" id="aclassgame__instance_html_a72cd93738171ffc856c3d77df5f967da"><div class="ttname"><a href="classgame__instance.html#a72cd93738171ffc856c3d77df5f967da">game_instance::get_id</a></div><div class="ttdeci">std::string get_id()</div><div class="ttdoc">Accessor of game instance id.</div><div class="ttdef"><b>Definition</b> game_instance.cpp:21</div></div>
 <div class="ttc" id="aclassgame__instance_html_aee2eedd24991ce59dbcf2ec4f6cae8ac"><div class="ttname"><a href="classgame__instance.html#aee2eedd24991ce59dbcf2ec4f6cae8ac">game_instance::start_game</a></div><div class="ttdeci">bool start_game(player *player, std::string &amp;err)</div><div class="ttdoc">Attempts to start the game.</div><div class="ttdef"><b>Definition</b> game_instance.cpp:63</div></div>
-<div class="ttc" id="aclassgame__state_html_a6ca6536eaec3404ff9b1ab39b8df4e67"><div class="ttname"><a href="classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67">game_state::start_game</a></div><div class="ttdeci">bool start_game(std::string &amp;err)</div><div class="ttdoc">Starts the game.</div><div class="ttdef"><b>Definition</b> game_state.cpp:371</div></div>
-<div class="ttc" id="aclassgame__state_html_abcaccd551f938f961d12266e34c037d2"><div class="ttname"><a href="classgame__state.html#abcaccd551f938f961d12266e34c037d2">game_state::get_players</a></div><div class="ttdeci">std::vector&lt; player * &gt; &amp; get_players()</div><div class="ttdoc">Gets the players that joined the game.</div><div class="ttdef"><b>Definition</b> game_state.cpp:196</div></div>
+<div class="ttc" id="aclassgame__state_html_a6ca6536eaec3404ff9b1ab39b8df4e67"><div class="ttname"><a href="classgame__state.html#a6ca6536eaec3404ff9b1ab39b8df4e67">game_state::start_game</a></div><div class="ttdeci">bool start_game(std::string &amp;err)</div><div class="ttdoc">Starts the game.</div><div class="ttdef"><b>Definition</b> game_state.cpp:386</div></div>
+<div class="ttc" id="aclassgame__state_html_abcaccd551f938f961d12266e34c037d2"><div class="ttname"><a href="classgame__state.html#abcaccd551f938f961d12266e34c037d2">game_state::get_players</a></div><div class="ttdeci">std::vector&lt; player * &gt; &amp; get_players()</div><div class="ttdoc">Gets the players that joined the game.</div><div class="ttdef"><b>Definition</b> game_state.cpp:207</div></div>
 <div class="ttc" id="aclassplayer_html"><div class="ttname"><a href="classplayer.html">player</a></div><div class="ttdoc">Represents a player in the game.</div><div class="ttdef"><b>Definition</b> player.h:18</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md25"></a>
 4.2.3 Debugging Messages</h3>
 <p>By default, the server (specifically, the <a class="el" href="classserver__network__manager.html">server_network_manager</a>) will print every valid message that it receives to the console. In order for this to work in your project as well, you have to make sure that your CMake file contains a line, where the preprocessor variable PRINT_NETWORK_MESSAGES is defined for your server executable.</p>
 <div class="fragment"><div class="line">target_compile_definitions(Wizard-server PRIVATE PRINT_NETWORK_MESSAGES=1)</div>
@@ -298,8 +339,8 @@ Server -&gt; Client:</h3>
 <div class="line"><span class="comment">// print serialization to the console.</span></div>
 <div class="line">std::cout &lt;&lt; json_utils::to_string(req_json) &lt;&lt; std::endl;</div>
 <div class="ttc" id="aclassjoin__game__request_html"><div class="ttname"><a href="classjoin__game__request.html">join_game_request</a></div><div class="ttdef"><b>Definition</b> join_game_request.h:13</div></div>
-<div class="ttc" id="aclassplayer_html_a42d01dcf4cdbd452fc5dcaf5e6f21773"><div class="ttname"><a href="classplayer.html#a42d01dcf4cdbd452fc5dcaf5e6f21773">player::get_player_name</a></div><div class="ttdeci">std::string get_player_name() const noexcept</div><div class="ttdoc">Gets the player's name.</div><div class="ttdef"><b>Definition</b> player.cpp:104</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
+<div class="ttc" id="aclassplayer_html_a42d01dcf4cdbd452fc5dcaf5e6f21773"><div class="ttname"><a href="classplayer.html#a42d01dcf4cdbd452fc5dcaf5e6f21773">player::get_player_name</a></div><div class="ttdeci">std::string get_player_name() const noexcept</div><div class="ttdoc">Gets the player's name.</div><div class="ttdef"><b>Definition</b> player.cpp:119</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md26"></a>
 4.3 Game State</h2>
 <p>The <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> class stores all parameters that are required to represent the game on the client (resp. server) side. In order to synchronize this <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> among all players, the <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> can also be <b>serialized</b> and <b>deserialized</b>. If a <code><a class="el" href="classclient__request.html">client_request</a></code> was successfully executed on the server, then the <code><a class="el" href="classrequest__response.html">request_response</a></code> that is sent back to the client contains a serialized version of the updated <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code>. All other players receive the updated <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> at the same time through a <code><a class="el" href="classfull__state__response.html">full_state_response</a></code>.</p>
 <p>To serialize the <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code>, the same <code>write_into_json(...)</code> function is used as for the <code><a class="el" href="classclient__request.html">client_request</a></code>.</p>
@@ -337,11 +378,11 @@ Server -&gt; Client:</h3>
 <div class="line">    <span class="keyword">static</span> <a class="code hl_class" href="classgame__state.html">game_state</a>* <a class="code hl_function" href="classgame__state.html#a794d484961c92b5b737586ec5599963f">from_json</a>(<span class="keyword">const</span> rapidjson::Value&amp; json);</div>
 <div class="line">};</div>
 <div class="ttc" id="aclassgame__state_html"><div class="ttname"><a href="classgame__state.html">game_state</a></div><div class="ttdoc">Represents the state of the game.</div><div class="ttdef"><b>Definition</b> game_state.h:27</div></div>
-<div class="ttc" id="aclassgame__state_html_a0c10b830e222d726557c3c33685c595a"><div class="ttname"><a href="classgame__state.html#a0c10b830e222d726557c3c33685c595a">game_state::game_state</a></div><div class="ttdeci">game_state()</div><div class="ttdoc">Constructs a new game_state object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:54</div></div>
-<div class="ttc" id="aclassgame__state_html_a54873cd18b46555915d150a6d8dd6f83"><div class="ttname"><a href="classgame__state.html#a54873cd18b46555915d150a6d8dd6f83">game_state::write_into_json</a></div><div class="ttdeci">void write_into_json(rapidjson::Value &amp;json, rapidjson::Document::AllocatorType &amp;allocator) const override</div><div class="ttdoc">Serializes a game_state object into a json object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:483</div></div>
-<div class="ttc" id="aclassgame__state_html_a794d484961c92b5b737586ec5599963f"><div class="ttname"><a href="classgame__state.html#a794d484961c92b5b737586ec5599963f">game_state::from_json</a></div><div class="ttdeci">static game_state * from_json(const rapidjson::Value &amp;json)</div><div class="ttdoc">Deserializes a game_state object from a json object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:547</div></div>
-<div class="ttc" id="aclassgame__state_html_a9b83de8a89e3bb506184492d22c3cf45"><div class="ttname"><a href="classgame__state.html#a9b83de8a89e3bb506184492d22c3cf45">game_state::is_finished</a></div><div class="ttdeci">bool is_finished() const</div><div class="ttdoc">Checks if the game is finished.</div><div class="ttdef"><b>Definition</b> game_state.cpp:166</div></div>
-<div class="ttc" id="aclassgame__state_html_aa0092c41779f38eba5e921e43b38559c"><div class="ttname"><a href="classgame__state.html#aa0092c41779f38eba5e921e43b38559c">game_state::is_started</a></div><div class="ttdeci">bool is_started() const</div><div class="ttdoc">Checks if the game is started.</div><div class="ttdef"><b>Definition</b> game_state.cpp:161</div></div>
+<div class="ttc" id="aclassgame__state_html_a0c10b830e222d726557c3c33685c595a"><div class="ttname"><a href="classgame__state.html#a0c10b830e222d726557c3c33685c595a">game_state::game_state</a></div><div class="ttdeci">game_state()</div><div class="ttdoc">Constructs a new game_state object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:56</div></div>
+<div class="ttc" id="aclassgame__state_html_a54873cd18b46555915d150a6d8dd6f83"><div class="ttname"><a href="classgame__state.html#a54873cd18b46555915d150a6d8dd6f83">game_state::write_into_json</a></div><div class="ttdeci">void write_into_json(rapidjson::Value &amp;json, rapidjson::Document::AllocatorType &amp;allocator) const override</div><div class="ttdoc">Serializes a game_state object into a json object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:518</div></div>
+<div class="ttc" id="aclassgame__state_html_a794d484961c92b5b737586ec5599963f"><div class="ttname"><a href="classgame__state.html#a794d484961c92b5b737586ec5599963f">game_state::from_json</a></div><div class="ttdeci">static game_state * from_json(const rapidjson::Value &amp;json)</div><div class="ttdoc">Deserializes a game_state object from a json object.</div><div class="ttdef"><b>Definition</b> game_state.cpp:586</div></div>
+<div class="ttc" id="aclassgame__state_html_a9b83de8a89e3bb506184492d22c3cf45"><div class="ttname"><a href="classgame__state.html#a9b83de8a89e3bb506184492d22c3cf45">game_state::is_finished</a></div><div class="ttdeci">bool is_finished() const</div><div class="ttdoc">Checks if the game is finished.</div><div class="ttdef"><b>Definition</b> game_state.cpp:176</div></div>
+<div class="ttc" id="aclassgame__state_html_aa0092c41779f38eba5e921e43b38559c"><div class="ttname"><a href="classgame__state.html#aa0092c41779f38eba5e921e43b38559c">game_state::is_started</a></div><div class="ttdeci">bool is_started() const</div><div class="ttdoc">Checks if the game is started.</div><div class="ttdef"><b>Definition</b> game_state.cpp:171</div></div>
 <div class="ttc" id="aclassserializable__value_html"><div class="ttname"><a href="classserializable__value.html">serializable_value</a></div><div class="ttdef"><b>Definition</b> serializable_value.h:27</div></div>
 <div class="ttc" id="aclassunique__serializable_html"><div class="ttname"><a href="classunique__serializable.html">unique_serializable</a></div><div class="ttdef"><b>Definition</b> unique_serializable.h:12</div></div>
 </div><!-- fragment --><p>The <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> inherits from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>, which essentially requires the <code>write_into_json()</code> function and adds a unique <code>id</code> to the object, such that it can be uniquely identified. Similarly, each parameter nested inside the <code><a class="el" href="classgame__state.html" title="Represents the state of the game.">game_state</a></code> (e.g. players, draw_pile, etc.) also inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code> and therefore have their own <code>id</code> and serialization, resp. deserialization functions.</p>
@@ -434,7 +475,7 @@ Server -&gt; Client:</h3>
 <div class="line">        <span class="keywordflow">throw</span> <a class="code hl_class" href="class_wizard_exception.html">WizardException</a>(<span class="stringliteral">&quot;Failed to deserialize game_state. Required entries were missing.&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassplayer_html_a5955c5f26db6a08862ccfb443fbe99c5"><div class="ttname"><a href="classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5">player::from_json</a></div><div class="ttdeci">static player * from_json(const rapidjson::Value &amp;json)</div><div class="ttdoc">Deserializes a player object from a json object.</div><div class="ttdef"><b>Definition</b> player.cpp:177</div></div>
+<div class="ttc" id="aclassplayer_html_a5955c5f26db6a08862ccfb443fbe99c5"><div class="ttname"><a href="classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5">player::from_json</a></div><div class="ttdeci">static player * from_json(const rapidjson::Value &amp;json)</div><div class="ttdoc">Deserializes a player object from a json object.</div><div class="ttdef"><b>Definition</b> player.cpp:202</div></div>
 </div><!-- fragment --><p>A similar scheme is applied in all other objects that inherit from <code><a class="el" href="classunique__serializable.html">unique_serializable</a></code>. Namely, these are:</p><ul>
 <li><code>player</code></li>
 <li><code>hand</code></li>
@@ -443,10 +484,10 @@ Server -&gt; Client:</h3>
 <li><code>discard_pile</code></li>
 <li><code><a class="el" href="classserializable__value.html">serializable_value</a></code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 4.4 GUI with wxWidgets</h2>
 <p>The GUI of the example project was built using the cross-platform GUI library <a href="https://www.wxwidgets.org/">wxWidgets</a>. In order to build a project using wxWidget elements, you will first need to install wxWidgets on your system (see Section 1.1 above).</p>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 4.4.1 Structure &amp; Important Classes</h3>
 <p>Here is a list of the most important elements that you will need to create your GUI. This is just meant as an overview, you will need to look up their correct usage in wxWidget's <a href="https://docs.wxwidgets.org/3.0/index.html">documentation</a>.</p>
 <ul>
@@ -471,7 +512,7 @@ Server -&gt; Client:</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md29"></a>
 4.4.2 Events</h3>
 <p>Like in most GUI environments, objects in wxWidgets trigger <b>events</b> when they are interacted with by the user. For instance, a button will trigger a <code>wxEVT_BUTTON</code> event when clicked. Similarly, a panel will trigger a <code>wxEVT_LEFT_UP</code> event when clicked. There are many other events that can be triggered - for example when a keyboard key is pressed, when a window is resized, or when the cursor moves over an element.</p>
 <p>In order to make the GUI interactive, we must specify the effect of an event. The easiest way is to <b>bind</b> an event to a lambda function. A lambda function is an unnamed function that can be used as an r-value. In C++, lambda functions have the following syntax:</p>

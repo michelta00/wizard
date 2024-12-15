@@ -1,5 +1,14 @@
 var searchData=
 [
-  ['add_5fcard_0',['add_card',['../classtrick.html#a2d3b5aa88a1469dc3d58f30885752f5d',1,'trick::add_card()'],['../classhand.html#ad4749893f36ff1d6dcda3bb18eaedffb',1,'hand::add_card()'],['../classplayer.html#ab3b087d03dd2c81d893b2ffad459a26f',1,'player::add_card()']]],
-  ['add_5fplayer_1',['add_player',['../classgame__state.html#a4a4fde0700a05c589a6b9c4dbcffac18',1,'game_state']]]
+  ['4_201_20connection_20panel_0',['4.1 Connection Panel',['../index.html#autotoc_md17',1,'']]],
+  ['4_201_20structure_20important_20classes_1',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md28',1,'']]],
+  ['4_202_202_20sending_20messages_2',['4.2.2 Sending messages',['../index.html#autotoc_md22',1,'']]],
+  ['4_202_203_20debugging_20messages_3',['4.2.3 Debugging Messages',['../index.html#autotoc_md25',1,'']]],
+  ['4_202_20events_4',['4.4.2 Events',['../index.html#autotoc_md29',1,'']]],
+  ['4_203_20game_20state_5',['4.3 Game State',['../index.html#autotoc_md26',1,'']]],
+  ['4_204_201_20structure_20important_20classes_6',['4.4.1 Structure &amp; Important Classes',['../index.html#autotoc_md28',1,'']]],
+  ['4_204_202_20events_7',['4.4.2 Events',['../index.html#autotoc_md29',1,'']]],
+  ['4_204_20gui_20with_20wxwidgets_8',['4.4 GUI with wxWidgets',['../index.html#autotoc_md27',1,'']]],
+  ['4_20gui_20with_20wxwidgets_9',['4.4 GUI with wxWidgets',['../index.html#autotoc_md27',1,'']]],
+  ['4_20play_20the_20game_10',['4 Play the Game',['../index.html#autotoc_md16',1,'']]]
 ];
