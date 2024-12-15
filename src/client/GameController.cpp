@@ -136,6 +136,12 @@ void GameController::updateGameState(game_state* newGameState) {
                 showTrickOverMessage(winner);
             }
 
+            if(round_number != oldGameState->get_round_number())
+            {
+                // new round has started
+                showNewRoundMessage(oldGameState, newGameState);
+            }
+
             // estimation phase
             if(GameController::_currentGameState->is_estimation_phase()) {
                 GameController::_gameWindow->showPanel(GameController::_trickEstimationPanel);
@@ -302,9 +308,4 @@ void GameController::showGameOverMessage() {
     if(buttonClicked == wxID_OK) {
         GameController::_gameWindow->Close();
     }
-}
-
-void GameController::closeGameWindow()
-{
-    GameController::_gameWindow->Close();
 }
