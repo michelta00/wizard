@@ -166,13 +166,14 @@ On macOS version 10.4 throughout the latest version run the following command in
 ```
 ipconfig getifaddr en0
 ```
+To host the server the firewall needs to be configured to allow connections on port *50505*.
+This can be easiest done by going to `Network settings > Firewall` and turning of the firewall.
 
-
-On Ubuntu 24.04 you can use the `hostname` command in the terminal to get the local ip address:
+On Ubuntu 24.04 you can use the `hostname` command in the terminal:
 ```
 hostname -I
 ```
-Then, run the following to configure the firewall to allow incoming connections on port 50505.
+The firewall can be configured to allow incoming connections on port *50505* with the following command:
 ```
 sudo ufw allow 50505
 ```
