@@ -249,7 +249,6 @@ void game_state::determine_trump_color() const
             std::uniform_int_distribution<> distrib(1, 4);
             _trump_color->set_value(distrib(gen));
             _trump_card_value->set_value(15);
-            // TODO: include get trump_color_request()
         }
     }
 }

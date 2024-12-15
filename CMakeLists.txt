@@ -32,7 +32,6 @@ set(CLIENT_SOURCE_FILES
         src/common/game_state/cards/deck.cpp src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
-        src/common/network/requests/decide_trump_color_request.cpp src/common/network/requests/decide_trump_color_request.h
         src/common/network/requests/estimate_tricks_request.cpp src/common/network/requests/estimate_tricks_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
         src/common/network/requests/leave_game_request.cpp src/common/network/requests/leave_game_request.h
@@ -50,8 +49,6 @@ set(CLIENT_SOURCE_FILES
         src/common/serialization/json_utils.h
         src/common/serialization/uuid_generator.h
         src/common/serialization/unique_serializable.cpp src/common/serialization/unique_serializable.h
-        src/common/network/requests/decide_trump_color_request.cpp
-        src/common/network/requests/decide_trump_color_request.h
         src/common/network/requests/leave_game_request.cpp
         src/common/network/requests/leave_game_request.h
         src/common/network/requests/estimate_tricks_request.cpp
@@ -84,7 +81,6 @@ set(SERVER_SOURCE_FILES
         src/common/game_state/cards/deck.cpp src/common/game_state/cards/deck.h
         # client requests
         src/common/network/requests/client_request.cpp src/common/network/requests/client_request.h
-        src/common/network/requests/decide_trump_color_request.cpp src/common/network/requests/decide_trump_color_request.h
         src/common/network/requests/estimate_tricks_request.cpp src/common/network/requests/estimate_tricks_request.h
         src/common/network/requests/join_game_request.cpp src/common/network/requests/join_game_request.h
         src/common/network/requests/leave_game_request.cpp src/common/network/requests/leave_game_request.h
