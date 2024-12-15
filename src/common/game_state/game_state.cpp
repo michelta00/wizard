@@ -579,7 +579,7 @@ void game_state::write_into_json(rapidjson::Value &json,
 
     rapidjson::Value trick_estimate_sum_val(rapidjson::kObjectType);
     _trick_estimate_sum->write_into_json(trick_estimate_sum_val, allocator);
-    json.AddMember("trick_estimate_sum_val", trick_estimate_sum_val, allocator);
+    json.AddMember("trick_estimate_sum", trick_estimate_sum_val, allocator);
 
 }
 
@@ -601,7 +601,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
         && json.HasMember("current_player_idx")
         && json.HasMember("trump_color")
         && json.HasMember("trump_card_value")
-        && json.HasMember("trick_estimate_sum_val"))
+        && json.HasMember("trick_estimate_sum"))
     {
         std::vector<player*> deserialized_players;
         for (auto &serialized_player : json["players"].GetArray()) {
@@ -624,7 +624,7 @@ game_state* game_state::from_json(const rapidjson::Value &json) {
                               serializable_value<int>::from_json(json["current_player_idx"].GetObject()),
                               serializable_value<int>::from_json(json["trump_color"].GetObject()),
                               serializable_value<int>::from_json(json["trump_card_value"].GetObject()),
-                              serializable_value<int>::from_json(json["trick_estimate_sum_val"].GetObject()));
+                              serializable_value<int>::from_json(json["trick_estimate_sum"].GetObject()));
     }
     throw WizardException("Failed to deserialize game_state. Required entries were missing.");
 }
