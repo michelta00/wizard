@@ -6,5 +6,6 @@ var searchData=
   ['_7egame_5fstate_3',['~game_state',['../classgame__state.html#a2fbc370f93617298719f61514afdb5bc',1,'game_state']]],
   ['_7ehand_4',['~hand',['../classhand.html#af3ffc5e5b46f04b14f12a9fc130b220a',1,'hand']]],
   ['_7eplayer_5',['~player',['../classplayer.html#a0a62c0208584465db2daa1ac6e15b1ad',1,'player']]],
-  ['_7etrick_6',['~trick',['../classtrick.html#a22c0b586f1d6c3baeb7bb0e22eb7dfe2',1,'trick']]]
+  ['_7etrick_6',['~trick',['../classtrick.html#a22c0b586f1d6c3baeb7bb0e22eb7dfe2',1,'trick']]],
+  ['_7etrickestimationpanel_7',['~TrickEstimationPanel',['../class_trick_estimation_panel.html#aa3747f2eff3ec518e3c1e0f7e882b656',1,'TrickEstimationPanel']]]
 ];

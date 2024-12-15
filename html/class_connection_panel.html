@@ -91,6 +91,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">ConnectionPanel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A custom wxPanel for handling server connection input and UI. This panel provides fields for entering the server address, port, and player name. It also includes a background image and a "Connect" button.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_connection_panel_8h_source.html">ConnectionPanel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ConnectionPanel:</div>
 <div class="dyncontent">
@@ -100,19 +105,108 @@ Inheritance diagram for ConnectionPanel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abc032283798f168176fc9af6fab9cbca" id="r_abc032283798f168176fc9af6fab9cbca"><td class="memItemLeft" align="right" valign="top"><a id="abc032283798f168176fc9af6fab9cbca" name="abc032283798f168176fc9af6fab9cbca"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ConnectionPanel</b> (wxWindow *parent)</td></tr>
+<tr class="memitem:abc032283798f168176fc9af6fab9cbca" id="r_abc032283798f168176fc9af6fab9cbca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc032283798f168176fc9af6fab9cbca">ConnectionPanel</a> (wxWindow *parent)</td></tr>
+<tr class="memdesc:abc032283798f168176fc9af6fab9cbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs Connection Panel.  <br /></td></tr>
 <tr class="separator:abc032283798f168176fc9af6fab9cbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae98ee379bc9ba0ad2b41793658b8064" id="r_aae98ee379bc9ba0ad2b41793658b8064"><td class="memItemLeft" align="right" valign="top"><a id="aae98ee379bc9ba0ad2b41793658b8064" name="aae98ee379bc9ba0ad2b41793658b8064"></a>
-wxString&#160;</td><td class="memItemRight" valign="bottom"><b>getServerAddress</b> ()</td></tr>
+<tr class="memitem:aae98ee379bc9ba0ad2b41793658b8064" id="r_aae98ee379bc9ba0ad2b41793658b8064"><td class="memItemLeft" align="right" valign="top">wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae98ee379bc9ba0ad2b41793658b8064">getServerAddress</a> ()</td></tr>
+<tr class="memdesc:aae98ee379bc9ba0ad2b41793658b8064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the server address entered by the user (default is set to 127.0.0.1).  <br /></td></tr>
 <tr class="separator:aae98ee379bc9ba0ad2b41793658b8064"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0dc7af0934d4184aa04d220e0bd9719" id="r_ab0dc7af0934d4184aa04d220e0bd9719"><td class="memItemLeft" align="right" valign="top"><a id="ab0dc7af0934d4184aa04d220e0bd9719" name="ab0dc7af0934d4184aa04d220e0bd9719"></a>
-wxString&#160;</td><td class="memItemRight" valign="bottom"><b>getServerPort</b> ()</td></tr>
+<tr class="memitem:ab0dc7af0934d4184aa04d220e0bd9719" id="r_ab0dc7af0934d4184aa04d220e0bd9719"><td class="memItemLeft" align="right" valign="top">wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0dc7af0934d4184aa04d220e0bd9719">getServerPort</a> ()</td></tr>
+<tr class="memdesc:ab0dc7af0934d4184aa04d220e0bd9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the server port entered by the user (default is set to 50505).  <br /></td></tr>
 <tr class="separator:ab0dc7af0934d4184aa04d220e0bd9719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a166e8404b755b5bdf719356b8bd07071" id="r_a166e8404b755b5bdf719356b8bd07071"><td class="memItemLeft" align="right" valign="top"><a id="a166e8404b755b5bdf719356b8bd07071" name="a166e8404b755b5bdf719356b8bd07071"></a>
-wxString&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayerName</b> ()</td></tr>
+<tr class="memitem:a166e8404b755b5bdf719356b8bd07071" id="r_a166e8404b755b5bdf719356b8bd07071"><td class="memItemLeft" align="right" valign="top">wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a166e8404b755b5bdf719356b8bd07071">getPlayerName</a> ()</td></tr>
+<tr class="memdesc:a166e8404b755b5bdf719356b8bd07071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the player name entered by the user. The player name is entered in an input field and is used for gameplay identification.  <br /></td></tr>
 <tr class="separator:a166e8404b755b5bdf719356b8bd07071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A custom wxPanel for handling server connection input and UI. This panel provides fields for entering the server address, port, and player name. It also includes a background image and a "Connect" button. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abc032283798f168176fc9af6fab9cbca" name="abc032283798f168176fc9af6fab9cbca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc032283798f168176fc9af6fab9cbca">&#9670;&#160;</a></span>ConnectionPanel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConnectionPanel::ConnectionPanel </td>
+          <td>(</td>
+          <td class="paramtype">wxWindow *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs Connection Panel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Pointer to the parent wxWindow that contains this window </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a166e8404b755b5bdf719356b8bd07071" name="a166e8404b755b5bdf719356b8bd07071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a166e8404b755b5bdf719356b8bd07071">&#9670;&#160;</a></span>getPlayerName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxString ConnectionPanel::getPlayerName </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the player name entered by the user. The player name is entered in an input field and is used for gameplay identification. </p>
+<dl class="section return"><dt>Returns</dt><dd>The player name as a wxString. </dd></dl>
+
+</div>
+</div>
+<a id="aae98ee379bc9ba0ad2b41793658b8064" name="aae98ee379bc9ba0ad2b41793658b8064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae98ee379bc9ba0ad2b41793658b8064">&#9670;&#160;</a></span>getServerAddress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxString ConnectionPanel::getServerAddress </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the server address entered by the user (default is set to 127.0.0.1). </p>
+<dl class="section return"><dt>Returns</dt><dd>The server address as a wxString. </dd></dl>
+
+</div>
+</div>
+<a id="ab0dc7af0934d4184aa04d220e0bd9719" name="ab0dc7af0934d4184aa04d220e0bd9719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0dc7af0934d4184aa04d220e0bd9719">&#9670;&#160;</a></span>getServerPort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wxString ConnectionPanel::getServerPort </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the server port entered by the user (default is set to 50505). </p>
+<dl class="section return"><dt>Returns</dt><dd>The server port as a wxString. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/client/panels/<a class="el" href="_connection_panel_8h_source.html">ConnectionPanel.h</a></li>
 <li>src/client/panels/<b>ConnectionPanel.cpp</b></li>
