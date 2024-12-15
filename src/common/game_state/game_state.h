@@ -46,6 +46,7 @@ private:
     serializable_value<int>* _trick_starting_player_idx;    ///< The index of the player that started the current trick.
     serializable_value<int>* _current_player_idx;           ///< The index of the player that is currently playing.
     serializable_value<int>* _trump_color;                  ///< The trump color of the current round.
+    serializable_value<int>* _trump_card_value;             ///< Value of the trump card to show in GUI.
     serializable_value<int>* _trick_estimate_sum;           ///< The sum of trick estimates.
 
 // constructors
@@ -71,6 +72,7 @@ private:
      * @param trick_starting_player_idx The trick starting player's index.
      * @param current_player_idx The current player's index.
      * @param trump_color The trump color.
+     * @param trump_card_value The value of the trump card to show in GUI.
      * @param trick_estimate_sum The sum of trick estimates.
      */
     game_state(
@@ -90,6 +92,7 @@ private:
             serializable_value<int>* trick_starting_player_idx,
             serializable_value<int>* current_player_idx,
             serializable_value<int>* trump_color,
+            serializable_value<int>* trump_card_value,
             serializable_value<int>* trick_estimate_sum
             );
 
@@ -217,6 +220,12 @@ public:
      * @return The trump color.
      */
     [[nodiscard]] int get_trump_color() const;
+
+    /**
+     * @brief Gets the value of the trump card to display in GUI.
+     * @return The value of the trum card
+     */
+    [[nodiscard]] int get_trump_card_value() const;
 
     /**
      * @brief Gets the current player.
