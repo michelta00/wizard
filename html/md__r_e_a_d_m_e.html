@@ -149,35 +149,42 @@ $(function(){ initResizable(false); });
 <hr  />
 <h1><a class="anchor" id="autotoc_md16"></a>
 4 Play the Game</h1>
-<p>Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most cases the default input can be left unchanged), as well as their player name. If the player name chosen already exists in the game, a number will be automatically added to the name. Next to these input fields, a <em>Rules</em> button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked to access the rules whenever needed.</p>
+<p>Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most cases, the default input can be left unchanged), as well as their player name. If the player name chosen already exists in the game, a number will be automatically added to the name (e.g., Marie_2). Next to these input fields, a <em>Rules</em> button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked to access the rules whenever needed.</p>
 <p><img src="/assets/readme/connection_panel.png" alt="Connection panel" width="50%" height="50%" class="inline"/> <br  />
 </p>
-<p>After clicking on the <em>Connect</em> button, the lobby shows up. Here all players that have joined the game can be seen. The <em>Start Game</em> button can be clicked to start a game once enough players joined, and the <em>Leave Game</em> button can be clicked to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started, the game is over.</p>
+<p>After clicking on the <em>Connect</em> button, the lobby shows up. Here all players that have joined the game can be seen. The <em>Start Game</em> button can be clicked to start a game once enough players joined, and the <em>Leave Game</em> button can be clicked to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started, the game is over. During the lobby, players can join and leave the game without terminating it.</p>
 <p><img src="assets/readme/lobby_one_player.png" alt="Lobby panel" width="50%" height="50%" class="inline"/> <br  />
 </p>
-<p>To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per game is 6. Once at least 3 players are connected to the server and have joined the game, the <em>Start Game</em> button turns purple and the game can be started by clicking the button.</p>
-<p>If players decide throughout the waiting time that they want to leave the game again, they can press the <em>Leave Game</em> button and leave the Lobby. The player will be removed from the Lobby and the other players can keep waiting.</p>
+<p>To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per game is 6. Once at least 3 players are connected to the server and have joined the game, the <em>Start Game</em> button turns purple and the game can be started by clicking the button. If players decide that they want to leave the game again throughout the waiting time, they can press the <em>Leave Game</em> button and leave the lobby. The player will be removed from the lobby and the other players can keep waiting.</p>
 <p><img src="assets/readme/lobby_six_players.png" alt="Lobby panel" width="50%" height="50%" class="inline"/> <br  />
 </p>
-<p>Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the provided input filed, and then submit it by clicking on the <em>Submit</em> button. In this phase of the game, each player can see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number and the sum of already submitted trick estimations in shown in the middle of the screen and can help players submitting a valid estimate (e.g., estimate cannot be greater than the current round number).</p>
-<p>Above the <em>Leave Game</em> button, the scoreboard can now be accessed by clicking on the <em>Scoreboard</em> button. The scoreboard is available throughout the whole game and winning and loosing players are color-coded. If a player leaves the game now after it was already started, the game ends immediately for all players and the final scores are shown to everyone.</p>
+<p>Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the provided input filed, and then submit it by clicking on the <em>Submit</em> button. In this phase of the game, each player can see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number and the sum of already submitted trick estimations is shown in the middle of the screen and can help players submitting a valid estimate (e.g., estimate cannot be greater than the current round number).</p>
 <p><img src="assets/readme/estimation_panel.png" alt="Estimation phase" width="50%" height="50%" class="inline"/> <br  />
 </p>
-<p>After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the screen shows whose turn it is. The player whose turn it is, is also highlighted in purple. Played cards are displayed in the middle of the screen as well and in the top left corner the round number and the sum of estimated tricks are shown. Below each players' name, the won and predicted numbers of tricks can be seen.</p>
+<p>Above the <em>Leave Game</em> button, the scoreboard can now be accessed by clicking on the <em>Scoreboard</em> button. The scoreboard is available throughout the whole game and winning and loosing players are color-coded. If a player leaves the game now after it was already started, the game ends immediately for all players and the final scores are shown to everyone.</p>
+<p><img src="assets/readme/scoreboard.png" alt="Scoreboard" width="50%" height="50%" class="inline"/> <br  />
+</p>
+<p>After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the screen shows whose turn it is. The player whose turn it is is also highlighted in purple. Played cards are displayed in the middle of the screen as well. In the top left corner the round number and the sum of estimated tricks are shown. Below each players' name, the won and predicted numbers of tricks can be seen.</p>
 <p><img src="assets/readme/play_phase_last_player.png" alt="Play phase" width="50%" height="50%" class="inline"/> <br  />
 </p>
-<p>At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of a round, also the points gained or lost in this round are shown, and the new round starts automatically. At the end of the game, the winner is announced and the players can close the game.</p>
+<p>At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of a round, the points gained or lost in this round are shown as well, and the new round starts automatically. At the end of the game, the winner is announced and the players can close the game. This also happens when someone leaves the game.</p>
+<p><img src="assets/readme/end_of_game.png" alt="End of Game" width="50%" height="50%" class="inline"/> <br  />
+</p>
 <p>Have fun playing!</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Play on different devices</h1>
+<hr  />
+<h1><a class="anchor" id="autotoc_md18"></a>
+5 Play on Different Devices</h1>
 <p>When playing the game on a single device, the default server address <em>127.0.0.1</em> and server port <em>50505</em> can be used during the connection phase.</p>
-<p>However, the game can also be played from different devices on the same wifi network 🛜 or if all devices are connected to the same VPN. In this case one player needs to host the server, while all other players only run a client. When connecting to the game, all players have to enter the private IP address of the player hosting the server in the <em>server address</em> field. The default port <em>50505</em> can be kept.</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<p>However, the game can also be played from different devices on the same Wi-Fi network 🛜 or if all devices are connected to the same VPN. In this case, one player needs to host the server, while all other players only have to run their client. When connecting to the game, all players have to enter the private IP address of the player hosting the server in the <em>server address</em> field. The default port <em>50505</em> can be kept.</p>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Get local IP address to host server</h2>
 <p>On macOS version 10.4 throughout the latest version run the following command in the terminal: </p><div class="fragment"><div class="line">ipconfig getifaddr en0</div>
-</div><!-- fragment --><p> On Ubuntu 24.04 you can use the <code>hostname</code> command in the terminal: </p><div class="fragment"><div class="line">hostname -I</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md19"></a>
-Find Coding Documentation</h1>
+</div><!-- fragment --><p> To host the server, the firewall needs to be configured to allow connections on port <em>50505</em>. This can be easiest done by going to <code>Network settings &gt; Firewall</code> and turning of the firewall.</p>
+<p>On Ubuntu 24.04 you can use the <code>hostname</code> command in the terminal: </p><div class="fragment"><div class="line">hostname -I</div>
+</div><!-- fragment --><p> The firewall can be configured to allow incoming connections on port <em>50505</em> with the following command: </p><div class="fragment"><div class="line">sudo ufw allow 50505</div>
+</div><!-- fragment --> <hr  />
+<h1><a class="anchor" id="autotoc_md21"></a>
+6 Coding Documentation</h1>
 <p>The code in this project was documented via <a href="https://doxygen.nl/">Doxygen</a>. Doxygen documentation can be accessed by opening the <code>index.html</code> file in the <code>html</code> folder. This can be automatically done by running the following command in the terminal out of the <code>wizard</code> project folder: </p><div class="fragment"><div class="line">open ./html/index.html</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['features_0',['Features',['../md__r_e_a_d_m_e.html#autotoc_md1',1,'🚀 Features'],['../index.html#autotoc_md21',1,'🚀 Features']]],
-  ['find_20coding_20documentation_1',['Find Coding Documentation',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'Find Coding Documentation'],['../index.html#autotoc_md39',1,'Find Coding Documentation']]],
-  ['finish_5fgame_2',['finish_game',['../classgame__state.html#a67fdd4b5682715cd2d848031a9911b17',1,'game_state']]],
-  ['from_5fjson_3',['from_json',['../classcard.html#a48593187c9bff442d61f197991954011',1,'card::from_json()'],['../classdeck.html#abe8dbe828189696c22f35ac3ed4fd296',1,'deck::from_json()'],['../classtrick.html#a1a3d94f638672d3d60d596190ae59dfb',1,'trick::from_json()'],['../classgame__state.html#a794d484961c92b5b737586ec5599963f',1,'game_state::from_json()'],['../classhand.html#aa9cffdf932d80c7304a335074403e785',1,'hand::from_json()'],['../classplayer.html#a5955c5f26db6a08862ccfb443fbe99c5',1,'player::from_json()']]],
-  ['full_5fstate_5fresponse_4',['full_state_response',['../classfull__state__response.html',1,'']]]
+  ['decide_5ftrump_5fcolor_5frequest_0',['decide_trump_color_request',['../classdecide__trump__color__request.html',1,'']]],
+  ['deck_1',['deck',['../classdeck.html',1,'deck'],['../classdeck.html#a2ff8465ba7b13201bdf650fe461b442e',1,'deck::deck()'],['../classdeck.html#ac18be42e5ad9ade42faed5be057f558b',1,'deck::deck(const std::vector&lt; card * &gt; &amp;cards)']]],
+  ['derived_5ffrom_2',['derived_from',['../structvector__utils_1_1derived__from.html',1,'vector_utils']]],
+  ['devices_3',['Devices',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'5 Play on Different Devices'],['../index.html#autotoc_md40',1,'5 Play on Different Devices']]],
+  ['different_20devices_4',['Different Devices',['../md__r_e_a_d_m_e.html#autotoc_md18',1,'5 Play on Different Devices'],['../index.html#autotoc_md40',1,'5 Play on Different Devices']]],
+  ['documentation_5',['Documentation',['../md__r_e_a_d_m_e.html#autotoc_md21',1,'6 Coding Documentation'],['../index.html#autotoc_md43',1,'6 Coding Documentation']]],
+  ['draw_5fcards_6',['draw_cards',['../classdeck.html#afa56e0fb7919ca1ceebae9b3bd79280d',1,'deck']]],
+  ['draw_5ftrump_7',['draw_trump',['../classdeck.html#ac5b85f992cf36d00873d2c7be7dc8c2b',1,'deck']]]
 ];

@@ -95,7 +95,7 @@ $(function(){ initResizable(false); });
 <img src="cards.png" alt="" width="500"/>
 <div class="caption">
 Cards</div></div>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 🚀 Features</h1>
 <ul>
 <li>🌐 <b>Multiplayer Gameplay:</b> Play with 3 to 6 players.</li>
@@ -105,17 +105,17 @@ Cards</div></div>
 <hr  />
 <p>You can read the game's rules <a href="https://blog.amigo-spiele.de/content/ap/rule/06900-GB-AmigoRule.pdf">here</a>. The implementation features a client/server architecture for multiplayer scenarios. It uses <a href="https://www.wxwidgets.org/">wxWidgets</a> for the GUI, <a href="https://github.com/fpagliughi/sockpp">sockpp</a> for the network interface, <a href="https://rapidjson.org/md_doc_tutorial.html">rapidjson</a> for object serialization, and <a href="https://github.com/google/googletest">googletest</a> for the unit tests.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 1 Overview</h1>
 <p>The game and source files are available on GitLab on the main branch. The game was developed based on the provided <a href="https://gitlab.ethz.ch/hraymond/cse-lama-example-project">LAMA example project</a> game. This project consists of a <b>server</b> and a <b>client</b>, each with their own main.cpp file. Each player can run their own client and connect to a server in the same local network.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 2 Compile Instructions</h1>
 <p>This project only works on UNIX systems (Linux / macOS). We thus only explain how to compile and run the game on these systems. The following description was tested on Ubuntu 24.04 and on macOS Sequoia.</p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 2.1 Prepare OS Environment</h2>
 <p>If your OS does not yet have git installed, install git by running <code>sudo apt-get install git</code> on Ubuntu or by running <code>xcode-select --install</code> on macOS (this installs git as well). The <a class="el" href="class_wizard.html">Wizard</a> repository can then be cloned by running <code>git clone <a href="https://gitlab.ethz.ch/beckermar/wizard.git">https://gitlab.ethz.ch/beckermar/wizard.git</a></code> (clone with HTTPS) or by running <code>git clone git@gitlab.ethz.ch:beckermar/wizard.git</code> (clone with SSH) inside the directory that should contain the game. Cloning the game as a first step also makes provided scripts for preparing the OS environment and for compiling the code available.</p>
-<h3><a class="anchor" id="autotoc_md28"></a>
+<h3><a class="anchor" id="autotoc_md30"></a>
 2.1.1 Ubuntu 24.04</h3>
 <p>The necessary packages and software can either be installed manually or by running the provided script.</p>
 <p>To use the provided script, run <code>bash scripts/prepare_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
@@ -126,7 +126,7 @@ Cards</div></div>
 <li><code>sudo apt-get install cmake</code> (install cmake)</li>
 <li><code>sudo reboot</code> (reboot system)</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md29"></a>
+<h3><a class="anchor" id="autotoc_md31"></a>
 2.1.2 macOS Sequoia</h3>
 <p>The necessary packages and software can either be installed manually or by running the provided script.</p>
 <p>To use the provided script, run <code>zsh scripts/prepare_macos.sh</code> inside the <b>wizard</b> directory.</p>
@@ -135,63 +135,74 @@ Cards</div></div>
 <li><code>brew install cmake</code> (install cmake)</li>
 <li><code>brew install wxwidgets</code> (install wxwidgets)</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 2.2 Compile Code</h2>
 <p>Compiling the code creates executables for the client (Wizard-client) and for the server (Wizard-server).</p>
-<h3><a class="anchor" id="autotoc_md31"></a>
+<h3><a class="anchor" id="autotoc_md33"></a>
 2.2.1 Ubuntu 24.04</h3>
 <p>Compiling the code can be done by running the provided script.</p>
 <p>To use the provided script, run <code>bash scripts/compile_ubuntu.sh</code> inside the <b>wizard</b> directory.</p>
-<h3><a class="anchor" id="autotoc_md32"></a>
+<h3><a class="anchor" id="autotoc_md34"></a>
 2.2.1 macOS Sequoia</h3>
 <p>Compiling the code can be done by running the provided script.</p>
 <p>To use the provided script, run <code>zsh scripts/compile_macos.sh</code> inside the <b>wizard</b> directory.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md36"></a>
 3 Run the Game</h1>
 <p>After compiling the code, navigate into the <b>cmake-build-debug</b> directory inside the <b>wizard</b> directory. To start a server, run <code>./Wizard-server</code>. In new consoles, you can now start as many clients as you wish by running <code>./Wizard-client</code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 4 Play the Game</h1>
-<p>Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most cases the default input can be left unchanged), as well as their player name. If the player name chosen already exists in the game, a number will be automatically added to the name. Next to these input fields, a <em>Rules</em> button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked to access the rules whenever needed.</p>
+<p>Once a client is started, the connection panel shows up. Here every player can enter the server address and port (in most cases, the default input can be left unchanged), as well as their player name. If the player name chosen already exists in the game, a number will be automatically added to the name (e.g., Marie_2). Next to these input fields, a <em>Rules</em> button is shown on the bottom right of the screen. The button will be shown throughout the whole game and can be clicked to access the rules whenever needed.</p>
 <div class="image">
 <img src="connection_panel.png" alt="" width="700"/>
 <div class="caption">
 Connection panel</div></div>
-<p>After clicking on the <em>Connect</em> button, the lobby shows up. Here all players that have joined the game can be seen. The <em>Start Game</em> button can be clicked to start a game once enough players joined, and the <em>Leave Game</em> button can be clicked to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started, the game is over.</p>
+<p>After clicking on the <em>Connect</em> button, the lobby shows up. Here all players that have joined the game can be seen. The <em>Start Game</em> button can be clicked to start a game once enough players joined, and the <em>Leave Game</em> button can be clicked to leave the game. This is possible throughout the whole game, however, if a player leaves the game after it has started, the game is over. During the lobby, players can join and leave the game without terminating it.</p>
 <div class="image">
 <img src="lobby_one_player.png" alt="" width="700"/>
 <div class="caption">
 Lobby panel</div></div>
-<p>To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per game is 6. Once at least 3 players are connected to the server and have joined the game, the <em>Start Game</em> button turns purple and the game can be started by clicking the button.</p>
-<p>If players decide throughout the waiting time that they want to leave the game again, they can press the <em>Leave Game</em> button and leave the Lobby. The player will be removed from the Lobby and the other players can keep waiting.</p>
+<p>To start a game, at least 3 players have to connect to the server and join the game. The maximum number of players per game is 6. Once at least 3 players are connected to the server and have joined the game, the <em>Start Game</em> button turns purple and the game can be started by clicking the button. If players decide that they want to leave the game again throughout the waiting time, they can press the <em>Leave Game</em> button and leave the lobby. The player will be removed from the lobby and the other players can keep waiting.</p>
 <div class="image">
 <img src="lobby_six_players.png" alt="" width="700"/>
 <div class="caption">
 Lobby panel</div></div>
-<p>Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the provided input filed, and then submit it by clicking on the <em>Submit</em> button. In this phase of the game, each player can see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number and the sum of already submitted trick estimations in shown in the middle of the screen and can help players submitting a valid estimate (e.g., estimate cannot be greater than the current round number).</p>
-<p>Above the <em>Leave Game</em> button, the scoreboard can now be accessed by clicking on the <em>Scoreboard</em> button. The scoreboard is available throughout the whole game and winning and loosing players are color-coded. If a player leaves the game now after it was already started, the game ends immediately for all players and the final scores are shown to everyone.</p>
+<p>Every round starts with an estimation phase. Here each player can enter their trick estimation by typing into the provided input filed, and then submit it by clicking on the <em>Submit</em> button. In this phase of the game, each player can see their own cards shown at the bottom and the trump card shown on the left side of the screen. The current round number and the sum of already submitted trick estimations is shown in the middle of the screen and can help players submitting a valid estimate (e.g., estimate cannot be greater than the current round number).</p>
 <div class="image">
 <img src="estimation_panel.png" alt="" width="700"/>
 <div class="caption">
 Estimation phase</div></div>
-<p>After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the screen shows whose turn it is. The player whose turn it is, is also highlighted in purple. Played cards are displayed in the middle of the screen as well and in the top left corner the round number and the sum of estimated tricks are shown. Below each players' name, the won and predicted numbers of tricks can be seen.</p>
+<p>Above the <em>Leave Game</em> button, the scoreboard can now be accessed by clicking on the <em>Scoreboard</em> button. The scoreboard is available throughout the whole game and winning and loosing players are color-coded. If a player leaves the game now after it was already started, the game ends immediately for all players and the final scores are shown to everyone.</p>
+<div class="image">
+<img src="scoreboard.png" alt="" width="700"/>
+<div class="caption">
+Scoreboard</div></div>
+<p>After every player has submitted their estimation, the playing phase starts. Cards can be played by clicking on the respective card. Hovering over cards increases their size to get a closer look. An announcement in the middle of the screen shows whose turn it is. The player whose turn it is is also highlighted in purple. Played cards are displayed in the middle of the screen as well. In the top left corner the round number and the sum of estimated tricks are shown. Below each players' name, the won and predicted numbers of tricks can be seen.</p>
 <div class="image">
 <img src="play_phase_last_player.png" alt="" width="700"/>
 <div class="caption">
 Play phase</div></div>
-<p>At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of a round, also the points gained or lost in this round are shown, and the new round starts automatically. At the end of the game, the winner is announced and the players can close the game.</p>
+<p>At the end of each trick, the winner is shown and the new trick starts automatically. If the trick is the last trick of a round, the points gained or lost in this round are shown as well, and the new round starts automatically. At the end of the game, the winner is announced and the players can close the game. This also happens when someone leaves the game.</p>
+<div class="image">
+<img src="end_of_game.png" alt="" width="700"/>
+<div class="caption">
+End of Game</div></div>
 <p>Have fun playing!</p>
-<h1><a class="anchor" id="autotoc_md37"></a>
-Play on different devices</h1>
+<hr  />
+<h1><a class="anchor" id="autotoc_md40"></a>
+5 Play on Different Devices</h1>
 <p>When playing the game on a single device, the default server address <em>127.0.0.1</em> and server port <em>50505</em> can be used during the connection phase.</p>
-<p>However, the game can also be played from different devices on the same wifi network 🛜 or if all devices are connected to the same VPN. In this case one player needs to host the server, while all other players only run a client. When connecting to the game, all players have to enter the private IP address of the player hosting the server in the <em>server address</em> field. The default port <em>50505</em> can be kept.</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<p>However, the game can also be played from different devices on the same Wi-Fi network 🛜 or if all devices are connected to the same VPN. In this case, one player needs to host the server, while all other players only have to run their client. When connecting to the game, all players have to enter the private IP address of the player hosting the server in the <em>server address</em> field. The default port <em>50505</em> can be kept.</p>
+<h2><a class="anchor" id="autotoc_md41"></a>
 Get local IP address to host server</h2>
 <p>On macOS version 10.4 throughout the latest version run the following command in the terminal: </p><div class="fragment"><div class="line">ipconfig getifaddr en0</div>
-</div><!-- fragment --><p> On Ubuntu 24.04 you can use the <code>hostname</code> command in the terminal: </p><div class="fragment"><div class="line">hostname -I</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md39"></a>
-Find Coding Documentation</h1>
+</div><!-- fragment --><p> To host the server, the firewall needs to be configured to allow connections on port <em>50505</em>. This can be easiest done by going to <code>Network settings &gt; Firewall</code> and turning of the firewall.</p>
+<p>On Ubuntu 24.04 you can use the <code>hostname</code> command in the terminal: </p><div class="fragment"><div class="line">hostname -I</div>
+</div><!-- fragment --><p> The firewall can be configured to allow incoming connections on port <em>50505</em> with the following command: </p><div class="fragment"><div class="line">sudo ufw allow 50505</div>
+</div><!-- fragment --> <hr  />
+<h1><a class="anchor" id="autotoc_md43"></a>
+6 Coding Documentation</h1>
 <p>The code in this project was documented via <a href="https://doxygen.nl/">Doxygen</a>. Doxygen documentation can be accessed by opening the <code>index.html</code> file in the <code>html</code> folder. This can be automatically done by running the following command in the terminal out of the <code>wizard</code> project folder: </p><div class="fragment"><div class="line">open ./html/index.html</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
